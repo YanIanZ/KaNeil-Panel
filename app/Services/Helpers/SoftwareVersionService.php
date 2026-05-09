@@ -82,6 +82,8 @@ class SoftwareVersionService
     public function currentPanelVersion(): string
     {
         return cache()->remember('panel:current_version', now()->addMinutes(5), function () {
+            $version = config('app.version');
+
             if (file_exists(base_path('.git/HEAD'))) {
                 $head = explode(' ', file_get_contents(base_path('.git/HEAD')));
 
@@ -89,12 +91,12 @@ class SoftwareVersionService
                     $path = base_path('.git/' . trim($head[1]));
 
                     if (file_exists($path)) {
-                        return 'canary (' . substr(file_get_contents($path), 0, 7) . ')';
+                        return $version . ' (' . substr(file_get_contents($path), 0, 7) . ')';
                     }
                 }
             }
 
-            return config('app.version');
+            return $version;
         });
     }
 }
