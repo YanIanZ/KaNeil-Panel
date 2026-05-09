@@ -32,4 +32,12 @@ class Dashboard extends BaseDashboard
     {
         return trans('admin/dashboard.version', ['version' => $this->softwareVersionService->currentPanelVersion()]);
     }
+
+    public function getWidgets(): array
+    {
+        return [
+            \App\Filament\Admin\Widgets\ServerCountWidget::class,
+            \App\Filament\Admin\Widgets\ActivityFeedWidget::class,
+        ];
+    }
 }

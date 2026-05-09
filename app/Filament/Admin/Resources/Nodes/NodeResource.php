@@ -46,7 +46,7 @@ class NodeResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return user()?->getCustomization(CustomizationKey::TopNavigation) ? false : trans('admin/dashboard.server');
+        return user()?->getCustomization(CustomizationKey::TopNavigation) ? false : 'Management';
     }
 
     public static function getNavigationBadge(): ?string

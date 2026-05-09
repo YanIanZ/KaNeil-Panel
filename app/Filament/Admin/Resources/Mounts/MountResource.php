@@ -67,7 +67,7 @@ class MountResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return trans('admin/dashboard.advanced');
+        return 'Templates';
     }
 
     /**

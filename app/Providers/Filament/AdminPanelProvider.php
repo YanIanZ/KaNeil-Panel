@@ -11,6 +11,7 @@ use Filament\Actions\Action;
 use Filament\Facades\Filament;
 use Filament\Navigation\NavigationGroup;
 use Filament\Panel;
+use Filament\Support\Colors\Color;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -20,6 +21,19 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->homeUrl('/')
+            ->brandName('KaNeil')
+            ->brandLogo(asset('kaneil.svg'))
+            ->brandLogoHeight('2.5rem')
+            ->favicon(asset('kaneil.ico'))
+            ->colors([
+                'primary' => Color::Indigo,
+                'danger' => Color::Red,
+                'success' => Color::Emerald,
+                'warning' => Color::Amber,
+                'gray' => Color::Slate,
+                'info' => Color::Cyan,
+            ])
+            ->viteTheme('resources/css/filament/kaneil/theme.css')
             ->breadcrumbs(false)
             ->sidebarCollapsibleOnDesktop(fn () => !$panel->hasTopNavigation())
             ->userMenuItems([
@@ -29,11 +43,11 @@ class AdminPanelProvider extends PanelProvider
                     ->icon(TablerIcon::ArrowBack),
             ])
             ->navigationGroups([
-                NavigationGroup::make(fn () => trans('admin/dashboard.server'))
+                NavigationGroup::make('Management')
                     ->collapsible(false),
-                NavigationGroup::make(fn () => trans('admin/dashboard.user'))
+                NavigationGroup::make('Templates')
                     ->collapsible(false),
-                NavigationGroup::make(fn () => trans('admin/dashboard.advanced')),
+                NavigationGroup::make('System'),
             ])
             ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\\Filament\\Admin\\Resources')
             ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\\Filament\\Admin\\Pages')
@@ -44,7 +58,7 @@ class AdminPanelProvider extends PanelProvider
                     ->listLogs(ListLogs::class)
                     ->viewLog(ViewLogs::class)
                     ->navigationLabel(fn () => trans('admin/log.navigation.panel_logs'))
-                    ->navigationGroup(fn () => trans('admin/dashboard.advanced'))
+                    ->navigationGroup('System')
                     ->navigationIcon(TablerIcon::FileInfo),
             ]);
 

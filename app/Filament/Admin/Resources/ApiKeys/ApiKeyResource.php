@@ -68,7 +68,7 @@ class ApiKeyResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return trans('admin/dashboard.advanced');
+        return 'System';
     }
 
     /**

@@ -51,6 +51,11 @@ class PluginResource extends Resource
         return (string) static::getEloquentQuery()->count() ?: null;
     }
 
+    public static function getNavigationGroup(): ?string
+    {
+        return 'System';
+    }
+
     public static function table(Table $table): Table
     {
         return $table

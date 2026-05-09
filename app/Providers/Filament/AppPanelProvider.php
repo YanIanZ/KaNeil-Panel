@@ -8,6 +8,7 @@ use Boquizo\FilamentLogViewer\FilamentLogViewerPlugin;
 use Filament\Actions\Action;
 use Filament\Facades\Filament;
 use Filament\Panel;
+use Filament\Support\Colors\Color;
 
 class AppPanelProvider extends PanelProvider
 {
@@ -16,6 +17,18 @@ class AppPanelProvider extends PanelProvider
         $panel = parent::panel($panel)
             ->id('app')
             ->default()
+            ->brandName('KaNeil')
+            ->brandLogo(asset('kaneil.svg'))
+            ->favicon(asset('kaneil.ico'))
+            ->colors([
+                'primary' => Color::Indigo,
+                'danger' => Color::Red,
+                'success' => Color::Emerald,
+                'warning' => Color::Amber,
+                'gray' => Color::Slate,
+                'info' => Color::Cyan,
+            ])
+            ->viteTheme('resources/css/filament/kaneil/theme.css')
             ->breadcrumbs(false)
             ->navigation(false)
             ->topbar(true)

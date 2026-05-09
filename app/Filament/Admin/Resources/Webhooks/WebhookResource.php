@@ -81,7 +81,7 @@ class WebhookResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return trans('admin/dashboard.advanced');
+        return 'System';
     }
 
     public static function defaultTable(Table $table): Table

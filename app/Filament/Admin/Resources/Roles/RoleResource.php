@@ -67,7 +67,7 @@ class RoleResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return user()?->getCustomization(CustomizationKey::TopNavigation) ? trans('admin/dashboard.advanced') : trans('admin/dashboard.user');
+        return user()?->getCustomization(CustomizationKey::TopNavigation) ? 'System' : 'System';
     }
 
     public static function getNavigationBadge(): ?string

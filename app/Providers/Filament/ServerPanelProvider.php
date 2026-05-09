@@ -12,6 +12,7 @@ use Filament\Actions\Action;
 use Filament\Facades\Filament;
 use Filament\Navigation\NavigationItem;
 use Filament\Panel;
+use Filament\Support\Colors\Color;
 
 class ServerPanelProvider extends PanelProvider
 {
@@ -21,6 +22,18 @@ class ServerPanelProvider extends PanelProvider
             ->id('server')
             ->path('server')
             ->homeUrl(fn () => Filament::getPanel('app')->getUrl())
+            ->brandName('KaNeil')
+            ->brandLogo(asset('kaneil.svg'))
+            ->favicon(asset('kaneil.ico'))
+            ->colors([
+                'primary' => Color::Indigo,
+                'danger' => Color::Red,
+                'success' => Color::Emerald,
+                'warning' => Color::Amber,
+                'gray' => Color::Slate,
+                'info' => Color::Cyan,
+            ])
+            ->viteTheme('resources/css/filament/kaneil/theme.css')
             ->tenant(Server::class, 'uuid_short')
             ->userMenuItems([
                 Action::make('to_serverList')
