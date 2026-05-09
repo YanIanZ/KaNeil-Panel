@@ -9,7 +9,7 @@ parameters:
     paths:
         - app
 
-    level: 6
+    level: 8
 
     treatPhpDocTypesAsCertain: false
 
@@ -17,6 +17,15 @@ parameters:
         - identifier: argument.templateType
         - identifier: missingType.generics
         - '#Call to an undefined method Filament\\Forms\\Components\\(.+)::hintCopy\(\)#'
+
+        # auth:sanctum middleware guarantees user() is non-null in API routes
+        -
+            identifier: nullsafe.neverNull
+            paths:
+                - app/Http/Controllers/Api/Application/*.php
+                - app/Http/Controllers/Api/Client/*.php
+                - app/Http/Controllers/Api/Remote/*.php
+                - app/Filament/Server/Resources/*.php
 
         # We are getting and setting environment variables directly
         -
