@@ -3,7 +3,7 @@
 namespace App\Filament\Admin\Resources\Maps\Pages;
 
 use App\Enums\TablerIcon;
-use App\Filament\Admin\Resources\Maps\EggResource;
+use App\Filament\Admin\Resources\Maps\MapResource;
 use App\Filament\Components\Actions\ExportEggAction;
 use App\Filament\Components\Actions\ImportEggAction;
 use App\Filament\Components\Actions\UpdateEggAction;
@@ -26,12 +26,12 @@ use Filament\Tables\Table;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
-class ListEggs extends ListRecords
+class ListMaps extends ListRecords
 {
     use CanCustomizeHeaderActions;
     use CanCustomizeHeaderWidgets;
 
-    protected static string $resource = EggResource::class;
+    protected static string $resource = MapResource::class;
 
     /**
      * @throws Exception
@@ -79,7 +79,7 @@ class ListEggs extends ListRecords
                         $replica->uuid = Str::uuid()->toString();
                     })
                     ->after(fn (Map $record, Map $replica) => $record->variables->each(fn ($variable) => $variable->replicate()->fill(['map_id' => $replica->id])->save()))
-                    ->successRedirectUrl(fn (Map $replica) => EditEgg::getUrl(['record' => $replica])),
+                    ->successRedirectUrl(fn (Map $replica) => EditMap::getUrl(['record' => $replica])),
             ])
             ->toolbarActions([
                 ImportEggAction::make()

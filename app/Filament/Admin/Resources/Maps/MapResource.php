@@ -4,9 +4,9 @@ namespace App\Filament\Admin\Resources\Maps;
 
 use App\Enums\CustomizationKey;
 use App\Enums\TablerIcon;
-use App\Filament\Admin\Resources\Maps\Pages\CreateEgg;
-use App\Filament\Admin\Resources\Maps\Pages\EditEgg;
-use App\Filament\Admin\Resources\Maps\Pages\ListEggs;
+use App\Filament\Admin\Resources\Maps\Pages\CreateMap;
+use App\Filament\Admin\Resources\Maps\Pages\EditMap;
+use App\Filament\Admin\Resources\Maps\Pages\ListMaps;
 use App\Filament\Admin\Resources\Maps\RelationManagers\ServersRelationManager;
 use App\Models\Map;
 use App\Traits\Filament\CanCustomizePages;
@@ -16,7 +16,7 @@ use Filament\Resources\Pages\PageRegistration;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Resource;
 
-class EggResource extends Resource
+class MapResource extends Resource
 {
     use CanCustomizePages;
     use CanCustomizeRelations;
@@ -69,9 +69,9 @@ class EggResource extends Resource
     public static function getDefaultPages(): array
     {
         return [
-            'index' => ListEggs::route('/'),
-            'create' => CreateEgg::route('/create'),
-            'edit' => EditEgg::route('/{record}/edit'),
+            'index' => ListMaps::route('/'),
+            'create' => CreateMap::route('/create'),
+            'edit' => EditMap::route('/{record}/edit'),
         ];
     }
 }

@@ -4,7 +4,7 @@ namespace App\Filament\Admin\Resources\Maps\Pages;
 
 use App\Enums\EditorLanguages;
 use App\Enums\TablerIcon;
-use App\Filament\Admin\Resources\Maps\EggResource;
+use App\Filament\Admin\Resources\Maps\MapResource;
 use App\Filament\Components\Forms\Fields\CopyFrom;
 use App\Filament\Components\Forms\Fields\MonacoEditor;
 use App\Models\EggVariable;
@@ -33,13 +33,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Unique;
 
-class CreateEgg extends CreateRecord
+class CreateMap extends CreateRecord
 {
     use CanCustomizeHeaderActions;
     use CanCustomizeHeaderWidgets;
     use CanCustomizeTabs;
 
-    protected static string $resource = EggResource::class;
+    protected static string $resource = MapResource::class;
 
     protected static bool $canCreateAnother = false;
 

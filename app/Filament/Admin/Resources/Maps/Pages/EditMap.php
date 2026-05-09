@@ -4,7 +4,7 @@ namespace App\Filament\Admin\Resources\Maps\Pages;
 
 use App\Enums\EditorLanguages;
 use App\Enums\TablerIcon;
-use App\Filament\Admin\Resources\Maps\EggResource;
+use App\Filament\Admin\Resources\Maps\MapResource;
 use App\Filament\Components\Actions\DeleteIcon;
 use App\Filament\Components\Actions\ExportEggAction;
 use App\Filament\Components\Actions\ImportEggAction;
@@ -39,13 +39,13 @@ use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Illuminate\Validation\Rules\Unique;
 
-class EditEgg extends EditRecord
+class EditMap extends EditRecord
 {
     use CanCustomizeHeaderActions;
     use CanCustomizeHeaderWidgets;
     use CanCustomizeTabs;
 
-    protected static string $resource = EggResource::class;
+    protected static string $resource = MapResource::class;
 
     public function form(Schema $schema): Schema
     {
