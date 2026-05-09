@@ -32,8 +32,8 @@ class ServerDatabaseTransformer extends BaseTransformer
             'username' => $model->username,
             'remote' => $model->remote,
             'max_connections' => $model->max_connections,
-            'created_at' => $model->created_at->toAtomString(),
-            'updated_at' => $model->updated_at->toAtomString(),
+            'created_at' => $model->created_at?->toAtomString(),
+            'updated_at' => $model->updated_at?->toAtomString(),
         ];
     }
 

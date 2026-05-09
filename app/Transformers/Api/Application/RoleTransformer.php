@@ -28,8 +28,8 @@ class RoleTransformer extends BaseTransformer
         return [
             'id' => $model->id,
             'name' => $model->name,
-            'created_at' => $model->created_at->toAtomString(),
-            'updated_at' => $model->updated_at->toAtomString(),
+            'created_at' => $model->created_at?->toAtomString(),
+            'updated_at' => $model->updated_at?->toAtomString(),
         ];
     }
 

@@ -34,8 +34,8 @@ class DatabaseHostTransformer extends BaseTransformer
             'host' => $model->host,
             'port' => $model->port,
             'username' => $model->username,
-            'created_at' => $model->created_at->toAtomString(),
-            'updated_at' => $model->updated_at->toAtomString(),
+            'created_at' => $model->created_at?->toAtomString(),
+            'updated_at' => $model->updated_at?->toAtomString(),
         ];
     }
 

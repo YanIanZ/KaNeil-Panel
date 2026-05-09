@@ -41,7 +41,7 @@ class DatabaseTransformer extends BaseClientTransformer
      */
     public function includePassword(Database $database): Item|NullResource
     {
-        if (!$this->request->user()->can(SubuserPermission::DatabaseViewPassword, $database->server)) {
+        if (!$this->getUser()->can(SubuserPermission::DatabaseViewPassword, $database->server)) {
             return $this->null();
         }
 

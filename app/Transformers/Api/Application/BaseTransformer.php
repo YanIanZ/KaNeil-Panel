@@ -70,7 +70,7 @@ abstract class BaseTransformer extends TransformerAbstract
     {
         $allowed = [ApiKey::TYPE_ACCOUNT, ApiKey::TYPE_APPLICATION];
 
-        $token = $this->request->user()->currentAccessToken();
+        $token = $this->request->user()?->currentAccessToken();
         if (!$token instanceof ApiKey || !in_array($token->key_type, $allowed)) {
             return false;
         }
@@ -79,7 +79,7 @@ abstract class BaseTransformer extends TransformerAbstract
         // the user is a root admin at the moment. In a future release we'll be rolling
         // out more specific permissions for keys.
         if ($token->key_type === ApiKey::TYPE_ACCOUNT) {
-            return $this->request->user()->isRootAdmin();
+            return $this->request->user()?->isRootAdmin() ?? false;
         }
 
         return AdminAcl::check($token, $resource);
@@ -106,9 +106,15 @@ abstract class BaseTransformer extends TransformerAbstract
     /**
      * Return an ISO-8601 formatted timestamp to use in the API response.
      */
-    protected function formatTimestamp(string $timestamp): string
+    protected function formatTimestamp(?string $timestamp): ?string
     {
-        return CarbonImmutable::createFromFormat(CarbonInterface::DEFAULT_TO_STRING_FORMAT, $timestamp)
+        if ($timestamp === null) {
+            return null;
+        }
+
+        $carbon = CarbonImmutable::createFromFormat(CarbonInterface::DEFAULT_TO_STRING_FORMAT, $timestamp);
+
+        return Assert::isInstanceOf($carbon, CarbonImmutable::class)
             ->setTimezone(self::RESPONSE_TIMEZONE)
             ->toAtomString();
     }

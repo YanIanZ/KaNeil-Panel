@@ -64,7 +64,7 @@ trait HasValidation
             // is one for a unique field. If that is the case, append the ID of the current
             // working model, so we don't run into errors due to the way that field validation
             // works.
-            foreach ($data as &$datum) {
+            foreach ((array) $data as &$datum) {
                 if (!Str::startsWith($datum, 'unique')) {
                     continue;
                 }

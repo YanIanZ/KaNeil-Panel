@@ -35,6 +35,9 @@ class ClientController extends ClientApiController
     public function index(GetServersRequest $request): array
     {
         $user = $request->user();
+        if ($user === null) {
+            return [];
+        }
         $transformer = $this->getTransformer(ServerTransformer::class);
 
         /** @var Builder<Model> $query */

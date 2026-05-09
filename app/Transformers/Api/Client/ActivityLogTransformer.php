@@ -32,7 +32,7 @@ class ActivityLogTransformer extends BaseClientTransformer
             'description' => $model->description,
             'properties' => $model->wrapProperties(),
             'has_additional_metadata' => $model->hasAdditionalMetadata(),
-            'timestamp' => $model->timestamp->toAtomString(),
+            'timestamp' => $model->timestamp?->toAtomString(),
         ];
     }
 
@@ -51,6 +51,8 @@ class ActivityLogTransformer extends BaseClientTransformer
      */
     protected function canViewIP(?Model $actor = null): bool
     {
-        return $actor?->is($this->request->user()) || $this->request->user()->can('seeIps activityLog');
+        $user = $this->request->user();
+
+        return $actor?->is($user) || ($user?->can('seeIps activityLog') ?? false);
     }
 }

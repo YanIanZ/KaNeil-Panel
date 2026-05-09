@@ -24,7 +24,7 @@ class BackupTransformer extends BaseClientTransformer
             'ignored_files' => $backup->ignored_files,
             'checksum' => $backup->checksum,
             'bytes' => $backup->bytes,
-            'created_at' => $backup->created_at->toAtomString(),
+            'created_at' => $backup->created_at?->toAtomString(),
             'completed_at' => $backup->completed_at ? $backup->completed_at->toAtomString() : null,
         ];
     }

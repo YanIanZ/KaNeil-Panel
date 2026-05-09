@@ -18,8 +18,8 @@ class RolePermissionTransformer extends BaseTransformer
     {
         return [
             'name' => $model->name,
-            'created_at' => $model->created_at->toAtomString(),
-            'updated_at' => $model->updated_at->toAtomString(),
+            'created_at' => $model->created_at?->toAtomString(),
+            'updated_at' => $model->updated_at?->toAtomString(),
         ];
     }
 }

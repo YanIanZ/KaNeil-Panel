@@ -27,7 +27,7 @@ class DaemonAuthenticate
      */
     public function handle(Request $request, Closure $next): mixed
     {
-        if (in_array($request->route()->getName(), $this->except)) {
+        if (in_array($request->route()?->getName(), $this->except)) {
             return $next($request);
         }
 

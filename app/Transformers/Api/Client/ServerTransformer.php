@@ -33,7 +33,7 @@ class ServerTransformer extends BaseClientTransformer
         /** @var StartupCommandService $service */
         $service = Container::getInstance()->make(StartupCommandService::class);
 
-        $user = $this->request->user();
+        $user = $this->getUser();
 
         $data = [
             'server_owner' => $user->id === $server->owner_id,
@@ -90,7 +90,7 @@ class ServerTransformer extends BaseClientTransformer
     {
         $transformer = $this->makeTransformer(AllocationTransformer::class);
 
-        $user = $this->request->user();
+        $user = $this->getUser();
         // While we include this permission, we do need to actually handle it slightly different here
         // for the purpose of keeping things functionally working. If the user doesn't have read permissions
         // for the allocations we'll only return the primary server allocation, and any notes associated
@@ -100,9 +100,11 @@ class ServerTransformer extends BaseClientTransformer
         // is generally needed for the frontend to make sense when browsing or searching results.
         if (!$user->can(SubuserPermission::AllocationRead, $server)) {
             $primary = clone $server->allocation;
-            $primary->notes = null;
+            if ($primary) {
+                $primary->notes = null;
+            }
 
-            return $this->collection([$primary], $transformer, Allocation::RESOURCE_NAME);
+            return $this->collection($primary ? [$primary] : [], $transformer, Allocation::RESOURCE_NAME);
         }
 
         return $this->collection($server->allocations, $transformer, Allocation::RESOURCE_NAME);
@@ -110,7 +112,7 @@ class ServerTransformer extends BaseClientTransformer
 
     public function includeVariables(Server $server): Collection|NullResource
     {
-        if (!$this->request->user()->can(SubuserPermission::StartupRead, $server)) {
+        if (!$this->getUser()->can(SubuserPermission::StartupRead, $server)) {
             return $this->null();
         }
 
@@ -134,7 +136,7 @@ class ServerTransformer extends BaseClientTransformer
      */
     public function includeSubusers(Server $server): Collection|NullResource
     {
-        if (!$this->request->user()->can(SubuserPermission::UserRead, $server)) {
+        if (!$this->getUser()->can(SubuserPermission::UserRead, $server)) {
             return $this->null();
         }
 

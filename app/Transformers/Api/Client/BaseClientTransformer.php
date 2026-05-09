@@ -14,7 +14,7 @@ abstract class BaseClientTransformer extends BaseApplicationTransformer
      */
     public function getUser(): User
     {
-        return $this->request->user();
+        return $this->request->user() ?? throw new \RuntimeException('User not authenticated');
     }
 
     /**
@@ -28,7 +28,7 @@ abstract class BaseClientTransformer extends BaseApplicationTransformer
     {
         Assert::isInstanceOf($server, Server::class);
 
-        return $this->request->user()->can($ability, [$server]);
+        return $this->request->user()?->can($ability, [$server]) ?? false;
     }
 
     /**

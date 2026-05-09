@@ -21,7 +21,7 @@ class ServerSubject
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $server = $request->route()->parameter('server');
+        $server = $request->route()?->parameter('server');
         $server ??= Filament::getTenant();
 
         if ($server instanceof Server) {

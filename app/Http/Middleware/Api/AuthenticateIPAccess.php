@@ -23,7 +23,11 @@ class AuthenticateIPAccess
     public function handle(Request $request, Closure $next): mixed
     {
         /** @var TransientToken|ApiKey $token */
-        $token = $request->user()->currentAccessToken();
+        $token = $request->user()?->currentAccessToken();
+
+        if ($token === null) {
+            return $next($request);
+        }
 
         // If this is a stateful request just push the request through to the next
         // middleware in the stack, there is nothing we need to explicitly check. If

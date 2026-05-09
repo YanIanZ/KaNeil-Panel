@@ -25,7 +25,7 @@ class AllocationTransformer extends BaseClientTransformer
             'ip_alias' => $model->ip_alias,
             'port' => $model->port,
             'notes' => $model->notes,
-            'is_default' => $model->server->allocation_id === $model->id,
+            'is_default' => $model->server?->allocation_id === $model->id,
         ];
     }
 }

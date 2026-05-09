@@ -38,17 +38,17 @@ abstract class ApplicationApiRequest extends FormRequest
         }
 
         /** @var TransientToken|ApiKey $token */
-        $token = $this->user()->currentAccessToken();
+        $token = $this->user()?->currentAccessToken();
 
         if ($token instanceof TransientToken) {
             return match ($this->permission) {
                 default => false,
-                AdminAcl::READ => $this->user()->can('viewList ' . $this->resource) && $this->user()->can('view ' . $this->resource),
-                AdminAcl::WRITE => $this->user()->can('update ' . $this->resource),
+                AdminAcl::READ => ($this->user()?->can('viewList ' . $this->resource) ?? false) && ($this->user()?->can('view ' . $this->resource) ?? false),
+                AdminAcl::WRITE => $this->user()?->can('update ' . $this->resource) ?? false,
             };
         }
 
-        if ($this->user()->isRootAdmin() && $token->key_type === ApiKey::TYPE_ACCOUNT) {
+        if (($this->user()?->isRootAdmin() ?? false) && $token->key_type === ApiKey::TYPE_ACCOUNT) {
             return true;
         }
 
@@ -84,7 +84,7 @@ abstract class ApplicationApiRequest extends FormRequest
      */
     public function parameter(string $key, string $expect)
     {
-        $value = $this->route()->parameter($key);
+        $value = $this->route()?->parameter($key);
 
         Assert::isInstanceOf($value, $expect);
         Assert::isInstanceOf($value, Model::class); // @phpstan-ignore staticMethod.alreadyNarrowedType
