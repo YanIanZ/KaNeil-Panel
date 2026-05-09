@@ -103,8 +103,8 @@ return [
         'files_node_error' => [
             'title' => 'Bestanden konden niet worden geladen!',
         ],
-        'pelicanignore' => [
-            'title' => 'Je bent een <code>.pelicanignore</code> bestand aan het aanpassen!',
+        'kaneilignore' => [
+            'title' => 'Je bent een <code>.kaneilignore</code> bestand aan het aanpassen!',
             'body' => 'Alle bestanden en mappen in dit bestand zullen worden uitgesloten van backups. Wildcards worden ondersteund door het gebruik van een asterisk (<code>*</code>).<br>Je kunt een eerdere regel ontkennen door er een uitroepteken voor te plaatsen (<code>!</code>).',
         ],
     ],

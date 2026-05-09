@@ -2,15 +2,15 @@
 
 ## Supported Versions
 
-While Pelican is in beta, we only provide security fixes for the most recent beta release. Older beta releases are unsupported.  
-![](https://img.shields.io/github/v/release/pelican-dev/panel?label=latest-release)
+While KaNeil is in beta, we only provide security fixes for the most recent beta release. Older beta releases are unsupported.  
+![](https://img.shields.io/github/v/release/kaneil-dev/panel?label=latest-release)
 
 ## Reporting a Vulnerability
 
 Please report any vulnerabilities via _one_ of the following methods:
 
-- [Create a security advisory on GitHub](https://github.com/pelican-dev/panel/security/advisories/new)
-- Send an e-mail to <team@pelican.dev>
+- [Create a security advisory on GitHub](https://github.com/kaneil-dev/panel/security/advisories/new)
+- Send an e-mail to <team@kaneil.dev>
 
 Include steps to reproduce, affected versions, impact, and a proof of concept if available.
 

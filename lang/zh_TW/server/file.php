@@ -103,8 +103,8 @@ return [
         'files_node_error' => [
             'title' => '無法載入檔案！',
         ],
-        'pelicanignore' => [
-            'title' => '你正在編輯 <code>.pelicanignore</code> 檔案！',
+        'kaneilignore' => [
+            'title' => '你正在編輯 <code>.kaneilignore</code> 檔案！',
             'body' => '此處列出的任何檔案或目錄都將從備份中排除。支援使用星號 (<code>*</code>) 作為通配符。<br>你可以在規則前加上驚嘆號 (<code>!</code>) 來否定之前的規則。',
         ],
     ],

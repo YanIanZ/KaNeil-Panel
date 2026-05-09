@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'heading' => 'Üdvözöljük a Pelicanban!',
+    'heading' => 'Üdvözöljük a KaNeilban!',
     'version' => 'Verzió: :version',
     'advanced' => 'Haladó',
     'server' => 'Szerver',
@@ -21,17 +21,17 @@ return [
         ],
         'intro-no-update' => [
             'heading' => 'A Panel naprakész',
-            'content' => 'A Pelicanod :version verzióját futtatja. A paneled naprakész!',
+            'content' => 'A KaNeilod :version verzióját futtatja. A paneled naprakész!',
         ],
         'intro-first-node' => [
             'heading' => 'Nincs észlelt csomópont',
             'content' => 'Úgy tűnik, hogy még nincs egyetlen csomópontod sem beállítva, de ne aggódj, mert a művelet gombra kattintva létrehozhatod az elsőt!',
             'extra_note' => 'Ha bármilyen problémába ütközik, kérjük jelentse a GitHubon.',
-            'button_label' => 'Első csomópont létrehozása a Pelicanban',
+            'button_label' => 'Első csomópont létrehozása a KaNeilban',
         ],
         'intro-support' => [
-            'heading' => 'Pelican támogatása',
-            'content' => 'Köszönjük, hogy használja a Pelicant, ezt csak az Ön és a támogatóink segítségével tudtuk elérni!',
+            'heading' => 'KaNeil támogatása',
+            'content' => 'Köszönjük, hogy használja a KaNeilt, ezt csak az Ön és a támogatóink segítségével tudtuk elérni!',
             'extra_note' => 'Nagyra értékelünk minden támogatást bárkitől.',
             'button_translate' => 'Segítség a fordításhoz',
             'button_donate' => 'Közvetlen adományozás',

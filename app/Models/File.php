@@ -88,10 +88,10 @@ class File extends Model
     public static function getSpecialFiles(): array
     {
         $specialFiles = [
-            '.pelicanignore' => [
-                'title' => fn () => trans('server/file.alerts.pelicanignore.title'),
-                'body' => fn () => trans('server/file.alerts.pelicanignore.body'),
-                'check' => fn (string $path) => str($path)->endsWith('.pelicanignore'),
+            '.kaneilignore' => [
+                'title' => fn () => trans('server/file.alerts.kaneilignore.title'),
+                'body' => fn () => trans('server/file.alerts.kaneilignore.body'),
+                'check' => fn (string $path) => str($path)->endsWith('.kaneilignore'),
             ],
         ];
 

@@ -103,8 +103,8 @@ return [
         'files_node_error' => [
             'title' => 'Não foi possível carregar os arquivos!',
         ],
-        'pelicanignore' => [
-            'title' => 'Você está editando um arquivo <code>.pelicanignore</code>!',
+        'kaneilignore' => [
+            'title' => 'Você está editando um arquivo <code>.kaneilignore</code>!',
             'body' => 'Quaisquer arquivos ou diretórios listados aqui serão excluídos dos backups. Curingas são suportados ao usar um asterisco (<code>*</code>).<br>Você pode negar uma regra prévia adicionando um ponto de exclamação (<code>!</code>).',
         ],
     ],

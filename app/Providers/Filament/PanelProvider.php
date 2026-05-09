@@ -34,10 +34,10 @@ abstract class PanelProvider extends BasePanelProvider
                 '*/oauth/redirect/*',
             ])
             ->databaseNotifications()
-            ->brandName(config('app.name', 'Pelican'))
+            ->brandName(config('app.name', 'KaNeil'))
             ->brandLogo(config('app.logo'))
             ->brandLogoHeight('2rem')
-            ->favicon(config('app.favicon', '/pelican.ico'))
+            ->favicon(config('app.favicon', '/kaneil.ico'))
             ->topNavigation(function () {
                 $navigationType = user()?->getCustomization(CustomizationKey::TopNavigation);
 

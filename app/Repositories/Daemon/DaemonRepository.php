@@ -64,7 +64,7 @@ abstract class DaemonRepository
         $header = $condition->header('User-Agent');
         if (
             empty($header) ||
-            preg_match('/^Pelican Wings\/v(?:\d+\.\d+\.\d+|develop) \(id:(\w*)\)$/', $header, $matches) &&
+            preg_match('/^KaNeil Wings\/v(?:\d+\.\d+\.\d+|develop) \(id:(\w*)\)$/', $header, $matches) &&
             array_get($matches, 1, '') !== $this->node->daemon_token_id
         ) {
             throw new ConnectionException($condition->effectiveUri()->__toString() . ' does not match node token_id !');

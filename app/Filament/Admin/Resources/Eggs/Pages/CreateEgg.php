@@ -141,7 +141,7 @@ class CreateEgg extends CreateRecord
                         ->keyLabel(trans('admin/egg.docker_name'))
                         ->keyPlaceholder('Java 21')
                         ->valueLabel(trans('admin/egg.docker_uri'))
-                        ->valuePlaceholder('ghcr.io/pelican-eggs/yolks:java_21')
+                        ->valuePlaceholder('ghcr.io/kaneil-eggs/yolks:java_21')
                         ->helperText(trans('admin/egg.docker_help')),
                 ]),
             Tab::make('process_management')
@@ -270,7 +270,7 @@ class CreateEgg extends CreateRecord
                         ->label(trans('admin/egg.script_container'))
                         ->required()
                         ->maxLength(255)
-                        ->default('ghcr.io/pelican-eggs/installers:debian'),
+                        ->default('ghcr.io/kaneil-eggs/installers:debian'),
                     Select::make('script_entry')
                         ->label(trans('admin/egg.script_entry'))
                         ->selectablePlaceholder(false)

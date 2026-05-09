@@ -123,7 +123,7 @@ return [
         'include_logs' => 'Include Logs',
         'include_logs_hint' => 'Including logs will show recent logs and help track down possible issues.',
         'run_diagnostics' => 'Run Diagnostics',
-        'upload_to_pelican' => 'Upload Logs',
+        'upload_to_kaneil' => 'Upload Logs',
         'logs_pulled' => 'Logs Pulled!',
         'logs_uploaded' => 'Logs Uploaded',
         'upload_failed' => 'Logs Upload Failed',

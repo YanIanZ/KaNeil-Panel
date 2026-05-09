@@ -54,11 +54,11 @@ class ListLogs extends BaseListLogs
                     ->icon(TablerIcon::FileDownload)->iconButton(),
                 Action::make('uploadLogs')
                     ->hiddenLabel()
-                    ->tooltip(trans('admin/log.actions.upload_tooltip', ['url' => 'logs.pelican.dev']))
+                    ->tooltip(trans('admin/log.actions.upload_tooltip', ['url' => 'logs.kaneil.dev']))
                     ->icon(TablerIcon::WorldUpload)
                     ->requiresConfirmation()
                     ->modalHeading(trans('admin/log.actions.upload_logs'))
-                    ->modalDescription(fn ($record) => trans('admin/log.actions.upload_logs_description', ['file' => $record['date'], 'url' => 'https://logs.pelican.dev']))
+                    ->modalDescription(fn ($record) => trans('admin/log.actions.upload_logs_description', ['file' => $record['date'], 'url' => 'https://logs.kaneil.dev']))
                     ->action(function ($record) {
                         $prefix = config('filament-log-viewer.pattern.prefix', 'laravel-');
                         $extension = config('filament-log-viewer.pattern.extension', '.log');
@@ -84,7 +84,7 @@ class ListLogs extends BaseListLogs
                                 ->asMultipart()
                                 ->attach('c', $content)
                                 ->attach('e', '14d')
-                                ->post('https://logs.pelican.dev');
+                                ->post('https://logs.kaneil.dev');
 
                             if ($response->failed()) {
                                 Notification::make()

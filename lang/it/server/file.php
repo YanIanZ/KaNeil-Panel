@@ -103,8 +103,8 @@ return [
         'files_node_error' => [
             'title' => 'Impossibile caricare i file!',
         ],
-        'pelicanignore' => [
-            'title' => 'Stai modificando un file <code>.pelicanignore</code>!',
+        'kaneilignore' => [
+            'title' => 'Stai modificando un file <code>.kaneilignore</code>!',
             'body' => 'Tutti i file o le directory elencati qui saranno esclusi dai backup. Le caratteri jolly sono supportati utilizzando un asterisco (<code>*</code>).<br>Puoi negare una regola precedente preponendo un punto esclamativo (<code>!</code>).',
         ],
     ],

@@ -103,8 +103,8 @@ return [
         'files_node_error' => [
             'title' => '¡No se pudieron cargar los archivos!',
         ],
-        'pelicanignore' => [
-            'title' => '¡Estás editando un archivo <code>.pelicanignore</code>!',
+        'kaneilignore' => [
+            'title' => '¡Estás editando un archivo <code>.kaneilignore</code>!',
             'body' => 'Cualquier fichero o directorio listado aquí será excluído de las copias de seguridad. Los comodines están soportados usando un asterisco (<code>*</code>).<br>Además puedes negar una regla previa anteponiendo una exclamación (<code>!</code>).',
         ],
     ],

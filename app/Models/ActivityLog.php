@@ -175,7 +175,7 @@ class ActivityLog extends Model implements HasIcon, HasLabel
         $user = $this->actor;
         if (!$user instanceof User) {
             $user = new User([
-                'email' => 'system@pelican.dev',
+                'email' => 'system@kaneil.dev',
                 'username' => 'system',
             ]);
         }

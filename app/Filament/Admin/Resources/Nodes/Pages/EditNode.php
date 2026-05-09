@@ -338,7 +338,7 @@ class EditNode extends EditRecord
                         ->suffix(config('panel.use_binary_prefix') ? 'MiB' : 'MB'),
                     TextInput::make('daemon_base')
                         ->label(trans('admin/node.daemon_base'))
-                        ->placeholder('/var/lib/pelican/volumes')
+                        ->placeholder('/var/lib/kaneil/volumes')
                         ->hintIcon(TablerIcon::QuestionMark, trans('admin/node.daemon_base_help'))
                         ->columnSpan([
                             'default' => 1,
@@ -580,7 +580,7 @@ class EditNode extends EditRecord
                         ->columnSpanFull()
                         ->state(new HtmlString(trans('admin/node.instructions_help'))),
                     CodeEntry::make('config')
-                        ->label('/etc/pelican/config.yml')
+                        ->label('/etc/kaneil/config.yml')
                         ->grammar(Grammar::Yaml)
                         ->state(fn (Node $node) => $node->getYamlConfiguration())
                         ->copyable()
@@ -711,7 +711,7 @@ class EditNode extends EditRecord
                                         $response = Http::asMultipart()
                                             ->attach('c', $get('log'))
                                             ->attach('e', '14d')
-                                            ->post('https://logs.pelican.dev');
+                                            ->post('https://logs.kaneil.dev');
 
                                         if ($response->failed()) {
                                             Notification::make()

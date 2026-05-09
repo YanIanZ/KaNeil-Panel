@@ -29,7 +29,7 @@ class QueueWorkerServiceCommand extends Command
 
             return;
         }
-        $serviceName = $this->option('service-name') ?? $this->ask('Queue worker service name', 'pelican-queue');
+        $serviceName = $this->option('service-name') ?? $this->ask('Queue worker service name', 'kaneil-queue');
         $path = '/etc/systemd/system/' . $serviceName  . '.service';
 
         $fileExists = @file_exists($path);
@@ -48,11 +48,11 @@ After=redis-server.service' : '';
 
         $basePath = base_path();
 
-        $success = File::put($path, "# Pelican Queue File
+        $success = File::put($path, "# KaNeil Queue File
 # ----------------------------------
 
 [Unit]
-Description=Pelican Queue Service$afterRedis
+Description=KaNeil Queue Service$afterRedis
 
 [Service]
 User=$user

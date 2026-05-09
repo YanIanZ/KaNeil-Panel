@@ -92,8 +92,8 @@ class Mount extends Model implements Validatable
      * @var string[]
      */
     public static array $invalidSourcePaths = [
-        '/etc/pelican',
-        '/var/lib/pelican/volumes',
+        '/etc/kaneil',
+        '/var/lib/kaneil/volumes',
         '/srv/daemon-data',
     ];
 

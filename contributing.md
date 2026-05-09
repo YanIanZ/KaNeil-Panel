@@ -1,10 +1,10 @@
 # Contributing
 
-Welcome to the Pelican project! We are excited to have you contribute to our open-source project. This guide will help you get started with setting up your development environment, understanding our coding standards, and making your first or next contribution.
+Welcome to the KaNeil project! We are excited to have you contribute to our open-source project. This guide will help you get started with setting up your development environment, understanding our coding standards, and making your first or next contribution.
 
 ## Getting started
 
-To start contributing to Pelican Panel, you need to have a basic understanding of the following:
+To start contributing to KaNeil Panel, you need to have a basic understanding of the following:
 
 * [PHP](https://php.net) & [Laravel](https://laravel.com)
 * [Livewire](https://laravel-livewire.com) & [Filament](https://filamentphp.com)
@@ -33,14 +33,14 @@ You can run PHPStan via `\vendor\bin\phpstan analyse` and Pint via `\vendor\bin\
 ## Making Contributions
 
 From your forked repository, make your own changes on your own branch. (do not make changes directly to `main`!)  
-When you are ready, you can submit a pull request to the Pelican repository. If you still work on your pull request or need help with something make sure to mark it as Draft.
+When you are ready, you can submit a pull request to the KaNeil repository. If you still work on your pull request or need help with something make sure to mark it as Draft.
 
 Also, please make sure that your pull requests are as targeted and simple as possible and don't do a hundred things at a time. If you want to add/ change/ fix 5 different things you should make 5 different pull requests.
 
 ### Translations
 
 If you add any new translation strings make sure to only add them to english.  
-Other languages are translated via [Crowdin](https://crowdin.com/project/pelican-dev).
+Other languages are translated via [Crowdin](https://crowdin.com/project/kaneil-dev).
 
 ## Code Review Process
 
@@ -51,7 +51,7 @@ Depending on the pull request size this process can take multiple days.
 
 ## Community and Support
 
-* Help: [Discord](https://discord.gg/pelican-panel)
-* Bugs: [GitHub Issues](https://github.com/pelican-dev/panel/issues)
-* Features: [GitHub Discussions](https://github.com/pelican-dev/panel/discussions)
+* Help: [Discord](https://discord.gg/kaneil-panel)
+* Bugs: [GitHub Issues](https://github.com/kaneil-dev/panel/issues)
+* Features: [GitHub Discussions](https://github.com/kaneil-dev/panel/discussions)
 * Security vulnerabilities: See our [security policy](./security.md).

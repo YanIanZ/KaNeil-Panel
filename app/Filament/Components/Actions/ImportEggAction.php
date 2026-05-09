@@ -166,7 +166,7 @@ class ImportEggAction extends Action
                                         ->default(fn (?Egg $egg) => $egg->update_url ?? '')
                                         ->live()
                                         ->label(trans('admin/egg.import.url'))
-                                        ->placeholder('https://github.com/pelican-eggs/generic/blob/main/nodejs/egg-node-js-generic.json')
+                                        ->placeholder('https://github.com/kaneil-eggs/generic/blob/main/nodejs/egg-node-js-generic.json')
                                         ->url()
                                         ->endsWith(['.json', '.yaml', '.yml'])
                                         ->validationAttribute(trans('admin/egg.import.url')),

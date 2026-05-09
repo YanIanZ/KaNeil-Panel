@@ -111,7 +111,7 @@ class AppServiceProvider extends ServiceProvider
 
         Gate::before(fn (User $user, $ability) => $user->isRootAdmin() ? true : null);
 
-        AboutCommand::add('Pelican', [
+        AboutCommand::add('KaNeil', [
             'Panel Version' => $versionService->currentPanelVersion(),
             'Latest Version' => $versionService->latestPanelVersion(),
             'Up-to-Date' => $versionService->isLatestPanel() ? '<fg=green;options=bold>Yes</>' : '<fg=red;options=bold>No</>',

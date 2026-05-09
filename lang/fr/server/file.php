@@ -103,8 +103,8 @@ return [
         'files_node_error' => [
             'title' => 'Impossible de charger les fichiers !',
         ],
-        'pelicanignore' => [
-            'title' => 'Vous éditez un fichier <code>.pelicanignore</code> !',
+        'kaneilignore' => [
+            'title' => 'Vous éditez un fichier <code>.kaneilignore</code> !',
             'body' => 'Tous les fichiers et dossiers listés ici vont être exclus des sauvegardes. Les wildcards sont supportées en utilisant un astérisque (<code>*</code>).<br>Vous pouvez annuler une règle précédente en préfixant un point d\'exclamation (<code>!</code>).',
         ],
     ],

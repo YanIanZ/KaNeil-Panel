@@ -103,8 +103,8 @@ return [
         'files_node_error' => [
             'title' => 'Dateien konnten nicht geladen werden!',
         ],
-        'pelicanignore' => [
-            'title' => 'Sie bearbeiten eine <code>.pelicanignore</code>-Datei!',
+        'kaneilignore' => [
+            'title' => 'Sie bearbeiten eine <code>.kaneilignore</code>-Datei!',
             'body' => 'Alle hier aufgeführten Dateien oder Verzeichnisse werden von Backups ausgeschlossen. Platzhalter werden durch die Verwendung eines Sternchens (<code>*</code>) unterstützt.<br> Sie können eine vorherige Regel negieren, indem Sie ein Ausrufezeichen (<code>!</code>) voranstellen.',
         ],
     ],

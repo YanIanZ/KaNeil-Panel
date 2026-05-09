@@ -103,8 +103,8 @@ return [
         'files_node_error' => [
             'title' => 'Nelze načíst soubory!',
         ],
-        'pelicanignore' => [
-            'title' => 'Upravujete <code>.pelicanignore</code> soubor!',
+        'kaneilignore' => [
+            'title' => 'Upravujete <code>.kaneilignore</code> soubor!',
             'body' => 'Všechny soubory nebo adresáře uvedené v tomto seznamu budou ze zálohování vyloučeny. Podporovány jsou zástupné znaky pomocí hvězdičky (<code>*</code>).<br>Předchozí pravidlo můžete zrušit přidáním vykřičníku (<code>!</code>) na začátek.',
         ],
     ],

@@ -122,7 +122,7 @@ return [
         'include_logs' => '包含記錄',
         'include_logs_hint' => '包含記錄會顯示最近的記錄，並幫助追蹤可能的問題。',
         'run_diagnostics' => '執行診斷',
-        'upload_to_pelican' => '上傳記錄',
+        'upload_to_kaneil' => '上傳記錄',
         'logs_pulled' => '記錄已提取！',
         'logs_uploaded' => '記錄已上傳',
         'upload_failed' => '記錄上傳失敗',

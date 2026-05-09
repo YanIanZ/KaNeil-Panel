@@ -157,7 +157,7 @@ class EditProfile extends BaseEditProfile
                         ->default('en')
                         ->selectablePlaceholder(false)
                         ->helperText(fn ($state, LanguageService $languageService) => new HtmlString($languageService->isLanguageTranslated($state) ? ''
-                            : trans('profile.language_help', ['state' => $state]) . ' <u><a href="https://crowdin.com/project/pelican-dev/">Update On Crowdin</a></u>'))
+                            : trans('profile.language_help', ['state' => $state]) . ' <u><a href="https://crowdin.com/project/kaneil-dev/">Update On Crowdin</a></u>'))
                         ->options(fn (LanguageService $languageService) => $languageService->getAvailableLanguages()),
                     FileUpload::make('avatar')
                         ->visible(fn () => config('panel.filament.uploadable-avatars'))
@@ -552,7 +552,7 @@ class EditProfile extends BaseEditProfile
                                                             <style>
                                                             {$style}
                                                             </style>
-                                                            <span class="preview-text">The quick blue pelican jumps over the lazy pterodactyl. :)</span>
+                                                            <span class="preview-text">The quick blue kaneil jumps over the lazy pterodactyl. :)</span>
                                                         HTML);
                                 }),
                             TextInput::make('console_graph_period')

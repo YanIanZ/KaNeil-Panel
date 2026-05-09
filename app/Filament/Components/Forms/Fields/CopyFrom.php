@@ -56,7 +56,7 @@ class CopyFrom extends Select
 
         $this->afterStateUpdated(function ($state, Set $set, Component $livewire) {
             if ($state === null) {
-                $set('script_container', 'ghcr.io/pelican-eggs/installers:debian');
+                $set('script_container', 'ghcr.io/kaneil-eggs/installers:debian');
                 $set('script_entry', 'bash');
                 $livewire->dispatch('setContent', content: '');
 

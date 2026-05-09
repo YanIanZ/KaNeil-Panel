@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'heading' => 'Willkommen bei Pelican!',
+    'heading' => 'Willkommen bei KaNeil!',
     'version' => 'Version: :version',
     'advanced' => 'Erweitert',
     'server' => 'Server',
@@ -27,11 +27,11 @@ return [
             'heading' => 'Keine Nodes gefunden',
             'content' => 'Es sieht so aus, als hätten Sie noch keine Nodes eingerichtet, aber keine Sorge, klicken Sie auf die Schaltfläche, um Ihre erste Node zu erstellen!',
             'extra_note' => 'Wenn Sie auf Probleme stoßen, melden Sie diese bitte auf GitHub.',
-            'button_label' => 'Erste Node in Pelican erstellen',
+            'button_label' => 'Erste Node in KaNeil erstellen',
         ],
         'intro-support' => [
-            'heading' => 'Pelican unterstützen',
-            'content' => 'Vielen Dank für die Verwendung von Pelican, dies konnte nur durch die Unterstützung von Ihnen, unseren Mitwirkenden und den Rest unserer Unterstützer erreicht werden!',
+            'heading' => 'KaNeil unterstützen',
+            'content' => 'Vielen Dank für die Verwendung von KaNeil, dies konnte nur durch die Unterstützung von Ihnen, unseren Mitwirkenden und den Rest unserer Unterstützer erreicht werden!',
             'extra_note' => 'Wir freuen uns über jede Unterstützung.',
             'button_translate' => 'Beim Übersetzen helfen',
             'button_donate' => 'Direkt spenden',

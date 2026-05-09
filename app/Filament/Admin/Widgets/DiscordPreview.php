@@ -40,8 +40,8 @@ class DiscordPreview extends Widget
                 'link' => fn ($href, $child) => $href ? "<a href=\"$href\" target=\"_blank\" class=\"link\">$child</a>" : $child,
                 'content' => null,
                 'sender' => [
-                    'name' => 'Pelican',
-                    'avatar' => 'https://raw.githubusercontent.com/pelican-dev/panel/refs/heads/main/public/pelican.ico',
+                    'name' => 'KaNeil',
+                    'avatar' => 'https://raw.githubusercontent.com/kaneil-dev/panel/refs/heads/main/public/kaneil.ico',
                 ],
                 'embeds' => [],
                 'getTime' => 'Today at ' . Carbon::now()->format('h:i A'),
@@ -68,8 +68,8 @@ class DiscordPreview extends Widget
             'link' => fn ($href, $child) => $href ? sprintf('<a href="%s" target="_blank" class="link">%s</a>', $href, $child) : $child,
             'content' => data_get($payload, 'content'),
             'sender' => [
-                'name' => data_get($payload, 'username', 'Pelican'),
-                'avatar' => data_get($payload, 'avatar_url', 'https://raw.githubusercontent.com/pelican-dev/panel/refs/heads/main/public/pelican.ico'),
+                'name' => data_get($payload, 'username', 'KaNeil'),
+                'avatar' => data_get($payload, 'avatar_url', 'https://raw.githubusercontent.com/kaneil-dev/panel/refs/heads/main/public/kaneil.ico'),
             ],
             'embeds' => $embeds,
             'getTime' => 'Today at ' . Carbon::now()->format('h:i A'),

@@ -276,7 +276,7 @@ class EditEgg extends EditRecord
                         ->label(trans('admin/egg.script_container'))
                         ->required()
                         ->maxLength(255)
-                        ->placeholder('ghcr.io/pelican-eggs/installers:debian'),
+                        ->placeholder('ghcr.io/kaneil-eggs/installers:debian'),
                     Select::make('script_entry')
                         ->label(trans('admin/egg.script_entry'))
                         ->selectablePlaceholder(false)

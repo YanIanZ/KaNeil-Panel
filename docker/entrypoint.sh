@@ -2,7 +2,7 @@
 # shellcheck shell=dash
 
 # check for .env file or symlink and generate app keys if missing
-if [ -f /pelican-data/.env ]; then
+if [ -f /kaneil-data/.env ]; then
   echo ".env vars exist."
   # load specific env vars from .env used in the entrypoint and they are not already set
   for VAR in "APP_KEY" "APP_INSTALLED" "DB_CONNECTION" "DB_HOST" "DB_PORT"; do
@@ -21,25 +21,25 @@ if [ -f /pelican-data/.env ]; then
 else
   echo ".env vars don't exist."
   # webroot .env is symlinked to this path
-  touch /pelican-data/.env
+  touch /kaneil-data/.env
 
   # manually generate a key because key generate --force fails
   if [ -z "${APP_KEY}" ]; then
     echo "No key set, Generating key."
     APP_KEY=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
-    echo "APP_KEY=$APP_KEY" > /pelican-data/.env
+    echo "APP_KEY=$APP_KEY" > /kaneil-data/.env
     echo "Generated app key written to .env file"
   else
     echo "APP_KEY exists in environment, using that."
-    echo "APP_KEY=${APP_KEY}" > /pelican-data/.env
+    echo "APP_KEY=${APP_KEY}" > /kaneil-data/.env
   fi
 
   # enable installer
-  echo "APP_INSTALLED=false" >> /pelican-data/.env
+  echo "APP_INSTALLED=false" >> /kaneil-data/.env
 fi
 
 # create directories for volumes
-mkdir -p /pelican-data/database /pelican-data/storage/avatars /pelican-data/storage/fonts /pelican-data/storage/icons /pelican-data/plugins /var/www/html/storage/logs/supervisord 2>/dev/null
+mkdir -p /kaneil-data/database /kaneil-data/storage/avatars /kaneil-data/storage/fonts /kaneil-data/storage/icons /kaneil-data/plugins /var/www/html/storage/logs/supervisord 2>/dev/null
 
 # if the app is installed then we need to run migrations on start. New installs will run migrations when you run the installer.
 if [ "${APP_INSTALLED}" = "true" ];  then

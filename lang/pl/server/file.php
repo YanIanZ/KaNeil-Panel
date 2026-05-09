@@ -103,8 +103,8 @@ return [
         'files_node_error' => [
             'title' => 'Nie można załadować plików!',
         ],
-        'pelicanignore' => [
-            'title' => 'Edytujesz plik <code>.pelicanignore</code>!',
+        'kaneilignore' => [
+            'title' => 'Edytujesz plik <code>.kaneilignore</code>!',
             'body' => 'Wszelkie pliki lub katalogi wymienione w tym miejscu zostaną wykluczone z kopii zapasowych. Symbole wieloznaczne są obsługiwane za pomocą gwiazdki (<code>*</code>).<br>Można unieważnić poprzednią regułę, dodając przed nią wykrzyknik (<code>!</code>).',
         ],
     ],

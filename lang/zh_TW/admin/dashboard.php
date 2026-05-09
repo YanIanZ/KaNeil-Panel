@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'heading' => '歡迎來到 Pelican!',
+    'heading' => '歡迎來到 KaNeil!',
     'version' => '版本：:version',
     'advanced' => '進階設定',
     'server' => '伺服器',
@@ -27,11 +27,11 @@ return [
             'heading' => '未偵測到節點',
             'content' => '看起來您尚未設定任何節點，不過別擔心，您可以點擊操作按鈕來建立第一個節點！',
             'extra_note' => '如果您遇到任何問題，請在 GitHub 上回報。',
-            'button_label' => '在 Pelican 建立第一個節點',
+            'button_label' => '在 KaNeil 建立第一個節點',
         ],
         'intro-support' => [
-            'heading' => '支持 Pelican',
-            'content' => '感謝您使用 Pelican！這一切的成就都要歸功於您、我們的貢獻者，以及所有支持者的協助與支持！',
+            'heading' => '支持 KaNeil',
+            'content' => '感謝您使用 KaNeil！這一切的成就都要歸功於您、我們的貢獻者，以及所有支持者的協助與支持！',
             'extra_note' => '我們由衷感謝任何形式的支持。',
             'button_translate' => '協助翻譯',
             'button_donate' => '直接抖內',

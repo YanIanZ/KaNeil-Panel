@@ -30,9 +30,9 @@ class ViewLogs extends BaseViewLog
                 ->hiddenLabel()
                 ->icon(TablerIcon::WorldUpload)
                 ->requiresConfirmation()
-                ->tooltip(trans('admin/log.actions.upload_tooltip', ['url' => 'logs.pelican.dev']))
+                ->tooltip(trans('admin/log.actions.upload_tooltip', ['url' => 'logs.kaneil.dev']))
                 ->modalHeading(trans('admin/log.actions.upload_logs'))
-                ->modalDescription(fn () => trans('admin/log.actions.upload_logs_description', ['file' => $this->resolveRecordDate(), 'url' => 'https://logs.pelican.dev']))
+                ->modalDescription(fn () => trans('admin/log.actions.upload_logs_description', ['file' => $this->resolveRecordDate(), 'url' => 'https://logs.kaneil.dev']))
                 ->action(function () {
                     $prefix = config('filament-log-viewer.pattern.prefix', 'laravel-');
                     $extension = config('filament-log-viewer.pattern.extension', '.log');
@@ -58,7 +58,7 @@ class ViewLogs extends BaseViewLog
                             ->asMultipart()
                             ->attach('c', $content)
                             ->attach('e', '14d')
-                            ->post('https://logs.pelican.dev');
+                            ->post('https://logs.kaneil.dev');
 
                         if ($response->failed()) {
                             Notification::make()

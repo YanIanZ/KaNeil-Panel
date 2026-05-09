@@ -103,8 +103,8 @@ return [
         'files_node_error' => [
             'title' => 'Could not load files!',
         ],
-        'pelicanignore' => [
-            'title' => 'You are editing a <code>.pelicanignore</code> file!',
+        'kaneilignore' => [
+            'title' => 'You are editing a <code>.kaneilignore</code> file!',
             'body' => 'Any files or directories listed in here will be excluded from backups. Wildcards are supported by using an asterisk (<code>*</code>).<br>You can negate a prior rule by prepending an exclamation point (<code>!</code>).',
         ],
     ],

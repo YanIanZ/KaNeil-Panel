@@ -1,8 +1,8 @@
 <footer class="flex flex-col items-center justify-center text-center space-y-2 p-4 text-gray-600 dark:text-gray-400">
     {{ \Filament\Support\Facades\FilamentView::renderHook(\App\Enums\CustomRenderHooks::FooterStart->value) }}
 
-    <a class="font-semibold" href="https://pelican.dev/docs/#core-team" target="_blank">
-        &copy; {{ date('Y') }} Pelican
+    <a class="font-semibold" href="https://kaneil.dev/docs/#core-team" target="_blank">
+        &copy; {{ date('Y') }} KaNeil
     </a>
 
     @if(config('app.debug'))
