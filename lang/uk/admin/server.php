@@ -112,7 +112,7 @@ return [
     'no_log' => 'Немає доступних записів',
     'tabs' => [
         'information' => 'Інформація',
-        'egg_configuration' => 'Конфігурація яйця',
+        'map_configuration' => 'Конфігурація яйця',
         'environment_configuration' => 'Конфігурація середовища',
     ],
     'notifications' => [

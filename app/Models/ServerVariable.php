@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property CarbonImmutable|null $created_at
  * @property CarbonImmutable|null $updated_at
  * @property-read Server $server
- * @property-read EggVariable $variable
+ * @property-read MapVariable $variable
  *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ServerVariable newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ServerVariable newQuery()
@@ -70,6 +70,6 @@ class ServerVariable extends Model implements Validatable
      */
     public function variable(): BelongsTo
     {
-        return $this->belongsTo(EggVariable::class, 'variable_id');
+        return $this->belongsTo(MapVariable::class, 'variable_id');
     }
 }

@@ -7,7 +7,7 @@ return [
     'tabs' => [
         'configuration' => 'Konfiguration',
         'process_management' => 'Prozessverwaltung',
-        'egg_variables' => 'Map Variablen',
+        'map_variables' => 'Map Variablen',
         'install_script' => 'Installationsscript',
     ],
     'import' => [
@@ -16,7 +16,7 @@ return [
         'image_url' => 'Bild URL',
         'image_error' => 'Bild konnte nicht abgerufen werden',
         'image_too_large' => 'Bild zu groß. Limit ist 1024KB',
-        'egg_help' => 'Dies sollte die unveränderte .json-Datei sein ( map-minecraft.json )',
+        'map_help' => 'Dies sollte die unveränderte .json-Datei sein ( map-minecraft.json )',
         'url_help' => 'URLs müssen direkt auf die unveränderte .json-Datei zeigen',
         'add_url' => 'Neue URL',
         'import_failed' => 'Import fehlgeschlagen',
@@ -38,7 +38,7 @@ return [
     'in_use' => 'In Verwendung',
     'servers' => 'Server',
     'name' => 'Name',
-    'egg_uuid' => 'Map UUID',
+    'map_uuid' => 'Map UUID',
     'map_id' => 'Map ID',
     'name_help' => 'Ein einfacher, lesbarer Name, der als Kennzeichnung für dieses Map verwendet wird.',
     'author' => 'Author',

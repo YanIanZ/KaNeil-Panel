@@ -112,7 +112,7 @@ return [
     'no_log' => 'Нет доступных журналов',
     'tabs' => [
         'information' => 'Информация',
-        'egg_configuration' => 'Конфигурация яйца',
+        'map_configuration' => 'Конфигурация яйца',
         'environment_configuration' => 'Настройки переменных',
     ],
     'notifications' => [

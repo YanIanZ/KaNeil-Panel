@@ -112,7 +112,7 @@ return [
     'no_log' => 'Žádný protokol není k dispozici',
     'tabs' => [
         'information' => 'Informace',
-        'egg_configuration' => 'Nastavení vejce',
+        'map_configuration' => 'Nastavení vejce',
         'environment_configuration' => 'Konfigurace prostředí',
     ],
     'notifications' => [

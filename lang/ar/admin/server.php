@@ -112,7 +112,7 @@ return [
     'no_log' => 'لا يوجد سجل متاح',
     'tabs' => [
         'information' => 'المعلومات',
-        'egg_configuration' => 'إعداد البيضة',
+        'map_configuration' => 'إعداد البيضة',
         'environment_configuration' => 'إعداد البيئة',
     ],
     'notifications' => [

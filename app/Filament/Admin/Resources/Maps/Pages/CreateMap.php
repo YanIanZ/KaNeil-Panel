@@ -7,7 +7,7 @@ use App\Enums\TablerIcon;
 use App\Filament\Admin\Resources\Maps\MapResource;
 use App\Filament\Components\Forms\Fields\CopyFrom;
 use App\Filament\Components\Forms\Fields\MonacoEditor;
-use App\Models\EggVariable;
+use App\Models\MapVariable;
 use App\Traits\Filament\CanCustomizeHeaderActions;
 use App\Traits\Filament\CanCustomizeHeaderWidgets;
 use App\Traits\Filament\CanCustomizeTabs;
@@ -168,8 +168,8 @@ class CreateMap extends CreateRecord
                         ->default('{}')
                         ->helperText(trans('admin/map.log_config_help')),
                 ]),
-            Tab::make('egg_variables')
-                ->label(trans('admin/map.tabs.egg_variables'))
+            Tab::make('map_variables')
+                ->label(trans('admin/map.tabs.map_variables'))
                 ->columnSpanFull()
                 ->schema([
                     Repeater::make('variables')
@@ -221,7 +221,7 @@ class CreateMap extends CreateRecord
                                 ->suffix('}}')
                                 ->hintIcon(TablerIcon::Code, fn ($state) => "{{{$state}}}")
                                 ->unique(modifyRuleUsing: fn (Unique $rule, Get $get) => $rule->where('map_id', $get('../../id')))
-                                ->rules(EggVariable::getRulesForField('env_variable'))
+                                ->rules(MapVariable::getRulesForField('env_variable'))
                                 ->validationMessages([
                                     'unique' => trans('admin/map.error_unique'),
                                     'required' => trans('admin/map.error_required'),

@@ -7,7 +7,7 @@ return [
     'tabs' => [
         'configuration' => 'Konfigurace',
         'process_management' => 'Správce procesů',
-        'egg_variables' => 'Map Variables',
+        'map_variables' => 'Map Variables',
         'install_script' => 'Nainstalovat skript',
     ],
     'import' => [
@@ -16,7 +16,7 @@ return [
         'image_url' => 'URL adresa obrázku',
         'image_error' => 'Obrázek nelze načíst',
         'image_too_large' => 'Obrázek je příliš velký. Limit je 1024KB',
-        'egg_help' => 'Toto by mělo být raw .json soubor ( map-minecraft.json )',
+        'map_help' => 'Toto by mělo být raw .json soubor ( map-minecraft.json )',
         'url_help' => 'URL musí odkazovat přímo na raw .json soubor',
         'add_url' => 'Nová URL',
         'import_failed' => 'Import se nezdařil',
@@ -38,7 +38,7 @@ return [
     'in_use' => 'Používá se',
     'servers' => 'Servery',
     'name' => 'Název',
-    'egg_uuid' => 'Map UUID',
+    'map_uuid' => 'Map UUID',
     'map_id' => 'Map ID',
     'name_help' => 'Jednoduché, člověkem čitelné jméno k použití jako identifikátor pro toto vejce.',
     'author' => 'Autor',

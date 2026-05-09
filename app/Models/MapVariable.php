@@ -29,7 +29,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property-read Collection<int, ServerVariable> $serverVariable
  * @property-read int|null $server_variable_count
  *
- * @method static \Database\Factories\EggVariableFactory factory($count = null, $state = [])
+ * @method static \Database\Factories\MapVariableFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MapVariable newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MapVariable newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MapVariable query()

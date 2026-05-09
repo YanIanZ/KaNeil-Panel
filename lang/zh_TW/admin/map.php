@@ -7,7 +7,7 @@ return [
     'tabs' => [
         'configuration' => '設定',
         'process_management' => '進程管理',
-        'egg_variables' => 'Map 變數',
+        'map_variables' => 'Map 變數',
         'install_script' => '安裝腳本',
     ],
     'import' => [
@@ -16,7 +16,7 @@ return [
         'image_url' => '映像網址',
         'image_error' => '無法擷取映像',
         'image_too_large' => '映像過大，限制為 1024KB',
-        'egg_help' => '這應該是個原始 .json/.yaml 檔案',
+        'map_help' => '這應該是個原始 .json/.yaml 檔案',
         'url_help' => 'URL必須指向原始 .json/.yaml 檔案',
         'add_url' => '新 URL',
         'import_failed' => '匯入失敗',
@@ -38,7 +38,7 @@ return [
     'in_use' => '使用中',
     'servers' => '伺服器',
     'name' => '名稱',
-    'egg_uuid' => 'Map UUID',
+    'map_uuid' => 'Map UUID',
     'map_id' => 'Map ID',
     'name_help' => '一個簡單易讀的名稱，用作該 Map 的識別碼。',
     'author' => '作者',

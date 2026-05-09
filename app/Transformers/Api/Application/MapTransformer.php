@@ -3,7 +3,7 @@
 namespace App\Transformers\Api\Application;
 
 use App\Models\Map;
-use App\Models\EggVariable;
+use App\Models\MapVariable;
 use App\Models\Server;
 use Illuminate\Support\Arr;
 use League\Fractal\Resource\Collection;
@@ -100,8 +100,8 @@ class EggTransformer extends BaseTransformer
 
         return $this->collection(
             $model->getRelation('variables'),
-            $this->makeTransformer(EggVariableTransformer::class),
-            EggVariable::RESOURCE_NAME
+            $this->makeTransformer(MapVariableTransformer::class),
+            MapVariable::RESOURCE_NAME
         );
     }
 }

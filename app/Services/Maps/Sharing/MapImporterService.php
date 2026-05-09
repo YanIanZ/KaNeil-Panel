@@ -5,7 +5,7 @@ namespace App\Services\Maps\Sharing;
 use App\Enums\EggFormat;
 use App\Exceptions\Service\InvalidFileUploadException;
 use App\Models\Map;
-use App\Models\EggVariable;
+use App\Models\MapVariable;
 use Exception;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Http\UploadedFile;
@@ -120,7 +120,7 @@ class EggImporterService
             $map->save();
 
             foreach ($parsed['variables'] ?? [] as $variable) {
-                EggVariable::unguarded(function () use ($map, $variable) {
+                MapVariable::unguarded(function () use ($map, $variable) {
                     $variable['rules'] = is_array($variable['rules']) ? $variable['rules'] : explode('|', $variable['rules']);
 
                     $map->variables()->updateOrCreate([
@@ -207,7 +207,7 @@ class EggImporterService
                 $variable,
                 ['env_variable' => strtoupper($variable['env_variable'])]
             ))
-            ->partition(fn ($variable) => in_array($variable['env_variable'], EggVariable::RESERVED_ENV_NAMES));
+            ->partition(fn ($variable) => in_array($variable['env_variable'], MapVariable::RESERVED_ENV_NAMES));
 
         $updatedVariables = $forbidden->map(fn ($variable) => array_merge(
             $variable,

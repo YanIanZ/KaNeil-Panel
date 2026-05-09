@@ -6,14 +6,14 @@ use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 
-class UpdateEggIndexCommand extends Command
+class UpdateMapIndexCommand extends Command
 {
     protected $signature = 'p:map:update-index';
 
     public function handle(): int
     {
         try {
-            $data = Http::timeout(5)->connectTimeout(1)->get(config('panel.cdn.egg_index_url'))->throw()->json();
+            $data = Http::timeout(5)->connectTimeout(1)->get(config('panel.cdn.map_index_url'))->throw()->json();
         } catch (Exception $exception) {
             $this->error($exception->getMessage());
 

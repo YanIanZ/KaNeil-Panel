@@ -18,7 +18,7 @@ return [
 
     'cdn' => [
         'cache_time' => 60,
-        'egg_index_url' => env('PANEL_MAP_INDEX_URL', 'https://raw.githubusercontent.com/kaneil-maps/kaneil-maps.github.io/refs/heads/main/content/kaneil.json'),
+        'map_index_url' => env('PANEL_MAP_INDEX_URL', 'https://raw.githubusercontent.com/kaneil-maps/kaneil-maps.github.io/refs/heads/main/content/kaneil.json'),
     ],
 
     'client_features' => [

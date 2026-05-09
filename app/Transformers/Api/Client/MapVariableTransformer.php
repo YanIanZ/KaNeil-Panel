@@ -2,18 +2,18 @@
 
 namespace App\Transformers\Api\Client;
 
-use App\Models\EggVariable;
+use App\Models\MapVariable;
 use BadMethodCallException;
 
-class EggVariableTransformer extends BaseClientTransformer
+class MapVariableTransformer extends BaseClientTransformer
 {
     public function getResourceName(): string
     {
-        return EggVariable::RESOURCE_NAME;
+        return MapVariable::RESOURCE_NAME;
     }
 
     /**
-     * @param  EggVariable  $variable
+     * @param  MapVariable  $variable
      */
     public function transform($variable): array
     {

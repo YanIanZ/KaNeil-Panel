@@ -7,7 +7,7 @@ return [
     'tabs' => [
         'configuration' => 'Configuration',
         'process_management' => 'Gestion des processus',
-        'egg_variables' => 'Variable de l\'map',
+        'map_variables' => 'Variable de l\'map',
         'install_script' => 'Script d\'installation',
     ],
     'import' => [
@@ -16,7 +16,7 @@ return [
         'image_url' => 'URL de l\'image',
         'image_error' => 'Impossible de récupérer l\'image',
         'image_too_large' => 'L\'image est trop grande. La limite est de 1024 Ko',
-        'egg_help' => 'Ceci doit être le fichier .json brut ( map-minecraft.json )',
+        'map_help' => 'Ceci doit être le fichier .json brut ( map-minecraft.json )',
         'url_help' => 'Les URL doivent pointer directement vers le fichier .json brut',
         'add_url' => 'Nouvelle URL',
         'import_failed' => 'Échec de l\'importation',
@@ -38,7 +38,7 @@ return [
     'in_use' => 'En Cours d\'Utilisation',
     'servers' => 'Serveurs',
     'name' => 'Nom',
-    'egg_uuid' => 'UUID de l\'map',
+    'map_uuid' => 'UUID de l\'map',
     'map_id' => 'ID de l\'map',
     'name_help' => 'Un nom simple et facile à lire à utiliser comme identifiant pour cet map.',
     'author' => 'Auteur',

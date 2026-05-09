@@ -7,7 +7,7 @@ return [
     'tabs' => [
         'configuration' => 'Configurazione',
         'process_management' => 'Gestione dei processi',
-        'egg_variables' => 'Variabili dell\'uovo',
+        'map_variables' => 'Variabili dell\'uovo',
         'install_script' => 'Script d\'installazione',
     ],
     'import' => [
@@ -16,7 +16,7 @@ return [
         'image_url' => 'URL dell\'immagine',
         'image_error' => 'Impossibile recuperare l\'immagine',
         'image_too_large' => 'Immagine troppo grande. Il limite è di 1024KB',
-        'egg_help' => 'Questo dovrebbe essere il file .json ( map-minecraft.json )',
+        'map_help' => 'Questo dovrebbe essere il file .json ( map-minecraft.json )',
         'url_help' => 'Gli URL devono puntare direttamente al file .json',
         'add_url' => 'Nuovo URL',
         'import_failed' => 'Import fallito',
@@ -38,7 +38,7 @@ return [
     'in_use' => 'In uso',
     'servers' => 'Server',
     'name' => 'Nome',
-    'egg_uuid' => 'UUID uovo',
+    'map_uuid' => 'UUID uovo',
     'map_id' => 'ID uovo',
     'name_help' => 'Un nome semplice e leggibile da usare come identificatore per quest\'uovo.',
     'author' => 'Autore',

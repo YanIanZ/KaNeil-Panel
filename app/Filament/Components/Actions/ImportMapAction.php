@@ -2,7 +2,7 @@
 
 namespace App\Filament\Components\Actions;
 
-use App\Console\Commands\Map\UpdateEggIndexCommand;
+use App\Console\Commands\Map\UpdateMapIndexCommand;
 use App\Enums\TablerIcon;
 use App\Jobs\InstallEgg;
 use App\Models\Map;
@@ -141,7 +141,7 @@ class ImportEggAction extends Action
                         ->schema([
                             FileUpload::make('files')
                                 ->label(trans('admin/map.model_label'))
-                                ->hint(trans('admin/map.import.egg_help'))
+                                ->hint(trans('admin/map.import.map_help'))
                                 ->acceptedFileTypes(['application/json', 'application/x-yaml', 'text/yaml', '.yaml', '.yml'])
                                 ->preserveFilenames()
                                 ->previewable(false)
@@ -181,24 +181,24 @@ class ImportEggAction extends Action
     public function importEggsFromGitHub(): Tab
     {
         if (!cache()->get('maps.index')) {
-            Artisan::call(UpdateEggIndexCommand::class);
+            Artisan::call(UpdateMapIndexCommand::class);
         }
 
         $maps = cache()->get('maps.index', []);
         $categories = array_keys($maps);
         $tabs = array_map(function (string $label) use ($maps) {
             $id = str_slug($label, '_');
-            $eggCount = count($maps[$label]);
+            $mapCount = count($maps[$label]);
 
             return Tab::make($id)
                 ->label($label)
-                ->badge($eggCount)
+                ->badge($mapCount)
                 ->schema([
                     CheckboxList::make("maps.$id")
                         ->hiddenLabel()
                         ->options(fn () => array_sort($maps[$label]))
-                        ->searchable($eggCount > 0)
-                        ->bulkToggleable($eggCount > 0)
+                        ->searchable($mapCount > 0)
+                        ->bulkToggleable($mapCount > 0)
                         ->columns(4),
                 ]);
         }, $categories);

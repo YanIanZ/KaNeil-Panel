@@ -112,7 +112,7 @@ return [
     'no_log' => 'Pas de journal disponible',
     'tabs' => [
         'information' => 'Information',
-        'egg_configuration' => 'Configuration des oeufs',
+        'map_configuration' => 'Configuration des oeufs',
         'environment_configuration' => 'Configuration de l\'environnement',
     ],
     'notifications' => [

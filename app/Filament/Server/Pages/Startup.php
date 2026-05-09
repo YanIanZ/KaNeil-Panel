@@ -122,7 +122,7 @@ class Startup extends ServerFormPage
                             ->relationship('serverVariables', function (Builder $query, Server $server) {
                                 $server->ensureVariablesExist();
 
-                                return $query->where('egg_variables.user_viewable', true)->orderByPowerJoins('variable.sort');
+                                return $query->where('map_variables.user_viewable', true)->orderByPowerJoins('variable.sort');
                             })
                             ->grid()
                             ->disabled(fn (Server $server) => !user()?->can(SubuserPermission::StartupUpdate, $server))

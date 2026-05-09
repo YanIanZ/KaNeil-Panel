@@ -112,7 +112,7 @@ return [
     'no_log' => 'Geen log beschikbaar',
     'tabs' => [
         'information' => 'Informatie',
-        'egg_configuration' => 'Map configuratie',
+        'map_configuration' => 'Map configuratie',
         'environment_configuration' => 'Omgeving configuratie',
     ],
     'notifications' => [

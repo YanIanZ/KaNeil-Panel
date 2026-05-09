@@ -7,7 +7,7 @@ return [
     'tabs' => [
         'configuration' => 'Konfigūracija',
         'process_management' => 'Procesų valdymas',
-        'egg_variables' => '„Kiaušinio“ kintamieji',
+        'map_variables' => '„Kiaušinio“ kintamieji',
         'install_script' => 'Įdiegimo scenarijus',
     ],
     'import' => [
@@ -16,7 +16,7 @@ return [
         'image_url' => 'Vaizdo URL',
         'image_error' => 'Nepavyko gauti vaizdo',
         'image_too_large' => 'Vaizdas per didelis. Riba yra 1024 KB',
-        'egg_help' => 'Tai turėtų būti neapdorotas .json failas (map-minecraft.json)',
+        'map_help' => 'Tai turėtų būti neapdorotas .json failas (map-minecraft.json)',
         'url_help' => 'Nuoroda(-os) turi nukreipti tiesiai į neapdorotą .json failą',
         'add_url' => 'Nauja nuoroda',
         'import_failed' => 'Importuoti nepavyko',
@@ -38,7 +38,7 @@ return [
     'in_use' => 'Naudojama(-as)',
     'servers' => 'Serveriai',
     'name' => 'Pavadinimas',
-    'egg_uuid' => '„Kiaušinio“ unikalus ID',
+    'map_uuid' => '„Kiaušinio“ unikalus ID',
     'map_id' => '„Kiaušinio“ ID',
     'name_help' => 'Paprastas, žmogui suprantamas pavadinimas, naudojamas kaip šio „kiaušinio“ identifikatorius.',
     'author' => 'Autorius',

@@ -2,7 +2,7 @@
 
 namespace App\Services\Servers;
 
-use App\Models\EggVariable;
+use App\Models\MapVariable;
 use App\Models\User;
 use App\Traits\Services\HasUserLevels;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
@@ -24,14 +24,14 @@ class VariableValidatorService
      */
     public function handle(int $map, array $fields = []): Collection
     {
-        $query = EggVariable::query()->where('map_id', $map);
+        $query = MapVariable::query()->where('map_id', $map);
         if (!$this->isUserLevel(User::USER_LEVEL_ADMIN)) {
             // Don't attempt to validate variables if they aren't user editable,
             // and we're not running this at an admin level.
             $query = $query->where('user_editable', true)->where('user_viewable', true);
         }
 
-        /** @var EggVariable[] $variables */
+        /** @var MapVariable[] $variables */
         $variables = $query->get();
 
         $data = $rules = $customAttributes = [];

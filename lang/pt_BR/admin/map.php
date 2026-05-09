@@ -7,7 +7,7 @@ return [
     'tabs' => [
         'configuration' => 'Configuração',
         'process_management' => 'Gerenciamento de Processo',
-        'egg_variables' => 'Variáveis do Map',
+        'map_variables' => 'Variáveis do Map',
         'install_script' => 'Instalação do Script',
     ],
     'import' => [
@@ -16,7 +16,7 @@ return [
         'image_url' => 'URL da Imagem',
         'image_error' => 'Não foi possível obter a imagem',
         'image_too_large' => 'Imagem muito grande. Limite é 1024KB',
-        'egg_help' => 'Este deve ser o arquivo JSON (map-minecraft.json)',
+        'map_help' => 'Este deve ser o arquivo JSON (map-minecraft.json)',
         'url_help' => 'URLs devem apontar diretamente para o arquivo JSON',
         'add_url' => 'Nova URL',
         'import_failed' => 'Falha ao Importar',
@@ -38,7 +38,7 @@ return [
     'in_use' => 'Em Uso',
     'servers' => 'Servidores',
     'name' => 'Nome',
-    'egg_uuid' => 'UUID do Map',
+    'map_uuid' => 'UUID do Map',
     'map_id' => 'ID do Map',
     'name_help' => 'Um simples nome para ser usado como identificador para este Map.',
     'author' => 'Autor',

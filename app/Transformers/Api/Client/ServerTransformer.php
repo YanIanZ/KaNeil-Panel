@@ -5,7 +5,7 @@ namespace App\Transformers\Api\Client;
 use App\Enums\SubuserPermission;
 use App\Models\Allocation;
 use App\Models\Map;
-use App\Models\EggVariable;
+use App\Models\MapVariable;
 use App\Models\Server;
 use App\Models\Subuser;
 use App\Services\Servers\StartupCommandService;
@@ -118,8 +118,8 @@ class ServerTransformer extends BaseClientTransformer
 
         return $this->collection(
             $server->variables->where('user_viewable', true),
-            $this->makeTransformer(EggVariableTransformer::class),
-            EggVariable::RESOURCE_NAME
+            $this->makeTransformer(MapVariableTransformer::class),
+            MapVariable::RESOURCE_NAME
         );
     }
 

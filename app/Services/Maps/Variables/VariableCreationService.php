@@ -5,7 +5,7 @@ namespace App\Services\Maps\Variables;
 use App\Exceptions\Model\DataValidationException;
 use App\Exceptions\Service\Map\Variable\BadValidationRuleException;
 use App\Exceptions\Service\Map\Variable\ReservedVariableNameException;
-use App\Models\EggVariable;
+use App\Models\MapVariable;
 use App\Traits\Services\ValidatesValidationRules;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 
@@ -42,9 +42,9 @@ class VariableCreationService
      * @throws BadValidationRuleException
      * @throws ReservedVariableNameException
      */
-    public function handle(int $map, array $data): EggVariable
+    public function handle(int $map, array $data): MapVariable
     {
-        if (in_array(strtoupper(array_get($data, 'env_variable')), EggVariable::RESERVED_ENV_NAMES)) {
+        if (in_array(strtoupper(array_get($data, 'env_variable')), MapVariable::RESERVED_ENV_NAMES)) {
             throw new ReservedVariableNameException(sprintf('Cannot use the protected name %s for this environment variable.', array_get($data, 'env_variable')));
         }
 
@@ -54,8 +54,8 @@ class VariableCreationService
 
         $options = array_get($data, 'options') ?? [];
 
-        /** @var EggVariable $eggVariable */
-        $eggVariable = EggVariable::query()->create([
+        /** @var MapVariable $eggVariable */
+        $eggVariable = MapVariable::query()->create([
             'map_id' => $map,
             'name' => $data['name'] ?? '',
             'description' => $data['description'] ?? '',

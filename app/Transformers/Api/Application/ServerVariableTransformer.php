@@ -3,7 +3,7 @@
 namespace App\Transformers\Api\Application;
 
 use App\Models\Map;
-use App\Models\EggVariable;
+use App\Models\MapVariable;
 use League\Fractal\Resource\Item;
 use League\Fractal\Resource\NullResource;
 
@@ -19,11 +19,11 @@ class ServerVariableTransformer extends BaseTransformer
      */
     public function getResourceName(): string
     {
-        return EggVariable::RESOURCE_NAME;
+        return MapVariable::RESOURCE_NAME;
     }
 
     /**
-     * @param  EggVariable  $variable
+     * @param  MapVariable  $variable
      */
     public function transform($variable): array
     {
@@ -33,7 +33,7 @@ class ServerVariableTransformer extends BaseTransformer
     /**
      * Return the parent service variable data.
      */
-    public function includeParent(EggVariable $variable): Item|NullResource
+    public function includeParent(MapVariable $variable): Item|NullResource
     {
         if (!$this->authorize(Map::RESOURCE_NAME)) {
             return $this->null();
@@ -41,6 +41,6 @@ class ServerVariableTransformer extends BaseTransformer
 
         $variable->loadMissing('variable');
 
-        return $this->item($variable->getRelation('variable'), $this->makeTransformer(EggVariableTransformer::class), 'variable');
+        return $this->item($variable->getRelation('variable'), $this->makeTransformer(MapVariableTransformer::class), 'variable');
     }
 }

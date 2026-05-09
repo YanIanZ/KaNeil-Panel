@@ -7,7 +7,7 @@ return [
     'tabs' => [
         'configuration' => 'Configuration',
         'process_management' => 'Process Management',
-        'egg_variables' => 'Map Variables',
+        'map_variables' => 'Map Variables',
         'install_script' => 'Install Script',
     ],
     'import' => [
@@ -15,7 +15,7 @@ return [
         'url' => 'URL',
         'icon_url' => 'Icon URL',
         'icon_error' => 'Could not fetch icon',
-        'egg_help' => 'This should be the raw .json/.yaml file',
+        'map_help' => 'This should be the raw .json/.yaml file',
         'url_help' => 'URLs must point directly to the raw .json/.yaml file',
         'add_url' => 'New URL',
         'import_failed' => 'Import Failed',
@@ -43,7 +43,7 @@ return [
     'in_use' => 'In Use',
     'servers' => 'Servers',
     'name' => 'Name',
-    'egg_uuid' => 'Map UUID',
+    'map_uuid' => 'Map UUID',
     'map_id' => 'Map ID',
     'name_help' => 'A simple, human-readable name to use as an identifier for this Map.',
     'author' => 'Author',

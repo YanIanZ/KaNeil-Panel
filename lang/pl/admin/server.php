@@ -112,7 +112,7 @@ return [
     'no_log' => 'Brak dostępnych dzienników',
     'tabs' => [
         'information' => 'Informacje',
-        'egg_configuration' => 'Konfiguracja Jajka',
+        'map_configuration' => 'Konfiguracja Jajka',
         'environment_configuration' => 'Konfiguracja środowiska',
     ],
     'notifications' => [

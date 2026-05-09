@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Installer\Steps;
 
-use App\Console\Commands\Map\UpdateEggIndexCommand;
+use App\Console\Commands\Map\UpdateMapIndexCommand;
 use App\Enums\TablerIcon;
 use Exception;
 use Filament\Forms\Components\CheckboxList;
@@ -13,12 +13,12 @@ use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Components\Wizard\Step;
 use Illuminate\Support\Facades\Artisan;
 
-class EggSelectionStep
+class MapSelectionStep
 {
     public static function make(): Step
     {
         try {
-            Artisan::call(UpdateEggIndexCommand::class);
+            Artisan::call(UpdateMapIndexCommand::class);
         } catch (Exception $exception) {
             Notification::make()
                 ->title(trans('installer.map.exceptions.failed_to_update'))
@@ -35,17 +35,17 @@ class EggSelectionStep
 
         $tabs = array_map(function (string $label) use ($maps) {
             $id = str_slug($label, '_');
-            $eggCount = count($maps[$label]);
+            $mapCount = count($maps[$label]);
 
             return Tab::make($id)
                 ->label($label)
-                ->badge($eggCount)
+                ->badge($mapCount)
                 ->schema([
                     CheckboxList::make("maps.$id")
                         ->hiddenLabel()
                         ->options(fn () => array_sort($maps[$label]))
-                        ->searchable($eggCount > 0)
-                        ->bulkToggleable($eggCount > 0)
+                        ->searchable($mapCount > 0)
+                        ->bulkToggleable($mapCount > 0)
                         ->columns(4),
                 ]);
         }, $categories);

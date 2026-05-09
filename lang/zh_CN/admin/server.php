@@ -112,7 +112,7 @@ return [
     'no_log' => '没有可用的日志',
     'tabs' => [
         'information' => '消息',
-        'egg_configuration' => 'Map信息',
+        'map_configuration' => 'Map信息',
         'environment_configuration' => '环境配置',
     ],
     'notifications' => [

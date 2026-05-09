@@ -7,7 +7,7 @@ return [
     'tabs' => [
         'configuration' => 'Konfiguracja',
         'process_management' => 'Zarządzanie procesami',
-        'egg_variables' => 'Zmienne Jajka',
+        'map_variables' => 'Zmienne Jajka',
         'install_script' => 'Skrypt instalacji',
     ],
     'import' => [
@@ -16,7 +16,7 @@ return [
         'image_url' => 'URL Obrazu',
         'image_error' => 'Nie udało się pobrać obrazu',
         'image_too_large' => 'Obraz jest za duży. Limit to 1024KB',
-        'egg_help' => 'To powinien być plik .json (map-minecraft.json)',
+        'map_help' => 'To powinien być plik .json (map-minecraft.json)',
         'url_help' => 'Adresy URL muszą wskazywać bezpośrednio do pliku .json',
         'add_url' => 'Nowy adres URL',
         'import_failed' => 'Importowanie nie powiodło się',
@@ -38,7 +38,7 @@ return [
     'in_use' => 'W użyciu',
     'servers' => 'Serwery',
     'name' => 'Nazwa',
-    'egg_uuid' => 'UUID Jajka',
+    'map_uuid' => 'UUID Jajka',
     'map_id' => 'UUID Jajka',
     'name_help' => 'Prosta, czytelna nazwa do użycia jako identyfikator dla tego Jajka.',
     'author' => 'Autor',

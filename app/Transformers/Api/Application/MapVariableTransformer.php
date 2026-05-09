@@ -3,9 +3,9 @@
 namespace App\Transformers\Api\Application;
 
 use App\Models\Map;
-use App\Models\EggVariable;
+use App\Models\MapVariable;
 
-class EggVariableTransformer extends BaseTransformer
+class MapVariableTransformer extends BaseTransformer
 {
     /**
      * Return the resource name for the JSONAPI output.
@@ -16,7 +16,7 @@ class EggVariableTransformer extends BaseTransformer
     }
 
     /**
-     * @param  EggVariable  $model
+     * @param  MapVariable  $model
      */
     public function transform($model): array
     {

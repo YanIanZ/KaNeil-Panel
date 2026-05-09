@@ -6,7 +6,7 @@ use App\Enums\TablerIcon;
 use App\Jobs\InstallEgg;
 use App\Livewire\Installer\Steps\CacheStep;
 use App\Livewire\Installer\Steps\DatabaseStep;
-use App\Livewire\Installer\Steps\EggSelectionStep;
+use App\Livewire\Installer\Steps\MapSelectionStep;
 use App\Livewire\Installer\Steps\EnvironmentStep;
 use App\Livewire\Installer\Steps\QueueStep;
 use App\Livewire\Installer\Steps\RequirementsStep;
@@ -109,7 +109,7 @@ class PanelInstaller extends SimplePage implements HasForms
             RequirementsStep::make(),
             EnvironmentStep::make($this),
             DatabaseStep::make($this),
-            EggSelectionStep::make(),
+            MapSelectionStep::make(),
             CacheStep::make($this),
             QueueStep::make($this),
             SessionStep::make(),

@@ -112,7 +112,7 @@ return [
     'no_log' => 'No hay registros disponibles',
     'tabs' => [
         'information' => 'Información',
-        'egg_configuration' => 'Configuración del map',
+        'map_configuration' => 'Configuración del map',
         'environment_configuration' => 'Configuración del entorno',
     ],
     'notifications' => [

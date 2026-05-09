@@ -7,7 +7,7 @@ return [
     'tabs' => [
         'configuration' => '配置',
         'process_management' => '进程管理',
-        'egg_variables' => 'Map 变量',
+        'map_variables' => 'Map 变量',
         'install_script' => '安装脚本',
     ],
     'import' => [
@@ -16,7 +16,7 @@ return [
         'image_url' => '图片地址',
         'image_error' => '无法获取图像',
         'image_too_large' => '图片过大，限制为 1024KB',
-        'egg_help' => '这应该是原始.json 文件(map-minecraft.json )',
+        'map_help' => '这应该是原始.json 文件(map-minecraft.json )',
         'url_help' => 'URL必须直接指向原始.json 文件',
         'add_url' => '新 URL',
         'import_failed' => '导入失败',
@@ -38,7 +38,7 @@ return [
     'in_use' => '使用中',
     'servers' => '服务器',
     'name' => '名称',
-    'egg_uuid' => 'Map UUID',
+    'map_uuid' => 'Map UUID',
     'map_id' => 'Map ID',
     'name_help' => '一个简单的、易读的，用作此预设的标识符。',
     'author' => '作者',

@@ -115,7 +115,7 @@ class ServerCreationService
                 $this->storeAssignedAllocations($server, $data);
             }
 
-            $this->storeEggVariables($server, $eggVariableData);
+            $this->storeMapVariables($server, $eggVariableData);
 
             return $server;
         }, 5);
@@ -199,7 +199,7 @@ class ServerCreationService
     /**
      * Process environment variables passed for this server and store them in the database.
      */
-    private function storeEggVariables(Server $server, Collection $variables): void
+    private function storeMapVariables(Server $server, Collection $variables): void
     {
         foreach ($variables as $variable) {
             $server->serverVariables()->forceCreate([

@@ -351,7 +351,7 @@ class CreateServer extends CreateRecord
                         ]),
                 ]),
 
-            Step::make(trans('admin/server.tabs.egg_configuration'))
+            Step::make(trans('admin/server.tabs.map_configuration'))
                 ->icon(TablerIcon::Map)
                 ->completedIcon(TablerIcon::Check)
                 ->columns([

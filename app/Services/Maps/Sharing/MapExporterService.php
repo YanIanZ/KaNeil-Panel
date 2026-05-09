@@ -4,7 +4,7 @@ namespace App\Services\Maps\Sharing;
 
 use App\Enums\EggFormat;
 use App\Models\Map;
-use App\Models\EggVariable;
+use App\Models\MapVariable;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
@@ -50,7 +50,7 @@ class EggExporterService
                     'entrypoint' => $map->copy_script_entry,
                 ],
             ],
-            'variables' => $map->variables->map(function (EggVariable $eggVariable) {
+            'variables' => $map->variables->map(function (MapVariable $eggVariable) {
                 return Collection::make($eggVariable->toArray())
                     ->except(['id', 'map_id', 'created_at', 'updated_at']);
             })->values()->toArray(),

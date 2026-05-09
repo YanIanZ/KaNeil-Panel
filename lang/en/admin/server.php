@@ -115,7 +115,7 @@ return [
     'warning_backups' => 'Be aware, not transferred backups will be deleted.',
     'tabs' => [
         'information' => 'Information',
-        'egg_configuration' => 'Map Configuration',
+        'map_configuration' => 'Map Configuration',
         'environment_configuration' => 'Environment Configuration',
     ],
     'notifications' => [

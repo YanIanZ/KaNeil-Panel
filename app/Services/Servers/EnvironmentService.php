@@ -2,7 +2,7 @@
 
 namespace App\Services\Servers;
 
-use App\Models\EggVariable;
+use App\Models\MapVariable;
 use App\Models\Server;
 
 class EnvironmentService
@@ -36,7 +36,7 @@ class EnvironmentService
      */
     public function handle(Server $server): array
     {
-        $variables = $server->variables->toBase()->mapWithKeys(function (EggVariable $variable) {
+        $variables = $server->variables->toBase()->mapWithKeys(function (MapVariable $variable) {
             return [$variable->env_variable => $variable->server_value ?? $variable->default_value];
         });
 

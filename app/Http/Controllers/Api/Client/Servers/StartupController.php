@@ -10,7 +10,7 @@ use App\Http\Requests\Api\Client\Servers\Startup\UpdateStartupVariableRequest;
 use App\Models\Server;
 use App\Models\ServerVariable;
 use App\Services\Servers\StartupCommandService;
-use App\Transformers\Api\Client\EggVariableTransformer;
+use App\Transformers\Api\Client\MapVariableTransformer;
 use Dedoc\Scramble\Attributes\Group;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -41,7 +41,7 @@ class StartupController extends ClientApiController
         return $this->fractal->collection(
             $server->variables()->where('user_viewable', true)->orderBy('sort')->get()
         )
-            ->transformWith($this->getTransformer(EggVariableTransformer::class))
+            ->transformWith($this->getTransformer(MapVariableTransformer::class))
             ->addMeta([
                 'startup_command' => $startup,
                 'docker_images' => $server->map->docker_images,
@@ -99,7 +99,7 @@ class StartupController extends ClientApiController
         }
 
         return $this->fractal->item($variable)
-            ->transformWith($this->getTransformer(EggVariableTransformer::class))
+            ->transformWith($this->getTransformer(MapVariableTransformer::class))
             ->addMeta([
                 'startup_command' => $startup,
                 'raw_startup_command' => $server->startup,

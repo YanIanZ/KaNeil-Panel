@@ -7,7 +7,7 @@ return [
     'tabs' => [
         'configuration' => 'Configuratie',
         'process_management' => 'Processen en verwerkingen',
-        'egg_variables' => 'Map Variabelen',
+        'map_variables' => 'Map Variabelen',
         'install_script' => 'Installatiescript',
     ],
     'import' => [
@@ -16,7 +16,7 @@ return [
         'image_url' => 'Foto URL',
         'image_error' => 'Kan afbeelding niet ophalen',
         'image_too_large' => 'Afbeelding is te groot. Limiet is 1024KB',
-        'egg_help' => 'Dit zou het raw .json bestand moeten zijn (map-minecraft.json )',
+        'map_help' => 'Dit zou het raw .json bestand moeten zijn (map-minecraft.json )',
         'url_help' => 'URL\'s moeten rechtstreeks naar het raw .json bestand verwijzen',
         'add_url' => 'Nieuwe URL',
         'import_failed' => 'Import niet geslaagd',
@@ -38,7 +38,7 @@ return [
     'in_use' => 'In gebruik',
     'servers' => 'Servers',
     'name' => 'Naam',
-    'egg_uuid' => 'Map UUID',
+    'map_uuid' => 'Map UUID',
     'map_id' => 'Map ID',
     'name_help' => 'Een eenvoudige, menselijk leesbare naam om te gebruiken als identificator voor deze Map.',
     'author' => 'Auteur',

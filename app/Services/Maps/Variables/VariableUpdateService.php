@@ -5,7 +5,7 @@ namespace App\Services\Maps\Variables;
 use App\Exceptions\DisplayException;
 use App\Exceptions\Model\DataValidationException;
 use App\Exceptions\Service\Map\Variable\ReservedVariableNameException;
-use App\Models\EggVariable;
+use App\Models\MapVariable;
 use App\Traits\Services\ValidatesValidationRules;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 
@@ -43,14 +43,14 @@ class VariableUpdateService
      * @throws DataValidationException
      * @throws ReservedVariableNameException
      */
-    public function handle(EggVariable $variable, array $data): EggVariable
+    public function handle(MapVariable $variable, array $data): MapVariable
     {
         if (!is_null(array_get($data, 'env_variable'))) {
-            if (in_array(strtoupper(array_get($data, 'env_variable')), EggVariable::RESERVED_ENV_NAMES)) {
+            if (in_array(strtoupper(array_get($data, 'env_variable')), MapVariable::RESERVED_ENV_NAMES)) {
                 throw new ReservedVariableNameException(trans('exceptions.variables.reserved_name', ['name' => array_get($data, 'env_variable')]));
             }
 
-            $search = EggVariable::query()
+            $search = MapVariable::query()
                 ->where('env_variable', $data['env_variable'])
                 ->where('map_id', $variable->map_id)
                 ->whereNot('id', $variable->id)

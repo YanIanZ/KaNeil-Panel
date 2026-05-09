@@ -112,7 +112,7 @@ return [
     'no_log' => '沒有日誌',
     'tabs' => [
         'information' => '資訊',
-        'egg_configuration' => 'Map 設定',
+        'map_configuration' => 'Map 設定',
         'environment_configuration' => '環境配置',
     ],
     'notifications' => [

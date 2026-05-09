@@ -7,7 +7,7 @@ return [
     'tabs' => [
         'configuration' => 'Налаштування',
         'process_management' => 'Керування процесом',
-        'egg_variables' => 'Змінні яйця',
+        'map_variables' => 'Змінні яйця',
         'install_script' => 'Скрипт встановлення',
     ],
     'import' => [
@@ -16,7 +16,7 @@ return [
         'image_url' => 'URL зображення',
         'image_error' => 'Не вдається отримати зображення',
         'image_too_large' => 'Зображення занадто велике. Обмеження - 1024KB',
-        'egg_help' => 'Це має бути безпосередньо .json файл (наприклад, map-minecraft.json)',
+        'map_help' => 'Це має бути безпосередньо .json файл (наприклад, map-minecraft.json)',
         'url_help' => 'URL-адреси повинні вказувати безпосередньо до файлу .json',
         'add_url' => 'Нова URL-адреса',
         'import_failed' => 'Помилка імпорту',
@@ -38,7 +38,7 @@ return [
     'in_use' => 'Використовується',
     'servers' => 'Сервери',
     'name' => 'Назва',
-    'egg_uuid' => 'UUID яйця',
+    'map_uuid' => 'UUID яйця',
     'map_id' => 'ID яйця',
     'name_help' => 'Просте, зрозуміле ім’я, яке буде використовуватися як ідентифікатор цього яйця.',
     'author' => 'Автор',
