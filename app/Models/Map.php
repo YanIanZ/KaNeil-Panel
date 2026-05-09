@@ -18,6 +18,7 @@ use Illuminate\Support\Str;
 
 /**
  * @property int $id
+ * @property int|null $ship_id
  * @property string $name
  * @property string|null $description
  * @property Carbon|null $created_at
@@ -41,9 +42,9 @@ use Illuminate\Support\Str;
  * @property bool $force_outgoing_ip
  * @property string[] $tags
  * @property array<string, string> $startup_commands
- * @property-read Collection<int, Egg> $children
+ * @property-read Collection<int, Map> $children
  * @property-read int|null $children_count
- * @property-read Egg|null $configFrom
+ * @property-read Map|null $configFrom
  * @property-read string $copy_script_container
  * @property-read string $copy_script_entry
  * @property-read string|null $copy_script_install
@@ -56,42 +57,44 @@ use Illuminate\Support\Str;
  * @property-read string[]|null $inherit_file_denylist
  * @property-read Collection<int, Mount> $mounts
  * @property-read int|null $mounts_count
- * @property-read Egg|null $scriptFrom
+ * @property-read Map|null $scriptFrom
  * @property-read Collection<int, Server> $servers
  * @property-read int|null $servers_count
- * @property-read Collection<int, EggVariable> $variables
+ * @property-read Ship|null $ship
+ * @property-read Collection<int, MapVariable> $variables
  * @property-read int|null $variables_count
  *
  * @method static \Database\Factories\EggFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Egg newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Egg newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Egg query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Egg whereAuthor($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Egg whereConfigFiles($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Egg whereConfigFrom($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Egg whereConfigLogs($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Egg whereConfigStartup($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Egg whereConfigStop($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Egg whereCopyScriptFrom($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Egg whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Egg whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Egg whereDockerImages($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Egg whereFeatures($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Egg whereFileDenylist($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Egg whereForceOutgoingIp($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Egg whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Egg whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Egg whereScriptContainer($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Egg whereScriptEntry($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Egg whereScriptInstall($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Egg whereScriptIsPrivileged($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Egg whereStartupCommands($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Egg whereTags($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Egg whereUpdateUrl($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Egg whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Egg whereUuid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Map newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Map newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Map query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Map whereAuthor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Map whereConfigFiles($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Map whereConfigFrom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Map whereConfigLogs($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Map whereConfigStartup($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Map whereConfigStop($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Map whereCopyScriptFrom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Map whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Map whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Map whereDockerImages($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Map whereFeatures($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Map whereFileDenylist($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Map whereForceOutgoingIp($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Map whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Map whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Map whereScriptContainer($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Map whereScriptEntry($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Map whereScriptInstall($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Map whereScriptIsPrivileged($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Map whereShipId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Map whereStartupCommands($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Map whereTags($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Map whereUpdateUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Map whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Map whereUuid($value)
  */
-class Egg extends Model implements Validatable
+class Map extends Model implements Validatable
 {
     use HasFactory;
     use HasIcon;
@@ -101,17 +104,23 @@ class Egg extends Model implements Validatable
      * The resource name for this model when it is transformed into an
      * API representation using fractal. Also used as name for api key permissions.
      */
-    public const RESOURCE_NAME = 'egg';
+    public const RESOURCE_NAME = 'map';
 
     /**
-     * Defines the current egg export version.
+     * Defines the current map export version.
      */
     public const EXPORT_VERSION = 'PLCN_v3';
+
+    /**
+     * The table associated with the model.
+     */
+    protected $table = 'maps';
 
     /**
      * Fields that are not mass assignable.
      */
     protected $fillable = [
+        'ship_id',
         'uuid',
         'name',
         'author',
@@ -137,6 +146,7 @@ class Egg extends Model implements Validatable
 
     /** @var array<array-key, string[]> */
     public static array $validationRules = [
+        'ship_id' => ['required', 'integer', 'exists:ships,id'],
         'uuid' => ['required', 'string', 'size:36'],
         'name' => ['required', 'string', 'max:255'],
         'description' => ['string', 'nullable'],
@@ -148,7 +158,7 @@ class Egg extends Model implements Validatable
         'docker_images.*' => ['required', 'string'],
         'startup_commands' => ['required', 'array', 'min:1'],
         'startup_commands.*' => ['required', 'string', 'distinct'],
-        'config_from' => ['sometimes', 'bail', 'nullable', 'numeric', 'exists:eggs,id'],
+        'config_from' => ['sometimes', 'bail', 'nullable', 'numeric', 'exists:maps,id'],
         'config_stop' => ['required_without:config_from', 'nullable', 'string', 'max:255'],
         'config_startup' => ['required_without:config_from', 'nullable', 'json'],
         'config_logs' => ['required_without:config_from', 'nullable', 'json'],
@@ -172,6 +182,7 @@ class Egg extends Model implements Validatable
     protected function casts(): array
     {
         return [
+            'ship_id' => 'integer',
             'config_from' => 'integer',
             'script_is_privileged' => 'boolean',
             'force_outgoing_ip' => 'boolean',
@@ -186,21 +197,21 @@ class Egg extends Model implements Validatable
 
     protected static function booted(): void
     {
-        static::creating(function (self $egg) {
-            $egg->uuid ??= Str::uuid()->toString();
+        static::creating(function (self $map) {
+            $map->uuid ??= Str::uuid()->toString();
 
             return true;
         });
 
-        static::deleting(function (self $egg) {
-            throw_if($egg->servers()->count(), new HasActiveServersException(trans('exceptions.egg.delete_has_servers')));
+        static::deleting(function (self $map) {
+            throw_if($map->servers()->count(), new HasActiveServersException(trans('exceptions.egg.delete_has_servers')));
 
-            throw_if($egg->children()->count(), new HasChildrenException(trans('exceptions.egg.has_children')));
+            throw_if($map->children()->count(), new HasChildrenException(trans('exceptions.egg.has_children')));
         });
     }
 
     /**
-     * Returns the install script for the egg; if egg is copying from another
+     * Returns the install script for the map; if map is copying from another
      * it will return the copied script.
      */
     public function getCopyScriptInstallAttribute(): ?string
@@ -213,7 +224,7 @@ class Egg extends Model implements Validatable
     }
 
     /**
-     * Returns the entry command for the egg; if egg is copying from another
+     * Returns the entry command for the map; if map is copying from another
      * it will return the copied entry command.
      */
     public function getCopyScriptEntryAttribute(): string
@@ -226,7 +237,7 @@ class Egg extends Model implements Validatable
     }
 
     /**
-     * Returns the install container for the egg; if egg is copying from another
+     * Returns the install container for the map; if map is copying from another
      * it will return the copied install container.
      */
     public function getCopyScriptContainerAttribute(): string
@@ -239,7 +250,7 @@ class Egg extends Model implements Validatable
     }
 
     /**
-     * Return the file configuration for an egg.
+     * Return the file configuration for a map.
      */
     public function getInheritConfigFilesAttribute(): ?string
     {
@@ -251,7 +262,7 @@ class Egg extends Model implements Validatable
     }
 
     /**
-     * Return the startup configuration for an egg.
+     * Return the startup configuration for a map.
      */
     public function getInheritConfigStartupAttribute(): ?string
     {
@@ -263,7 +274,7 @@ class Egg extends Model implements Validatable
     }
 
     /**
-     * Return the log reading configuration for an egg.
+     * Return the log reading configuration for a map.
      */
     public function getInheritConfigLogsAttribute(): ?string
     {
@@ -275,7 +286,7 @@ class Egg extends Model implements Validatable
     }
 
     /**
-     * Return the stop command configuration for an egg.
+     * Return the stop command configuration for a map.
      */
     public function getInheritConfigStopAttribute(): ?string
     {
@@ -287,8 +298,8 @@ class Egg extends Model implements Validatable
     }
 
     /**
-     * Returns the features available to this egg from the parent configuration if there are
-     * no features defined for this egg specifically and there is a parent egg configured.
+     * Returns the features available to this map from the parent configuration if there are
+     * no features defined for this map specifically and there is a parent map configured.
      *
      * @return ?string[]
      */
@@ -302,8 +313,8 @@ class Egg extends Model implements Validatable
     }
 
     /**
-     * Returns the features available to this egg from the parent configuration if there are
-     * no features defined for this egg specifically and there is a parent egg configured.
+     * Returns the features available to this map from the parent configuration if there are
+     * no features defined for this map specifically and there is a parent map configured.
      *
      * @return ?string[]
      */
@@ -316,29 +327,34 @@ class Egg extends Model implements Validatable
         return $this->configFrom->file_denylist;
     }
 
+    public function ship(): BelongsTo
+    {
+        return $this->belongsTo(Ship::class);
+    }
+
     public function mounts(): MorphToMany
     {
         return $this->morphToMany(Mount::class, 'mountable');
     }
 
     /**
-     * Gets all servers associated with this egg.
+     * Gets all servers associated with this map.
      */
     public function servers(): HasMany
     {
-        return $this->hasMany(Server::class, 'egg_id');
+        return $this->hasMany(Server::class, 'map_id');
     }
 
     /**
-     * Gets all variables associated with this egg.
+     * Gets all variables associated with this map.
      */
     public function variables(): HasMany
     {
-        return $this->hasMany(EggVariable::class, 'egg_id');
+        return $this->hasMany(MapVariable::class, 'map_id');
     }
 
     /**
-     * Get the parent egg from which to copy scripts.
+     * Get the parent map from which to copy scripts.
      */
     public function scriptFrom(): BelongsTo
     {
@@ -351,7 +367,7 @@ class Egg extends Model implements Validatable
     }
 
     /**
-     * Get the parent egg from which to copy configuration settings.
+     * Get the parent map from which to copy configuration settings.
      */
     public function configFrom(): BelongsTo
     {

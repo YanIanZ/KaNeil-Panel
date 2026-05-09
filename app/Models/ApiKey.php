@@ -162,7 +162,7 @@ class ApiKey extends PersonalAccessToken
         Node::RESOURCE_NAME,
         Allocation::RESOURCE_NAME,
         User::RESOURCE_NAME,
-        Egg::RESOURCE_NAME,
+        Map::RESOURCE_NAME,
         DatabaseHost::RESOURCE_NAME,
         Database::RESOURCE_NAME,
         Mount::RESOURCE_NAME,

@@ -17,8 +17,8 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  * @property string $target
  * @property bool $read_only
  * @property bool $user_mountable
- * @property-read Collection<int, Egg> $eggs
- * @property-read int|null $eggs_count
+ * @property-read Collection<int, Map> $maps
+ * @property-read int|null $maps_count
  * @property-read Collection<int, Node> $nodes
  * @property-read int|null $nodes_count
  * @property-read Collection<int, Server> $servers
@@ -116,11 +116,11 @@ class Mount extends Model implements Validatable
     }
 
     /**
-     * Returns all eggs that have this mount assigned.
+     * Returns all maps that have this mount assigned.
      */
-    public function eggs(): MorphToMany
+    public function maps(): MorphToMany
     {
-        return $this->morphedByMany(Egg::class, 'mountable');
+        return $this->morphedByMany(Map::class, 'mountable');
     }
 
     /**

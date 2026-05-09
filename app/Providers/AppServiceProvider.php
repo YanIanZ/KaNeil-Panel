@@ -15,11 +15,12 @@ use App\Models\Allocation;
 use App\Models\ApiKey;
 use App\Models\Backup;
 use App\Models\Database;
-use App\Models\Egg;
-use App\Models\EggVariable;
+use App\Models\Map;
+use App\Models\MapVariable;
 use App\Models\Node;
 use App\Models\Schedule;
 use App\Models\Server;
+use App\Models\Ship;
 use App\Models\Task;
 use App\Models\User;
 use App\Models\UserSSHKey;
@@ -65,10 +66,11 @@ class AppServiceProvider extends ServiceProvider
             'api_key' => ApiKey::class,
             'backup' => Backup::class,
             'database' => Database::class,
-            'egg' => Egg::class,
-            'egg_variable' => EggVariable::class,
+            'map' => Map::class,
+            'map_variable' => MapVariable::class,
             'schedule' => Schedule::class,
             'server' => Server::class,
+            'ship' => Ship::class,
             'ssh_key' => UserSSHKey::class,
             'task' => Task::class,
             'user' => User::class,

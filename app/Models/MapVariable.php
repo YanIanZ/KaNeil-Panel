@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property int $id
- * @property int $egg_id
+ * @property int $map_id
  * @property string $name
  * @property string $description
  * @property string $env_variable
@@ -24,31 +24,31 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property CarbonImmutable|null $created_at
  * @property CarbonImmutable|null $updated_at
  * @property int|null $sort
- * @property-read Egg|null $egg
+ * @property-read Map|null $map
  * @property-read bool $required
  * @property-read Collection<int, ServerVariable> $serverVariable
  * @property-read int|null $server_variable_count
  *
  * @method static \Database\Factories\EggVariableFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|EggVariable newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|EggVariable newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|EggVariable query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|EggVariable whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|EggVariable whereDefaultValue($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|EggVariable whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|EggVariable whereEggId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|EggVariable whereEnvVariable($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|EggVariable whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|EggVariable whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|EggVariable whereRules($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|EggVariable whereSort($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|EggVariable whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|EggVariable whereUserEditable($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|EggVariable whereUserViewable($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MapVariable newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MapVariable newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MapVariable query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MapVariable whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MapVariable whereDefaultValue($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MapVariable whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MapVariable whereEnvVariable($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MapVariable whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MapVariable whereMapId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MapVariable whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MapVariable whereRules($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MapVariable whereSort($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MapVariable whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MapVariable whereUserEditable($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MapVariable whereUserViewable($value)
  *
  * @property string|null $server_value This variable is only present on the object if you've loaded this model using the server relationship.
  */
-class EggVariable extends Model implements Validatable
+class MapVariable extends Model implements Validatable
 {
     use HasFactory;
     use HasValidation { getRules as getValidationRules; }
@@ -57,12 +57,17 @@ class EggVariable extends Model implements Validatable
      * The resource name for this model when it is transformed into an
      * API representation using fractal.
      */
-    public const RESOURCE_NAME = 'egg_variable';
+    public const RESOURCE_NAME = 'map_variable';
 
     /**
      * Reserved environment variable names.
      */
     public const RESERVED_ENV_NAMES = ['P_SERVER_UUID', 'P_SERVER_ALLOCATION_LIMIT', 'SERVER_MEMORY', 'SERVER_IP', 'SERVER_PORT', 'ENV', 'HOME', 'USER', 'STARTUP', 'MODIFIED_STARTUP', 'SERVER_UUID', 'UUID', 'INTERNAL_IP', 'HOSTNAME', 'TERM', 'LANG', 'PWD', 'TZ', 'TIMEZONE'];
+
+    /**
+     * The table associated with the model.
+     */
+    protected $table = 'map_variables';
 
     /**
      * Fields that are not mass assignable.
@@ -71,7 +76,7 @@ class EggVariable extends Model implements Validatable
 
     /** @var array<string, string[]> */
     public static array $validationRules = [
-        'egg_id' => ['exists:eggs,id'],
+        'map_id' => ['exists:maps,id'],
         'sort' => ['nullable'],
         'name' => ['required', 'string', 'between:1,255'],
         'description' => ['string'],
@@ -91,7 +96,7 @@ class EggVariable extends Model implements Validatable
     {
         $rules = self::getValidationRules();
 
-        $rules['env_variable'] = ['required', 'alphaDash', 'between:1,255', 'notIn:' . implode(',', EggVariable::RESERVED_ENV_NAMES)];
+        $rules['env_variable'] = ['required', 'alphaDash', 'between:1,255', 'notIn:' . implode(',', MapVariable::RESERVED_ENV_NAMES)];
 
         return $rules;
     }
@@ -105,7 +110,7 @@ class EggVariable extends Model implements Validatable
     protected function casts(): array
     {
         return [
-            'egg_id' => 'integer',
+            'map_id' => 'integer',
             'user_viewable' => 'bool',
             'user_editable' => 'bool',
             'rules' => 'array',
@@ -119,9 +124,9 @@ class EggVariable extends Model implements Validatable
         return in_array('required', $this->rules);
     }
 
-    public function egg(): HasOne
+    public function map(): HasOne
     {
-        return $this->hasOne(Egg::class);
+        return $this->hasOne(Map::class);
     }
 
     /**

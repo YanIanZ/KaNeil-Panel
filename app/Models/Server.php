@@ -47,7 +47,7 @@ use Psr\Http\Message\ResponseInterface;
  * @property int $disk
  * @property int $io
  * @property int $cpu
- * @property int $egg_id
+ * @property int $map_id
  * @property string $startup
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
@@ -74,9 +74,9 @@ use Psr\Http\Message\ResponseInterface;
  * @property-read ServerState|ContainerStatus $condition
  * @property-read Collection<int, Database> $databases
  * @property-read int|null $databases_count
- * @property-read Egg $egg
- * @property-read Collection<int, EggVariable> $eggVariables
- * @property-read int|null $egg_variables_count
+ * @property-read Map $map
+ * @property-read Collection<int, MapVariable> $mapVariables
+ * @property-read int|null $map_variables_count
  * @property-read string|null $icon
  * @property-read Collection<int, Mount> $mounts
  * @property-read int|null $mounts_count
@@ -91,7 +91,7 @@ use Psr\Http\Message\ResponseInterface;
  * @property-read int|null $subusers_count
  * @property-read ServerTransfer|null $transfer
  * @property-read User $user
- * @property-read Collection<int, EggVariable> $variables
+ * @property-read Collection<int, MapVariable> $variables
  * @property-read int|null $variables_count
  *
  * @method static \Database\Factories\ServerFactory factory($count = null, $state = [])
@@ -176,7 +176,7 @@ class Server extends Model implements HasAvatar, Validatable
         'oom_killer' => ['sometimes', 'boolean'],
         'disk' => ['required', 'numeric', 'min:0'],
         'allocation_id' => ['sometimes', 'nullable', 'unique:servers', 'exists:allocations,id'],
-        'egg_id' => ['required', 'exists:eggs,id'],
+        'map_id' => ['required', 'exists:maps,id'],
         'startup' => ['required', 'string'],
         'skip_scripts' => ['sometimes', 'boolean'],
         'image' => ['required', 'string', 'max:255'],
@@ -199,7 +199,7 @@ class Server extends Model implements HasAvatar, Validatable
             'cpu' => 'integer',
             'oom_killer' => 'boolean',
             'allocation_id' => 'integer',
-            'egg_id' => 'integer',
+            'map_id' => 'integer',
             'database_limit' => 'integer',
             'allocation_limit' => 'integer',
             'backup_limit' => 'integer',
@@ -289,32 +289,32 @@ class Server extends Model implements HasAvatar, Validatable
     }
 
     /**
-     * Gets information for the egg associated with this server.
+     * Gets information for the map associated with this server.
      */
-    public function egg(): BelongsTo
+    public function map(): BelongsTo
     {
-        return $this->belongsTo(Egg::class);
+        return $this->belongsTo(Map::class, 'map_id');
     }
 
-    public function eggVariables(): HasMany
+    public function mapVariables(): HasMany
     {
-        return $this->hasMany(EggVariable::class, 'egg_id', 'egg_id');
+        return $this->hasMany(MapVariable::class, 'map_id', 'map_id');
     }
 
     /**
-     * Gets information for the egg variables associated with this server.
+     * Gets information for the map variables associated with this server.
      *
-     * @return HasMany<EggVariable, $this>
+     * @return HasMany<MapVariable, $this>
      */
     public function variables(): HasMany
     {
-        return $this->hasMany(EggVariable::class, 'egg_id', 'egg_id')
-            ->select(['egg_variables.*', 'server_variables.variable_value as server_value'])
+        return $this->hasMany(MapVariable::class, 'map_id', 'map_id')
+            ->select(['map_variables.*', 'server_variables.variable_value as server_value'])
             ->leftJoin('server_variables', function (JoinClause $join) {
                 // Don't forget to join against the server ID as well since the way we're using this relationship
-                // would actually return all the variables and their values for _all_ servers using that egg,
+                // would actually return all the variables and their values for _all_ servers using that map,
                 // rather than only the server for this model.
-                $join->on('server_variables.variable_id', 'egg_variables.id')
+                $join->on('server_variables.variable_id', 'map_variables.id')
                     ->where('server_variables.server_id', $this->id);
             });
     }
@@ -326,7 +326,7 @@ class Server extends Model implements HasAvatar, Validatable
 
     public function ensureVariablesExist(): void
     {
-        foreach ($this->eggVariables as $variable) {
+        foreach ($this->mapVariables as $variable) {
             ServerVariable::firstOrCreate([
                 'server_id' => $this->id,
                 'variable_id' => $variable->id,
@@ -515,6 +515,6 @@ class Server extends Model implements HasAvatar, Validatable
 
     public function getFilamentAvatarUrl(): ?string
     {
-        return $this->icon ?? $this->egg->icon;
+        return $this->icon ?? $this->map->icon;
     }
 }
