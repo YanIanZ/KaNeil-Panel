@@ -16,7 +16,7 @@ return [
     ],
     'map' => [
         'delete_has_servers' => 'Et map med aktive servere tilknyttet kan ikke slettes fra panelet.',
-        'invalid_copy_id' => 'Egget som er valgt for å kopiere et skript fra, eksisterer enten ikke eller kopierer allerede et annet skript.',
+        'invalid_copy_id' => 'Mapet som er valgt for å kopiere et skript fra, eksisterer enten ikke eller kopierer allerede et annet skript.',
         'has_children' => 'Dette egget er en overordnet til ett eller flere andre map. Vennligst slett disse eggene før du sletter dette egget.',
     ],
     'variables' => [
