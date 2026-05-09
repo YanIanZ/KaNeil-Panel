@@ -3,7 +3,7 @@
 return [
     'appsettings' => [
         'comment' => [
-            'author' => 'Adj meg egy e-mail címet, amire exportálni tudjuk az eggs-t. Mindenképp valós e-mail cím legyen.',
+            'author' => 'Adj meg egy e-mail címet, amire exportálni tudjuk az maps-t. Mindenképp valós e-mail cím legyen.',
             'url' => 'Az URL címnek kötelező, hogy "https://" vagy "http://"-el kezdődjön, attól függően, hogy SSL-t használsz-e vagy nem. Hogyha hibásan adod meg, rossz helyre fog menni.',
             'timezone' => 'Az időzónának egyeznie kell a PHP által támogatott időzónákkal. Hogyha nem vagy biztos, kérlek, látogasd meg a https://php.net/manual/en/timezones.php oldalt.',
         ],

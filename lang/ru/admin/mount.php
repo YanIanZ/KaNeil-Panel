@@ -15,7 +15,7 @@ return [
     'description' => 'Описание',
     'description_help' => 'Более длинное описание для этого хранилища',
     'no_mounts' => 'Нет хранилищ',
-    'eggs' => 'Яйца',
+    'maps' => 'Яйца',
     'nodes' => 'Узлы',
     'toggles' => [
         'writable' => 'Изменяемый',

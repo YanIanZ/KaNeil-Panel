@@ -15,7 +15,7 @@ return [
     'description' => 'Descriere',
     'description_help' => 'O descriere mai lungă pentru această montare',
     'no_mounts' => 'Fără montări',
-    'eggs' => 'Ouă',
+    'maps' => 'Ouă',
     'nodes' => 'Noduri',
     'toggles' => [
         'writable' => 'Care poate fi scris',

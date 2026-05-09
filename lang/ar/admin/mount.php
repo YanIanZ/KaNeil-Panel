@@ -15,7 +15,7 @@ return [
     'description' => 'الوصف',
     'description_help' => 'وصف تفصيلي لهذا التوصيل',
     'no_mounts' => 'لا توجد توصيلات',
-    'eggs' => 'البيوض',
+    'maps' => 'البيوض',
     'nodes' => 'العقد',
     'toggles' => [
         'writable' => 'قابل للكتابة',

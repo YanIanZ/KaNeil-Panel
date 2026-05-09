@@ -15,7 +15,7 @@ return [
     'description' => '敘述',
     'description_help' => '此掛載點的詳細描述',
     'no_mounts' => '沒有任何掛載點',
-    'eggs' => 'Eggs',
+    'maps' => 'Maps',
     'nodes' => '節點',
     'toggles' => [
         'writable' => '可寫',
@@ -23,7 +23,7 @@ return [
     ],
     'table' => [
         'name' => '名稱',
-        'all_eggs' => '所有 Eggs',
+        'all_eggs' => '所有 Maps',
         'all_nodes' => '所有節點',
         'read_only' => '唯讀',
     ],

@@ -15,7 +15,7 @@ return [
     'description' => 'Descrição',
     'description_help' => 'Uma descrição mais longa para esta Montagem',
     'no_mounts' => 'Sem Montagens',
-    'eggs' => 'Eggs',
+    'maps' => 'Maps',
     'nodes' => 'Nodes',
     'toggles' => [
         'writable' => 'Gravável',
@@ -23,7 +23,7 @@ return [
     ],
     'table' => [
         'name' => 'Nome',
-        'all_eggs' => 'Todos os Eggs',
+        'all_eggs' => 'Todos os Maps',
         'all_nodes' => 'Todos os Nodes',
         'read_only' => 'Somente Leitura',
     ],

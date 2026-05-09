@@ -15,7 +15,7 @@ return [
     'description' => 'Popis',
     'description_help' => 'Dlhší popis pre toto úložisko',
     'no_mounts' => 'Žiadne úložiská',
-    'eggs' => 'Vajcia',
+    'maps' => 'Vajcia',
     'nodes' => 'Uzly',
     'toggles' => [
         'writable' => 'Zapisovateľné',

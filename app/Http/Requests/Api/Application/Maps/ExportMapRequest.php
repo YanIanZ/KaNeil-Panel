@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api\Application\Eggs;
+namespace App\Http\Requests\Api\Application\Maps;
 
 class ExportEggRequest extends GetEggRequest
 {

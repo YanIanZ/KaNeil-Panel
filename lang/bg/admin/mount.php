@@ -15,7 +15,7 @@ return [
     'description' => 'Описание',
     'description_help' => 'По-дълго описание за този Mount',
     'no_mounts' => 'Няма Mount-ове',
-    'eggs' => 'Яйца',
+    'maps' => 'Яйца',
     'nodes' => 'Node-ове',
     'toggles' => [
         'writable' => 'Записваемо',

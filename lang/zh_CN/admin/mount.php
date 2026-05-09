@@ -15,7 +15,7 @@ return [
     'description' => '描述',
     'description_help' => '此挂载的较长描述',
     'no_mounts' => '没有挂载',
-    'eggs' => 'Eggs',
+    'maps' => 'Maps',
     'nodes' => '节点',
     'toggles' => [
         'writable' => '可写入',
@@ -23,7 +23,7 @@ return [
     ],
     'table' => [
         'name' => '名称',
-        'all_eggs' => '所有 Eggs',
+        'all_eggs' => '所有 Maps',
         'all_nodes' => '所有节点',
         'read_only' => '只读',
     ],

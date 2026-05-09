@@ -15,7 +15,7 @@ return [
     'description' => 'Beschreibung',
     'description_help' => 'Eine längere Beschreibung für diesen Mount',
     'no_mounts' => 'Keine Mounts',
-    'eggs' => 'Eggs',
+    'maps' => 'Maps',
     'nodes' => 'Nodes',
     'toggles' => [
         'writable' => 'Schreibend',
@@ -23,7 +23,7 @@ return [
     ],
     'table' => [
         'name' => 'Name',
-        'all_eggs' => 'Alle Eggs',
+        'all_eggs' => 'Alle Maps',
         'all_nodes' => 'Alle Nodes',
         'read_only' => 'Schreibgeschützt?',
     ],

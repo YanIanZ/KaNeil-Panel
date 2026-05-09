@@ -15,7 +15,7 @@ return [
     'description' => 'Description',
     'description_help' => 'A longer description for this Mount',
     'no_mounts' => 'No Mounts',
-    'eggs' => 'Eggs',
+    'maps' => 'Maps',
     'nodes' => 'Nodes',
     'user_mountable' => 'User Mountable?',
     'user_mountable_help' => 'Should users be able to toggle this mount on or off for their servers?',
@@ -27,7 +27,7 @@ return [
     ],
     'table' => [
         'name' => 'Name',
-        'all_eggs' => 'All Eggs',
+        'all_eggs' => 'All Maps',
         'all_nodes' => 'All Nodes',
         'read_only' => 'Read Only',
         'user_mountable' => 'User Mountable',

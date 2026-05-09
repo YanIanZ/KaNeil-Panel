@@ -15,7 +15,7 @@ return [
     'description' => 'Description',
     'description_help' => 'Une description plus longue pour cette Monture',
     'no_mounts' => 'Aucune montagne',
-    'eggs' => 'Œufs',
+    'maps' => 'Œufs',
     'nodes' => 'Nœuds',
     'toggles' => [
         'writable' => 'Écriture autorisée',
@@ -23,7 +23,7 @@ return [
     ],
     'table' => [
         'name' => 'Nom',
-        'all_eggs' => 'Tous les eggs',
+        'all_eggs' => 'Tous les maps',
         'all_nodes' => 'Tous les nœuds',
         'read_only' => 'Lecture seule',
     ],

@@ -3,7 +3,7 @@
 return [
     'appsettings' => [
         'comment' => [
-            'author' => 'Bu Panel tarafından dışa aktarılan yumurtaların (eggs) hangi e-posta adresinden gönderileceğini belirtin. Bu, geçerli bir e-posta adresi olmalıdır.',
+            'author' => 'Bu Panel tarafından dışa aktarılan yumurtaların (maps) hangi e-posta adresinden gönderileceğini belirtin. Bu, geçerli bir e-posta adresi olmalıdır.',
             'url' => 'Uygulama URL\'si, SSL kullanıp kullanmadığınıza bağlı olarak https:// veya http:// ile başlamalıdır. Şema eklemezseniz, e-postalarınız ve diğer içerikler yanlış konuma bağlanacaktır.',
             'timezone' => "Saat dilimi, PHP'nin desteklediği saat dilimlerinden biriyle eşleşmelidir. Emin değilseniz, lütfen https://php.net/manual/en/timezones.php adresine bakın.",
         ],

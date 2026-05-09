@@ -3,7 +3,7 @@
 return [
     'appsettings' => [
         'comment' => [
-            'author' => '請提供此面板匯出 Eggs 時所使用的寄件人電子郵件。這必須是一個有效的電子郵件。',
+            'author' => '請提供此面板匯出 Maps 時所使用的寄件人電子郵件。這必須是一個有效的電子郵件。',
             'url' => '應用程式網址必須以 https:// 或 http:// 開頭，依照你是否使用 SSL 而定。如果未包含這個開頭，郵件與其他內容中的連結將會導向錯誤的位置。',
             'timezone' => '時區應符合 PHP 支援的時區格式。如不確定，請參考：https://php.net/manual/en/timezones.php。',
         ],

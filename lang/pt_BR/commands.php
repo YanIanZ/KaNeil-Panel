@@ -3,7 +3,7 @@
 return [
     'appsettings' => [
         'comment' => [
-            'author' => 'Forneça o endereço de email que os Eggs exportados por esse painel devem ter. Esse deve ser um endereço de email válido.',
+            'author' => 'Forneça o endereço de email que os Maps exportados por esse painel devem ter. Esse deve ser um endereço de email válido.',
             'url' => 'A URL da aplicação DEVE começar com https:// ou http://, dependendo se você está usando SSL ou não. Se você não incluir o esquema, seus e-mails e outros conteúdos irão apontar para o local incorreto.',
             'timezone' => 'O fuso horário deve corresponder a um dos fusos horários suportados pelo PHP. Se você não tiver certeza, consulte: https://php.net/manual/en/timezones.php.',
         ],

@@ -15,7 +15,7 @@ return [
     'description' => 'Aprašymas',
     'description_help' => 'Ilgesnis šio disko prijungimo aprašymas',
     'no_mounts' => 'Nėra disko prijungimų',
-    'eggs' => '„Kiaušiniai“',
+    'maps' => '„Kiaušiniai“',
     'nodes' => '„Nodes“',
     'toggles' => [
         'writable' => 'Įrašomas',

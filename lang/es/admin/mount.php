@@ -15,7 +15,7 @@ return [
     'description' => 'Descripción',
     'description_help' => 'Una descripción más larga sobre el volumen',
     'no_mounts' => 'Sin volumenes',
-    'eggs' => 'Huevos',
+    'maps' => 'Huevos',
     'nodes' => 'Nodos',
     'toggles' => [
         'writable' => 'Editable',

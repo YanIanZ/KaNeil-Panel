@@ -81,8 +81,8 @@ class MountResource extends Resource
                     ->label(trans('admin/mount.table.name'))
                     ->description(fn (Mount $mount) => "$mount->source -> $mount->target")
                     ->sortable(),
-                TextColumn::make('eggs.name')
-                    ->label(trans('admin/mount.eggs'))
+                TextColumn::make('maps.name')
+                    ->label(trans('admin/mount.maps'))
                     ->badge()
                     ->placeholder(trans('admin/mount.table.all_eggs')),
                 TextColumn::make('nodes.name')
@@ -192,11 +192,11 @@ class MountResource extends Resource
                         'xl' => 2,
                     ]),
                 Section::make()->schema([
-                    Select::make('eggs')
+                    Select::make('maps')
                         ->multiple()
-                        ->label(trans('admin/mount.eggs'))
+                        ->label(trans('admin/mount.maps'))
                         // Selecting only non-json fields to prevent Postgres from choking on DISTINCT JSON columns
-                        ->relationship('eggs', 'name', fn (Builder $query) => $query->select(['eggs.id', 'eggs.name']))
+                        ->relationship('maps', 'name', fn (Builder $query) => $query->select(['maps.id', 'maps.name']))
                         ->preload(),
                     Select::make('nodes')
                         ->multiple()

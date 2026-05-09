@@ -15,7 +15,7 @@ return [
     'description' => 'Açıklama',
     'description_help' => 'Bu bağlama için daha uzun bir açıklama.',
     'no_mounts' => 'Bağlama Yok',
-    'eggs' => 'Yumurtalar',
+    'maps' => 'Yumurtalar',
     'nodes' => 'Düğümler',
     'toggles' => [
         'writable' => 'Yazılabilir',

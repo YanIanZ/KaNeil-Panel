@@ -15,7 +15,7 @@ return [
     'description' => 'Popis:',
     'description_help' => 'Delší popis pro toto připojení',
     'no_mounts' => 'Žádná připojení',
-    'eggs' => 'Vejce',
+    'maps' => 'Vejce',
     'nodes' => 'Uzly',
     'toggles' => [
         'writable' => 'Lze zapisovat',

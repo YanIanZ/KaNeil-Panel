@@ -15,7 +15,7 @@ return [
     'description' => 'Opis',
     'description_help' => 'Dłuższy opis dla tego punktu montowania',
     'no_mounts' => 'Brak punktów montowania',
-    'eggs' => 'Jajka',
+    'maps' => 'Jajka',
     'nodes' => 'Węzły',
     'toggles' => [
         'writable' => 'Zapisywalne',

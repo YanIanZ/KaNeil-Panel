@@ -15,7 +15,7 @@ return [
     'description' => 'Opis',
     'description_help' => 'Duži opis za ovo Montiranje',
     'no_mounts' => 'Nema Montiranja',
-    'eggs' => 'Jaja',
+    'maps' => 'Jaja',
     'nodes' => 'Čvorovi',
     'toggles' => [
         'writable' => 'Za pisanje',

@@ -3,7 +3,7 @@
 return [
     'appsettings' => [
         'comment' => [
-            'author' => 'Geef het e-mailadres op waarvan eggs geëxporteerd worden vanuit dit Paneel. Dit moet een geldig e-mailadres zijn.',
+            'author' => 'Geef het e-mailadres op waarvan maps geëxporteerd worden vanuit dit Paneel. Dit moet een geldig e-mailadres zijn.',
             'url' => 'De applicatie-URL MOET beginnen met https:// of http:// afhankelijk van het gebruik van SSL of niet. Als u dit niet toevoegt zullen uw e-mails en andere inhoud linken naar de verkeerde locatie.',
             'timezone' => "De tijdzone moet overeenkomen met een van de ondersteunde tijdzones van PHP\\'s. Als u niet zeker bent, ga dan naar https://php.net/manual/en/timezones.php.",
         ],
