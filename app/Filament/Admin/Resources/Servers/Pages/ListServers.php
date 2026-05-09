@@ -33,7 +33,7 @@ class ListServers extends ListRecords
             ->groups([
                 Group::make('node.name')->getDescriptionFromRecordUsing(fn (Server $server): string => str($server->node->description)->limit(150)),
                 Group::make('user.username')->getDescriptionFromRecordUsing(fn (Server $server): string => $server->user->email),
-                Group::make('egg.name')->getDescriptionFromRecordUsing(fn (Server $server): string => str($server->egg->description)->limit(150)),
+                Group::make('map.name')->getDescriptionFromRecordUsing(fn (Server $server): string => str($server->map->description)->limit(150)),
             ])
             ->columns([
                 TextColumn::make('condition')
@@ -58,10 +58,10 @@ class ListServers extends ListRecords
                     ->hidden(fn (Table $table) => $table->getGrouping()?->getId() === 'node.name')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('egg.name')
-                    ->label(trans('admin/server.egg'))
-                    ->url(fn (Server $server) => route('filament.admin.resources.eggs.edit', ['record' => $server->egg]))
-                    ->hidden(fn (Table $table) => $table->getGrouping()?->getId() === 'egg.name')
+                TextColumn::make('map.name')
+                    ->label(trans('admin/server.map'))
+                    ->url(fn (Server $server) => route('filament.admin.resources.maps.edit', ['record' => $server->map]))
+                    ->hidden(fn (Table $table) => $table->getGrouping()?->getId() === 'map.name')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('user.username')

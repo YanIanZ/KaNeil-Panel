@@ -39,7 +39,7 @@ class ProcessWebhooksTest extends TestCase
             'owner_id' => 1,
             'node_id' => 1,
             'allocation_id' => 1,
-            'egg_id' => 1,
+            'map_id' => 1,
             'uuid' => '9ff9885f-ab79-4a6e-a53e-466a84cdb2d8',
             'uuid_short' => 'ypk27val',
             'name' => 'Delmer',

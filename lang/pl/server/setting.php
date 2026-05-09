@@ -16,7 +16,7 @@ return [
         'node_name' => 'Nazwa węzła',
         'icon' => [
             'upload' => 'Prześlij ikonę',
-            'tooltip' => 'Używanie ikony Egg\'a',
+            'tooltip' => 'Używanie ikony Map\'a',
             'updated' => 'Ikona serwera została zaktualizowana',
             'deleted' => 'Ikona serwera została usunięta',
         ],

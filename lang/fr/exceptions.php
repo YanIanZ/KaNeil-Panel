@@ -14,13 +14,13 @@ return [
         'cidr_out_of_range' => 'La notation CIDR permet uniquement les masques entre /25 et /32.',
         'port_out_of_range' => 'Les ports d\'une allocation doivent être supérieurs à 1024 et inférieurs ou égaux à 65535.',
     ],
-    'egg' => [
-        'delete_has_servers' => 'Un egg avec des serveurs actifs qui y sont attachés ne peuvent pas être supprimés du Panel.',
+    'map' => [
+        'delete_has_servers' => 'Un map avec des serveurs actifs qui y sont attachés ne peuvent pas être supprimés du Panel.',
         'invalid_copy_id' => 'L\'oeuf sélectionné pour copier un script de soit n\'existe pas, soit il copie un script lui-même.',
-        'has_children' => 'Cet Egg est un parent pour un ou plusieurs autres Egg. Veuillez supprimer ces Egg avant de supprimer celui-ci.',
+        'has_children' => 'Cet Map est un parent pour un ou plusieurs autres Map. Veuillez supprimer ces Map avant de supprimer celui-ci.',
     ],
     'variables' => [
-        'env_not_unique' => 'La variable d\'environnement :name doit être unique à cet Egg',
+        'env_not_unique' => 'La variable d\'environnement :name doit être unique à cet Map',
         'reserved_name' => 'La variable d\'environnement :name est protégée et ne peut pas être assignée à une variable.',
         'bad_validation_rule' => 'La règle de validation ":rule" n\'est pas une règle valide pour cette application.',
     ],

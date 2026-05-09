@@ -3,7 +3,7 @@
 namespace App\Http\Resources\Daemon;
 
 use App\Models\Server;
-use App\Services\Eggs\EggConfigurationService;
+use App\Services\Maps\EggConfigurationService;
 use App\Services\Servers\ServerConfigurationStructureService;
 use Illuminate\Container\Container;
 use Illuminate\Http\Resources\Json\ResourceCollection;
@@ -20,17 +20,17 @@ class ServerConfigurationCollection extends ResourceCollection
      */
     public function toArray($request): array
     {
-        /** @var EggConfigurationService $egg */
-        $egg = Container::getInstance()->make(EggConfigurationService::class);
+        /** @var EggConfigurationService $map */
+        $map = Container::getInstance()->make(EggConfigurationService::class);
 
         /** @var ServerConfigurationStructureService $configuration */
         $configuration = Container::getInstance()->make(ServerConfigurationStructureService::class);
 
-        return $this->collection->map(function (Server $server) use ($configuration, $egg) {
+        return $this->collection->map(function (Server $server) use ($configuration, $map) {
             return [
                 'uuid' => $server->uuid,
                 'settings' => $configuration->handle($server),
-                'process_configuration' => $egg->handle($server),
+                'process_configuration' => $map->handle($server),
             ];
         })->toArray();
     }

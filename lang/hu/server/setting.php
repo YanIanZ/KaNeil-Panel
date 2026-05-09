@@ -16,7 +16,7 @@ return [
         'node_name' => 'Csomópont neve',
         'icon' => [
             'upload' => 'Ikon feltöltése',
-            'tooltip' => 'Egg ikon használata',
+            'tooltip' => 'Map ikon használata',
             'updated' => 'Szerver ikon frissítve',
             'deleted' => 'Szerver ikon törölve',
         ],

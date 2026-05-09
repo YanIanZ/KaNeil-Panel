@@ -14,13 +14,13 @@ return [
         'cidr_out_of_range' => 'CIDR notatie staat alleen subnet masks toe tussen /25 en /32.',
         'port_out_of_range' => 'De poorten in een toewijzing moeten groter zijn dan 1024 en minder dan of gelijk zijn aan 65535.',
     ],
-    'egg' => [
-        'delete_has_servers' => 'Een egg met actieve servers gekoppeld kan niet worden verwijderd uit het paneel.',
-        'invalid_copy_id' => 'De egg dat geselecteerd is om een script van te kopiëren bestaat niet, of kopieert een script zelf.',
-        'has_children' => 'Deze egg is het hoofd van een of meer eggs. Verwijder deze eggs voor het verwijderen van deze egg.',
+    'map' => [
+        'delete_has_servers' => 'Een map met actieve servers gekoppeld kan niet worden verwijderd uit het paneel.',
+        'invalid_copy_id' => 'De map dat geselecteerd is om een script van te kopiëren bestaat niet, of kopieert een script zelf.',
+        'has_children' => 'Deze map is het hoofd van een of meer maps. Verwijder deze maps voor het verwijderen van deze map.',
     ],
     'variables' => [
-        'env_not_unique' => 'De omgevingsvariabele :name moet uniek zijn voor deze egg.',
+        'env_not_unique' => 'De omgevingsvariabele :name moet uniek zijn voor deze map.',
         'reserved_name' => 'De omgevingsvariabele :name is beveiligd en kan niet worden toegewezen aan een variabele.',
         'bad_validation_rule' => 'De validatieregel ":rule" is geen geldige regel voor deze toepassing.',
     ],

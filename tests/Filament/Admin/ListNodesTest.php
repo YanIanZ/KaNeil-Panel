@@ -22,9 +22,9 @@ it('root admin can see all nodes', function () {
 });
 
 it('non root admin cannot see any nodes', function () {
-    $role = Role::factory()->create(['name' => 'Egg Viewer', 'guard_name' => 'web']);
-    // Egg Permission is on purpose, we check the wrong permissions.
-    $permission = Permission::factory()->create(['name' => RolePermissionModels::Egg->viewAny(), 'guard_name' => 'web']);
+    $role = Role::factory()->create(['name' => 'Map Viewer', 'guard_name' => 'web']);
+    // Map Permission is on purpose, we check the wrong permissions.
+    $permission = Permission::factory()->create(['name' => RolePermissionModels::Map->viewAny(), 'guard_name' => 'web']);
     $role->permissions()->attach($permission);
     [$user] = generateTestAccount();
 

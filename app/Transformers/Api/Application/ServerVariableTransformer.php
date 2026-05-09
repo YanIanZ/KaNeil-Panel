@@ -2,7 +2,7 @@
 
 namespace App\Transformers\Api\Application;
 
-use App\Models\Egg;
+use App\Models\Map;
 use App\Models\EggVariable;
 use League\Fractal\Resource\Item;
 use League\Fractal\Resource\NullResource;
@@ -35,7 +35,7 @@ class ServerVariableTransformer extends BaseTransformer
      */
     public function includeParent(EggVariable $variable): Item|NullResource
     {
-        if (!$this->authorize(Egg::RESOURCE_NAME)) {
+        if (!$this->authorize(Map::RESOURCE_NAME)) {
             return $this->null();
         }
 

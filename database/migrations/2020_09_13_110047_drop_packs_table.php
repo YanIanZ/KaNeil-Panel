@@ -21,7 +21,7 @@ return new class extends Migration
     {
         Schema::create('packs', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('egg_id');
+            $table->unsignedInteger('map_id');
             $table->string('uuid', 36)->unique();
             $table->string('name');
             $table->string('version');
@@ -33,7 +33,7 @@ return new class extends Migration
         });
 
         Schema::table('packs', function (Blueprint $table) {
-            $table->foreign('egg_id')->references('id')->on('eggs')->cascadeOnDelete();
+            $table->foreign('map_id')->references('id')->on('maps')->cascadeOnDelete();
         });
     }
 };

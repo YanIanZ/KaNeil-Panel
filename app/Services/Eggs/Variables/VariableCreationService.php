@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\Eggs\Variables;
+namespace App\Services\Maps\Variables;
 
 use App\Exceptions\Model\DataValidationException;
-use App\Exceptions\Service\Egg\Variable\BadValidationRuleException;
-use App\Exceptions\Service\Egg\Variable\ReservedVariableNameException;
+use App\Exceptions\Service\Map\Variable\BadValidationRuleException;
+use App\Exceptions\Service\Map\Variable\ReservedVariableNameException;
 use App\Models\EggVariable;
 use App\Traits\Services\ValidatesValidationRules;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
@@ -28,7 +28,7 @@ class VariableCreationService
     }
 
     /**
-     * Create a new variable for a given Egg.
+     * Create a new variable for a given Map.
      *
      * @param array{
      *     name?: string,
@@ -42,7 +42,7 @@ class VariableCreationService
      * @throws BadValidationRuleException
      * @throws ReservedVariableNameException
      */
-    public function handle(int $egg, array $data): EggVariable
+    public function handle(int $map, array $data): EggVariable
     {
         if (in_array(strtoupper(array_get($data, 'env_variable')), EggVariable::RESERVED_ENV_NAMES)) {
             throw new ReservedVariableNameException(sprintf('Cannot use the protected name %s for this environment variable.', array_get($data, 'env_variable')));
@@ -56,7 +56,7 @@ class VariableCreationService
 
         /** @var EggVariable $eggVariable */
         $eggVariable = EggVariable::query()->create([
-            'egg_id' => $egg,
+            'map_id' => $map,
             'name' => $data['name'] ?? '',
             'description' => $data['description'] ?? '',
             'env_variable' => $data['env_variable'] ?? '',

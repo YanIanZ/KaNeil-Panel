@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands\Egg;
+namespace App\Console\Commands\Map;
 
 use Exception;
 use Illuminate\Console\Command;
@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Http;
 
 class UpdateEggIndexCommand extends Command
 {
-    protected $signature = 'p:egg:update-index';
+    protected $signature = 'p:map:update-index';
 
     public function handle(): int
     {
@@ -27,19 +27,19 @@ class UpdateEggIndexCommand extends Command
             $this->info("Nest: $nestName");
 
             $nestEggs = [];
-            foreach ($nest['Eggs'] as $egg) {
-                $eggName = $egg['egg']['name'];
+            foreach ($nest['Maps'] as $map) {
+                $eggName = $map['map']['name'];
 
-                $this->comment("Egg: $eggName");
+                $this->comment("Map: $eggName");
 
-                $nestEggs[$egg['download_url']] = $eggName;
+                $nestEggs[$map['download_url']] = $eggName;
             }
             $index[$nestName] = $nestEggs;
 
             $this->info('');
         }
 
-        cache()->forever('eggs.index', $index);
+        cache()->forever('maps.index', $index);
 
         return 0;
     }

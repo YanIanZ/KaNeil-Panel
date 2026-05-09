@@ -61,7 +61,7 @@ return [
             'migration' => 'Přesun dat se nezdařil',
         ],
     ],
-    'egg' => [
+    'map' => [
         'title' => 'Vejce',
         'no_eggs' => 'Žádná vejce nejsou k dispozici',
         'background_install_started' => 'Instalace vejce byla spuštěna',

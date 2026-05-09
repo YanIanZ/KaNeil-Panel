@@ -60,17 +60,17 @@ return new class extends Migration
         });
 
         Schema::table('egg_mount', function (Blueprint $table) {
-            $table->dropForeign(['egg_id']);
+            $table->dropForeign(['map_id']);
             $table->dropForeign(['mount_id']);
-            $table->dropUnique(['egg_id', 'mount_id']);
+            $table->dropUnique(['map_id', 'mount_id']);
         });
 
         $eggMounts = DB::table('egg_mount')->get();
         $eggMounts->each(function ($mount) use (&$inserts) {
             $inserts[] = [
                 'mount_id' => $mount->mount_id,
-                'mountable_type' => 'egg',
-                'mountable_id' => $mount->egg_id,
+                'mountable_type' => 'map',
+                'mountable_id' => $mount->map_id,
             ];
         });
 

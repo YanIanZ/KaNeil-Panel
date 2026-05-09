@@ -14,13 +14,13 @@ return [
         'cidr_out_of_range' => 'CIDR žymėjimas leidžia naudoti tik kaukes tarp /25 ir /32.',
         'port_out_of_range' => 'Paskirstymo prievadai turi būti didesni arba lygūs 1024 ir mažesni arba lygūs 65535.',
     ],
-    'egg' => [
-        'delete_has_servers' => 'Egg su aktyviais, prijungtais serveriais, negali būti ištrintas iš Panel.',
-        'invalid_copy_id' => 'Pasirinktas Egg skripto kopijavimui neegzistuoja arba kopijuoja skriptą pats.',
-        'has_children' => 'Šis Egg yra tėvas vienam ar daugiau kitems Eggs. Prašau ištrinti tuos Eggs prieš šio Egg ištrinimą.',
+    'map' => [
+        'delete_has_servers' => 'Map su aktyviais, prijungtais serveriais, negali būti ištrintas iš Panel.',
+        'invalid_copy_id' => 'Pasirinktas Map skripto kopijavimui neegzistuoja arba kopijuoja skriptą pats.',
+        'has_children' => 'Šis Map yra tėvas vienam ar daugiau kitems Maps. Prašau ištrinti tuos Maps prieš šio Map ištrinimą.',
     ],
     'variables' => [
-        'env_not_unique' => 'Aplinkos kintamasis :name turi būti unikalus šiam Egg.',
+        'env_not_unique' => 'Aplinkos kintamasis :name turi būti unikalus šiam Map.',
         'reserved_name' => 'Aplinkos kintamasis :name yra apsaugotas ir negali būti paskirtas kintamajam.',
         'bad_validation_rule' => 'Validacijos taisyklė ":rule" nėra galiojanti taisyklė šiai aplikacijai.',
     ],

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Requests\Api\Application\Eggs;
+namespace App\Http\Requests\Api\Application\Maps;
 
 use App\Http\Requests\Api\Application\ApplicationApiRequest;
-use App\Models\Egg;
+use App\Models\Map;
 use App\Services\Acl\Api\AdminAcl;
 
 class ImportEggRequest extends ApplicationApiRequest
 {
-    protected ?string $resource = Egg::RESOURCE_NAME;
+    protected ?string $resource = Map::RESOURCE_NAME;
 
     protected int $permission = AdminAcl::WRITE;
 }

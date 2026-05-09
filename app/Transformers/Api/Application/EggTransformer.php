@@ -2,7 +2,7 @@
 
 namespace App\Transformers\Api\Application;
 
-use App\Models\Egg;
+use App\Models\Map;
 use App\Models\EggVariable;
 use App\Models\Server;
 use Illuminate\Support\Arr;
@@ -26,11 +26,11 @@ class EggTransformer extends BaseTransformer
      */
     public function getResourceName(): string
     {
-        return Egg::RESOURCE_NAME;
+        return Map::RESOURCE_NAME;
     }
 
     /**
-     * @param  Egg  $model
+     * @param  Map  $model
      */
     public function transform($model): array
     {
@@ -74,9 +74,9 @@ class EggTransformer extends BaseTransformer
     }
 
     /**
-     * Include the Servers relationship for the given Egg in the transformation.
+     * Include the Servers relationship for the given Map in the transformation.
      */
-    public function includeServers(Egg $model): Collection|NullResource
+    public function includeServers(Map $model): Collection|NullResource
     {
         if (!$this->authorize(Server::RESOURCE_NAME)) {
             return $this->null();
@@ -88,11 +88,11 @@ class EggTransformer extends BaseTransformer
     }
 
     /**
-     * Include the variables that are defined for this Egg.
+     * Include the variables that are defined for this Map.
      */
-    public function includeVariables(Egg $model): Collection|NullResource
+    public function includeVariables(Map $model): Collection|NullResource
     {
-        if (!$this->authorize(Egg::RESOURCE_NAME)) {
+        if (!$this->authorize(Map::RESOURCE_NAME)) {
             return $this->null();
         }
 

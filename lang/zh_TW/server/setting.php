@@ -16,7 +16,7 @@ return [
         'node_name' => '節點名稱',
         'icon' => [
             'upload' => '上傳圖標',
-            'tooltip' => '使用 Egg 圖標',
+            'tooltip' => '使用 Map 圖標',
             'updated' => '伺服器圖標已更新',
             'deleted' => '伺服器圖標已刪除',
         ],

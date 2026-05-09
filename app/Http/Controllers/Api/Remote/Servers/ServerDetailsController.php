@@ -11,7 +11,7 @@ use App\Models\ActivityLog;
 use App\Models\Backup;
 use App\Models\Node;
 use App\Models\Server;
-use App\Services\Eggs\EggConfigurationService;
+use App\Services\Maps\EggConfigurationService;
 use App\Services\Servers\ServerConfigurationStructureService;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Http\JsonResponse;
@@ -65,7 +65,7 @@ class ServerDetailsController extends Controller
 
         // Avoid run-away N+1 SQL queries by preloading the relationships that are used
         // within each of the services called below.
-        $servers = Server::query()->with('allocations', 'egg', 'mounts', 'variables')
+        $servers = Server::query()->with('allocations', 'map', 'mounts', 'variables')
             ->where('node_id', $node->id)
             // If you don't cast this to a string you'll end up with a stringified per_page returned in
             // the metadata, and then daemon will panic crash as a result.

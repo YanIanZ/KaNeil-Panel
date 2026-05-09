@@ -8,7 +8,7 @@ enum RolePermissionModels: string
     case Allocation = 'allocation';
     case DatabaseHost = 'databaseHost';
     case Database = 'database';
-    case Egg = 'egg';
+    case Map = 'map';
     case Mount = 'mount';
     case Node = 'node';
     case Role = 'role';

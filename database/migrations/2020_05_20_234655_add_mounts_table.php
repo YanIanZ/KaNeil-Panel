@@ -23,10 +23,10 @@ return new class extends Migration
         });
 
         Schema::create('egg_mount', function (Blueprint $table) {
-            $table->integer('egg_id');
+            $table->integer('map_id');
             $table->integer('mount_id');
 
-            $table->unique(['egg_id', 'mount_id']);
+            $table->unique(['map_id', 'mount_id']);
         });
 
         Schema::create('mount_node', function (Blueprint $table) {

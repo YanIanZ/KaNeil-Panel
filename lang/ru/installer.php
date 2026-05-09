@@ -61,7 +61,7 @@ return [
             'migration' => 'Не удалось перенести данные',
         ],
     ],
-    'egg' => [
+    'map' => [
         'title' => 'Яйца',
         'no_eggs' => 'Нет доступных яиц',
         'background_install_started' => 'Установка яйца началась',

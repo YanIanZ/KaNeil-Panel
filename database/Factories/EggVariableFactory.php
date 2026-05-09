@@ -32,7 +32,7 @@ class EggVariableFactory extends Factory
     }
 
     /**
-     * Indicate that the egg variable is viewable.
+     * Indicate that the map variable is viewable.
      */
     public function viewable(): static
     {
@@ -44,7 +44,7 @@ class EggVariableFactory extends Factory
     }
 
     /**
-     * Indicate that the egg variable is editable.
+     * Indicate that the map variable is editable.
      */
     public function editable(): static
     {

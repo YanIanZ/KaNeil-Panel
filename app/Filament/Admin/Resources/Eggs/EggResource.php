@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Admin\Resources\Eggs;
+namespace App\Filament\Admin\Resources\Maps;
 
 use App\Enums\CustomizationKey;
 use App\Enums\TablerIcon;
-use App\Filament\Admin\Resources\Eggs\Pages\CreateEgg;
-use App\Filament\Admin\Resources\Eggs\Pages\EditEgg;
-use App\Filament\Admin\Resources\Eggs\Pages\ListEggs;
-use App\Filament\Admin\Resources\Eggs\RelationManagers\ServersRelationManager;
-use App\Models\Egg;
+use App\Filament\Admin\Resources\Maps\Pages\CreateEgg;
+use App\Filament\Admin\Resources\Maps\Pages\EditEgg;
+use App\Filament\Admin\Resources\Maps\Pages\ListEggs;
+use App\Filament\Admin\Resources\Maps\RelationManagers\ServersRelationManager;
+use App\Models\Map;
 use App\Traits\Filament\CanCustomizePages;
 use App\Traits\Filament\CanCustomizeRelations;
 use BackedEnum;
@@ -21,9 +21,9 @@ class EggResource extends Resource
     use CanCustomizePages;
     use CanCustomizeRelations;
 
-    protected static ?string $model = Egg::class;
+    protected static ?string $model = Map::class;
 
-    protected static string|BackedEnum|null $navigationIcon = TablerIcon::Eggs;
+    protected static string|BackedEnum|null $navigationIcon = TablerIcon::Maps;
 
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -39,17 +39,17 @@ class EggResource extends Resource
 
     public static function getNavigationLabel(): string
     {
-        return trans('admin/egg.nav_title');
+        return trans('admin/map.nav_title');
     }
 
     public static function getModelLabel(): string
     {
-        return trans('admin/egg.model_label');
+        return trans('admin/map.model_label');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return trans('admin/egg.model_label_plural');
+        return trans('admin/map.model_label_plural');
     }
 
     public static function getGloballySearchableAttributes(): array

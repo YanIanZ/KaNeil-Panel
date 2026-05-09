@@ -20,7 +20,7 @@ return [
         'servers' => 'Сервери',
         'alias' => 'Псевдонім',
         'ip' => 'IP',
-        'egg' => 'Яйце',
+        'map' => 'Яйце',
         'owner' => 'Власник',
         'allocation_notes' => 'Примітки',
         'no_notes' => 'Немає приміток',

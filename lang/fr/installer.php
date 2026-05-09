@@ -61,7 +61,7 @@ return [
             'migration' => 'Échec de la migration',
         ],
     ],
-    'egg' => [
+    'map' => [
         'title' => 'Œufs',
         'no_eggs' => 'Aucun œuf disponible',
         'background_install_started' => 'Installation de l’œuf démarrée',

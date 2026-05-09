@@ -2,7 +2,7 @@
 
 namespace App\Transformers\Api\Application;
 
-use App\Models\Egg;
+use App\Models\Map;
 use App\Models\Mount;
 use App\Models\Node;
 use App\Models\Server;
@@ -14,7 +14,7 @@ class MountTransformer extends BaseTransformer
     /**
      * List of resources that can be included.
      */
-    protected array $availableIncludes = ['eggs', 'nodes', 'servers'];
+    protected array $availableIncludes = ['maps', 'nodes', 'servers'];
 
     /**
      * Return the resource name for the JSONAPI output.
@@ -33,20 +33,20 @@ class MountTransformer extends BaseTransformer
     }
 
     /**
-     * Return the eggs associated with this mount.
+     * Return the maps associated with this mount.
      */
     public function includeEggs(Mount $mount): Collection|NullResource
     {
-        if (!$this->authorize(Egg::RESOURCE_NAME)) {
+        if (!$this->authorize(Map::RESOURCE_NAME)) {
             return $this->null();
         }
 
-        $mount->loadMissing('eggs');
+        $mount->loadMissing('maps');
 
         return $this->collection(
-            $mount->getRelation('eggs'),
+            $mount->getRelation('maps'),
             $this->makeTransformer(EggTransformer::class),
-            'egg'
+            'map'
         );
     }
 

@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Api\Application\Eggs;
+namespace App\Http\Controllers\Api\Application\Maps;
 
 use App\Enums\EggFormat;
 use App\Http\Controllers\Api\Application\ApplicationApiController;
-use App\Http\Requests\Api\Application\Eggs\ExportEggRequest;
-use App\Http\Requests\Api\Application\Eggs\GetEggRequest;
-use App\Http\Requests\Api\Application\Eggs\GetEggsRequest;
-use App\Http\Requests\Api\Application\Eggs\ImportEggRequest;
-use App\Models\Egg;
-use App\Services\Eggs\Sharing\EggExporterService;
-use App\Services\Eggs\Sharing\EggImporterService;
+use App\Http\Requests\Api\Application\Maps\ExportEggRequest;
+use App\Http\Requests\Api\Application\Maps\GetEggRequest;
+use App\Http\Requests\Api\Application\Maps\GetEggsRequest;
+use App\Http\Requests\Api\Application\Maps\ImportEggRequest;
+use App\Models\Map;
+use App\Services\Maps\Sharing\EggExporterService;
+use App\Services\Maps\Sharing\EggImporterService;
 use App\Transformers\Api\Application\EggTransformer;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -28,67 +28,67 @@ class EggController extends ApplicationApiController
     }
 
     /**
-     * List eggs
+     * List maps
      *
-     * Return all eggs
+     * Return all maps
      *
      * @return array<mixed>
      */
     public function index(GetEggsRequest $request): array
     {
-        return $this->fractal->collection(Egg::all())
+        return $this->fractal->collection(Map::all())
             ->transformWith($this->getTransformer(EggTransformer::class))
             ->toArray();
     }
 
     /**
-     * View egg
+     * View map
      *
-     * Return a single egg that exists
+     * Return a single map that exists
      *
      * @return array<mixed>
      */
-    public function view(GetEggRequest $request, Egg $egg): array
+    public function view(GetEggRequest $request, Map $map): array
     {
-        return $this->fractal->item($egg)
+        return $this->fractal->item($map)
             ->transformWith($this->getTransformer(EggTransformer::class))
             ->toArray();
     }
 
     /**
-     * Delete egg
+     * Delete map
      *
-     * Delete an egg from the Panel.
+     * Delete an map from the Panel.
      *
      * @throws Exception
      */
-    public function delete(GetEggRequest $request, Egg $egg): Response
+    public function delete(GetEggRequest $request, Map $map): Response
     {
-        $egg->delete();
+        $map->delete();
 
         return $this->returnNoContent();
     }
 
     /**
-     * Export egg
+     * Export map
      *
-     * Return a single egg as yaml or json file (defaults to YAML)
+     * Return a single map as yaml or json file (defaults to YAML)
      */
-    public function export(ExportEggRequest $request, Egg $egg): StreamedResponse
+    public function export(ExportEggRequest $request, Map $map): StreamedResponse
     {
         $format = EggFormat::tryFrom($request->input('format')) ?? EggFormat::YAML;
 
-        return response()->streamDownload(function () use ($egg, $format) {
-            echo $this->exporterService->handle($egg->id, $format);
-        }, 'egg-' . $egg->getKebabName() . '.' . $format->value, [
+        return response()->streamDownload(function () use ($map, $format) {
+            echo $this->exporterService->handle($map->id, $format);
+        }, 'map-' . $map->getKebabName() . '.' . $format->value, [
             'Content-Type' => 'application/' . $format->value,
         ]);
     }
 
     /**
-     * Import egg
+     * Import map
      *
-     * Create a new egg on the Panel. Returns the created egg and an HTTP/201 status response on success
+     * Create a new map on the Panel. Returns the created map and an HTTP/201 status response on success
      * If no uuid is supplied a new one will be generated
      * If an uuid is supplied, and it already exists the old configuration get overwritten
      *
@@ -96,9 +96,9 @@ class EggController extends ApplicationApiController
      */
     public function import(ImportEggRequest $request): JsonResponse
     {
-        $egg = $this->importService->fromContent($request->getContent());
+        $map = $this->importService->fromContent($request->getContent());
 
-        return $this->fractal->item($egg)
+        return $this->fractal->item($map)
             ->transformWith($this->getTransformer(EggTransformer::class))
             ->respond(201);
     }

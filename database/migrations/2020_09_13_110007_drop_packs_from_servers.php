@@ -23,7 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('servers', function (Blueprint $table) {
-            $table->unsignedInteger('pack_id')->after('egg_id')->nullable();
+            $table->unsignedInteger('pack_id')->after('map_id')->nullable();
             $table->foreign('pack_id')->references('id')->on('packs');
         });
     }

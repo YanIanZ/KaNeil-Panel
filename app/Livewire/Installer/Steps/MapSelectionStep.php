@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Installer\Steps;
 
-use App\Console\Commands\Egg\UpdateEggIndexCommand;
+use App\Console\Commands\Map\UpdateEggIndexCommand;
 use App\Enums\TablerIcon;
 use Exception;
 use Filament\Forms\Components\CheckboxList;
@@ -21,29 +21,29 @@ class EggSelectionStep
             Artisan::call(UpdateEggIndexCommand::class);
         } catch (Exception $exception) {
             Notification::make()
-                ->title(trans('installer.egg.exceptions.failed_to_update'))
-                ->icon(TablerIcon::Egg)
+                ->title(trans('installer.map.exceptions.failed_to_update'))
+                ->icon(TablerIcon::Map)
                 ->body($exception->getMessage())
                 ->danger()
                 ->persistent()
                 ->send();
         }
 
-        $eggs = cache()->get('eggs.index', []);
+        $maps = cache()->get('maps.index', []);
 
-        $categories = array_keys($eggs);
+        $categories = array_keys($maps);
 
-        $tabs = array_map(function (string $label) use ($eggs) {
+        $tabs = array_map(function (string $label) use ($maps) {
             $id = str_slug($label, '_');
-            $eggCount = count($eggs[$label]);
+            $eggCount = count($maps[$label]);
 
             return Tab::make($id)
                 ->label($label)
                 ->badge($eggCount)
                 ->schema([
-                    CheckboxList::make("eggs.$id")
+                    CheckboxList::make("maps.$id")
                         ->hiddenLabel()
-                        ->options(fn () => array_sort($eggs[$label]))
+                        ->options(fn () => array_sort($maps[$label]))
                         ->searchable($eggCount > 0)
                         ->bulkToggleable($eggCount > 0)
                         ->columns(4),
@@ -52,16 +52,16 @@ class EggSelectionStep
 
         if (empty($tabs)) {
             $tabs[] = Tab::make('no_eggs')
-                ->label(trans('installer.egg.no_eggs'))
+                ->label(trans('installer.map.no_eggs'))
                 ->schema([
                     TextEntry::make('no_eggs')
                         ->hiddenLabel()
-                        ->state(trans('installer.egg.exceptions.no_eggs')),
+                        ->state(trans('installer.map.exceptions.no_eggs')),
                 ]);
         }
 
-        return Step::make('egg')
-            ->label(trans('installer.egg.title'))
+        return Step::make('map')
+            ->label(trans('installer.map.title'))
             ->columnSpanFull()
             ->schema([
                 Tabs::make('egg_tabs')

@@ -107,7 +107,7 @@ use Psr\Http\Message\ResponseInterface;
  * @method static Builder<static>|Server whereDescription($value)
  * @method static Builder<static>|Server whereDisk($value)
  * @method static Builder<static>|Server whereDockerLabels($value)
- * @method static Builder<static>|Server whereEggId($value)
+ * @method static Builder<static>|Server whereMapId($value)
  * @method static Builder<static>|Server whereExternalId($value)
  * @method static Builder<static>|Server whereId($value)
  * @method static Builder<static>|Server whereImage($value)

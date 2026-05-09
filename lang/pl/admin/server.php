@@ -97,7 +97,7 @@ return [
     'delete_db' => 'Czy jesteś pewny że chcesz to usunąć?',
     'delete_db_heading' => 'Usuń Bazę Danych',
     'backups' => 'Kopie zapasowe',
-    'egg' => 'Jajko',
+    'map' => 'Jajko',
     'mounts' => 'Punkty montowania',
     'no_mounts' => 'Brak punktów montowania dla tego węzła.',
     'create_database' => 'Utwórz bazę danych',

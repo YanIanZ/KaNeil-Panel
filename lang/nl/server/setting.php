@@ -16,7 +16,7 @@ return [
         'node_name' => 'Node naam',
         'icon' => [
             'upload' => 'Upload Icoontje',
-            'tooltip' => 'Egg Icoon gebruiken',
+            'tooltip' => 'Map Icoon gebruiken',
             'updated' => 'Server icoon bijgewerkt',
             'deleted' => 'Server icoon verwijderd',
         ],

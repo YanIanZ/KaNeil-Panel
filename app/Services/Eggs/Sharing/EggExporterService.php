@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Services\Eggs\Sharing;
+namespace App\Services\Maps\Sharing;
 
 use App\Enums\EggFormat;
-use App\Models\Egg;
+use App\Models\Map;
 use App\Models\EggVariable;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
@@ -13,46 +13,46 @@ use Symfony\Component\Yaml\Yaml;
 class EggExporterService
 {
     /**
-     * Return a JSON or YAML representation of an egg and its variables.
+     * Return a JSON or YAML representation of an map and its variables.
      */
-    public function handle(int $egg, EggFormat $format): string
+    public function handle(int $map, EggFormat $format): string
     {
-        $egg = Egg::with(['scriptFrom', 'configFrom', 'variables'])->findOrFail($egg);
-        $iconBase64 = $this->getEggIconAsBase64($egg);
+        $map = Map::with(['scriptFrom', 'configFrom', 'variables'])->findOrFail($map);
+        $iconBase64 = $this->getEggIconAsBase64($map);
 
         $struct = [
             '_comment' => 'DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL',
             'meta' => [
-                'version' => Egg::EXPORT_VERSION,
-                'update_url' => $egg->update_url,
+                'version' => Map::EXPORT_VERSION,
+                'update_url' => $map->update_url,
             ],
             'exported_at' => Carbon::now()->toAtomString(),
-            'name' => $egg->name,
-            'author' => $egg->author,
-            'uuid' => $egg->uuid,
-            'description' => $egg->description,
+            'name' => $map->name,
+            'author' => $map->author,
+            'uuid' => $map->uuid,
+            'description' => $map->description,
             'icon' => $iconBase64,
-            'tags' => $egg->tags,
-            'features' => $egg->features,
-            'docker_images' => $egg->docker_images,
-            'file_denylist' => Collection::make($egg->inherit_file_denylist)->filter(fn ($v) => !empty($v))->values(),
-            'startup_commands' => $egg->startup_commands,
+            'tags' => $map->tags,
+            'features' => $map->features,
+            'docker_images' => $map->docker_images,
+            'file_denylist' => Collection::make($map->inherit_file_denylist)->filter(fn ($v) => !empty($v))->values(),
+            'startup_commands' => $map->startup_commands,
             'config' => [
-                'files' => $egg->inherit_config_files,
-                'startup' => $egg->inherit_config_startup,
-                'logs' => $egg->inherit_config_logs,
-                'stop' => $egg->inherit_config_stop,
+                'files' => $map->inherit_config_files,
+                'startup' => $map->inherit_config_startup,
+                'logs' => $map->inherit_config_logs,
+                'stop' => $map->inherit_config_stop,
             ],
             'scripts' => [
                 'installation' => [
-                    'script' => $egg->copy_script_install,
-                    'container' => $egg->copy_script_container,
-                    'entrypoint' => $egg->copy_script_entry,
+                    'script' => $map->copy_script_install,
+                    'container' => $map->copy_script_container,
+                    'entrypoint' => $map->copy_script_entry,
                 ],
             ],
-            'variables' => $egg->variables->map(function (EggVariable $eggVariable) {
+            'variables' => $map->variables->map(function (EggVariable $eggVariable) {
                 return Collection::make($eggVariable->toArray())
-                    ->except(['id', 'egg_id', 'created_at', 'updated_at']);
+                    ->except(['id', 'map_id', 'created_at', 'updated_at']);
             })->values()->toArray(),
         ];
 
@@ -63,12 +63,12 @@ class EggExporterService
     }
 
     /**
-     * Get the egg icon as base64 for export.
+     * Get the map icon as base64 for export.
      */
-    private function getEggIconAsBase64(Egg $egg): ?string
+    private function getEggIconAsBase64(Map $map): ?string
     {
-        foreach (Egg::$iconFormats as $ext => $mimeType) {
-            $path = Egg::getIconStoragePath() . "/$egg->uuid.$ext";
+        foreach (Map::$iconFormats as $ext => $mimeType) {
+            $path = Map::getIconStoragePath() . "/$map->uuid.$ext";
 
             if (Storage::disk('public')->exists($path)) {
                 return 'data:' . $mimeType . ';base64,' . base64_encode(Storage::disk('public')->get($path));

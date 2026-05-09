@@ -14,13 +14,13 @@ return [
         'cidr_out_of_range' => 'CIDR 표기법은 /25에서 /32 사이의 마스크만 허용합니다.',
         'port_out_of_range' => '할당의 포트는 1024 이상 65535 이하여야 합니다.',
     ],
-    'egg' => [
-        'delete_has_servers' => '활성 서버가 연결된 Egg는 패널에서 삭제할 수 없습니다.',
-        'invalid_copy_id' => '스크립트를 복사하기 위해 선택한 Egg가 존재하지 않거나 스크립트 자체를 복사하고 있습니다.',
-        'has_children' => '이 Egg는 하나 이상의 다른 Egg의 부모입니다. 이 Egg를 삭제하기 전에 해당 Egg를 삭제하세요.',
+    'map' => [
+        'delete_has_servers' => '활성 서버가 연결된 Map는 패널에서 삭제할 수 없습니다.',
+        'invalid_copy_id' => '스크립트를 복사하기 위해 선택한 Map가 존재하지 않거나 스크립트 자체를 복사하고 있습니다.',
+        'has_children' => '이 Map는 하나 이상의 다른 Map의 부모입니다. 이 Map를 삭제하기 전에 해당 Map를 삭제하세요.',
     ],
     'variables' => [
-        'env_not_unique' => '환경 변수 :name은 이 Egg에 고유해야 합니다.',
+        'env_not_unique' => '환경 변수 :name은 이 Map에 고유해야 합니다.',
         'reserved_name' => '환경 변수 :name은 보호되어 있으며 변수에 할당할 수 없습니다.',
         'bad_validation_rule' => '유효성 검사 규칙 ":rule"은 이 애플리케이션에 유효한 규칙이 아닙니다.',
     ],

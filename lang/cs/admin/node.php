@@ -20,7 +20,7 @@ return [
         'servers' => 'Servery',
         'alias' => 'Alias',
         'ip' => 'IP',
-        'egg' => 'Vejce',
+        'map' => 'Vejce',
         'owner' => 'Vlastník',
         'allocation_notes' => 'Poznámky',
         'no_notes' => 'Žádné poznámky',

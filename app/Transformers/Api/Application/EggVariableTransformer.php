@@ -2,7 +2,7 @@
 
 namespace App\Transformers\Api\Application;
 
-use App\Models\Egg;
+use App\Models\Map;
 use App\Models\EggVariable;
 
 class EggVariableTransformer extends BaseTransformer
@@ -12,7 +12,7 @@ class EggVariableTransformer extends BaseTransformer
      */
     public function getResourceName(): string
     {
-        return Egg::RESOURCE_NAME;
+        return Map::RESOURCE_NAME;
     }
 
     /**

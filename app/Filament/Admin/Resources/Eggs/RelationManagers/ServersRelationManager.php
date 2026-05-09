@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Admin\Resources\Eggs\RelationManagers;
+namespace App\Filament\Admin\Resources\Maps\RelationManagers;
 
 use App\Models\Server;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -16,10 +16,10 @@ class ServersRelationManager extends RelationManager
     {
         return $table
             ->recordTitleAttribute('servers')
-            ->emptyStateDescription(trans('admin/egg.no_servers'))
-            ->emptyStateHeading(trans('admin/egg.no_servers_help'))
+            ->emptyStateDescription(trans('admin/map.no_servers'))
+            ->emptyStateHeading(trans('admin/map.no_servers_help'))
             ->searchable(false)
-            ->heading(trans('admin/egg.servers'))
+            ->heading(trans('admin/map.servers'))
             ->columns([
                 TextColumn::make('user.username')
                     ->label(trans('admin/server.owner'))

@@ -16,7 +16,7 @@ return [
         'node_name' => 'Nombre del nodo',
         'icon' => [
             'upload' => 'Subir icono',
-            'tooltip' => 'Usando el icono del Egg',
+            'tooltip' => 'Usando el icono del Map',
             'updated' => 'Icono del servidor actualizado',
             'deleted' => 'Icono del servidor borrado',
         ],

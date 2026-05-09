@@ -14,7 +14,7 @@ return [
         'cidr_out_of_range' => 'CIDR notácia dovoľuje len masky medzi /25 a /32.',
         'port_out_of_range' => 'Porty v alokácii musia mať vyššiu hodnotu ako 1024 a menšiu, alebo rovnú 65535.',
     ],
-    'egg' => [
+    'map' => [
         'delete_has_servers' => 'Vajce s priradenými aktívnymi servermi nemože byť vymazané z panelu.',
         'invalid_copy_id' => 'Vybrané vajce na kopírovanie skriptu buď neexistuje, alebo samé ešte skript kopíruje.',
         'has_children' => 'Toto vajce je rodičom ďalšieho jedného, alebo viacero iných vajec. Prosím zmažte tieto vajcia pred zmazaním tohto vajca.',

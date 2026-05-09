@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\Application\Mounts;
 use App\Exceptions\Model\DataValidationException;
 use App\Exceptions\Service\HasActiveServersException;
 use App\Http\Controllers\Api\Application\ApplicationApiController;
-use App\Http\Requests\Api\Application\Eggs\GetEggsRequest;
+use App\Http\Requests\Api\Application\Maps\GetEggsRequest;
 use App\Http\Requests\Api\Application\Mounts\DeleteMountRequest;
 use App\Http\Requests\Api\Application\Mounts\GetMountRequest;
 use App\Http\Requests\Api\Application\Mounts\StoreMountRequest;
@@ -122,13 +122,13 @@ class MountController extends ApplicationApiController
     }
 
     /**
-     * List assigned eggs
+     * List assigned maps
      *
      * @return array<array-key, mixed>
      */
     public function getEggs(GetEggsRequest $request, Mount $mount): array
     {
-        return $this->fractal->collection($mount->eggs)
+        return $this->fractal->collection($mount->maps)
             ->transformWith($this->getTransformer(EggTransformer::class))
             ->toArray();
     }
@@ -158,20 +158,20 @@ class MountController extends ApplicationApiController
     }
 
     /**
-     * Assign eggs to mount
+     * Assign maps to mount
      *
-     * Adds eggs to the mount's many-to-many relation.
+     * Adds maps to the mount's many-to-many relation.
      *
      * @return array<array-key, mixed>
      */
     public function addEggs(Request $request, Mount $mount): array
     {
         $validatedData = $request->validate([
-            'eggs' => 'required|array|exists:eggs,id',
-            'eggs.*' => 'integer',
+            'maps' => 'required|array|exists:maps,id',
+            'maps.*' => 'integer',
         ]);
 
-        $mount->eggs()->attach($validatedData['eggs']);
+        $mount->maps()->attach($validatedData['maps']);
 
         return $this->fractal->item($mount)
             ->transformWith($this->getTransformer(MountTransformer::class))
@@ -221,13 +221,13 @@ class MountController extends ApplicationApiController
     }
 
     /**
-     * Unassign egg from mount
+     * Unassign map from mount
      *
-     * Deletes an egg from the mount's many-to-many relation.
+     * Deletes an map from the mount's many-to-many relation.
      */
-    public function deleteEgg(Mount $mount, int $egg_id): JsonResponse
+    public function deleteEgg(Mount $mount, int $map_id): JsonResponse
     {
-        $mount->eggs()->detach($egg_id);
+        $mount->maps()->detach($map_id);
 
         return new JsonResponse([], JsonResponse::HTTP_NO_CONTENT);
     }

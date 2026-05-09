@@ -29,9 +29,9 @@ return new class extends Migration
             });
         }
 
-        $this->renameIdColumn('servers', 'egg_id', 'map_id');
-        $this->renameIdColumn('api_keys', 'egg_id', 'map_id');
-        $this->renameIdColumn('map_variables', 'egg_id', 'map_id');
+        $this->renameIdColumn('servers', 'map_id', 'map_id');
+        $this->renameIdColumn('api_keys', 'map_id', 'map_id');
+        $this->renameIdColumn('map_variables', 'map_id', 'map_id');
 
         $existing = DB::table('ships')->where('author', 'KaNeil')->where('name', 'Default')->count();
 
@@ -79,9 +79,9 @@ return new class extends Migration
             });
         }
 
-        $this->renameIdColumn('servers', 'map_id', 'egg_id');
-        $this->renameIdColumn('api_keys', 'map_id', 'egg_id');
-        $this->renameIdColumn('map_variables', 'map_id', 'egg_id');
+        $this->renameIdColumn('servers', 'map_id', 'map_id');
+        $this->renameIdColumn('api_keys', 'map_id', 'map_id');
+        $this->renameIdColumn('map_variables', 'map_id', 'map_id');
     }
 
     private function foreignExists(string $table, string $column): bool

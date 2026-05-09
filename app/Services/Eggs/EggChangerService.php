@@ -1,27 +1,27 @@
 <?php
 
-namespace App\Services\Eggs;
+namespace App\Services\Maps;
 
-use App\Models\Egg;
+use App\Models\Map;
 use App\Models\Server;
 use App\Models\ServerVariable;
 use Illuminate\Support\Arr;
 
 class EggChangerService
 {
-    public function handle(Server $server, Egg|int $newEgg, bool $keepOldVariables = true): void
+    public function handle(Server $server, Map|int $newEgg, bool $keepOldVariables = true): void
     {
-        if (!$newEgg instanceof Egg) {
-            $newEgg = Egg::findOrFail($newEgg);
+        if (!$newEgg instanceof Map) {
+            $newEgg = Map::findOrFail($newEgg);
         }
 
-        if ($server->egg->id === $newEgg->id) {
+        if ($server->map->id === $newEgg->id) {
             return;
         }
 
-        // Change egg id, default image and startup command
+        // Change map id, default image and startup command
         $server->forceFill([
-            'egg_id' => $newEgg->id,
+            'map_id' => $newEgg->id,
             'image' => Arr::first($newEgg->docker_images),
             'startup' => Arr::first($newEgg->startup_commands),
         ])->saveOrFail();

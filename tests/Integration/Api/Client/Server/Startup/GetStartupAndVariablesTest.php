@@ -21,15 +21,15 @@ class GetStartupAndVariablesTest extends ClientApiIntegrationTestCase
         /** @var Server $server */
         [$user, $server] = $this->generateTestAccount($permissions);
 
-        $egg = $this->cloneEggAndVariables($server->egg);
+        $map = $this->cloneEggAndVariables($server->map);
         // BUNGEE_VERSION should never be returned to the user in this API call, either in
         // the array of variables, or revealed in the startup command.
-        $egg->variables()->firstWhere('env_variable', 'BUNGEE_VERSION')->update([
+        $map->variables()->firstWhere('env_variable', 'BUNGEE_VERSION')->update([
             'user_viewable' => false,
         ]);
 
         $server->fill([
-            'egg_id' => $egg->id,
+            'map_id' => $map->id,
             'startup' => 'java {{SERVER_JARFILE}} --version {{BUNGEE_VERSION}}',
         ])->save();
         $server = $server->refresh();
@@ -43,7 +43,7 @@ class GetStartupAndVariablesTest extends ClientApiIntegrationTestCase
         $response->assertJsonPath('object', 'list');
         $response->assertJsonCount(1, 'data');
         $response->assertJsonPath('data.0.object', EggVariable::RESOURCE_NAME);
-        $this->assertJsonTransformedWith($response->json('data.0.attributes'), $egg->variables()->where('user_viewable', true)->first());
+        $this->assertJsonTransformedWith($response->json('data.0.attributes'), $map->variables()->where('user_viewable', true)->first());
     }
 
     /**

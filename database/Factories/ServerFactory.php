@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Allocation;
-use App\Models\Egg;
+use App\Models\Map;
 use App\Models\Node;
 use App\Models\Server;
 use App\Models\User;
@@ -42,7 +42,7 @@ class ServerFactory extends Factory
             'owner_id' => User::factory(),
             'node_id' => Node::factory(),
             'allocation_id' => Allocation::factory(),
-            'egg_id' => Egg::factory(),
+            'map_id' => Map::factory(),
             'uuid' => Uuid::uuid4()->toString(),
             'uuid_short' => Str::lower(Str::random(8)),
             'name' => $this->faker->firstName(),

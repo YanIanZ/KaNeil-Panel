@@ -14,13 +14,13 @@ return [
         'cidr_out_of_range' => 'CIDR-Notation nur für Masken zwischen /25 und /32 erlaubt.',
         'port_out_of_range' => 'Ports in einer Zuteilung müssen größer als 1024 und kleiner oder gleich 65535 sein.',
     ],
-    'egg' => [
-        'delete_has_servers' => 'Ein Egg mit aktiven Servern kann nicht aus dem Panel gelöscht werden.',
-        'invalid_copy_id' => 'Das Egg, das für das Kopieren eines Skripts ausgewählt wurde, existiert nicht oder kopiert selbst ein Skript.',
-        'has_children' => 'Dieses Egg ist ein Parent-Egg für ein oder mehrere Eggs. Bitte lösche diese Eggs bevor Du dieses Egg löschst.',
+    'map' => [
+        'delete_has_servers' => 'Ein Map mit aktiven Servern kann nicht aus dem Panel gelöscht werden.',
+        'invalid_copy_id' => 'Das Map, das für das Kopieren eines Skripts ausgewählt wurde, existiert nicht oder kopiert selbst ein Skript.',
+        'has_children' => 'Dieses Map ist ein Parent-Map für ein oder mehrere Maps. Bitte lösche diese Maps bevor Du dieses Map löschst.',
     ],
     'variables' => [
-        'env_not_unique' => 'Die Umgebungsvariable :name muss für dieses Egg einzigartig sein.',
+        'env_not_unique' => 'Die Umgebungsvariable :name muss für dieses Map einzigartig sein.',
         'reserved_name' => 'Die Umgebungsvariable :name ist geschützt und kann nicht zugewiesen werden.',
         'bad_validation_rule' => 'Die Validierungsregel ":rule" ist keine gültige Regel für diese Anwendung.',
     ],

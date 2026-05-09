@@ -2551,14 +2551,8 @@ enum TablerIcon: string
     case EditCircle = 'tabler-edit-circle';
     case EditOff = 'tabler-edit-off';
     case Edit = 'tabler-edit';
-    case EggCrackedFilled = 'tabler-egg-cracked-filled';
-    case EggCracked = 'tabler-egg-cracked';
-    case EggFilled = 'tabler-egg-filled';
-    case EggFriedFilled = 'tabler-egg-fried-filled';
-    case EggFried = 'tabler-egg-fried';
-    case EggOff = 'tabler-egg-off';
-    case Egg = 'tabler-egg';
-    case Eggs = 'tabler-eggs';
+    case Map = 'tabler-map';
+    case Maps = 'tabler-maps';
     case ElevatorFilled = 'tabler-elevator-filled';
     case ElevatorOff = 'tabler-elevator-off';
     case Elevator = 'tabler-elevator';
@@ -3812,7 +3806,6 @@ enum TablerIcon: string
     case MapUp = 'tabler-map-up';
     case MapWest = 'tabler-map-west';
     case MapX = 'tabler-map-x';
-    case Map = 'tabler-map';
     case MarkdownOff = 'tabler-markdown-off';
     case Markdown = 'tabler-markdown';
     case Marquee2 = 'tabler-marquee-2';

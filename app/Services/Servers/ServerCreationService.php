@@ -8,7 +8,7 @@ use App\Exceptions\Model\DataValidationException;
 use App\Exceptions\Service\Deployment\NoViableAllocationException;
 use App\Exceptions\Service\Deployment\NoViableNodeException;
 use App\Models\Allocation;
-use App\Models\Egg;
+use App\Models\Map;
 use App\Models\Objects\DeploymentObject;
 use App\Models\Server;
 use App\Models\User;
@@ -57,12 +57,12 @@ class ServerCreationService
             $data['oom_killer'] = !$data['oom_disabled'];
         }
 
-        /** @var Egg $egg */
-        $egg = Egg::query()->findOrFail($data['egg_id']);
+        /** @var Map $map */
+        $map = Map::query()->findOrFail($data['map_id']);
 
-        // Fill missing fields from egg
-        $data['image'] ??= Arr::first($egg->docker_images);
-        $data['startup'] ??= Arr::first($egg->startup_commands);
+        // Fill missing fields from map
+        $data['image'] ??= Arr::first($map->docker_images);
+        $data['startup'] ??= Arr::first($map->startup_commands);
 
         // If a deployment object has been passed we need to get the allocation and node that the server should use.
         if ($deployment) {
@@ -99,7 +99,7 @@ class ServerCreationService
 
         $eggVariableData = $this->validatorService
             ->setUserLevel(User::USER_LEVEL_ADMIN)
-            ->handle(Arr::get($data, 'egg_id'), Arr::get($data, 'environment', []));
+            ->handle(Arr::get($data, 'map_id'), Arr::get($data, 'environment', []));
 
         // Due to the design of the Daemon, we need to persist this server to the disk
         // before we can actually create it on the Daemon.
@@ -162,7 +162,7 @@ class ServerCreationService
             'threads' => Arr::get($data, 'threads'),
             'oom_killer' => Arr::get($data, 'oom_killer') ?? false,
             'allocation_id' => Arr::get($data, 'allocation_id'),
-            'egg_id' => Arr::get($data, 'egg_id'),
+            'map_id' => Arr::get($data, 'map_id'),
             'startup' => Arr::get($data, 'startup'),
             'image' => Arr::get($data, 'image'),
             'database_limit' => Arr::get($data, 'database_limit') ?? 0,

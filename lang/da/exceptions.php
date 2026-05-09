@@ -14,7 +14,7 @@ return [
         'cidr_out_of_range' => 'CIDR notation tillader kun masker mellem /25 og /32.',
         'port_out_of_range' => 'Porte i en tildeling skal være større end eller lig med 1024 og mindre end eller lig med 65535.',
     ],
-    'egg' => [
+    'map' => [
         'delete_has_servers' => 'Et æg med aktive servere tilknyttet kan ikke slettes fra panelet.',
         'invalid_copy_id' => 'Ægget valgt til kopiering af et script fra eksisterer ikke, eller kopierer et script selv.',
         'has_children' => 'Dette æg er forælder til et eller flere andre æg. Slet disse æg, før du sletter dette æg.',

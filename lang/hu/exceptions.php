@@ -14,13 +14,13 @@ return [
         'cidr_out_of_range' => 'A CIDR maszk csak /25 és /32es tartomány között engedélyezett.',
         'port_out_of_range' => 'Az allokációban megadott portoknak 1024 és 65535 között kell lenniük.',
     ],
-    'egg' => [
-        'delete_has_servers' => 'Egy aktív szerverhez társított Egg nem törölhető a panelből.',
-        'invalid_copy_id' => 'A script másolására kiválasztott Egg nem létezik, vagy magát a scriptet másolja.',
-        'has_children' => 'Ez az Egg szülője egy vagy több más Egg-nek. Töröld először az alárendelt Egg-eket mielőtt ezt törölnéd.',
+    'map' => [
+        'delete_has_servers' => 'Egy aktív szerverhez társított Map nem törölhető a panelből.',
+        'invalid_copy_id' => 'A script másolására kiválasztott Map nem létezik, vagy magát a scriptet másolja.',
+        'has_children' => 'Ez az Map szülője egy vagy több más Map-nek. Töröld először az alárendelt Map-eket mielőtt ezt törölnéd.',
     ],
     'variables' => [
-        'env_not_unique' => 'A(z) :name környezeti változónak egyedinek kell lennie ehhez az Egg-hez.',
+        'env_not_unique' => 'A(z) :name környezeti változónak egyedinek kell lennie ehhez az Map-hez.',
         'reserved_name' => 'A(z) :name környezeti változó védett és nem lehet hozzárendelni.',
         'bad_validation_rule' => 'A(z) ":rule" érvényesítési szabály nem érvényes az alkalmazásban.',
     ],

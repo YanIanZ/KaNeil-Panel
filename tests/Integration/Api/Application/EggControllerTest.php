@@ -2,7 +2,7 @@
 
 namespace App\Tests\Integration\Api\Application;
 
-use App\Models\Egg;
+use App\Models\Map;
 use App\Services\Acl\Api\AdminAcl;
 use App\Transformers\Api\Application\EggTransformer;
 use Illuminate\Http\Response;
@@ -11,15 +11,15 @@ use Illuminate\Support\Arr;
 class EggControllerTest extends ApplicationApiIntegrationTestCase
 {
     /**
-     * Test that all the eggs can be returned.
+     * Test that all the maps can be returned.
      */
     public function test_list_all_eggs(): void
     {
-        $eggs = Egg::query()->get();
+        $maps = Map::query()->get();
 
-        $response = $this->getJson('/api/application/eggs');
+        $response = $this->getJson('/api/application/maps');
         $response->assertStatus(Response::HTTP_OK);
-        $response->assertJsonCount(count($eggs), 'data');
+        $response->assertJsonCount(count($maps), 'data');
         $response->assertJsonStructure([
             'object',
             'data' => [
@@ -41,10 +41,10 @@ class EggControllerTest extends ApplicationApiIntegrationTestCase
         ]);
 
         foreach (array_get($response->json(), 'data') as $datum) {
-            $egg = $eggs->where('id', '=', $datum['attributes']['id'])->first();
+            $map = $maps->where('id', '=', $datum['attributes']['id'])->first();
 
             $expected = json_encode(Arr::sortRecursive($datum['attributes']));
-            $actual = json_encode(Arr::sortRecursive($this->getTransformer(EggTransformer::class)->transform($egg)));
+            $actual = json_encode(Arr::sortRecursive($this->getTransformer(EggTransformer::class)->transform($map)));
 
             $this->assertSame(
                 $expected,
@@ -55,13 +55,13 @@ class EggControllerTest extends ApplicationApiIntegrationTestCase
     }
 
     /**
-     * Test that a single egg can be returned.
+     * Test that a single map can be returned.
      */
     public function test_return_single_egg(): void
     {
-        $egg = Egg::query()->findOrFail(1);
+        $map = Map::query()->findOrFail(1);
 
-        $response = $this->getJson('/api/application/eggs/' . $egg->id);
+        $response = $this->getJson('/api/application/maps/' . $map->id);
         $response->assertStatus(Response::HTTP_OK);
         $response->assertJsonStructure([
             'object',
@@ -71,19 +71,19 @@ class EggControllerTest extends ApplicationApiIntegrationTestCase
         ]);
 
         $response->assertJson([
-            'object' => 'egg',
-            'attributes' => $this->getTransformer(EggTransformer::class)->transform($egg),
+            'object' => 'map',
+            'attributes' => $this->getTransformer(EggTransformer::class)->transform($map),
         ], true);
     }
 
     /**
-     * Test that a single egg and all the defined relationships can be returned.
+     * Test that a single map and all the defined relationships can be returned.
      */
     public function test_return_single_egg_with_relationships(): void
     {
-        $egg = Egg::query()->findOrFail(1);
+        $map = Map::query()->findOrFail(1);
 
-        $response = $this->getJson('/api/application/eggs/' . $egg->id . '?include=servers,variables');
+        $response = $this->getJson('/api/application/maps/' . $map->id . '?include=servers,variables');
         $response->assertStatus(Response::HTTP_OK);
         $response->assertJsonStructure([
             'object',
@@ -97,11 +97,11 @@ class EggControllerTest extends ApplicationApiIntegrationTestCase
     }
 
     /**
-     * Test that a missing egg returns a 404 error.
+     * Test that a missing map returns a 404 error.
      */
     public function test_get_missing_egg(): void
     {
-        $response = $this->getJson('/api/application/eggs/12345');
+        $response = $this->getJson('/api/application/maps/12345');
         $this->assertNotFoundJson($response);
     }
 
@@ -111,10 +111,10 @@ class EggControllerTest extends ApplicationApiIntegrationTestCase
      */
     public function test_error_returned_if_no_permission(): void
     {
-        $egg = Egg::query()->findOrFail(1);
-        $this->createNewDefaultApiKey($this->getApiUser(), [Egg::RESOURCE_NAME => AdminAcl::NONE]);
+        $map = Map::query()->findOrFail(1);
+        $this->createNewDefaultApiKey($this->getApiUser(), [Map::RESOURCE_NAME => AdminAcl::NONE]);
 
-        $response = $this->getJson('/api/application/eggs');
+        $response = $this->getJson('/api/application/maps');
         $this->assertAccessDeniedJson($response);
     }
 }

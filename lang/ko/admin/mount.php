@@ -15,7 +15,7 @@ return [
     'description' => '설명',
     'description_help' => '이 마운트에 대한 자세한 설명',
     'no_mounts' => '마운트 없음',
-    'eggs' => 'Eggs',
+    'maps' => 'Maps',
     'nodes' => '노드',
     'toggles' => [
         'writable' => '쓰기 가능',
@@ -23,7 +23,7 @@ return [
     ],
     'table' => [
         'name' => '이름',
-        'all_eggs' => '모든 Egg',
+        'all_eggs' => '모든 Map',
         'all_nodes' => '모든 노드',
         'read_only' => '읽기 전용',
     ],

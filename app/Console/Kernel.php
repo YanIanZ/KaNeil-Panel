@@ -2,8 +2,8 @@
 
 namespace App\Console;
 
-use App\Console\Commands\Egg\CheckEggUpdatesCommand;
-use App\Console\Commands\Egg\UpdateEggIndexCommand;
+use App\Console\Commands\Map\CheckEggUpdatesCommand;
+use App\Console\Commands\Map\UpdateEggIndexCommand;
 use App\Console\Commands\Maintenance\CleanServiceBackupFilesCommand;
 use App\Console\Commands\Maintenance\PruneImagesCommand;
 use App\Console\Commands\Maintenance\PruneOrphanedBackupsCommand;

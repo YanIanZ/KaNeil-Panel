@@ -16,15 +16,15 @@ class VariableValidatorService
     public function __construct(private readonly ValidationFactory $validator) {}
 
     /**
-     * Validate  passed data against the given egg variables.
+     * Validate  passed data against the given map variables.
      *
      * @param  array<array-key, ?string>  $fields
      *
      * @throws ValidationException
      */
-    public function handle(int $egg, array $fields = []): Collection
+    public function handle(int $map, array $fields = []): Collection
     {
-        $query = EggVariable::query()->where('egg_id', $egg);
+        $query = EggVariable::query()->where('map_id', $map);
         if (!$this->isUserLevel(User::USER_LEVEL_ADMIN)) {
             // Don't attempt to validate variables if they aren't user editable,
             // and we're not running this at an admin level.

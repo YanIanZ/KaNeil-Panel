@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Contracts\Validatable;
-use App\Exceptions\Service\Egg\HasChildrenException;
+use App\Exceptions\Service\Map\HasChildrenException;
 use App\Exceptions\Service\HasActiveServersException;
 use App\Models\Traits\HasIcon;
 use App\Traits\HasValidation;
@@ -204,9 +204,9 @@ class Map extends Model implements Validatable
         });
 
         static::deleting(function (self $map) {
-            throw_if($map->servers()->count(), new HasActiveServersException(trans('exceptions.egg.delete_has_servers')));
+            throw_if($map->servers()->count(), new HasActiveServersException(trans('exceptions.map.delete_has_servers')));
 
-            throw_if($map->children()->count(), new HasChildrenException(trans('exceptions.egg.has_children')));
+            throw_if($map->children()->count(), new HasChildrenException(trans('exceptions.map.has_children')));
         });
     }
 

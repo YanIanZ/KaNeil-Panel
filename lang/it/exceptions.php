@@ -14,7 +14,7 @@ return [
         'cidr_out_of_range' => 'La notazione CIDR consente solo masks tra /25 e /32.',
         'port_out_of_range' => 'Le porte in un\'allocazione deve essere maggiori o uguali a 1024 e minori o uguali a 65535',
     ],
-    'egg' => [
+    'map' => [
         'delete_has_servers' => 'Un uovo con server attivi ad esso collegati non può essere eliminato dal pannello.',
         'invalid_copy_id' => 'L\'uovo selezionato per copiare uno script da entrambi non esiste o sta copiando uno script stesso.',
         'has_children' => 'Questo Uovo è genitore di una o più uova. Si prega di eliminare queste Uova prima di eliminare questo Uovo.',

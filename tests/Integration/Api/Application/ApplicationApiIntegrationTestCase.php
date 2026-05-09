@@ -6,7 +6,7 @@ use App\Models\Allocation;
 use App\Models\ApiKey;
 use App\Models\Database;
 use App\Models\DatabaseHost;
-use App\Models\Egg;
+use App\Models\Map;
 use App\Models\Mount;
 use App\Models\Node;
 use App\Models\Role;
@@ -92,7 +92,7 @@ abstract class ApplicationApiIntegrationTestCase extends IntegrationTestCase
                 Node::RESOURCE_NAME => AdminAcl::READ | AdminAcl::WRITE,
                 Allocation::RESOURCE_NAME => AdminAcl::READ | AdminAcl::WRITE,
                 User::RESOURCE_NAME => AdminAcl::READ | AdminAcl::WRITE,
-                Egg::RESOURCE_NAME => AdminAcl::READ | AdminAcl::WRITE,
+                Map::RESOURCE_NAME => AdminAcl::READ | AdminAcl::WRITE,
                 DatabaseHost::RESOURCE_NAME => AdminAcl::READ | AdminAcl::WRITE,
                 Database::RESOURCE_NAME => AdminAcl::READ | AdminAcl::WRITE,
                 Mount::RESOURCE_NAME => AdminAcl::READ | AdminAcl::WRITE,

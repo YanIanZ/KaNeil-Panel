@@ -55,11 +55,11 @@ class UpdateStartupVariableTest extends ClientApiIntegrationTestCase
         /** @var Server $server */
         [$user, $server] = $this->generateTestAccount($permissions);
 
-        $egg = $this->cloneEggAndVariables($server->egg);
-        $egg->variables()->where('env_variable', 'BUNGEE_VERSION')->update(['user_viewable' => false]);
-        $egg->variables()->where('env_variable', 'SERVER_JARFILE')->update(['user_editable' => false]);
+        $map = $this->cloneEggAndVariables($server->map);
+        $map->variables()->where('env_variable', 'BUNGEE_VERSION')->update(['user_viewable' => false]);
+        $map->variables()->where('env_variable', 'SERVER_JARFILE')->update(['user_editable' => false]);
 
-        $server->fill(['egg_id' => $egg->id])->save();
+        $server->fill(['map_id' => $map->id])->save();
         $server->refresh();
 
         $response = $this->actingAs($user)->putJson($this->link($server) . '/startup/variable', [
@@ -90,11 +90,11 @@ class UpdateStartupVariableTest extends ClientApiIntegrationTestCase
         /** @var Server $server */
         [$user, $server] = $this->generateTestAccount();
 
-        $egg = $this->cloneEggAndVariables($server->egg);
-        $egg->variables()->firstWhere('env_variable', 'BUNGEE_VERSION')->update(['user_viewable' => false]);
+        $map = $this->cloneEggAndVariables($server->map);
+        $map->variables()->firstWhere('env_variable', 'BUNGEE_VERSION')->update(['user_viewable' => false]);
 
         $server->fill([
-            'egg_id' => $egg->id,
+            'map_id' => $map->id,
             'startup' => 'java {{SERVER_JARFILE}} --version {{BUNGEE_VERSION}}',
         ])->save();
 
@@ -111,7 +111,7 @@ class UpdateStartupVariableTest extends ClientApiIntegrationTestCase
     }
 
     /**
-     * Test that an egg variable with a validation rule of 'nullable|string' works if no value
+     * Test that an map variable with a validation rule of 'nullable|string' works if no value
      * is passed through in the request.
      */
     public function test_egg_variable_with_nullable_string_is_not_required(): void
@@ -119,10 +119,10 @@ class UpdateStartupVariableTest extends ClientApiIntegrationTestCase
         /** @var Server $server */
         [$user, $server] = $this->generateTestAccount();
 
-        $egg = $this->cloneEggAndVariables($server->egg);
-        $egg->variables()->firstWhere('env_variable', 'BUNGEE_VERSION')->update(['rules' => ['nullable', 'string']]);
+        $map = $this->cloneEggAndVariables($server->map);
+        $map->variables()->firstWhere('env_variable', 'BUNGEE_VERSION')->update(['rules' => ['nullable', 'string']]);
 
-        $server->fill(['egg_id' => $egg->id])->save();
+        $server->fill(['map_id' => $map->id])->save();
         $server->refresh();
 
         $response = $this->actingAs($user)->putJson($this->link($server) . '/startup/variable', [

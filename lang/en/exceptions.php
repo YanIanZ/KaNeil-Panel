@@ -14,13 +14,13 @@ return [
         'cidr_out_of_range' => 'CIDR notation only allows masks between /25 and /32.',
         'port_out_of_range' => 'Ports in an allocation must be greater than or equal to 1024 and less than or equal to 65535.',
     ],
-    'egg' => [
-        'delete_has_servers' => 'An Egg with active servers attached to it cannot be deleted from the Panel.',
-        'invalid_copy_id' => 'The Egg selected for copying a script from either does not exist, or is copying a script itself.',
-        'has_children' => 'This Egg is a parent to one or more other Eggs. Please delete those Eggs before deleting this Egg.',
+    'map' => [
+        'delete_has_servers' => 'An Map with active servers attached to it cannot be deleted from the Panel.',
+        'invalid_copy_id' => 'The Map selected for copying a script from either does not exist, or is copying a script itself.',
+        'has_children' => 'This Map is a parent to one or more other Maps. Please delete those Maps before deleting this Map.',
     ],
     'variables' => [
-        'env_not_unique' => 'The environment variable :name must be unique to this Egg.',
+        'env_not_unique' => 'The environment variable :name must be unique to this Map.',
         'reserved_name' => 'The environment variable :name is protected and cannot be assigned to a variable.',
         'bad_validation_rule' => 'The validation rule ":rule" is not a valid rule for this application.',
     ],

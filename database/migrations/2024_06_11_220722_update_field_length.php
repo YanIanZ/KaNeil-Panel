@@ -54,7 +54,7 @@ return new class extends Migration
             $table->string('env_variable')->change();
         });
 
-        Schema::table('eggs', function (Blueprint $table) {
+        Schema::table('maps', function (Blueprint $table) {
             $table->string('author')->change();
             $table->string('name')->change();
             $table->string('config_stop')->nullable()->default(null)->change();
@@ -194,7 +194,7 @@ return new class extends Migration
             $table->string('env_variable', 191)->change();
         });
 
-        Schema::table('eggs', function (Blueprint $table) {
+        Schema::table('maps', function (Blueprint $table) {
             $table->string('author', 191)->change();
             $table->string('name', 191)->change();
             $table->string('config_stop', 191)->nullable()->default(null)->change();

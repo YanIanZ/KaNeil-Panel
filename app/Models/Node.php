@@ -205,7 +205,7 @@ class Node extends Model implements Validatable
         });
 
         static::deleting(function (self $node) {
-            throw_if($node->servers()->count(), new HasActiveServersException(trans('exceptions.egg.delete_has_servers')));
+            throw_if($node->servers()->count(), new HasActiveServersException(trans('exceptions.map.delete_has_servers')));
         });
     }
 

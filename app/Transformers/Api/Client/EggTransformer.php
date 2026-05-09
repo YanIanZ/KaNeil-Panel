@@ -2,7 +2,7 @@
 
 namespace App\Transformers\Api\Client;
 
-use App\Models\Egg;
+use App\Models\Map;
 
 class EggTransformer extends BaseClientTransformer
 {
@@ -11,17 +11,17 @@ class EggTransformer extends BaseClientTransformer
      */
     public function getResourceName(): string
     {
-        return Egg::RESOURCE_NAME;
+        return Map::RESOURCE_NAME;
     }
 
     /**
-     * @param  Egg  $egg
+     * @param  Map  $map
      */
-    public function transform($egg): array
+    public function transform($map): array
     {
         return [
-            'uuid' => $egg->uuid,
-            'name' => $egg->name,
+            'uuid' => $map->uuid,
+            'name' => $map->name,
         ];
     }
 }

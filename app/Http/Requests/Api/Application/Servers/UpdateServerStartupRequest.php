@@ -22,7 +22,7 @@ class UpdateServerStartupRequest extends ApplicationApiRequest
         return [
             'startup' => 'sometimes|string',
             'environment' => 'present|array',
-            'egg' => $rules['egg_id'],
+            'map' => $rules['map_id'],
             'image' => 'sometimes|string',
             'skip_scripts' => 'present|boolean',
         ];
@@ -38,7 +38,7 @@ class UpdateServerStartupRequest extends ApplicationApiRequest
         $data = parent::validated();
 
         return collect($data)->only(['startup', 'environment', 'skip_scripts'])->merge([
-            'egg_id' => array_get($data, 'egg'),
+            'map_id' => array_get($data, 'map'),
             'docker_image' => array_get($data, 'image'),
         ])->toArray();
     }

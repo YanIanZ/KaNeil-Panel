@@ -4,7 +4,7 @@ namespace App\Filament\Admin\Widgets;
 
 use App\Models\Server;
 use App\Models\Node;
-use App\Models\Egg;
+use App\Models\Map;
 use App\Models\User;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
@@ -22,9 +22,9 @@ class ServerCountWidget extends BaseWidget
                 ->description('Active nodes')
                 ->descriptionIcon('tabler-server-2')
                 ->color('info'),
-            Stat::make('Eggs', Egg::count())
+            Stat::make('Maps', Map::count())
                 ->description('Templates')
-                ->descriptionIcon('tabler-egg')
+                ->descriptionIcon('tabler-map')
                 ->color('warning'),
             Stat::make('Users', User::count())
                 ->description('Registered users')

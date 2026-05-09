@@ -2,7 +2,7 @@
 
 namespace App\Tests\Integration\Services\Servers;
 
-use App\Models\Egg;
+use App\Models\Map;
 use App\Models\Server;
 use App\Models\ServerVariable;
 use App\Models\User;
@@ -15,8 +15,8 @@ class StartupModificationServiceTest extends IntegrationTestCase
 {
     /**
      * Test that a non-admin request to modify the server startup parameters does
-     * not perform any egg updates. This also attempts to pass through an
-     * egg_id variable which should have no impact if the request is coming from
+     * not perform any map updates. This also attempts to pass through an
+     * map_id variable which should have no impact if the request is coming from
      * a non-admin entity.
      */
     public function test_non_admin_can_modify_server_variables(): void
@@ -25,7 +25,7 @@ class StartupModificationServiceTest extends IntegrationTestCase
 
         try {
             $this->app->make(StartupModificationService::class)->handle($server, [
-                'egg_id' => $server->egg_id + 1,
+                'map_id' => $server->map_id + 1,
                 'environment' => [
                     'BUNGEE_VERSION' => '$$',
                     'SERVER_JARFILE' => 'server.jar',
@@ -49,7 +49,7 @@ class StartupModificationServiceTest extends IntegrationTestCase
 
         $result = $this->getService()
             ->handle($server, [
-                'egg_id' => $server->egg_id + 1,
+                'map_id' => $server->map_id + 1,
                 'startup' => 'random gibberish',
                 'environment' => [
                     'BUNGEE_VERSION' => '1234',
@@ -65,28 +65,28 @@ class StartupModificationServiceTest extends IntegrationTestCase
     }
 
     /**
-     * Test that modifying an egg as an admin properly updates the data for the server.
+     * Test that modifying an map as an admin properly updates the data for the server.
      */
     public function test_server_is_properly_modified_as_admin_user(): void
     {
-        /** @var Egg $nextEgg */
-        $nextEgg = Egg::query()->findOrFail(2);
+        /** @var Map $nextEgg */
+        $nextEgg = Map::query()->findOrFail(2);
 
-        $server = $this->createServerModel(['egg_id' => 1]);
+        $server = $this->createServerModel(['map_id' => 1]);
 
-        $this->assertNotSame($nextEgg->id, $server->egg_id);
+        $this->assertNotSame($nextEgg->id, $server->map_id);
 
         $response = $this->getService()
             ->setUserLevel(User::USER_LEVEL_ADMIN)
             ->handle($server, [
-                'egg_id' => $nextEgg->id,
+                'map_id' => $nextEgg->id,
                 'startup' => 'sample startup',
                 'skip_scripts' => true,
                 'docker_image' => 'docker/hodor',
             ]);
 
         $this->assertInstanceOf(Server::class, $response);
-        $this->assertSame($nextEgg->id, $response->egg_id);
+        $this->assertSame($nextEgg->id, $response->map_id);
         $this->assertSame('sample startup', $response->startup);
         $this->assertSame('docker/hodor', $response->image);
         $this->assertTrue($response->skip_scripts);
@@ -102,15 +102,15 @@ class StartupModificationServiceTest extends IntegrationTestCase
     public function test_environment_variables_can_be_updated_by_admin(): void
     {
         $server = $this->createServerModel();
-        $server->loadMissing(['egg', 'variables']);
+        $server->loadMissing(['map', 'variables']);
 
-        $clone = $this->cloneEggAndVariables($server->egg);
+        $clone = $this->cloneEggAndVariables($server->map);
         // This makes the BUNGEE_VERSION variable not user editable.
         $clone->variables()->firstWhere('env_variable', 'BUNGEE_VERSION')->update([
             'user_editable' => false,
         ]);
 
-        $server->fill(['egg_id' => $clone->id])->saveOrFail();
+        $server->fill(['map_id' => $clone->id])->saveOrFail();
         $server->refresh();
 
         ServerVariable::query()->updateOrCreate([
@@ -144,7 +144,7 @@ class StartupModificationServiceTest extends IntegrationTestCase
     }
 
     /**
-     * Test that passing an invalid egg ID into the function throws an exception
+     * Test that passing an invalid map ID into the function throws an exception
      * rather than silently failing or skipping.
      */
     public function test_invalid_egg_id_triggers_exception(): void
@@ -155,7 +155,7 @@ class StartupModificationServiceTest extends IntegrationTestCase
 
         $this->getService()
             ->setUserLevel(User::USER_LEVEL_ADMIN)
-            ->handle($server, ['egg_id' => 123456789]);
+            ->handle($server, ['map_id' => 123456789]);
     }
 
     private function getService(): StartupModificationService

@@ -14,10 +14,10 @@ return [
         'cidr_out_of_range' => 'CIDR-notasjon tillater kun masker mellom /25 og /32.',
         'port_out_of_range' => 'Porter i en allokering må være større enn eller lik 1024 og mindre enn eller lik 65535.',
     ],
-    'egg' => [
-        'delete_has_servers' => 'Et egg med aktive servere tilknyttet kan ikke slettes fra panelet.',
+    'map' => [
+        'delete_has_servers' => 'Et map med aktive servere tilknyttet kan ikke slettes fra panelet.',
         'invalid_copy_id' => 'Egget som er valgt for å kopiere et skript fra, eksisterer enten ikke eller kopierer allerede et annet skript.',
-        'has_children' => 'Dette egget er en overordnet til ett eller flere andre egg. Vennligst slett disse eggene før du sletter dette egget.',
+        'has_children' => 'Dette egget er en overordnet til ett eller flere andre map. Vennligst slett disse eggene før du sletter dette egget.',
     ],
     'variables' => [
         'env_not_unique' => 'Miljøvariabelen :name må være unik for dette egget.',

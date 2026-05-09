@@ -24,12 +24,12 @@ class ServerInstallController extends Controller
             throw new HttpForbiddenException('Requesting node does not have permission to access this server.');
         }
 
-        $egg = $server->egg;
+        $map = $server->map;
 
         return new JsonResponse([
-            'container_image' => $egg->copy_script_container,
-            'entrypoint' => $egg->copy_script_entry,
-            'script' => $egg->copy_script_install,
+            'container_image' => $map->copy_script_container,
+            'entrypoint' => $map->copy_script_entry,
+            'script' => $map->copy_script_install,
         ]);
     }
 

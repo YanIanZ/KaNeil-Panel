@@ -14,7 +14,7 @@ class ServerConfigurationStructureService
      * Return a configuration array for a specific server when passed a server model.
      *
      * DO NOT MODIFY THIS FUNCTION. This powers legacy code handling for the new daemon
-     * daemon, if you modify the structure eggs will break unexpectedly.
+     * daemon, if you modify the structure maps will break unexpectedly.
      *
      * @param  array<array-key, mixed>  $override
      * @return array<array-key, mixed>
@@ -60,7 +60,7 @@ class ServerConfigurationStructureService
      *         default: array{ip: string, port: int},
      *         mappings: array<string, array<int>>,
      *     },
-     *     egg: array{id: string, file_denylist: string[], features: string[][]},
+     *     map: array{id: string, file_denylist: string[], features: string[][]},
      *     labels?: string[],
      *     mounts: array{source: string, target: string, read_only: bool},
      * }
@@ -94,17 +94,17 @@ class ServerConfigurationStructureService
                 'requires_rebuild' => false,
             ],
             'allocations' => [
-                'force_outgoing_ip' => $server->egg->force_outgoing_ip,
+                'force_outgoing_ip' => $server->map->force_outgoing_ip,
                 'default' => [
                     'ip' => $server->allocation->ip ?? '127.0.0.1',
                     'port' => $server->allocation->port ?? 0,
                 ],
                 'mappings' => $server->getAllocationMappings(),
             ],
-            'egg' => [
-                'id' => $server->egg->uuid,
-                'file_denylist' => $server->egg->inherit_file_denylist,
-                'features' => $this->featureService->getMappings($server->egg->features),
+            'map' => [
+                'id' => $server->map->uuid,
+                'file_denylist' => $server->map->inherit_file_denylist,
+                'features' => $this->featureService->getMappings($server->map->features),
             ],
         ];
 

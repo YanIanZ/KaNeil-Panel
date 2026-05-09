@@ -16,7 +16,7 @@ return [
         'node_name' => 'Knoten Name',
         'icon' => [
             'upload' => 'Icon hochladen',
-            'tooltip' => 'Nutze Egg Icon',
+            'tooltip' => 'Nutze Map Icon',
             'updated' => 'Server Icon aktualisiert',
             'deleted' => 'Server Icon gelöscht',
         ],

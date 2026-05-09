@@ -2,7 +2,7 @@
 
 namespace App\Tests\Integration\Services\Servers;
 
-use App\Models\Egg;
+use App\Models\Map;
 use App\Models\User;
 use App\Services\Servers\VariableValidatorService;
 use App\Tests\Integration\IntegrationTestCase;
@@ -11,14 +11,14 @@ use Illuminate\Validation\ValidationException;
 
 class VariableValidatorServiceTest extends IntegrationTestCase
 {
-    protected Egg $egg;
+    protected Map $map;
 
     protected function setUp(): void
     {
         parent::setUp();
 
         /* @noinspection PhpFieldAssignmentTypeMismatchInspection */
-        $this->egg = Egg::query()
+        $this->map = Map::query()
             ->where('author', 'panel@example.com')
             ->where('name', 'Bungeecord')
             ->firstOrFail();
@@ -29,10 +29,10 @@ class VariableValidatorServiceTest extends IntegrationTestCase
      */
     public function test_environment_variables_can_be_validated(): void
     {
-        $egg = $this->cloneEggAndVariables($this->egg);
+        $map = $this->cloneEggAndVariables($this->map);
 
         try {
-            $this->getService()->handle($egg->id, [
+            $this->getService()->handle($map->id, [
                 'BUNGEE_VERSION' => '1.2.3',
                 'SERVER_JARFILE' => '',
             ]);
@@ -48,7 +48,7 @@ class VariableValidatorServiceTest extends IntegrationTestCase
             $this->assertSame('The Bungeecord Jar File variable field is required.', $errors['environment.SERVER_JARFILE'][0]);
         }
 
-        $response = $this->getService()->handle($egg->id, [
+        $response = $this->getService()->handle($map->id, [
             'BUNGEE_VERSION' => '1234',
             'SERVER_JARFILE' => 'server.jar',
         ]);
@@ -70,12 +70,12 @@ class VariableValidatorServiceTest extends IntegrationTestCase
      */
     public function test_normal_user_cannot_validate_non_user_editable_variables(): void
     {
-        $egg = $this->cloneEggAndVariables($this->egg);
-        $egg->variables()->firstWhere('env_variable', 'BUNGEE_VERSION')->update([
+        $map = $this->cloneEggAndVariables($this->map);
+        $map->variables()->firstWhere('env_variable', 'BUNGEE_VERSION')->update([
             'user_editable' => false,
         ]);
 
-        $response = $this->getService()->handle($egg->id, [
+        $response = $this->getService()->handle($map->id, [
             // This is an invalid value, but it shouldn't cause any issues since it should be skipped.
             'BUNGEE_VERSION' => '1.2.3',
             'SERVER_JARFILE' => 'server.jar',
@@ -89,13 +89,13 @@ class VariableValidatorServiceTest extends IntegrationTestCase
 
     public function test_environment_variables_can_be_updated_as_admin(): void
     {
-        $egg = $this->cloneEggAndVariables($this->egg);
-        $egg->variables()->first()->update([
+        $map = $this->cloneEggAndVariables($this->map);
+        $map->variables()->first()->update([
             'user_editable' => false,
         ]);
 
         try {
-            $this->getService()->setUserLevel(User::USER_LEVEL_ADMIN)->handle($egg->id, [
+            $this->getService()->setUserLevel(User::USER_LEVEL_ADMIN)->handle($map->id, [
                 'BUNGEE_VERSION' => '1.2.3',
                 'SERVER_JARFILE' => 'server.jar',
             ]);
@@ -106,7 +106,7 @@ class VariableValidatorServiceTest extends IntegrationTestCase
             $this->assertArrayHasKey('environment.BUNGEE_VERSION', $exception->errors());
         }
 
-        $response = $this->getService()->setUserLevel(User::USER_LEVEL_ADMIN)->handle($egg->id, [
+        $response = $this->getService()->setUserLevel(User::USER_LEVEL_ADMIN)->handle($map->id, [
             'BUNGEE_VERSION' => '123',
             'SERVER_JARFILE' => 'server.jar',
         ]);
@@ -124,20 +124,20 @@ class VariableValidatorServiceTest extends IntegrationTestCase
 
     public function test_nullable_environment_variables_can_be_used_correctly(): void
     {
-        $egg = $this->cloneEggAndVariables($this->egg);
-        $egg->variables()->where('env_variable', '!=', 'BUNGEE_VERSION')->delete();
+        $map = $this->cloneEggAndVariables($this->map);
+        $map->variables()->where('env_variable', '!=', 'BUNGEE_VERSION')->delete();
 
-        $egg->variables()->update(['rules' => ['nullable', 'string']]);
+        $map->variables()->update(['rules' => ['nullable', 'string']]);
 
-        $response = $this->getService()->handle($egg->id, []);
+        $response = $this->getService()->handle($map->id, []);
         $this->assertCount(1, $response);
         $this->assertNull($response->get(0)->value);
 
-        $response = $this->getService()->handle($egg->id, ['BUNGEE_VERSION' => null]);
+        $response = $this->getService()->handle($map->id, ['BUNGEE_VERSION' => null]);
         $this->assertCount(1, $response);
         $this->assertNull($response->get(0)->value);
 
-        $response = $this->getService()->handle($egg->id, ['BUNGEE_VERSION' => '']);
+        $response = $this->getService()->handle($map->id, ['BUNGEE_VERSION' => '']);
         $this->assertCount(1, $response);
         $this->assertSame('', $response->get(0)->value);
     }

@@ -6,7 +6,7 @@ use App\Enums\TablerIcon;
 use App\Filament\Admin\Resources\Servers\ServerResource;
 use App\Filament\Components\Forms\Fields\StartupVariable;
 use App\Models\Allocation;
-use App\Models\Egg;
+use App\Models\Map;
 use App\Models\Node;
 use App\Models\User;
 use App\Services\Allocations\AssignmentService;
@@ -111,8 +111,8 @@ class CreateServer extends CreateRecord
                             ->tooltip('Random')
                             ->icon('tabler-dice-' . random_int(1, 6))
                             ->action(function (Set $set, Get $get) {
-                                $egg = Egg::find($get('egg_id'));
-                                $prefix = $egg ? str($egg->name)->lower()->kebab() . '-' : '';
+                                $map = Map::find($get('map_id'));
+                                $prefix = $map ? str($map->name)->lower()->kebab() . '-' : '';
 
                                 $word = (new RandomWordService())->word();
 
@@ -287,7 +287,7 @@ class CreateServer extends CreateRecord
                                     ->default(null)
                                     ->datalist([
                                         $get('name'),
-                                        Egg::find($get('egg_id'))?->name,
+                                        Map::find($get('map_id'))?->name,
                                     ])
                                     ->helperText(trans('admin/server.alias_helper')),
                                 TagsInput::make('allocation_ports')
@@ -352,7 +352,7 @@ class CreateServer extends CreateRecord
                 ]),
 
             Step::make(trans('admin/server.tabs.egg_configuration'))
-                ->icon(TablerIcon::Egg)
+                ->icon(TablerIcon::Map)
                 ->completedIcon(TablerIcon::Check)
                 ->columns([
                     'default' => 1,
@@ -361,10 +361,10 @@ class CreateServer extends CreateRecord
                     'lg' => 6,
                 ])
                 ->schema([
-                    Select::make('egg_id')
+                    Select::make('map_id')
                         ->label(trans('admin/server.name'))
-                        ->prefixIcon(TablerIcon::Egg)
-                        ->relationship('egg', 'name')
+                        ->prefixIcon(TablerIcon::Map)
+                        ->relationship('map', 'name')
                         ->columnSpan([
                             'default' => 1,
                             'sm' => 2,
@@ -375,11 +375,11 @@ class CreateServer extends CreateRecord
                         ->preload()
                         ->live()
                         ->afterStateUpdated(function ($state, Set $set, Get $get, $old) {
-                            $egg = Egg::query()->find($state);
+                            $map = Map::query()->find($state);
                             $set('startup', '');
                             $set('image', '');
 
-                            $variables = $egg->variables ?? [];
+                            $variables = $map->variables ?? [];
                             $serverVariables = collect();
                             foreach ($variables as $variable) {
                                 $serverVariables->add($variable->toArray());
@@ -395,9 +395,9 @@ class CreateServer extends CreateRecord
 
                             $set('environment', $variables);
 
-                            $previousEgg = Egg::query()->find($old);
+                            $previousEgg = Map::query()->find($old);
                             if (!$get('name') || $previousEgg?->getKebabName() === $get('name')) {
-                                $set('name', $egg->getKebabName());
+                                $set('name', $map->getKebabName());
                             }
                         })
                         ->required(),
@@ -452,13 +452,13 @@ class CreateServer extends CreateRecord
 
                     Select::make('select_startup')
                         ->label(trans('admin/server.startup_cmd'))
-                        ->hidden(fn (Get $get) => $get('egg_id') === null)
+                        ->hidden(fn (Get $get) => $get('map_id') === null)
                         ->required()
                         ->live()
                         ->afterStateUpdated(fn (Set $set, $state) => $set('startup', $state))
                         ->options(function ($state, Get $get, Set $set) {
-                            $egg = Egg::query()->find($get('egg_id'));
-                            $startups = $egg->startup_commands ?? [];
+                            $map = Map::query()->find($get('map_id'));
+                            $startups = $map->startup_commands ?? [];
 
                             $currentStartup = $get('startup');
                             if (!$currentStartup && $startups) {
@@ -474,13 +474,13 @@ class CreateServer extends CreateRecord
 
                     Textarea::make('startup')
                         ->hiddenLabel()
-                        ->hidden(fn (Get $get) => $get('egg_id') === null)
+                        ->hidden(fn (Get $get) => $get('map_id') === null)
                         ->required()
                         ->live()
                         ->autosize()
                         ->afterStateUpdated(function ($state, Get $get, Set $set) {
-                            $egg = Egg::query()->find($get('egg_id'));
-                            $startups = $egg->startup_commands ?? [];
+                            $map = Map::query()->find($get('map_id'));
+                            $startups = $map->startup_commands ?? [];
 
                             if (in_array($state, $startups)) {
                                 $set('select_startup', $state);
@@ -494,17 +494,17 @@ class CreateServer extends CreateRecord
                     Hidden::make('environment')->default([]),
 
                     Section::make(trans('admin/server.variables'))
-                        ->icon(TablerIcon::Eggs)
+                        ->icon(TablerIcon::Maps)
                         ->iconColor('primary')
-                        ->hidden(fn (Get $get) => $get('egg_id') === null)
+                        ->hidden(fn (Get $get) => $get('map_id') === null)
                         ->collapsible()
                         ->columnSpanFull()
                         ->schema([
                             TextEntry::make(trans('admin/server.select_egg'))
-                                ->hidden(fn (Get $get) => $get('egg_id')),
+                                ->hidden(fn (Get $get) => $get('map_id')),
                             TextEntry::make(trans('admin/server.no_variables'))
-                                ->hidden(fn (Get $get) => !$get('egg_id') ||
-                                    Egg::query()->find($get('egg_id'))?->variables()?->count()
+                                ->hidden(fn (Get $get) => !$get('map_id') ||
+                                    Map::query()->find($get('map_id'))?->variables()?->count()
                                 ),
                             Repeater::make('server_variables')
                                 ->hiddenLabel()
@@ -798,8 +798,8 @@ class CreateServer extends CreateRecord
                                 ->live()
                                 ->afterStateUpdated(fn (Set $set, $state) => $set('image', $state))
                                 ->options(function ($state, Get $get, Set $set) {
-                                    $egg = Egg::query()->find($get('egg_id'));
-                                    $images = $egg->docker_images ?? [];
+                                    $map = Map::query()->find($get('map_id'));
+                                    $images = $map->docker_images ?? [];
 
                                     $currentImage = $get('image');
                                     if (!$currentImage && $images) {
@@ -822,8 +822,8 @@ class CreateServer extends CreateRecord
                                 ->label(trans('admin/server.image'))
                                 ->required()
                                 ->afterStateUpdated(function ($state, Get $get, Set $set) {
-                                    $egg = Egg::query()->find($get('egg_id'));
-                                    $images = $egg->docker_images ?? [];
+                                    $map = Map::query()->find($get('map_id'));
+                                    $images = $map->docker_images ?? [];
 
                                     if (in_array($state, $images)) {
                                         $set('select_image', $state);

@@ -14,13 +14,13 @@ return [
         'cidr_out_of_range' => 'CIDR 表示法僅允許遮罩在 /25 到 /32 之間。',
         'port_out_of_range' => '配置中的連接埠必須大於或等於 1024，且小於或等於 65535。',
     ],
-    'egg' => [
-        'delete_has_servers' => '已使用在活躍伺服器的 Egg 無法從面板刪除。',
-        'invalid_copy_id' => '選擇用來複製腳本的 Egg 不存在，或該 Egg 本身正在複製腳本。',
-        'has_children' => '此 Egg 是一個或多個其他 Egg 的父項。請先刪除那些 Egg，才能刪除此 Egg。',
+    'map' => [
+        'delete_has_servers' => '已使用在活躍伺服器的 Map 無法從面板刪除。',
+        'invalid_copy_id' => '選擇用來複製腳本的 Map 不存在，或該 Map 本身正在複製腳本。',
+        'has_children' => '此 Map 是一個或多個其他 Map 的父項。請先刪除那些 Map，才能刪除此 Map。',
     ],
     'variables' => [
-        'env_not_unique' => '環境變數 :name 在此 Egg 中必須是唯一的。',
+        'env_not_unique' => '環境變數 :name 在此 Map 中必須是唯一的。',
         'reserved_name' => '環境變數 :name 受到保護，無法被指派為變數。',
         'bad_validation_rule' => '驗證規則「:rule」並非本應用程式有效的規則。',
     ],

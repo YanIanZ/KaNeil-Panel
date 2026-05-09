@@ -4,7 +4,7 @@ namespace App\Transformers\Api\Client;
 
 use App\Enums\SubuserPermission;
 use App\Models\Allocation;
-use App\Models\Egg;
+use App\Models\Map;
 use App\Models\EggVariable;
 use App\Models\Server;
 use App\Models\Subuser;
@@ -18,7 +18,7 @@ class ServerTransformer extends BaseClientTransformer
 {
     protected array $defaultIncludes = ['allocations', 'variables'];
 
-    protected array $availableIncludes = ['egg', 'subusers'];
+    protected array $availableIncludes = ['map', 'subusers'];
 
     public function getResourceName(): string
     {
@@ -62,7 +62,7 @@ class ServerTransformer extends BaseClientTransformer
             ],
             'invocation' => $service->handle($server, hideAllValues: !$user->can(SubuserPermission::StartupRead, $server)),
             'docker_image' => $server->image,
-            'egg_features' => $server->egg->inherit_features,
+            'egg_features' => $server->map->inherit_features,
             'feature_limits' => [
                 'databases' => $server->database_limit,
                 'allocations' => $server->allocation_limit,
@@ -124,11 +124,11 @@ class ServerTransformer extends BaseClientTransformer
     }
 
     /**
-     * Returns the egg associated with this server.
+     * Returns the map associated with this server.
      */
     public function includeEgg(Server $server): Item
     {
-        return $this->item($server->egg, $this->makeTransformer(EggTransformer::class), Egg::RESOURCE_NAME);
+        return $this->item($server->map, $this->makeTransformer(EggTransformer::class), Map::RESOURCE_NAME);
     }
 
     /**

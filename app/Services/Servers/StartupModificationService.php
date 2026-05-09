@@ -2,7 +2,7 @@
 
 namespace App\Services\Servers;
 
-use App\Models\Egg;
+use App\Models\Map;
 use App\Models\Server;
 use App\Models\ServerVariable;
 use App\Models\User;
@@ -31,11 +31,11 @@ class StartupModificationService
     {
         return $this->connection->transaction(function () use ($server, $data) {
             if (!empty($data['environment'])) {
-                $egg = $this->isUserLevel(User::USER_LEVEL_ADMIN) ? ($data['egg_id'] ?? $server->egg_id) : $server->egg_id;
+                $map = $this->isUserLevel(User::USER_LEVEL_ADMIN) ? ($data['map_id'] ?? $server->map_id) : $server->map_id;
 
                 $results = $this->validatorService
                     ->setUserLevel($this->getUserLevel())
-                    ->handle($egg, $data['environment']);
+                    ->handle($map, $data['environment']);
 
                 foreach ($results as $result) {
                     ServerVariable::query()->updateOrCreate(
@@ -67,7 +67,7 @@ class StartupModificationService
      * Update certain administrative settings for a server in the DB.
      *
      * @param array{
-     *     egg_id: ?int,
+     *     map_id: ?int,
      *     docker_image?: ?string,
      *     startup?: ?string,
      *     skip_scripts?: ?bool,
@@ -75,18 +75,18 @@ class StartupModificationService
      */
     protected function updateAdministrativeSettings(array $data, Server &$server): void
     {
-        $eggId = Arr::get($data, 'egg_id');
+        $mapId = Arr::get($data, 'map_id');
 
-        if (is_digit($eggId) && $server->egg_id !== (int) $eggId) {
-            $egg = Egg::findOrFail($data['egg_id']);
+        if (is_digit($mapId) && $server->map_id !== (int) $mapId) {
+            $map = Map::findOrFail($data['map_id']);
 
             $server = $server->forceFill([
-                'egg_id' => $egg->id,
+                'map_id' => $map->id,
             ]);
 
-            // Fill missing fields from egg
-            $data['docker_image'] ??= Arr::first($egg->docker_images);
-            $data['startup'] ??= Arr::first($egg->startup_commands);
+            // Fill missing fields from map
+            $data['docker_image'] ??= Arr::first($map->docker_images);
+            $data['startup'] ??= Arr::first($map->startup_commands);
         }
 
         $server->fill([

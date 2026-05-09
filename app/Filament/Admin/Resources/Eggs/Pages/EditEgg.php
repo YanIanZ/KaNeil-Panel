@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Filament\Admin\Resources\Eggs\Pages;
+namespace App\Filament\Admin\Resources\Maps\Pages;
 
 use App\Enums\EditorLanguages;
 use App\Enums\TablerIcon;
-use App\Filament\Admin\Resources\Eggs\EggResource;
+use App\Filament\Admin\Resources\Maps\EggResource;
 use App\Filament\Components\Actions\DeleteIcon;
 use App\Filament\Components\Actions\ExportEggAction;
 use App\Filament\Components\Actions\ImportEggAction;
 use App\Filament\Components\Actions\UploadIcon;
 use App\Filament\Components\Forms\Fields\CopyFrom;
 use App\Filament\Components\Forms\Fields\MonacoEditor;
-use App\Models\Egg;
+use App\Models\Map;
 use App\Models\EggVariable;
 use App\Traits\Filament\CanCustomizeHeaderActions;
 use App\Traits\Filament\CanCustomizeHeaderWidgets;
@@ -63,9 +63,9 @@ class EditEgg extends EditRecord
     {
         return [
             Tab::make('configuration')
-                ->label(trans('admin/egg.tabs.configuration'))
+                ->label(trans('admin/map.tabs.configuration'))
                 ->columns(['default' => 2, 'sm' => 2, 'md' => 4, 'lg' => 6])
-                ->icon(TablerIcon::Egg)
+                ->icon(TablerIcon::Map)
                 ->schema([
                     Grid::make(2)
                         ->columnStart(1)
@@ -78,104 +78,104 @@ class EditEgg extends EditRecord
                                 ->alignJustify(),
                             UploadIcon::make(),
                             DeleteIcon::make()
-                                ->iconStoragePath(Egg::getIconStoragePath()),
+                                ->iconStoragePath(Map::getIconStoragePath()),
                         ]),
                     TextInput::make('name')
-                        ->label(trans('admin/egg.name'))
+                        ->label(trans('admin/map.name'))
                         ->required()
                         ->maxLength(255)
                         ->columnSpan(['default' => 2, 'sm' => 2, 'md' => 3, 'lg' => 2])
-                        ->helperText(trans('admin/egg.name_help')),
+                        ->helperText(trans('admin/map.name_help')),
                     Textarea::make('description')
-                        ->label(trans('admin/egg.description'))
+                        ->label(trans('admin/map.description'))
                         ->rows(3)
                         ->columnSpan(['default' => 2, 'sm' => 2, 'md' => 4, 'lg' => 3])
-                        ->helperText(trans('admin/egg.description_help')),
+                        ->helperText(trans('admin/map.description_help')),
                     TextInput::make('id')
-                        ->label(trans('admin/egg.egg_id'))
+                        ->label(trans('admin/map.map_id'))
                         ->columnSpan(1)
                         ->disabled(),
                     TextInput::make('uuid')
-                        ->label(trans('admin/egg.egg_uuid'))
+                        ->label(trans('admin/map.egg_uuid'))
                         ->disabled()
                         ->columnSpan(['default' => 1, 'sm' => 1, 'md' => 1, 'lg' => 2])
-                        ->helperText(trans('admin/egg.uuid_help')),
+                        ->helperText(trans('admin/map.uuid_help')),
                     TextInput::make('author')
-                        ->label(trans('admin/egg.author'))
+                        ->label(trans('admin/map.author'))
                         ->required()
                         ->maxLength(255)
                         ->email()
                         ->disabled()
                         ->columnSpan(['default' => 1, 'sm' => 1, 'md' => 1, 'lg' => 2])
-                        ->helperText(trans('admin/egg.author_help_edit')),
+                        ->helperText(trans('admin/map.author_help_edit')),
                     Toggle::make('force_outgoing_ip')
                         ->inline(false)
-                        ->label(trans('admin/egg.force_ip'))
+                        ->label(trans('admin/map.force_ip'))
                         ->columnSpan(1)
-                        ->hintIcon(TablerIcon::QuestionMark, trans('admin/egg.force_ip_help')),
+                        ->hintIcon(TablerIcon::QuestionMark, trans('admin/map.force_ip_help')),
                     KeyValue::make('startup_commands')
-                        ->label(trans('admin/egg.startup_commands'))
+                        ->label(trans('admin/map.startup_commands'))
                         ->live()
                         ->columnSpanFull()
                         ->required()
                         ->reorderable()
-                        ->addActionLabel(trans('admin/egg.add_startup'))
-                        ->keyLabel(trans('admin/egg.startup_name'))
-                        ->valueLabel(trans('admin/egg.startup_command'))
-                        ->helperText(trans('admin/egg.startup_help')),
+                        ->addActionLabel(trans('admin/map.add_startup'))
+                        ->keyLabel(trans('admin/map.startup_name'))
+                        ->valueLabel(trans('admin/map.startup_command'))
+                        ->helperText(trans('admin/map.startup_help')),
                     TagsInput::make('file_denylist')
-                        ->label(trans('admin/egg.file_denylist'))
+                        ->label(trans('admin/map.file_denylist'))
                         ->placeholder('denied-file.txt')
-                        ->helperText(trans('admin/egg.file_denylist_help'))
+                        ->helperText(trans('admin/map.file_denylist_help'))
                         ->columnSpan(['default' => 2, 'sm' => 2, 'md' => 2, 'lg' => 3]),
                     TextInput::make('update_url')
-                        ->label(trans('admin/egg.update_url'))
+                        ->label(trans('admin/map.update_url'))
                         ->url()
-                        ->hintIcon(TablerIcon::QuestionMark, trans('admin/egg.update_url_help'))
+                        ->hintIcon(TablerIcon::QuestionMark, trans('admin/map.update_url_help'))
                         ->columnSpan(['default' => 2, 'sm' => 2, 'md' => 2, 'lg' => 3]),
                     TagsInput::make('features')
-                        ->label(trans('admin/egg.features'))
+                        ->label(trans('admin/map.features'))
                         ->columnSpan(['default' => 2, 'sm' => 2, 'md' => 2, 'lg' => 3]),
                     Hidden::make('script_is_privileged')
-                        ->helperText('The docker images available to servers using this egg.'),
+                        ->helperText('The docker images available to servers using this map.'),
                     TagsInput::make('tags')
-                        ->label(trans('admin/egg.tags'))
+                        ->label(trans('admin/map.tags'))
                         ->columnSpan(['default' => 2, 'sm' => 2, 'md' => 2, 'lg' => 3]),
                     KeyValue::make('docker_images')
-                        ->label(trans('admin/egg.docker_images'))
+                        ->label(trans('admin/map.docker_images'))
                         ->live()
                         ->columnSpanFull()
                         ->required()
                         ->reorderable()
-                        ->addActionLabel(trans('admin/egg.add_image'))
-                        ->keyLabel(trans('admin/egg.docker_name'))
-                        ->valueLabel(trans('admin/egg.docker_uri'))
-                        ->helperText(trans('admin/egg.docker_help')),
+                        ->addActionLabel(trans('admin/map.add_image'))
+                        ->keyLabel(trans('admin/map.docker_name'))
+                        ->valueLabel(trans('admin/map.docker_uri'))
+                        ->helperText(trans('admin/map.docker_help')),
                 ]),
             Tab::make('process_management')
-                ->label(trans('admin/egg.tabs.process_management'))
+                ->label(trans('admin/map.tabs.process_management'))
                 ->columns()
                 ->icon(TablerIcon::ServerCog)
                 ->schema([
                     CopyFrom::make('copy_process_from')
                         ->process(),
                     TextInput::make('config_stop')
-                        ->label(trans('admin/egg.stop_command'))
+                        ->label(trans('admin/map.stop_command'))
                         ->maxLength(255)
-                        ->helperText(trans('admin/egg.stop_command_help')),
+                        ->helperText(trans('admin/map.stop_command_help')),
                     Textarea::make('config_startup')->rows(10)->json()
-                        ->label(trans('admin/egg.start_config'))
-                        ->helperText(trans('admin/egg.start_config_help')),
+                        ->label(trans('admin/map.start_config'))
+                        ->helperText(trans('admin/map.start_config_help')),
                     Textarea::make('config_files')->rows(10)->json()
-                        ->label(trans('admin/egg.config_files'))
+                        ->label(trans('admin/map.config_files'))
                         ->dehydrateStateUsing(fn ($state) => blank($state) ? '{}' : $state)
-                        ->helperText(trans('admin/egg.config_files_help')),
+                        ->helperText(trans('admin/map.config_files_help')),
                     Textarea::make('config_logs')->rows(10)->json()
-                        ->label(trans('admin/egg.log_config'))
-                        ->helperText(trans('admin/egg.log_config_help')),
+                        ->label(trans('admin/map.log_config'))
+                        ->helperText(trans('admin/map.log_config_help')),
                 ]),
             Tab::make('egg_variables')
-                ->label(trans('admin/egg.tabs.egg_variables'))
+                ->label(trans('admin/map.tabs.egg_variables'))
                 ->columnSpanFull()
                 ->icon(TablerIcon::Variable)
                 ->schema([
@@ -185,7 +185,7 @@ class EditEgg extends EditRecord
                         ->relationship('variables')
                         ->orderColumn()
                         ->collapsible()->collapsed()
-                        ->addActionLabel(trans('admin/egg.add_new_variable'))
+                        ->addActionLabel(trans('admin/map.add_new_variable'))
                         ->itemLabel(fn (array $state) => $state['name'])
                         ->mutateRelationshipDataBeforeCreateUsing(function (array $data): array {
                             $data['default_value'] ??= '';
@@ -207,40 +207,40 @@ class EditEgg extends EditRecord
                         })
                         ->schema([
                             TextInput::make('name')
-                                ->label(trans('admin/egg.name'))
+                                ->label(trans('admin/map.name'))
                                 ->live()
                                 ->debounce(750)
                                 ->maxLength(255)
                                 ->columnSpanFull()
                                 ->afterStateUpdated(fn (Set $set, $state) => $set('env_variable', str($state)->trim()->snake()->upper()->toString()))
-                                ->unique(modifyRuleUsing: fn (Unique $rule, Get $get) => $rule->where('egg_id', $get('../../id')))
+                                ->unique(modifyRuleUsing: fn (Unique $rule, Get $get) => $rule->where('map_id', $get('../../id')))
                                 ->validationMessages([
-                                    'unique' => trans('admin/egg.error_unique'),
+                                    'unique' => trans('admin/map.error_unique'),
                                 ])
                                 ->required(),
-                            Textarea::make('description')->label(trans('admin/egg.description'))->columnSpanFull(),
+                            Textarea::make('description')->label(trans('admin/map.description'))->columnSpanFull(),
                             TextInput::make('env_variable')
-                                ->label(trans('admin/egg.environment_variable'))
+                                ->label(trans('admin/map.environment_variable'))
                                 ->maxLength(255)
                                 ->prefix('{{')
                                 ->suffix('}}')
                                 ->hintIcon(TablerIcon::Code, fn ($state) => "{{{$state}}}")
-                                ->unique(modifyRuleUsing: fn (Unique $rule, Get $get) => $rule->where('egg_id', $get('../../id')))
+                                ->unique(modifyRuleUsing: fn (Unique $rule, Get $get) => $rule->where('map_id', $get('../../id')))
                                 ->rules(EggVariable::getRulesForField('env_variable'))
                                 ->validationMessages([
-                                    'unique' => trans('admin/egg.error_unique'),
-                                    'required' => trans('admin/egg.error_required'),
-                                    '*' => trans('admin/egg.error_reserved'),
+                                    'unique' => trans('admin/map.error_unique'),
+                                    'required' => trans('admin/map.error_required'),
+                                    '*' => trans('admin/map.error_reserved'),
                                 ])
                                 ->required(),
-                            TextInput::make('default_value')->label(trans('admin/egg.default_value')),
-                            Fieldset::make(trans('admin/egg.user_permissions'))
+                            TextInput::make('default_value')->label(trans('admin/map.default_value')),
+                            Fieldset::make(trans('admin/map.user_permissions'))
                                 ->schema([
-                                    Checkbox::make('user_viewable')->label(trans('admin/egg.viewable')),
-                                    Checkbox::make('user_editable')->label(trans('admin/egg.editable')),
+                                    Checkbox::make('user_viewable')->label(trans('admin/map.viewable')),
+                                    Checkbox::make('user_editable')->label(trans('admin/map.editable')),
                                 ]),
                             TagsInput::make('rules')
-                                ->label(trans('admin/egg.rules'))
+                                ->label(trans('admin/map.rules'))
                                 ->columnSpanFull()
                                 ->reorderable()
                                 ->suggestions([
@@ -266,19 +266,19 @@ class EditEgg extends EditRecord
                         ]),
                 ]),
             Tab::make('install_script')
-                ->label(trans('admin/egg.tabs.install_script'))
+                ->label(trans('admin/map.tabs.install_script'))
                 ->columns(3)
                 ->icon(TablerIcon::FileDownload)
                 ->schema([
                     CopyFrom::make('copy_script_from')
                         ->script(),
                     TextInput::make('script_container')
-                        ->label(trans('admin/egg.script_container'))
+                        ->label(trans('admin/map.script_container'))
                         ->required()
                         ->maxLength(255)
-                        ->placeholder('ghcr.io/kaneil-eggs/installers:debian'),
+                        ->placeholder('ghcr.io/kaneil-maps/installers:debian'),
                     Select::make('script_entry')
-                        ->label(trans('admin/egg.script_entry'))
+                        ->label(trans('admin/map.script_entry'))
                         ->selectablePlaceholder(false)
                         ->options([
                             'bash' => 'bash',
@@ -299,8 +299,8 @@ class EditEgg extends EditRecord
     {
         return [
             DeleteAction::make()
-                ->disabled(fn (Egg $egg): bool => $egg->servers()->count() > 0)
-                ->tooltip(fn (Egg $egg): string => $egg->servers()->count() <= 0 ? trans('filament-actions::delete.single.label') : trans('admin/egg.in_use')),
+                ->disabled(fn (Map $map): bool => $map->servers()->count() > 0)
+                ->tooltip(fn (Map $map): string => $map->servers()->count() <= 0 ? trans('filament-actions::delete.single.label') : trans('admin/map.in_use')),
             ExportEggAction::make(),
             ImportEggAction::make()
                 ->multiple(false),

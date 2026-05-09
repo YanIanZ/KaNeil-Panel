@@ -20,7 +20,7 @@ return [
         'servers' => 'Servidores',
         'alias' => 'Alias',
         'ip' => 'IP',
-        'egg' => 'Egg',
+        'map' => 'Map',
         'owner' => 'Proprietário',
         'allocation_notes' => 'Anotações',
         'no_notes' => 'Sem anotações',

@@ -14,11 +14,11 @@ use App\Filament\Components\StateCasts\ServerConditionStateCast;
 use App\Filament\Server\Pages\Console;
 use App\Models\Allocation;
 use App\Models\Backup;
-use App\Models\Egg;
+use App\Models\Map;
 use App\Models\Server;
 use App\Models\User;
 use App\Repositories\Daemon\DaemonServerRepository;
-use App\Services\Eggs\EggChangerService;
+use App\Services\Maps\EggChangerService;
 use App\Services\Servers\RandomWordService;
 use App\Services\Servers\ReinstallServerService;
 use App\Services\Servers\ServerDeletionService;
@@ -111,8 +111,8 @@ class EditServer extends EditRecord
                         ->columnStart(1)
                         ->schema([
                             Image::make('', 'icon')
-                                ->hidden(fn ($record) => !$record->icon && !$record->egg->icon)
-                                ->url(fn ($record) => $record->icon ?: $record->egg->icon)
+                                ->hidden(fn ($record) => !$record->icon && !$record->map->icon)
+                                ->url(fn ($record) => $record->icon ?: $record->map->icon)
                                 ->tooltip(fn ($record) => $record->icon ? '' : trans('server/setting.server_info.icon.tooltip'))
                                 ->imageSize(150)
                                 ->columnSpanFull()
@@ -138,8 +138,8 @@ class EditServer extends EditRecord
                                     ->tooltip('Random')
                                     ->icon('tabler-dice-' . random_int(1, 6))
                                     ->action(function (Set $set, Get $get) {
-                                        $egg = Egg::find($get('egg_id'));
-                                        $prefix = $egg ? str($egg->name)->lower()->kebab() . '-' : '';
+                                        $map = Map::find($get('map_id'));
+                                        $prefix = $map ? str($map->name)->lower()->kebab() . '-' : '';
 
                                         $word = (new RandomWordService())->word();
 
@@ -530,8 +530,8 @@ class EditServer extends EditRecord
                                 ->live()
                                 ->afterStateUpdated(fn (Set $set, $state) => $set('image', $state))
                                 ->options(function ($state, Get $get, Set $set) {
-                                    $egg = Egg::query()->find($get('egg_id'));
-                                    $images = $egg->docker_images ?? [];
+                                    $map = Map::query()->find($get('map_id'));
+                                    $images = $map->docker_images ?? [];
 
                                     $currentImage = $get('image');
                                     if (!$currentImage && $images) {
@@ -554,8 +554,8 @@ class EditServer extends EditRecord
                                 ->label(trans('admin/server.image'))
                                 ->required()
                                 ->afterStateUpdated(function ($state, Get $get, Set $set) {
-                                    $egg = Egg::query()->find($get('egg_id'));
-                                    $images = $egg->docker_images ?? [];
+                                    $map = Map::query()->find($get('map_id'));
+                                    $images = $map->docker_images ?? [];
 
                                     if (in_array($state, $images)) {
                                         $set('select_image', $state);
@@ -579,9 +579,9 @@ class EditServer extends EditRecord
                                 ->columnSpanFull(),
                         ]),
                 ]),
-            Tab::make('egg')
-                ->label(trans('admin/server.egg'))
-                ->icon(TablerIcon::Egg)
+            Tab::make('map')
+                ->label(trans('admin/server.map'))
+                ->icon(TablerIcon::Map)
                 ->columns([
                     'default' => 1,
                     'sm' => 3,
@@ -589,16 +589,16 @@ class EditServer extends EditRecord
                     'lg' => 5,
                 ])
                 ->schema([
-                    Select::make('egg_id')
+                    Select::make('map_id')
                         ->disabled()
-                        ->prefixIcon(TablerIcon::Egg)
+                        ->prefixIcon(TablerIcon::Map)
                         ->columnSpan([
                             'default' => 6,
                             'sm' => 3,
                             'md' => 3,
                             'lg' => 4,
                         ])
-                        ->relationship('egg', 'name')
+                        ->relationship('map', 'name')
                         ->label(trans('admin/server.name'))
                         ->searchable()
                         ->preload()
@@ -607,16 +607,16 @@ class EditServer extends EditRecord
                             Action::make('hint_change_egg')
                                 ->label(trans('admin/server.change_egg'))
                                 ->action(function (array $data, Server $server, EggChangerService $service) {
-                                    $service->handle($server, $data['egg_id'], $data['keep_old_variables']);
+                                    $service->handle($server, $data['map_id'], $data['keep_old_variables']);
 
                                     // Use redirect instead of fillForm to prevent server variables from duplicating
-                                    $this->redirect($this->getUrl(['record' => $server, 'tab' => 'egg::data::tab']), true);
+                                    $this->redirect($this->getUrl(['record' => $server, 'tab' => 'map::data::tab']), true);
                                 })
                                 ->schema(fn (Server $server) => [
-                                    Select::make('egg_id')
+                                    Select::make('map_id')
                                         ->label(trans('admin/server.new_egg'))
-                                        ->prefixIcon(TablerIcon::Egg)
-                                        ->options(fn () => Egg::all()->filter(fn (Egg $egg) => $egg->id !== $server->egg->id)->mapWithKeys(fn (Egg $egg) => [$egg->id => $egg->name]))
+                                        ->prefixIcon(TablerIcon::Map)
+                                        ->options(fn () => Map::all()->filter(fn (Map $map) => $map->id !== $server->map->id)->mapWithKeys(fn (Map $map) => [$map->id => $map->name]))
                                         ->searchable()
                                         ->preload()
                                         ->required(),
@@ -658,11 +658,11 @@ class EditServer extends EditRecord
                         ->required()
                         ->live()
                         ->options(function (Get $get) {
-                            $egg = Egg::find($get('egg_id'));
+                            $map = Map::find($get('map_id'));
 
-                            return array_flip($egg->startup_commands ?? []) + ['custom' => 'Custom Startup'];
+                            return array_flip($map->startup_commands ?? []) + ['custom' => 'Custom Startup'];
                         })
-                        ->formatStateUsing(fn (Server $server) => in_array($server->startup, $server->egg->startup_commands) ? $server->startup : 'custom')
+                        ->formatStateUsing(fn (Server $server) => in_array($server->startup, $server->map->startup_commands) ? $server->startup : 'custom')
                         ->afterStateUpdated(function (Set $set, string $state) {
                             if ($state !== 'custom') {
                                 $set('startup', $state);
@@ -679,8 +679,8 @@ class EditServer extends EditRecord
                         ->live()
                         ->autosize()
                         ->afterStateUpdated(function ($state, Get $get, Set $set) {
-                            $egg = Egg::find($get('egg_id'));
-                            $startups = $egg->startup_commands ?? [];
+                            $map = Map::find($get('map_id'));
+                            $startups = $map->startup_commands ?? [];
 
                             if (in_array($state, $startups)) {
                                 $set('select_startup', $state);

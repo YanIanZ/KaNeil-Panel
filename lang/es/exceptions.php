@@ -14,7 +14,7 @@ return [
         'cidr_out_of_range' => 'La notación CIDR solo permite máscaras entre /25 y /32.',
         'port_out_of_range' => 'Los puertos en una asignación deben ser mayores o iguales que 1024 y menores o iguales a 65535.',
     ],
-    'egg' => [
+    'map' => [
         'delete_has_servers' => 'Un Huevo con servidores activos vinculados a él no puede ser eliminado del Panel.',
         'invalid_copy_id' => 'El Huevo seleccionado para copiar un script no existe o está copiando un script en sí mismo.',
         'has_children' => 'Este Huevo es parte de uno o más Huevos. Por favor, elimina esos Huevos antes de eliminar este Huevo.',

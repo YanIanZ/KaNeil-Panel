@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Egg;
+use App\Models\Map;
 use App\Models\Server;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -15,10 +15,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        $eggs = DB::table('eggs')->whereNotNull('image')->get();
-        foreach ($eggs as $egg) {
-            if (!empty($egg->image) && str_starts_with($egg->image, 'data:')) {
-                $this->convertBase64ToFile($egg->image, $egg->uuid, Egg::getIconStoragePath());
+        $maps = DB::table('maps')->whereNotNull('image')->get();
+        foreach ($maps as $map) {
+            if (!empty($map->image) && str_starts_with($map->image, 'data:')) {
+                $this->convertBase64ToFile($map->image, $map->uuid, Map::getIconStoragePath());
             }
         }
 
@@ -29,7 +29,7 @@ return new class extends Migration
             }
         }
 
-        Schema::table('eggs', function (Blueprint $table) {
+        Schema::table('maps', function (Blueprint $table) {
             $table->dropColumn('image');
         });
 

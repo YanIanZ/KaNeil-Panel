@@ -4,7 +4,7 @@ namespace App\Transformers\Api\Application;
 
 use App\Models\Allocation;
 use App\Models\Database;
-use App\Models\Egg;
+use App\Models\Map;
 use App\Models\Node;
 use App\Models\Server;
 use App\Models\User;
@@ -24,7 +24,7 @@ class ServerTransformer extends BaseTransformer
         'allocations',
         'user',
         'subusers',
-        'egg',
+        'map',
         'variables',
         'node',
         'databases',
@@ -81,7 +81,7 @@ class ServerTransformer extends BaseTransformer
             'user' => $server->owner_id,
             'node' => $server->node_id,
             'allocation' => $server->allocation_id,
-            'egg' => $server->egg_id,
+            'map' => $server->map_id,
             'container' => [
                 'startup_command' => $server->startup,
                 'image' => $server->image,
@@ -137,17 +137,17 @@ class ServerTransformer extends BaseTransformer
     }
 
     /**
-     * Return a generic array with egg information for this server.
+     * Return a generic array with map information for this server.
      */
     public function includeEgg(Server $server): Item|NullResource
     {
-        if (!$this->authorize(Egg::RESOURCE_NAME)) {
+        if (!$this->authorize(Map::RESOURCE_NAME)) {
             return $this->null();
         }
 
-        $server->loadMissing('egg');
+        $server->loadMissing('map');
 
-        return $this->item($server->getRelation('egg'), $this->makeTransformer(EggTransformer::class), 'egg');
+        return $this->item($server->getRelation('map'), $this->makeTransformer(EggTransformer::class), 'map');
     }
 
     /**

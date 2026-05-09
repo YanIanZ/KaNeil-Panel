@@ -237,12 +237,12 @@ class WebhookConfiguration extends Model
             'disk' => 20480,
             'io' => 500,
             'cpu' => 300,
-            'egg_id' => 1,
+            'map_id' => 1,
             'startup' => 'java -Xms128M -XX:MaxRAMPercentage=95.0 -Dterminal.jline=false -Dterminal.ansi=true -jar {{SERVER_JARFILE}}',
             'created_at' => '2025-09-05T01:15:43.000000Z',
             'updated_at' => '2025-09-11T22:45:14.000000Z',
             'allocation_id' => 4,
-            'image' => 'ghcr.io/kaneil-eggs/yolks:java_21',
+            'image' => 'ghcr.io/kaneil-maps/yolks:java_21',
             'description' => 'This is an example server description.',
             'skip_scripts' => false,
             'external_id' => null,
@@ -268,7 +268,7 @@ class WebhookConfiguration extends Model
             'variables' => [
                 [
                     'id' => 1,
-                    'egg_id' => 1,
+                    'map_id' => 1,
                     'name' => 'Build Number',
                     'description' => 'The build number for the paper release.\r\n\r\nLeave at latest to always get the latest version. Invalid versions will default to latest.',
                     'env_variable' => 'BUILD_NUMBER',
@@ -283,7 +283,7 @@ class WebhookConfiguration extends Model
                 ],
                 [
                     'id' => 2,
-                    'egg_id' => 1,
+                    'map_id' => 1,
                     'name' => 'Download Path',
                     'description' => 'A URL to use to download a server.jar rather than the ones in the install script. This is not user\nviewable.',
                     'env_variable' => 'DL_PATH',
@@ -298,7 +298,7 @@ class WebhookConfiguration extends Model
                 ],
                 [
                     'id' => 3,
-                    'egg_id' => 1,
+                    'map_id' => 1,
                     'name' => 'Minecraft Version',
                     'description' => 'The version of minecraft to download. \r\n\r\nLeave at latest to always get the latest version. Invalid versions will default to latest.',
                     'env_variable' => 'MINECRAFT_VERSION',
@@ -313,7 +313,7 @@ class WebhookConfiguration extends Model
                 ],
                 [
                     'id' => 4,
-                    'egg_id' => 1,
+                    'map_id' => 1,
                     'name' => 'Server Jar File',
                     'description' => 'The name of the server jarfile to run the server with.',
                     'env_variable' => 'SERVER_JARFILE',
@@ -337,7 +337,7 @@ class WebhookConfiguration extends Model
                     'updated_at' => '2025-09-09T17:59:40.000000Z',
                     'variable' => [
                         'id' => 3,
-                        'egg_id' => 1,
+                        'map_id' => 1,
                         'name' => 'Minecraft Version',
                         'description' => 'The version of minecraft to download. \r\n\r\nLeave at latest to always get the latest version. Invalid versions will default to latest.',
                         'env_variable' => 'MINECRAFT_VERSION',
@@ -359,7 +359,7 @@ class WebhookConfiguration extends Model
                     'updated_at' => '2025-09-06T06:01:05.000000Z',
                     'variable' => [
                         'id' => 4,
-                        'egg_id' => 1,
+                        'map_id' => 1,
                         'name' => 'Server Jar File',
                         'description' => 'The name of the server jarfile to run the server with.',
                         'env_variable' => 'SERVER_JARFILE',
@@ -381,7 +381,7 @@ class WebhookConfiguration extends Model
                     'updated_at' => '2025-09-06T06:00:58.000000Z',
                     'variable' => [
                         'id' => 2,
-                        'egg_id' => 1,
+                        'map_id' => 1,
                         'name' => 'Download Path',
                         'description' => 'A URL to use to download a server.jar rather than the ones in the install script. This is not user\nviewable.',
                         'env_variable' => 'DL_PATH',
@@ -403,7 +403,7 @@ class WebhookConfiguration extends Model
                     'updated_at' => '2025-09-06T06:00:58.000000Z',
                     'variable' => [
                         'id' => 1,
-                        'egg_id' => 1,
+                        'map_id' => 1,
                         'name' => 'Build Number',
                         'description' => 'The build number for the paper release.\r\n\r\nLeave at latest to always get the latest version. Invalid versions will default to latest.',
                         'env_variable' => 'BUILD_NUMBER',

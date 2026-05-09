@@ -70,7 +70,7 @@ class ListServers extends ListRecords
             ImageColumn::make('icon')
                 ->label('')
                 ->imageSize(46)
-                ->state(fn (Server $server) => $server->icon ?: $server->egg->icon),
+                ->state(fn (Server $server) => $server->icon ?: $server->map->icon),
             TextColumn::make('condition')
                 ->label(trans('server/dashboard.status'))
                 ->badge()
@@ -134,8 +134,8 @@ class ListServers extends ListRecords
             ->emptyStateHeading(fn () => $this->activeTab === 'my' ? 'You don\'t own any servers!' : 'You don\'t have access to any servers!')
             ->persistFiltersInSession()
             ->filters([
-                SelectFilter::make('egg')
-                    ->relationship('egg', 'name', fn (Builder $query) => $query->whereIn('id', $baseQuery->pluck('egg_id')))
+                SelectFilter::make('map')
+                    ->relationship('map', 'name', fn (Builder $query) => $query->whereIn('id', $baseQuery->pluck('map_id')))
                     ->searchable()
                     ->preload(),
                 SelectFilter::make('owner')

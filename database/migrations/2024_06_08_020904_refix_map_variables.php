@@ -10,23 +10,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        $eggs = DB::table('eggs')->get();
+        $maps = DB::table('maps')->get();
 
-        foreach ($eggs as $egg) {
+        foreach ($maps as $map) {
             $updatedEnv = str_replace(
                 'server.build.environment.',
                 'server.environment.',
-                $egg->config_files
+                $map->config_files
             );
 
-            if ($updatedEnv !== $egg->config_files) {
-                $egg->config_files = $updatedEnv;
-                echo "Processed ENV update with ID: {$egg->name}\n";
+            if ($updatedEnv !== $map->config_files) {
+                $map->config_files = $updatedEnv;
+                echo "Processed ENV update with ID: {$map->name}\n";
             }
 
-            DB::table('eggs')
-                ->where('id', $egg->id)
-                ->update(['config_files' => $egg->config_files]);
+            DB::table('maps')
+                ->where('id', $map->id)
+                ->update(['config_files' => $map->config_files]);
         }
     }
 

@@ -49,13 +49,13 @@ trait HasIcon
         };
 
         if (is_null($normalizedExtension)) {
-            throw new Exception(trans('admin/egg.import.unknown_extension', ['extension' => $extension]));
+            throw new Exception(trans('admin/map.import.unknown_extension', ['extension' => $extension]));
         }
 
         $fileName = static::getIconStoragePath() . "/$this->uuid.$normalizedExtension";
 
         if (!Storage::disk('public')->put($fileName, $data)) {
-            throw new Exception(trans('admin/egg.import.could_not_write'));
+            throw new Exception(trans('admin/map.import.could_not_write'));
         }
 
         foreach (['png', 'jpg', 'jpeg', 'webp', 'svg'] as $ext) {

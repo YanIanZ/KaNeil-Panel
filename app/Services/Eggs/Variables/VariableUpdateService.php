@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\Eggs\Variables;
+namespace App\Services\Maps\Variables;
 
 use App\Exceptions\DisplayException;
 use App\Exceptions\Model\DataValidationException;
-use App\Exceptions\Service\Egg\Variable\ReservedVariableNameException;
+use App\Exceptions\Service\Map\Variable\ReservedVariableNameException;
 use App\Models\EggVariable;
 use App\Traits\Services\ValidatesValidationRules;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
@@ -28,7 +28,7 @@ class VariableUpdateService
     }
 
     /**
-     * Update a specific egg variable.
+     * Update a specific map variable.
      *
      * @param array{
      *     env_variable?: string,
@@ -52,7 +52,7 @@ class VariableUpdateService
 
             $search = EggVariable::query()
                 ->where('env_variable', $data['env_variable'])
-                ->where('egg_id', $variable->egg_id)
+                ->where('map_id', $variable->map_id)
                 ->whereNot('id', $variable->id)
                 ->count();
 

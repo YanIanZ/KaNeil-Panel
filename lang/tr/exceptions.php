@@ -14,13 +14,13 @@ return [
         'cidr_out_of_range' => 'CIDR notasyonu yalnızca /25 ile /32 arasındaki maskelere izin verir.',
         'port_out_of_range' => 'Bir tahsisdeki portlar 1024\'ten büyük veya eşit ve 65535\'ten küçük veya eşit olmalıdır.',
     ],
-    'egg' => [
-        'delete_has_servers' => 'Üzerinde aktif sunucular bulunan bir Egg, Panel\'den silinemez.',
-        'invalid_copy_id' => 'Komut dosyası kopyalamak için seçilen Egg ya mevcut değil ya da kendisi bir komut dosyası kopyalıyor.',
-        'has_children' => 'Bu Egg, bir veya daha fazla Egg\'in ebeveynidir. Lütfen bu Egg\'i silmeden önce diğer Egg\'leri silin.',
+    'map' => [
+        'delete_has_servers' => 'Üzerinde aktif sunucular bulunan bir Map, Panel\'den silinemez.',
+        'invalid_copy_id' => 'Komut dosyası kopyalamak için seçilen Map ya mevcut değil ya da kendisi bir komut dosyası kopyalıyor.',
+        'has_children' => 'Bu Map, bir veya daha fazla Map\'in ebeveynidir. Lütfen bu Map\'i silmeden önce diğer Map\'leri silin.',
     ],
     'variables' => [
-        'env_not_unique' => ':name ortam değişkeni bu Egg için benzersiz olmalıdır.',
+        'env_not_unique' => ':name ortam değişkeni bu Map için benzersiz olmalıdır.',
         'reserved_name' => ':name ortam değişkeni korumalıdır ve bir değişkene atanamaz.',
         'bad_validation_rule' => '":rule" doğrulama kuralı bu uygulama için geçerli bir kural değildir.',
     ],

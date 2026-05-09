@@ -50,8 +50,8 @@ class JavaVersionSchema implements FeatureSchemaInterface
                     ->label('Please select a supported version from the list below to continue starting the server.'),
                 Select::make('image')
                     ->label('Docker Image')
-                    ->disabled(fn () => !in_array($server->image, $server->egg->docker_images))
-                    ->options(fn () => collect($server->egg->docker_images)->mapWithKeys(fn ($key, $value) => [$key => $value]))
+                    ->disabled(fn () => !in_array($server->image, $server->map->docker_images))
+                    ->options(fn () => collect($server->map->docker_images)->mapWithKeys(fn ($key, $value) => [$key => $value]))
                     ->selectablePlaceholder(false)
                     ->default(fn () => $server->image)
                     ->notIn(fn () => $server->image)

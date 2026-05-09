@@ -34,7 +34,7 @@ class UploadIcon extends Action
 
         $this->hiddenLabel();
 
-        $this->tooltip(trans('admin/egg.import.import_icon'));
+        $this->tooltip(trans('admin/map.import.import_icon'));
 
         $this->icon(TablerIcon::PhotoUp);
 
@@ -42,16 +42,16 @@ class UploadIcon extends Action
 
         $this->modalHeading('');
 
-        $this->modalSubmitActionLabel(trans('admin/egg.import.import_icon'));
+        $this->modalSubmitActionLabel(trans('admin/map.import.import_icon'));
 
         $this->schema([
             Tabs::make()
                 ->contained(false)
                 ->tabs([
-                    Tab::make(trans('admin/egg.import.url'))
+                    Tab::make(trans('admin/map.import.url'))
                         ->schema([
                             TextInput::make('icon_url')
-                                ->label(trans('admin/egg.import.icon_url'))
+                                ->label(trans('admin/map.import.icon_url'))
                                 ->reactive()
                                 ->autocomplete(false)
                                 ->debounce(500)
@@ -79,7 +79,7 @@ class UploadIcon extends Action
                                 ->visible(fn (Get $get) => $get('icon_url') && !$get('icon_url_error'))
                                 ->alignCenter(),
                         ]),
-                    Tab::make(trans('admin/egg.import.file'))
+                    Tab::make(trans('admin/map.import.file'))
                         ->schema([
                             FileUpload::make('icon')
                                 ->hiddenLabel()
@@ -105,7 +105,7 @@ class UploadIcon extends Action
                 $content = Http::timeout(5)->connectTimeout(1)->withoutRedirecting()->get($data['icon_url'])->body();
 
                 if (empty($content)) {
-                    throw new Exception(trans('admin/egg.import.invalid_url'));
+                    throw new Exception(trans('admin/map.import.invalid_url'));
                 }
 
                 $extension = strtolower(pathinfo(parse_url($data['icon_url'], PHP_URL_PATH), PATHINFO_EXTENSION));
@@ -113,17 +113,17 @@ class UploadIcon extends Action
                 $record->writeIcon($extension, $content);
 
                 Notification::make()
-                    ->title(trans('admin/egg.import.icon_updated'))
+                    ->title(trans('admin/map.import.icon_updated'))
                     ->success()
                     ->send();
             } elseif (!empty($data['icon'])) {
                 Notification::make()
-                    ->title(trans('admin/egg.import.icon_updated'))
+                    ->title(trans('admin/map.import.icon_updated'))
                     ->success()
                     ->send();
             } else {
                 Notification::make()
-                    ->title(trans('admin/egg.import.no_icon'))
+                    ->title(trans('admin/map.import.no_icon'))
                     ->warning()
                     ->send();
             }
@@ -133,18 +133,18 @@ class UploadIcon extends Action
     protected function validateIconUrl(string $url): void
     {
         if (!in_array(parse_url($url, PHP_URL_SCHEME), ['http', 'https'], true)) {
-            throw new Exception(trans('admin/egg.import.invalid_url'));
+            throw new Exception(trans('admin/map.import.invalid_url'));
         }
 
         if (!filter_var($url, FILTER_VALIDATE_URL)) {
-            throw new Exception(trans('admin/egg.import.invalid_url'));
+            throw new Exception(trans('admin/map.import.invalid_url'));
         }
 
         $host = parse_url($url, PHP_URL_HOST);
         $ip = gethostbyname($host);
 
         if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) === false) {
-            throw new Exception(trans('admin/egg.import.no_local_ip'));
+            throw new Exception(trans('admin/map.import.no_local_ip'));
         }
     }
 

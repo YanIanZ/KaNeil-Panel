@@ -15,7 +15,7 @@ return [
     'description' => 'Leírás',
     'description_help' => 'Egy hosszabb leírás ehhez a mount-hoz',
     'no_mounts' => 'Nincs csatolás',
-    'eggs' => 'Egg-ek',
+    'maps' => 'Map-ek',
     'nodes' => 'Csomópontok',
     'toggles' => [
         'writable' => 'Írható',
@@ -23,7 +23,7 @@ return [
     ],
     'table' => [
         'name' => 'Név',
-        'all_eggs' => 'Minden Egg',
+        'all_eggs' => 'Minden Map',
         'all_nodes' => 'Minden csomópont',
         'read_only' => 'Csak olvasható',
     ],

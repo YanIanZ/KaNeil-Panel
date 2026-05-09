@@ -61,15 +61,15 @@ return [
             'migration' => 'Falha na migrações',
         ],
     ],
-    'egg' => [
-        'title' => 'Eggs',
-        'no_eggs' => 'Sem eggs disponíveis',
-        'background_install_started' => 'Instalação de egg iniciada',
-        'background_install_description' => 'A instalação de :count eggs foi colocada na fila e continuará em segundo plano.',
+    'map' => [
+        'title' => 'Maps',
+        'no_eggs' => 'Sem maps disponíveis',
+        'background_install_started' => 'Instalação de map iniciada',
+        'background_install_description' => 'A instalação de :count maps foi colocada na fila e continuará em segundo plano.',
         'exceptions' => [
-            'failed_to_update' => 'Falha ao atualizar index de eggs',
-            'no_eggs' => 'Não há eggs disponíveis para instalação neste momento.',
-            'installation_failed' => 'Falha ao instalar eggs selecionados. Por favor, importe-os após a instalação ultilizando a lista de eggs.',
+            'failed_to_update' => 'Falha ao atualizar index de maps',
+            'no_eggs' => 'Não há maps disponíveis para instalação neste momento.',
+            'installation_failed' => 'Falha ao instalar maps selecionados. Por favor, importe-os após a instalação ultilizando a lista de maps.',
         ],
     ],
     'session' => [

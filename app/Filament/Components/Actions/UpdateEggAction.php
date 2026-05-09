@@ -3,8 +3,8 @@
 namespace App\Filament\Components\Actions;
 
 use App\Enums\TablerIcon;
-use App\Models\Egg;
-use App\Services\Eggs\Sharing\EggImporterService;
+use App\Models\Map;
+use App\Services\Maps\Sharing\EggImporterService;
 use Exception;
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;
@@ -20,7 +20,7 @@ class UpdateEggAction extends Action
     {
         parent::setUp();
 
-        $this->tooltip(trans_choice('admin/egg.update', 1));
+        $this->tooltip(trans_choice('admin/map.update', 1));
 
         $this->icon(TablerIcon::CloudDownload);
 
@@ -28,23 +28,23 @@ class UpdateEggAction extends Action
 
         $this->requiresConfirmation();
 
-        $this->modalHeading(trans_choice('admin/egg.update_question', 1));
+        $this->modalHeading(trans_choice('admin/map.update_question', 1));
 
-        $this->modalDescription(trans_choice('admin/egg.update_description', 1));
+        $this->modalDescription(trans_choice('admin/map.update_description', 1));
 
         $this->modalIconColor('danger');
 
         $this->modalSubmitAction(fn (Action $action) => $action->color('danger'));
 
-        $this->action(function (Egg $egg, EggImporterService $eggImporterService) {
+        $this->action(function (Map $map, EggImporterService $eggImporterService) {
             try {
-                $eggImporterService->fromUrl($egg->update_url, $egg);
+                $eggImporterService->fromUrl($map->update_url, $map);
 
-                cache()->forget("eggs.$egg->uuid.update");
+                cache()->forget("maps.$map->uuid.update");
             } catch (Exception $exception) {
                 Notification::make()
-                    ->title(trans('admin/egg.update_failed', ['egg' => $egg->name]))
-                    ->body(trans('admin/egg.update_error', ['error' => $exception->getMessage()]))
+                    ->title(trans('admin/map.update_failed', ['map' => $map->name]))
+                    ->body(trans('admin/map.update_error', ['error' => $exception->getMessage()]))
                     ->danger()
                     ->send();
 
@@ -54,14 +54,14 @@ class UpdateEggAction extends Action
             }
 
             Notification::make()
-                ->title(trans('admin/egg.update_success', ['egg' => $egg->name]))
-                ->body(trans('admin/egg.updated_from', ['url' => $egg->update_url]))
+                ->title(trans('admin/map.update_success', ['map' => $map->name]))
+                ->body(trans('admin/map.updated_from', ['url' => $map->update_url]))
                 ->success()
                 ->send();
         });
 
-        $this->authorize(fn () => user()?->can('import egg'));
+        $this->authorize(fn () => user()?->can('import map'));
 
-        $this->visible(fn (Egg $egg) => cache()->get("eggs.$egg->uuid.update", false));
+        $this->visible(fn (Map $map) => cache()->get("maps.$map->uuid.update", false));
     }
 }

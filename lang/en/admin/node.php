@@ -21,7 +21,7 @@ return [
         'servers' => 'Servers',
         'alias' => 'Alias',
         'ip' => 'IP',
-        'egg' => 'Egg',
+        'map' => 'Map',
         'owner' => 'Owner',
         'allocation_notes' => 'Notes',
         'no_notes' => 'No notes',

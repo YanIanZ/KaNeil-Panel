@@ -46,13 +46,13 @@ class Startup extends ServerFormPage
                 TextInput::make('custom_startup')
                     ->label(trans('server/startup.command'))
                     ->readOnly()
-                    ->visible(fn (Server $server) => !in_array($server->startup, $server->egg->startup_commands))
+                    ->visible(fn (Server $server) => !in_array($server->startup, $server->map->startup_commands))
                     ->formatStateUsing(fn () => 'Custom Startup')
                     ->hintAction(PreviewStartupAction::make()),
                 Select::make('startup_select')
                     ->label(trans('server/startup.command'))
                     ->live()
-                    ->visible(fn (Server $server) => in_array($server->startup, $server->egg->startup_commands))
+                    ->visible(fn (Server $server) => in_array($server->startup, $server->map->startup_commands))
                     ->disabled(fn (Server $server) => !user()?->can(SubuserPermission::StartupUpdate, $server))
                     ->formatStateUsing(fn (Server $server) => $server->startup)
                     ->afterStateUpdated(function ($state, Server $server, Set $set) {
@@ -63,7 +63,7 @@ class Startup extends ServerFormPage
                         $set('previewing', false);
 
                         if ($original !== $server->startup) {
-                            $startups = array_flip($server->egg->startup_commands);
+                            $startups = array_flip($server->map->startup_commands);
                             Activity::event('server:startup.command')
                                 ->property(['old' => $startups[$original], 'new' => $startups[$state]])
                                 ->log();
@@ -75,18 +75,18 @@ class Startup extends ServerFormPage
                             ->success()
                             ->send();
                     })
-                    ->options(fn (Server $server) => array_flip($server->egg->startup_commands))
+                    ->options(fn (Server $server) => array_flip($server->map->startup_commands))
                     ->selectablePlaceholder(false)
                     ->hintAction(PreviewStartupAction::make()),
                 TextInput::make('custom_image')
                     ->label(trans('server/startup.docker_image'))
                     ->readOnly()
-                    ->visible(fn (Server $server) => !in_array($server->image, $server->egg->docker_images))
+                    ->visible(fn (Server $server) => !in_array($server->image, $server->map->docker_images))
                     ->formatStateUsing(fn (Server $server) => $server->image),
                 Select::make('image')
                     ->label(trans('server/startup.docker_image'))
                     ->live()
-                    ->visible(fn (Server $server) => in_array($server->image, $server->egg->docker_images))
+                    ->visible(fn (Server $server) => in_array($server->image, $server->map->docker_images))
                     ->disabled(fn (Server $server) => !user()?->can(SubuserPermission::StartupDockerImage, $server))
                     ->afterStateUpdated(function ($state, Server $server) {
                         $original = $server->image;
@@ -105,7 +105,7 @@ class Startup extends ServerFormPage
                             ->send();
                     })
                     ->options(function (Server $server) {
-                        $images = $server->egg->docker_images;
+                        $images = $server->map->docker_images;
 
                         return array_flip($images);
                     }),

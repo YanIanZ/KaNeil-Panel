@@ -45,10 +45,10 @@ body:
     required: true
 
 - type: input
-  id: egg-details
+  id: map-details
   attributes:
-    label: Games and/or Eggs Affected
-    description: Please include the specific game(s) or egg(s) you are running into this bug with.
+    label: Games and/or Maps Affected
+    description: Please include the specific game(s) or map(s) you are running into this bug with.
     placeholder: Minecraft (Paper), Minecraft (Forge)
 
 - type: input

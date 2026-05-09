@@ -37,9 +37,9 @@ class ServersRelationManager extends RelationManager
                     ->url(fn (Server $server): string => route('filament.admin.resources.servers.edit', ['record' => $server]))
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('egg.name')
-                    ->label(trans('admin/node.table.egg'))
-                    ->url(fn (Server $server): string => route('filament.admin.resources.eggs.edit', ['record' => $server->user]))
+                TextColumn::make('map.name')
+                    ->label(trans('admin/node.table.map'))
+                    ->url(fn (Server $server): string => route('filament.admin.resources.maps.edit', ['record' => $server->user]))
                     ->sortable(),
                 SelectColumn::make('allocation.id')
                     ->label(trans('admin/node.primary_allocation'))

@@ -14,13 +14,13 @@ return [
         'cidr_out_of_range' => 'Notacja CIDR dopuszcza tylko maski od /25 do /32.',
         'port_out_of_range' => 'Porty w alokacji muszą być większe lub równe 1024 i mniejsze lub równe 65535.',
     ],
-    'egg' => [
+    'map' => [
         'delete_has_servers' => 'Jajo z aktywnymi serwerami nie może zostać usunięte z panelu.',
         'invalid_copy_id' => 'Jajo wybrane do skopiowania skryptu albo nie istnieje, albo kopiuje sam skrypt.',
         'has_children' => 'To jajo jest rodzicem jednego lub więcej innych jaj. Usuń te jaja przed usunięciem tego jaja.',
     ],
     'variables' => [
-        'env_not_unique' => 'Zmienna środowiskowa :name musi być unikalna dla tego Egg.',
+        'env_not_unique' => 'Zmienna środowiskowa :name musi być unikalna dla tego Map.',
         'reserved_name' => 'Zmienna środowiskowa :name jest chroniona i nie może być przypisana do zmiennej.',
         'bad_validation_rule' => 'Reguła walidacji ":rule” nie jest prawidłową regułą dla tej aplikacji.',
     ],

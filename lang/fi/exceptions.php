@@ -14,7 +14,7 @@ return [
         'cidr_out_of_range' => 'CIDR-muoto sallii vain maskit välillä /25 ja /32.',
         'port_out_of_range' => 'Portit allokaatiossa tulee olla välillä 1024–65535.',
     ],
-    'egg' => [
+    'map' => [
         'delete_has_servers' => 'Paneelista ei voi poistaa Munaa, johon on liitetty aktiivisia palvelimia.',
         'invalid_copy_id' => 'Skriptin kopiointiin valittu Muna ei ole olemassa tai se kopioi itse skriptiä.',
         'has_children' => 'Tämä Muna on yhden tai useamman muun Munan vanhempi. Poista Munat ennen tämän Munan poistamista.',

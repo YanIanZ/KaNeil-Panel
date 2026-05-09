@@ -50,8 +50,8 @@ class Mounts extends ServerFormPage
                     ->orWhereHas('nodes', fn ($q) => $q->where('nodes.id', $server->node_id));
             })
             ->where(function ($query) use ($server) {
-                $query->whereDoesntHave('eggs')
-                    ->orWhereHas('eggs', fn ($q) => $q->where('eggs.id', $server->egg_id));
+                $query->whereDoesntHave('maps')
+                    ->orWhereHas('maps', fn ($q) => $q->where('maps.id', $server->map_id));
             })
             ->get();
 

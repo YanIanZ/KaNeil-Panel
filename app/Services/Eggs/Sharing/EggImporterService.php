@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\Eggs\Sharing;
+namespace App\Services\Maps\Sharing;
 
 use App\Enums\EggFormat;
 use App\Exceptions\Service\InvalidFileUploadException;
-use App\Models\Egg;
+use App\Models\Map;
 use App\Models\EggVariable;
 use Exception;
 use Illuminate\Database\ConnectionInterface;
@@ -34,23 +34,23 @@ class EggImporterService
     public function __construct(protected ConnectionInterface $connection) {}
 
     /**
-     * Take a JSON or YAML as string and parse it into a new egg.
+     * Take a JSON or YAML as string and parse it into a new map.
      *
      * @throws InvalidFileUploadException|Throwable
      */
-    public function fromContent(string $content, EggFormat $format = EggFormat::YAML, ?Egg $egg = null): Egg
+    public function fromContent(string $content, EggFormat $format = EggFormat::YAML, ?Map $map = null): Map
     {
         $parsed = $this->parse($content, $format);
 
-        return $this->fromParsed($parsed, $egg);
+        return $this->fromParsed($parsed, $map);
     }
 
     /**
-     * Take an uploaded JSON or YAML file and parse it into a new egg.
+     * Take an uploaded JSON or YAML file and parse it into a new map.
      *
      * @throws InvalidFileUploadException|Throwable
      */
-    public function fromFile(UploadedFile $file, ?Egg $egg = null): Egg
+    public function fromFile(UploadedFile $file, ?Map $map = null): Map
     {
         if ($file->getError() !== UPLOAD_ERR_OK) {
             throw new InvalidFileUploadException('The selected file was not uploaded successfully');
@@ -63,21 +63,21 @@ class EggImporterService
             $content = $file->getContent();
 
             if (in_array($extension, ['yaml', 'yml']) || str_contains($mime, 'yaml')) {
-                return $this->fromContent($content, EggFormat::YAML, $egg);
+                return $this->fromContent($content, EggFormat::YAML, $map);
             }
 
-            return $this->fromContent($content, EggFormat::JSON, $egg);
+            return $this->fromContent($content, EggFormat::JSON, $map);
         } catch (Throwable $e) {
             throw new InvalidFileUploadException('File parse failed: ' . $e->getMessage());
         }
     }
 
     /**
-     * Take a URL (YAML or JSON) and parse it into a new egg or update an existing one.
+     * Take a URL (YAML or JSON) and parse it into a new map or update an existing one.
      *
      * @throws InvalidFileUploadException|Throwable
      */
-    public function fromUrl(string $url, ?Egg $egg = null): Egg
+    public function fromUrl(string $url, ?Map $map = null): Map
     {
         $info = pathinfo($url);
         $extension = strtolower($info['extension']);
@@ -90,23 +90,23 @@ class EggImporterService
 
         $content = Http::timeout(5)->connectTimeout(1)->get($url)->throw()->body();
 
-        return $this->fromContent($content, $format, $egg);
+        return $this->fromContent($content, $format, $map);
     }
 
     /**
-     * Take an array and parse it into a new egg.
+     * Take an array and parse it into a new map.
      *
      * @param  array<array-key, mixed>  $parsed
      *
      * @throws InvalidFileUploadException|Throwable
      */
-    protected function fromParsed(array $parsed, ?Egg $egg = null): Egg
+    protected function fromParsed(array $parsed, ?Map $map = null): Map
     {
-        return $this->connection->transaction(function () use ($egg, $parsed) {
+        return $this->connection->transaction(function () use ($map, $parsed) {
             $uuid = $parsed['uuid'] ?? Uuid::uuid4()->toString();
-            $egg = $egg ?? Egg::where('uuid', $uuid)->first() ?? new Egg();
+            $map = $map ?? Map::where('uuid', $uuid)->first() ?? new Map();
 
-            $egg = $egg->forceFill([
+            $map = $map->forceFill([
                 'uuid' => $uuid,
                 'author' => Arr::get($parsed, 'author'),
                 'copy_script_from' => null,
@@ -116,28 +116,28 @@ class EggImporterService
                 unset($parsed['variables'][$i]['field_type']);
             }
 
-            $egg = $this->fillFromParsed($egg, $parsed);
-            $egg->save();
+            $map = $this->fillFromParsed($map, $parsed);
+            $map->save();
 
             foreach ($parsed['variables'] ?? [] as $variable) {
-                EggVariable::unguarded(function () use ($egg, $variable) {
+                EggVariable::unguarded(function () use ($map, $variable) {
                     $variable['rules'] = is_array($variable['rules']) ? $variable['rules'] : explode('|', $variable['rules']);
 
-                    $egg->variables()->updateOrCreate([
+                    $map->variables()->updateOrCreate([
                         'env_variable' => $variable['env_variable'],
-                    ], Collection::make($variable)->except(['egg_id', 'env_variable'])->toArray());
+                    ], Collection::make($variable)->except(['map_id', 'env_variable'])->toArray());
                 });
             }
 
             $imported = array_map(fn ($value) => $value['env_variable'], $parsed['variables'] ?? []);
-            $egg->variables()->whereNotIn('env_variable', $imported)->delete();
+            $map->variables()->whereNotIn('env_variable', $imported)->delete();
 
-            return $egg->refresh();
+            return $map->refresh();
         });
     }
 
     /**
-     * Takes a string and parses out the egg configuration from within.
+     * Takes a string and parses out the map configuration from within.
      *
      * @return array<array-key, mixed>
      *
@@ -159,7 +159,7 @@ class EggImporterService
         $parsed = match ($version) {
             'PTDL_v1' => $this->convertToV3($this->convertLegacy($parsed)),
             'PTDL_v2', 'PLCN_v1', 'PLCN_v2' => $this->convertToV3($parsed),
-            Egg::EXPORT_VERSION => $parsed,
+            Map::EXPORT_VERSION => $parsed,
             default => throw new InvalidFileUploadException('The file format is not recognized.'),
         };
 
@@ -234,7 +234,7 @@ class EggImporterService
     /**
      * @param  array<string, mixed>  $parsed
      */
-    protected function fillFromParsed(Egg $model, array $parsed): Egg
+    protected function fillFromParsed(Map $model, array $parsed): Map
     {
         // Handle icon data if present
         if (!empty($parsed['icon']) && str_starts_with($parsed['icon'], 'data:')) {
@@ -261,9 +261,9 @@ class EggImporterService
     }
 
     /**
-     * Save an egg icon from base64 data to a file.
+     * Save an map icon from base64 data to a file.
      */
-    private function saveEggIconFromBase64(string $base64String, Egg $egg): void
+    private function saveEggIconFromBase64(string $base64String, Map $map): void
     {
         if (!preg_match('/^data:image\/([\w+]+);base64,(.+)$/', $base64String, $matches)) {
             return;
@@ -274,7 +274,7 @@ class EggImporterService
             $data = base64_decode($matches[2]);
 
             if ($data) {
-                $egg->writeIcon($extension, $data);
+                $map->writeIcon($extension, $data);
             }
         } catch (Exception $exception) {
             report($exception);

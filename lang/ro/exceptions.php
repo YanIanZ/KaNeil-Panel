@@ -14,7 +14,7 @@ return [
         'cidr_out_of_range' => 'Notația CIDR permite masca doar între /25 și /32.',
         'port_out_of_range' => 'Sumele alocate porturilor trebuie să fie mai mari sau egale cu 1024 şi mai mici sau egale cu 65535.',
     ],
-    'egg' => [
+    'map' => [
         'delete_has_servers' => 'Un ou cu servere active atașate nu poate fi șters din Panou.',
         'invalid_copy_id' => 'Oul selectat pentru copierea unui script fie nu există, fie copiază un script în sine.',
         'has_children' => 'Acest ou este un părinte pentru unul sau mai multe alte ouă. Vă rugăm să ștergeți acele ouă înainte de a șterge acest ou.',

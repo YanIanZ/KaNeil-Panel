@@ -4,7 +4,7 @@ namespace App\Tests\Traits\Integration;
 
 use App\Enums\SubuserPermission;
 use App\Models\Allocation;
-use App\Models\Egg;
+use App\Models\Map;
 use App\Models\Node;
 use App\Models\Server;
 use App\Models\Subuser;
@@ -44,10 +44,10 @@ trait CreatesTestModels
             $attributes['allocation_id'] = $allocation->id;
         }
 
-        if (empty($attributes['egg_id'])) {
-            $egg = $this->getBungeecordEgg();
+        if (empty($attributes['map_id'])) {
+            $map = $this->getBungeecordEgg();
 
-            $attributes['egg_id'] = $egg->id;
+            $attributes['map_id'] = $map->id;
         }
 
         unset($attributes['user_id']);
@@ -58,7 +58,7 @@ trait CreatesTestModels
         Allocation::query()->where('id', $server->allocation_id)->update(['server_id' => $server->id]);
 
         return $server->fresh([
-            'user', 'node', 'allocation', 'egg',
+            'user', 'node', 'allocation', 'map',
         ]);
     }
 
@@ -90,20 +90,20 @@ trait CreatesTestModels
     }
 
     /**
-     * Clones a given egg allowing us to make modifications that don't affect other
-     * tests that rely on the egg existing in the correct state.
+     * Clones a given map allowing us to make modifications that don't affect other
+     * tests that rely on the map existing in the correct state.
      */
-    protected function cloneEggAndVariables(Egg $egg): Egg
+    protected function cloneEggAndVariables(Map $map): Map
     {
-        $model = $egg->replicate(['id', 'uuid']);
+        $model = $map->replicate(['id', 'uuid']);
         $model->uuid = Uuid::uuid4()->toString();
         $model->push();
 
-        /** @var Egg $model */
+        /** @var Map $model */
         $model = $model->fresh();
 
-        foreach ($egg->variables as $variable) {
-            $variable->replicate(['id', 'egg_id'])->forceFill(['egg_id' => $model->id])->push();
+        foreach ($map->variables as $variable) {
+            $variable->replicate(['id', 'map_id'])->forceFill(['map_id' => $model->id])->push();
         }
 
         return $model->fresh();
@@ -111,13 +111,13 @@ trait CreatesTestModels
 
     /**
      * Almost every test just assumes it is using BungeeCord — this is the critical
-     * egg model for all tests unless specified otherwise.
+     * map model for all tests unless specified otherwise.
      */
-    private function getBungeecordEgg(): Egg
+    private function getBungeecordEgg(): Map
     {
-        /** @var Egg $egg */
-        $egg = Egg::query()->where('author', 'panel@example.com')->where('name', 'Bungeecord')->firstOrFail();
+        /** @var Map $map */
+        $map = Map::query()->where('author', 'panel@example.com')->where('name', 'Bungeecord')->firstOrFail();
 
-        return $egg;
+        return $map;
     }
 }

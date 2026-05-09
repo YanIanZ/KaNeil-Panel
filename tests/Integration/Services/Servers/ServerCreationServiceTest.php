@@ -3,7 +3,7 @@
 namespace App\Tests\Integration\Services\Servers;
 
 use App\Models\Allocation;
-use App\Models\Egg;
+use App\Models\Map;
 use App\Models\Node;
 use App\Models\Objects\DeploymentObject;
 use App\Models\Server;
@@ -23,7 +23,7 @@ class ServerCreationServiceTest extends IntegrationTestCase
 
     protected MockInterface $daemonServerRepository;
 
-    protected Egg $bungeecord;
+    protected Map $bungeecord;
 
     /**
      * Stub the calls to daemon so that we don't actually hit those API endpoints.
@@ -33,7 +33,7 @@ class ServerCreationServiceTest extends IntegrationTestCase
         parent::setUp();
 
         /* @noinspection PhpFieldAssignmentTypeMismatchInspection */
-        $this->bungeecord = Egg::query()
+        $this->bungeecord = Map::query()
             ->where('author', 'panel@example.com')
             ->where('name', 'Bungeecord')
             ->firstOrFail();
@@ -66,10 +66,10 @@ class ServerCreationServiceTest extends IntegrationTestCase
             $allocations[0]->port,
         ]);
 
-        $egg = $this->cloneEggAndVariables($this->bungeecord);
+        $map = $this->cloneEggAndVariables($this->bungeecord);
         // We want to make sure that the validator service runs as an admin, and not as a regular
         // user when saving variables.
-        $egg->variables()->first()->update([
+        $map->variables()->first()->update([
             'user_editable' => false,
         ]);
 
@@ -84,7 +84,7 @@ class ServerCreationServiceTest extends IntegrationTestCase
             'cpu' => 0,
             'startup' => 'java server2.jar',
             'image' => 'java:8',
-            'egg_id' => $egg->id,
+            'map_id' => $map->id,
             'allocation_additional' => [
                 $allocations[4]->id,
             ],
@@ -118,7 +118,7 @@ class ServerCreationServiceTest extends IntegrationTestCase
         $this->assertNotNull($response->uuid);
         $this->assertSame($response->uuid_short, substr($response->uuid, 0, 8));
         $this->assertSame($node->id, $response->node_id);
-        $this->assertSame($egg->id, $response->egg_id);
+        $this->assertSame($map->id, $response->map_id);
         $this->assertCount(2, $response->variables);
         $this->assertSame('123', $response->variables()->firstWhere('env_variable', 'BUNGEE_VERSION')->server_value);
         $this->assertSame('server2.jar', $response->variables()->firstWhere('env_variable', 'SERVER_JARFILE')->server_value);
@@ -157,10 +157,10 @@ class ServerCreationServiceTest extends IntegrationTestCase
 
         $deployment = new DeploymentObject();
 
-        $egg = $this->cloneEggAndVariables($this->bungeecord);
+        $map = $this->cloneEggAndVariables($this->bungeecord);
         // We want to make sure that the validator service runs as an admin, and not as a regular
         // user when saving variables.
-        $egg->variables()->first()->update([
+        $map->variables()->first()->update([
             'user_editable' => false,
         ]);
 
@@ -175,7 +175,7 @@ class ServerCreationServiceTest extends IntegrationTestCase
             'cpu' => 0,
             'startup' => 'java server2.jar',
             'image' => 'java:8',
-            'egg_id' => $egg->id,
+            'map_id' => $map->id,
             'allocation_additional' => [],
             'environment' => [
                 'BUNGEE_VERSION' => '123',
@@ -207,7 +207,7 @@ class ServerCreationServiceTest extends IntegrationTestCase
         $this->assertNotNull($response->uuid);
         $this->assertSame($response->uuid_short, substr($response->uuid, 0, 8));
         $this->assertSame($node->id, $response->node_id);
-        $this->assertSame($egg->id, $response->egg_id);
+        $this->assertSame($map->id, $response->map_id);
         $this->assertCount(2, $response->variables);
         $this->assertSame('123', $response->variables()->firstWhere('env_variable', 'BUNGEE_VERSION')->server_value);
         $this->assertSame('server2.jar', $response->variables()->firstWhere('env_variable', 'SERVER_JARFILE')->server_value);
@@ -260,7 +260,7 @@ class ServerCreationServiceTest extends IntegrationTestCase
             'cpu' => 0,
             'startup' => 'java server2.jar',
             'image' => 'java:8',
-            'egg_id' => $this->bungeecord->id,
+            'map_id' => $this->bungeecord->id,
             'environment' => [
                 'BUNGEE_VERSION' => '123',
                 'SERVER_JARFILE' => 'server2.jar',

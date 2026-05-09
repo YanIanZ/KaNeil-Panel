@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Eggs;
+namespace App\Services\Maps;
 
 use App\Models\Server;
 use App\Services\Servers\ServerConfigurationStructureService;
@@ -15,7 +15,7 @@ class EggConfigurationService
     public function __construct(private ServerConfigurationStructureService $configurationStructureService) {}
 
     /**
-     * Return an Egg file to be used by the Daemon.
+     * Return an Map file to be used by the Daemon.
      *
      * @return array{
      *     startup: array{done: string[], user_interaction: string[], strip_ansi: bool},
@@ -32,14 +32,14 @@ class EggConfigurationService
      */
     public function handle(Server $server): array
     {
-        $configFiles = json_decode($server->egg->inherit_config_files ?? '{}');
+        $configFiles = json_decode($server->map->inherit_config_files ?? '{}');
         $configs = is_object($configFiles) || is_array($configFiles)
             ? $this->replacePlaceholders($server, $configFiles)
             : [];
 
         return [
-            'startup' => $this->convertStartupToNewFormat(json_decode($server->egg->inherit_config_startup, true)),
-            'stop' => $this->convertStopToNewFormat($server->egg->inherit_config_stop),
+            'startup' => $this->convertStartupToNewFormat(json_decode($server->map->inherit_config_startup, true)),
+            'stop' => $this->convertStopToNewFormat($server->map->inherit_config_stop),
             'configs' => $configs,
         ];
     }
@@ -64,7 +64,7 @@ class EggConfigurationService
     /**
      * Converts a legacy stop string into a new generation stop option for a server.
      *
-     * For most eggs, this ends up just being a command sent to the server console, but
+     * For most maps, this ends up just being a command sent to the server console, but
      * if the stop command is something starting with a caret (^), it will be converted
      * into the associated kill signal for the instance.
      *
@@ -94,7 +94,7 @@ class EggConfigurationService
     protected function replacePlaceholders(Server $server, object|array $configs): array
     {
         // Get the legacy configuration structure for the server so that we
-        // can property map the egg placeholders to values.
+        // can property map the map placeholders to values.
         $structure = $this->configurationStructureService->handle($server);
 
         $response = [];
@@ -102,8 +102,8 @@ class EggConfigurationService
         // easily ingest, as well as make things more flexible down the road.
         foreach ($configs as $file => $data) {
             // Try to head off any errors relating to parsing a set of configuration files
-            // or other JSON data for the egg. This should probably be blocked at the time
-            // of egg creation/update, but it isn't so this check will at least prevent a
+            // or other JSON data for the map. This should probably be blocked at the time
+            // of map creation/update, but it isn't so this check will at least prevent a
             // 500 error which would crash the entire daemon boot process.
             if (!is_object($data) || !isset($data->find)) {
                 continue;
@@ -161,7 +161,7 @@ class EggConfigurationService
             }
 
             // We don't want to do anything with config keys since the Daemon will need to handle
-            // that. For example, the Spigot egg uses "config.docker.interface" to identify the Docker
+            // that. For example, the Spigot map uses "config.docker.interface" to identify the Docker
             // interface to proxy through, but the Panel would be unaware of that.
             if (Str::startsWith($key, 'config.')) {
                 continue;

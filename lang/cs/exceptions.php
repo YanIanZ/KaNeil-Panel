@@ -14,7 +14,7 @@ return [
         'cidr_out_of_range' => 'Poznámka CIDR umožňuje pouze masky mezi /25 a /32.',
         'port_out_of_range' => 'Porty v alokacích musí být vyšší než 1024 a nížší nebo se rovnat 65535.',
     ],
-    'egg' => [
+    'map' => [
         'delete_has_servers' => 'Vejce s aktivními servery, které jsou k němu připojeny, nemůže být odstraněna z panelu.',
         'invalid_copy_id' => 'Vejce vybraná pro kopírování skriptu buď neexistuje, nebo kopíruje samotný skript.',
         'has_children' => 'Toto vejce je nadřazeno jednomu či více vajec. Prosím vymažte tyto vejce předtím než smažete toto.',

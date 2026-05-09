@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Egg;
+use App\Models\Map;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Ramsey\Uuid\Uuid;
 
@@ -13,7 +13,7 @@ class EggFactory extends Factory
      *
      * @var string
      */
-    protected $model = Egg::class;
+    protected $model = Map::class;
 
     /**
      * Define the model's default state.

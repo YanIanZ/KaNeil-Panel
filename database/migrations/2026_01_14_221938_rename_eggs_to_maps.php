@@ -7,13 +7,13 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::rename('eggs', 'maps');
+        Schema::rename('maps', 'maps');
         Schema::rename('egg_variables', 'map_variables');
     }
 
     public function down(): void
     {
-        Schema::rename('maps', 'eggs');
+        Schema::rename('maps', 'maps');
         Schema::rename('map_variables', 'egg_variables');
     }
 };

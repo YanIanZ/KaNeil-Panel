@@ -65,11 +65,11 @@ class ServerResource extends Resource
     {
         $allowedMounts = Mount::all();
         $node = $get('node_id');
-        $egg = $get('egg_id');
+        $map = $get('map_id');
 
-        if ($node && $egg) {
+        if ($node && $map) {
             $allowedMounts = $allowedMounts->filter(fn (Mount $mount) => ($mount->nodes->isEmpty() || $mount->nodes->contains($node)) &&
-                ($mount->eggs->isEmpty() || $mount->eggs->contains($egg))
+                ($mount->maps->isEmpty() || $mount->maps->contains($map))
             );
         }
 

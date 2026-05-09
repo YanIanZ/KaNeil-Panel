@@ -3,8 +3,8 @@
 namespace App\Filament\Components\Actions;
 
 use App\Enums\TablerIcon;
-use App\Models\Egg;
-use App\Services\Eggs\Sharing\EggImporterService;
+use App\Models\Map;
+use App\Services\Maps\Sharing\EggImporterService;
 use Exception;
 use Filament\Actions\Action;
 use Filament\Actions\BulkAction;
@@ -22,7 +22,7 @@ class UpdateEggBulkAction extends BulkAction
     {
         parent::setUp();
 
-        $this->label(trans_choice('admin/egg.update', 2));
+        $this->label(trans_choice('admin/map.update', 2));
 
         $this->icon(TablerIcon::CloudDownload);
 
@@ -30,9 +30,9 @@ class UpdateEggBulkAction extends BulkAction
 
         $this->requiresConfirmation();
 
-        $this->modalHeading(trans_choice('admin/egg.update_question', 2));
+        $this->modalHeading(trans_choice('admin/map.update_question', 2));
 
-        $this->modalDescription(trans_choice('admin/egg.update_description', 2));
+        $this->modalDescription(trans_choice('admin/map.update_description', 2));
 
         $this->modalIconColor('danger');
 
@@ -41,7 +41,7 @@ class UpdateEggBulkAction extends BulkAction
         $this->action(function (Collection $records, EggImporterService $eggImporterService) {
             if ($records->count() === 0) {
                 Notification::make()
-                    ->title(trans('admin/egg.no_updates'))
+                    ->title(trans('admin/map.no_updates'))
                     ->warning()
                     ->send();
 
@@ -52,41 +52,41 @@ class UpdateEggBulkAction extends BulkAction
             $failedEggs = collect();
             $skippedEggs = collect();
 
-            /** @var Egg $egg */
-            foreach ($records as $egg) {
-                if ($egg->update_url === null) {
-                    $skippedEggs->push($egg->name);
+            /** @var Map $map */
+            foreach ($records as $map) {
+                if ($map->update_url === null) {
+                    $skippedEggs->push($map->name);
 
                     continue;
                 }
                 try {
-                    $eggImporterService->fromUrl($egg->update_url, $egg);
+                    $eggImporterService->fromUrl($map->update_url, $map);
 
-                    $successEggs->push($egg->name);
+                    $successEggs->push($map->name);
 
-                    cache()->forget("eggs.$egg->uuid.update");
+                    cache()->forget("maps.$map->uuid.update");
                 } catch (Exception $exception) {
-                    $failedEggs->push($egg->name);
+                    $failedEggs->push($map->name);
 
                     report($exception);
                 }
             }
 
             $bodyParts = collect([
-                $successEggs->isNotEmpty() ? trans('admin/egg.updated_eggs', ['eggs' => $successEggs->join(', ')]) : null,
-                $failedEggs->isNotEmpty() ? trans('admin/egg.failed_eggs', ['eggs' => $failedEggs->join(', ')]) : null,
-                $skippedEggs->isNotEmpty() ? trans('admin/egg.skipped_eggs', ['eggs' => $skippedEggs->join(', ')]) : null,
+                $successEggs->isNotEmpty() ? trans('admin/map.updated_eggs', ['maps' => $successEggs->join(', ')]) : null,
+                $failedEggs->isNotEmpty() ? trans('admin/map.failed_eggs', ['maps' => $failedEggs->join(', ')]) : null,
+                $skippedEggs->isNotEmpty() ? trans('admin/map.skipped_eggs', ['maps' => $skippedEggs->join(', ')]) : null,
             ])->filter();
 
             Notification::make()
-                ->title(trans_choice('admin/egg.updated', 2, ['count' => $successEggs->count(), 'total' => $records->count()]))
+                ->title(trans_choice('admin/map.updated', 2, ['count' => $successEggs->count(), 'total' => $records->count()]))
                 ->body($bodyParts->join(' | '))
                 ->status($failedEggs->isNotEmpty() ? 'warning' : 'success')
                 ->persistent()
                 ->send();
         });
 
-        $this->authorize(fn () => user()?->can('import egg'));
+        $this->authorize(fn () => user()?->can('import map'));
 
         $this->deselectRecordsAfterCompletion();
     }

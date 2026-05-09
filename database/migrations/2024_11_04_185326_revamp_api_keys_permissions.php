@@ -4,7 +4,7 @@ use App\Models\Allocation;
 use App\Models\ApiKey;
 use App\Models\Database;
 use App\Models\DatabaseHost;
-use App\Models\Egg;
+use App\Models\Map;
 use App\Models\Mount;
 use App\Models\Node;
 use App\Models\Server;
@@ -31,7 +31,7 @@ return new class extends Migration
                 Node::RESOURCE_NAME => intval($apiKey->r_nodes ?? 0),
                 Allocation::RESOURCE_NAME => intval($apiKey->r_allocations ?? 0),
                 User::RESOURCE_NAME => intval($apiKey->r_users ?? 0),
-                Egg::RESOURCE_NAME => intval($apiKey->r_eggs ?? 0),
+                Map::RESOURCE_NAME => intval($apiKey->r_eggs ?? 0),
                 DatabaseHost::RESOURCE_NAME => intval($apiKey->r_database_hosts ?? 0),
                 Database::RESOURCE_NAME => intval($apiKey->r_server_databases ?? 0),
                 Mount::RESOURCE_NAME => intval($apiKey->r_mounts ?? 0),
@@ -80,7 +80,7 @@ return new class extends Migration
                     'r_nodes' => $apiKey->permissions[Node::RESOURCE_NAME],
                     'r_allocations' => $apiKey->permissions[Allocation::RESOURCE_NAME],
                     'r_users' => $apiKey->permissions[User::RESOURCE_NAME],
-                    'r_eggs' => $apiKey->permissions[Egg::RESOURCE_NAME],
+                    'r_eggs' => $apiKey->permissions[Map::RESOURCE_NAME],
                     'r_database_hosts' => $apiKey->permissions[DatabaseHost::RESOURCE_NAME],
                     'r_server_databases' => $apiKey->permissions[Database::RESOURCE_NAME],
                     'r_mounts' => $apiKey->permissions[Mount::RESOURCE_NAME],

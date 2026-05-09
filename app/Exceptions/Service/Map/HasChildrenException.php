@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exceptions\Service\Egg;
+namespace App\Exceptions\Service\Map;
 
 use App\Exceptions\DisplayException;
 

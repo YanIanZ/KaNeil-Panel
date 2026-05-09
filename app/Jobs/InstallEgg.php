@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Services\Eggs\Sharing\EggImporterService;
+use App\Services\Maps\Sharing\EggImporterService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -27,7 +27,7 @@ class InstallEgg implements ShouldQueue
         try {
             $eggImporterService->fromUrl($this->downloadUrl);
         } catch (Throwable $e) {
-            Log::error('Failed to install egg from URL: ' . $this->downloadUrl, ['exception' => $e]);
+            Log::error('Failed to install map from URL: ' . $this->downloadUrl, ['exception' => $e]);
         }
     }
 }

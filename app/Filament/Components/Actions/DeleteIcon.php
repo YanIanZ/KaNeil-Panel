@@ -28,7 +28,7 @@ class DeleteIcon extends Action
 
         $this->hiddenLabel();
 
-        $this->tooltip(trans('admin/egg.import.delete_icon'));
+        $this->tooltip(trans('admin/map.import.delete_icon'));
 
         $this->icon(TablerIcon::Trash);
 
@@ -43,7 +43,7 @@ class DeleteIcon extends Action
             }
 
             Notification::make()
-                ->title(trans('admin/egg.import.icon_deleted'))
+                ->title(trans('admin/map.import.icon_deleted'))
                 ->success()
                 ->send();
 

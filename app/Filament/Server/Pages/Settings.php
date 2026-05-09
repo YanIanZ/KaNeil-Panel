@@ -75,8 +75,8 @@ class Settings extends ServerFormPage
                                     ->columnStart(6)
                                     ->schema([
                                         Image::make('', 'icon')
-                                            ->hidden(fn ($record) => !$record->icon && !$record->egg->icon)
-                                            ->url(fn ($record) => $record->icon ?: $record->egg->icon)
+                                            ->hidden(fn ($record) => !$record->icon && !$record->map->icon)
+                                            ->url(fn ($record) => $record->icon ?: $record->map->icon)
                                             ->tooltip(fn ($record) => $record->icon ? '' : trans('server/setting.server_info.icon.tooltip'))
                                             ->imageSize(150)
                                             ->columnSpanFull()

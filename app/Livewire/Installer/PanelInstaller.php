@@ -152,7 +152,7 @@ class PanelInstaller extends SimplePage implements HasForms
             // Write session data at the very end to avoid "page expired" errors
             $this->writeToEnv('env_session');
 
-            // Install selected eggs
+            // Install selected maps
             $this->installEggs();
 
             // Redirect to admin panel
@@ -236,20 +236,20 @@ class PanelInstaller extends SimplePage implements HasForms
     public function installEggs(): void
     {
         try {
-            $selectedEggs = array_get($this->data, 'eggs', []);
+            $selectedEggs = array_get($this->data, 'maps', []);
             if (!$selectedEggs) {
                 return;
             }
 
-            foreach ($selectedEggs as $category => $eggs) {
-                foreach ($eggs as $downloadUrl) {
+            foreach ($selectedEggs as $category => $maps) {
+                foreach ($maps as $downloadUrl) {
                     InstallEgg::dispatch($downloadUrl);
                 }
             }
 
             Notification::make()
-                ->title(trans('installer.egg.background_install_started'))
-                ->body(trans('installer.egg.background_install_description', ['count' => array_sum(array_map('count', $selectedEggs))]))
+                ->title(trans('installer.map.background_install_started'))
+                ->body(trans('installer.map.background_install_description', ['count' => array_sum(array_map('count', $selectedEggs))]))
                 ->success()
                 ->persistent()
                 ->send();
@@ -257,7 +257,7 @@ class PanelInstaller extends SimplePage implements HasForms
             report($exception);
 
             Notification::make()
-                ->title(trans('installer.egg.exceptions.installation_failed'))
+                ->title(trans('installer.map.exceptions.installation_failed'))
                 ->body($exception->getMessage())
                 ->danger()
                 ->persistent()

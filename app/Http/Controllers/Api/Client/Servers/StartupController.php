@@ -44,7 +44,7 @@ class StartupController extends ClientApiController
             ->transformWith($this->getTransformer(EggVariableTransformer::class))
             ->addMeta([
                 'startup_command' => $startup,
-                'docker_images' => $server->egg->docker_images,
+                'docker_images' => $server->map->docker_images,
                 'raw_startup_command' => $server->startup,
             ])
             ->toArray();
@@ -72,7 +72,7 @@ class StartupController extends ClientApiController
 
         $original = $variable->server_value;
 
-        // Revalidate the variable value using the egg variable specific validation rules for it.
+        // Revalidate the variable value using the map variable specific validation rules for it.
         $request->validate(['value' => $variable->rules]);
 
         ServerVariable::query()->updateOrCreate([

@@ -91,13 +91,13 @@ test('unauthorized user cannot change docker image in use by server', function (
         ->and($server->image)->toBe($originalImage);
 });
 
-test('cannot change docker image to image not allowed by egg', function () {
+test('cannot change docker image to image not allowed by map', function () {
 
     [$user, $server] = generateTestAccount([SubuserPermission::StartupDockerImage]);
-    $server->image = 'ghcr.io/kaneil-eggs/yolks:java_17';
+    $server->image = 'ghcr.io/kaneil-maps/yolks:java_17';
     $server->save();
 
-    $newImage = 'ghcr.io/kaneil-eggs/fake:image';
+    $newImage = 'ghcr.io/kaneil-maps/fake:image';
 
     $server = $server->refresh();
 
@@ -114,11 +114,11 @@ test('cannot change docker image to image not allowed by egg', function () {
 
 test('can change docker image in use by server', function () {
     [$user, $server] = generateTestAccount([SubuserPermission::StartupDockerImage]);
-    $oldImage = 'ghcr.io/kaneil-eggs/yolks:java_17';
+    $oldImage = 'ghcr.io/kaneil-maps/yolks:java_17';
     $server->image = $oldImage;
     $server->save();
 
-    $newImage = 'ghcr.io/kaneil-eggs/yolks:java_21';
+    $newImage = 'ghcr.io/kaneil-maps/yolks:java_21';
 
     $this->actingAs($user)
         ->putJson("/api/client/servers/$server->uuid/settings/docker-image", [
@@ -137,11 +137,11 @@ test('can change docker image in use by server', function () {
 
 test('unable to change the docker image set by administrator', function () {
     [$user, $server] = generateTestAccount([SubuserPermission::StartupDockerImage]);
-    $oldImage = 'ghcr.io/kaneil-eggs/yolks:java_custom';
+    $oldImage = 'ghcr.io/kaneil-maps/yolks:java_custom';
     $server->image = $oldImage;
     $server->save();
 
-    $newImage = 'ghcr.io/kaneil-eggs/yolks:java_8';
+    $newImage = 'ghcr.io/kaneil-maps/yolks:java_8';
 
     $this->actingAs($user)
         ->putJson("/api/client/servers/$server->uuid/settings/docker-image", [

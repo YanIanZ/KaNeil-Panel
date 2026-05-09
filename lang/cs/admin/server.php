@@ -97,7 +97,7 @@ return [
     'delete_db' => 'Jste si jisti, že chcete odstranit',
     'delete_db_heading' => 'Smazat databázi?',
     'backups' => 'Zálohy',
-    'egg' => 'Vejce',
+    'map' => 'Vejce',
     'mounts' => 'Připojení',
     'no_mounts' => 'Pro tento uzel neexistují žádná zařízení',
     'create_database' => 'Vytvořit databázi',

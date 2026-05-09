@@ -137,7 +137,7 @@ class DiscordPreview extends Widget
             'threads' => '1, 3, 5',
             'oom_killer' => false,
             'allocation_id' => 4,
-            'egg_id' => 2,
+            'map_id' => 2,
             'startup' => 'This is a example startup command.',
             'image' => 'Image here',
             'allocation_limit' => 5,

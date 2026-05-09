@@ -50,7 +50,7 @@ class Role extends BaseRole
     public const DEFAULT_GUARD_NAME = 'web';
 
     public const MODEL_SPECIFIC_PERMISSIONS = [
-        'egg' => [
+        'map' => [
             'import',
             'export',
         ],
