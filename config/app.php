@@ -6,7 +6,7 @@ return [
     'logo' => env('APP_LOGO'),
     'favicon' => env('APP_FAVICON', '/logo.svg'),
 
-    'version' => '1.0.3',
+    'version' => '1.0.4',
 
     'timezone' => 'UTC',
 
