@@ -27,9 +27,10 @@ return [
     OAuthServiceProvider::class,
     TaskServiceProvider::class,
     FilamentServiceProvider::class,
-    AdminPanelProvider::class,
-    AppPanelProvider::class,
-    ServerPanelProvider::class,
+    // Disabled in experimental/v2.0-EX — Galleon owns these routes
+    // AdminPanelProvider::class,
+    // AppPanelProvider::class,
+    // ServerPanelProvider::class,
     RouteServiceProvider::class,
     ServiceProvider::class,
 ];
