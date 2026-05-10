@@ -33,109 +33,67 @@ class ImportBulkMapsCommand extends Command
         $skipped = 0;
 
         foreach ($files as $file) {
-            $data = json_decode(file_get_contents($file), true);
-            if (!$data || empty($data['name'])) {
-                $this->warn("Skipping invalid JSON: $file");
-                $skipped++;
-                continue;
-            }
-
-            $name = $data['name'];
-            $slug = Str::slug($name);
-
-            // Check if already exists
-            if (Map::where('name', $name)->exists()) {
-                $this->line("Skipping existing: $name");
-                $skipped++;
-                continue;
-            }
-
-            // Prepare docker images
-            $dockerImages = [];
-            $rawImages = $data['docker_images'] ?? [];
-            if (is_string($rawImages)) {
-                $rawImages = json_decode($rawImages, true) ?? [];
-            }
-            if (is_array($rawImages)) {
-                foreach ($rawImages as $image => $label) {
-                    $dockerImages[$image] = is_string($label) ? $label : (is_array($label) ? ($label[0] ?? $image) : $image);
+            try {
+                $data = json_decode(file_get_contents($file), true);
+                if (!$data || empty($data['name'])) {
+                    $this->warn("Skipping invalid JSON: $file");
+                    $skipped++;
+                    continue;
                 }
-            }
-            if (empty($dockerImages)) {
-                $dockerImages['ghcr.io/kaneil-dev/yolks:java_21'] = 'Java 21';
-            }
 
-            // Prepare startup command
-            $startup = $data['startup'] ?? 'echo "Server started"';
-            if (is_array($startup)) {
-                $startup = implode('; ', $startup);
-            }
-            $startupCommands = [is_string($startup) ? $startup : 'echo "Server started"'];
+                $name = $data['name'];
 
-            // Prepare scripts
-            $scriptInstall = $data['scripts']['installation']['script'] ?? '#!/bin/bash\necho "No install script"';
-            $scriptEntry = $data['scripts']['installation']['entrypoint'] ?? 'bash';
-            $scriptContainer = $data['scripts']['installation']['container'] ?? 'ghcr.io/kaneil-dev/installers:alpine';
-            $isPrivileged = ($data['scripts']['installation']['privileged'] ?? false) === true;
+                if (Map::where('name', $name)->exists()) {
+                    $skipped++;
+                    continue;
+                }
 
-            // Prepare config files
-            $configFiles = [];
-            $rawFiles = $data['config']['files'] ?? [];
-            if (is_string($rawFiles)) {
-                $rawFiles = json_decode($rawFiles, true) ?? [];
-            }
-            if (is_array($rawFiles)) {
-                foreach ($rawFiles as $path => $config) {
-                    if (is_string($config)) {
-                        $configFiles[$path] = ['parser' => 'file', 'find' => []];
-                    } else {
-                        $configFiles[$path] = [
-                            'parser' => $config['parser'] ?? 'file',
-                            'find' => $config['find'] ?? [],
-                        ];
+                // Simplify docker images
+                $dockerImages = [];
+                $raw = $data['docker_images'] ?? [];
+                if (is_string($raw)) $raw = json_decode($raw, true) ?? [];
+                if (is_array($raw)) {
+                    $first = array_key_first($raw);
+                    if ($first) {
+                        $label = $raw[$first];
+                        $dockerImages[$first] = is_string($label) ? $label : $first;
                     }
                 }
-            }
+                if (empty($dockerImages)) {
+                    $dockerImages['ghcr.io/kaneil-dev/yolks:java_21'] = 'Java 21';
+                }
 
-            // Prepare config startup
-            $configStartup = json_encode([
-                'done' => $data['config']['startup']['done'] ?? 'Done',
-            ]);
+                // Simplify startup
+                $startup = $data['startup'] ?? 'echo "started"';
+                if (is_array($startup)) $startup = implode('; ', $startup);
 
-            // Prepare config logs
-            $configLogs = json_encode([
-                'custom' => $data['config']['logs']['custom'] ?? false,
-                'location' => $data['config']['logs']['location'] ?? 'latest.log',
-            ]);
+                // Simplify config
+                $configStartup = json_encode(['done' => 'Done']);
 
-            // Prepare config stop
-            $configStop = $data['config']['stop'] ?? 'stop';
+                $configFiles = [];
+                $rawFiles = $data['config']['files'] ?? [];
+                if (is_string($rawFiles)) $rawFiles = json_decode($rawFiles, true) ?? [];
+                $configFiles = is_array($rawFiles) ? $rawFiles : [];
 
-            // Prepare variables
-            $variables = [];
-            foreach ($data['variables'] ?? [] as $var) {
-                $variables[] = [
-                    'name' => $var['name'] ?? '',
-                    'description' => $var['description'] ?? '',
-                    'env_variable' => $var['env_variable'] ?? '',
-                    'default_value' => $var['default_value'] ?? '',
-                    'user_viewable' => ($var['user_viewable'] ?? true) === true,
-                    'user_editable' => ($var['user_editable'] ?? true) === true,
-                    'rules' => $var['rules'] ?? 'required|string|max:255',
-                ];
-            }
+                $configLogs = json_encode(['custom' => false, 'location' => 'latest.log']);
+                $configStop = $data['config']['stop'] ?? 'stop';
 
-            try {
-                $map = Map::create([
+                // Scripts
+                $scriptInstall = $data['scripts']['installation']['script'] ?? '#!/bin/bash\necho "done"';
+                $scriptEntry = $data['scripts']['installation']['entrypoint'] ?? 'bash';
+                $scriptContainer = $data['scripts']['installation']['container'] ?? 'ghcr.io/kaneil-dev/installers:alpine';
+                $isPrivileged = ($data['scripts']['installation']['privileged'] ?? false) === true;
+
+                Map::create([
                     'ship_id' => $ship->id,
                     'uuid' => Str::uuid()->toString(),
                     'name' => $name,
                     'author' => $data['author'] ?? 'unknown@kaneil.dev',
                     'description' => $data['description'] ?? '',
-                    'features' => $data['features'] ?? null,
+                    'features' => null,
                     'docker_images' => $dockerImages,
-                    'startup_commands' => $startupCommands,
-                    'file_denylist' => $data['file_denylist'] ?? [],
+                    'startup_commands' => [$startup],
+                    'file_denylist' => [],
                     'config_files' => $configFiles,
                     'config_startup' => $configStartup,
                     'config_logs' => $configLogs,
@@ -144,34 +102,19 @@ class ImportBulkMapsCommand extends Command
                     'script_entry' => $scriptEntry,
                     'script_container' => $scriptContainer,
                     'script_is_privileged' => $isPrivileged,
-                    'update_url' => $data['meta']['update_url'] ?? null,
-                    'tags' => json_encode([$slug]),
+                    'update_url' => null,
+                    'tags' => json_encode([]),
                 ]);
 
-                // Create variables — skip if table/structure issues
-                try {
-                    foreach ($variables as $var) {
-                        $map->variables()->create(array_merge($var, [
-                            'map_id' => $map->id,
-                            'user_viewable' => $var['user_viewable'] ?? true,
-                            'user_editable' => $var['user_editable'] ?? true,
-                            'rules' => is_array($var['rules']) ? implode('|', $var['rules']) : ($var['rules'] ?? 'required|string'),
-                        ]));
-                    }
-                } catch (\Exception $e) {
-                    $this->warn("  Variables skipped for $name: " . $e->getMessage());
-                }
-
-                $this->info("Imported: $name");
+                $this->info("  OK: $name");
                 $imported++;
             } catch (\Exception $e) {
-                $this->error("Failed to import $name: " . $e->getMessage());
+                $this->error("  FAIL: " . ($data['name'] ?? basename($file)) . " - " . $e->getMessage());
                 $skipped++;
             }
         }
 
         $this->info("Done. Imported: $imported, Skipped: $skipped");
-
         return 0;
     }
 
