@@ -20,6 +20,6 @@ class GameShipsSeeder extends Seeder
         $directory = base_path('../game-eggs');
         $count = $this->importEggsFromDirectory($directory, $ship, 'games@kaneil.dev');
 
-        $this->command->info("Imported $count game maps.");
+        $this->command?->info("Imported $count game maps.");
     }
 }

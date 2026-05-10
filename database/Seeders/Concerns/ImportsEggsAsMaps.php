@@ -11,7 +11,7 @@ trait ImportsEggsAsMaps
     protected function importEggsFromDirectory(string $directory, Ship $ship, string $defaultAuthor = 'community@kaneil.dev'): int
     {
         if (!is_dir($directory)) {
-            $this->command->info("Directory not found: $directory, skipping.");
+            $this->command?->info("Directory not found: $directory, skipping.");
             return 0;
         }
 
@@ -34,7 +34,7 @@ trait ImportsEggsAsMaps
                 $this->createMapFromEggData($data, $ship->id, $defaultAuthor);
                 $imported++;
             } catch (\Throwable $e) {
-                $this->command->warn("Failed to import {$file}: {$e->getMessage()}");
+                $this->command?->warn("Failed to import {$file}: {$e->getMessage()}");
             }
         }
 
@@ -51,9 +51,14 @@ trait ImportsEggsAsMaps
             $raw = is_array($decoded) ? $decoded : [];
         }
         if (is_array($raw) && !empty($raw)) {
-            $first = array_key_first($raw);
-            $label = $raw[$first];
-            $dockerImages[(string) $first] = is_string($label) ? $label : (string) $first;
+            // Normalize to [imageUrl => label] regardless of input orientation.
+            // Egg JSON typically has [label => imageUrl]; numeric arrays have [imageUrl, ...].
+            foreach ($raw as $key => $value) {
+                $imageUrl = is_int($key) ? (string) $value : (string) $value;
+                $label = is_int($key) ? (string) $value : (string) $key;
+                $dockerImages[$imageUrl] = $label;
+                break;
+            }
         }
         if (empty($dockerImages)) {
             $dockerImages['ghcr.io/kaneil-dev/installers:alpine'] = 'Alpine';

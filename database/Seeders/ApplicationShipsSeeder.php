@@ -20,6 +20,6 @@ class ApplicationShipsSeeder extends Seeder
         $directory = base_path('../application-eggs');
         $count = $this->importEggsFromDirectory($directory, $ship, 'apps@kaneil.dev');
 
-        $this->command->info("Imported $count application maps.");
+        $this->command?->info("Imported $count application maps.");
     }
 }
