@@ -12,8 +12,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::table('map_variables')->select(['id', 'rules'])->cursor()->each(function ($eggVariable) {
-            DB::table('map_variables')->where('id', $eggVariable->id)->update(['rules' => explode('|', $eggVariable->rules)]);
+        DB::table('map_variables')->select(['id', 'rules'])->cursor()->each(function ($mapVariable) {
+            DB::table('map_variables')->where('id', $mapVariable->id)->update(['rules' => explode('|', $mapVariable->rules)]);
         });
 
         if (Schema::getConnection()->getDriverName() === 'pgsql') {
@@ -36,8 +36,8 @@ return new class extends Migration
             $table->text('rules')->change();
         });
 
-        DB::table('map_variables')->select(['id', 'rules'])->cursor()->each(function ($eggVariable) {
-            DB::table('map_variables')->where('id', $eggVariable->id)->update(['rules' => implode('|', json_decode($eggVariable->rules))]);
+        DB::table('map_variables')->select(['id', 'rules'])->cursor()->each(function ($mapVariable) {
+            DB::table('map_variables')->where('id', $mapVariable->id)->update(['rules' => implode('|', json_decode($mapVariable->rules))]);
         });
     }
 };

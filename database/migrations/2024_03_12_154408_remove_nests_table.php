@@ -16,12 +16,12 @@ return new class extends Migration
 
         DB::table('maps')->update(['tags' => '[]']);
 
-        $eggsWithNests = DB::table('maps')
+        $mapsWithShips = DB::table('maps')
             ->select(['maps.id', 'nests.name'])
             ->join('nests', 'nests.id', '=', 'maps.nest_id')
             ->get();
 
-        foreach ($eggsWithNests as $map) {
+        foreach ($mapsWithShips as $map) {
             DB::table('maps')
                 ->where('id', $map->id)
                 ->update(['tags' => "[\"$map->name\"]"]);
