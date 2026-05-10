@@ -26,15 +26,15 @@ class UpdateMapIndexCommand extends Command
 
             $this->info("Nest: $nestName");
 
-            $nestEggs = [];
+            $nestMaps = [];
             foreach ($nest['Maps'] as $map) {
-                $eggName = $map['map']['name'];
+                $mapName = $map['map']['name'];
 
-                $this->comment("Map: $eggName");
+                $this->comment("Map: $mapName");
 
-                $nestEggs[$map['download_url']] = $eggName;
+                $nestMaps[$map['download_url']] = $mapName;
             }
-            $index[$nestName] = $nestEggs;
+            $index[$nestName] = $nestMaps;
 
             $this->info('');
         }

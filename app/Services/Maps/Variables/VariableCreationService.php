@@ -54,8 +54,8 @@ class VariableCreationService
 
         $options = array_get($data, 'options') ?? [];
 
-        /** @var MapVariable $eggVariable */
-        $eggVariable = MapVariable::query()->create([
+        /** @var MapVariable $mapVariable */
+        $mapVariable = MapVariable::query()->create([
             'map_id' => $map,
             'name' => $data['name'] ?? '',
             'description' => $data['description'] ?? '',
@@ -66,6 +66,6 @@ class VariableCreationService
             'rules' => $data['rules'] ?? [],
         ]);
 
-        return $eggVariable;
+        return $mapVariable;
     }
 }

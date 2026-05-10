@@ -27,7 +27,7 @@ class ServerDetailsController extends Controller
     public function __construct(
         protected ConnectionInterface $connection,
         private ServerConfigurationStructureService $configurationStructureService,
-        private MapConfigurationService $eggConfigurationService
+        private MapConfigurationService $mapConfigurationService
     ) {}
 
     /**

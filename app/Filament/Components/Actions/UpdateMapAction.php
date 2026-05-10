@@ -36,9 +36,9 @@ class UpdateMapAction extends Action
 
         $this->modalSubmitAction(fn (Action $action) => $action->color('danger'));
 
-        $this->action(function (Map $map, MapImporterService $eggImporterService) {
+        $this->action(function (Map $map, MapImporterService $mapImporterService) {
             try {
-                $eggImporterService->fromUrl($map->update_url, $map);
+                $mapImporterService->fromUrl($map->update_url, $map);
 
                 cache()->forget("maps.$map->uuid.update");
             } catch (Exception $exception) {

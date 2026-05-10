@@ -64,7 +64,7 @@ use Illuminate\Support\Str;
  * @property-read Collection<int, MapVariable> $variables
  * @property-read int|null $variables_count
  *
- * @method static \Database\Factories\EggFactory factory($count = null, $state = [])
+ * @method static \Database\Factories\MapFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Map newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Map newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Map query()
@@ -109,7 +109,7 @@ class Map extends Model implements Validatable
     /**
      * Defines the current map export version.
      */
-    public const EXPORT_VERSION = 'PLCN_v3';
+    public const EXPORT_VERSION = 'KNLN_v1';
 
     /**
      * The table associated with the model.

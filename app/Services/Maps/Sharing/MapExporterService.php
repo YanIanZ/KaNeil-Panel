@@ -50,8 +50,8 @@ class MapExporterService
                     'entrypoint' => $map->copy_script_entry,
                 ],
             ],
-            'variables' => $map->variables->map(function (MapVariable $eggVariable) {
-                return Collection::make($eggVariable->toArray())
+            'variables' => $map->variables->map(function (MapVariable $mapVariable) {
+                return Collection::make($mapVariable->toArray())
                     ->except(['id', 'map_id', 'created_at', 'updated_at']);
             })->values()->toArray(),
         ];

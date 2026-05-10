@@ -44,7 +44,7 @@ class ImportMapAction extends Action
 
         $this->authorize(fn () => user()?->can('import map'));
 
-        $this->action(function (array $data, MapImporterService $eggImportService): void {
+        $this->action(function (array $data, MapImporterService $mapImportService): void {
 
             $gitHubEggs = array_get($this->data, 'maps', []);
             $maps = array_merge(collect($data['urls'])->flatten()->whereNotNull()->unique()->all(), Arr::wrap($data['files']));
@@ -100,7 +100,7 @@ class ImportMapAction extends Action
                     };
                 }
                 try {
-                    $eggImportService->$method($map);
+                    $mapImportService->$method($map);
                     $success->push($name);
                 } catch (Exception $exception) {
                     $failed->push($name);
@@ -109,8 +109,8 @@ class ImportMapAction extends Action
             }
 
             $bodyParts = collect([
-                $success->isNotEmpty() ? trans('admin/map.import.imported_eggs', ['maps' => $success->join(', ')]) : null,
-                $failed->isNotEmpty() ? trans('admin/map.import.failed_import_eggs', ['maps' => $failed->join(', ')]) : null,
+                $success->isNotEmpty() ? trans('admin/map.import.imported_maps', ['maps' => $success->join(', ')]) : null,
+                $failed->isNotEmpty() ? trans('admin/map.import.failed_import_maps', ['maps' => $failed->join(', ')]) : null,
             ])->filter();
 
             if ($bodyParts->isNotEmpty()) {

@@ -38,7 +38,7 @@ class UpdateMapBulkAction extends BulkAction
 
         $this->modalSubmitAction(fn (Action $action) => $action->color('danger'));
 
-        $this->action(function (Collection $records, MapImporterService $eggImporterService) {
+        $this->action(function (Collection $records, MapImporterService $mapImporterService) {
             if ($records->count() === 0) {
                 Notification::make()
                     ->title(trans('admin/map.no_updates'))
@@ -60,7 +60,7 @@ class UpdateMapBulkAction extends BulkAction
                     continue;
                 }
                 try {
-                    $eggImporterService->fromUrl($map->update_url, $map);
+                    $mapImporterService->fromUrl($map->update_url, $map);
 
                     $successEggs->push($map->name);
 
@@ -73,9 +73,9 @@ class UpdateMapBulkAction extends BulkAction
             }
 
             $bodyParts = collect([
-                $successEggs->isNotEmpty() ? trans('admin/map.updated_eggs', ['maps' => $successEggs->join(', ')]) : null,
-                $failedEggs->isNotEmpty() ? trans('admin/map.failed_eggs', ['maps' => $failedEggs->join(', ')]) : null,
-                $skippedEggs->isNotEmpty() ? trans('admin/map.skipped_eggs', ['maps' => $skippedEggs->join(', ')]) : null,
+                $successEggs->isNotEmpty() ? trans('admin/map.updated_maps', ['maps' => $successEggs->join(', ')]) : null,
+                $failedEggs->isNotEmpty() ? trans('admin/map.failed_maps', ['maps' => $failedEggs->join(', ')]) : null,
+                $skippedEggs->isNotEmpty() ? trans('admin/map.skipped_maps', ['maps' => $skippedEggs->join(', ')]) : null,
             ])->filter();
 
             Notification::make()

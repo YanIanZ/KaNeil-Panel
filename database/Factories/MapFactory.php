@@ -6,7 +6,7 @@ use App\Models\Map;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Ramsey\Uuid\Uuid;
 
-class EggFactory extends Factory
+class MapFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.

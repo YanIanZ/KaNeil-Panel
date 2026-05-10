@@ -51,12 +51,12 @@ class MapSelectionStep
         }, $categories);
 
         if (empty($tabs)) {
-            $tabs[] = Tab::make('no_eggs')
-                ->label(trans('installer.map.no_eggs'))
+            $tabs[] = Tab::make('no_maps')
+                ->label(trans('installer.map.no_maps'))
                 ->schema([
-                    TextEntry::make('no_eggs')
+                    TextEntry::make('no_maps')
                         ->hiddenLabel()
-                        ->state(trans('installer.map.exceptions.no_eggs')),
+                        ->state(trans('installer.map.exceptions.no_maps')),
                 ]);
         }
 

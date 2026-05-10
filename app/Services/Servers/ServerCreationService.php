@@ -97,7 +97,7 @@ class ServerCreationService
 
         Assert::false(empty($data['node_id']), 'Expected a non-empty node_id in server creation data.');
 
-        $eggVariableData = $this->validatorService
+        $mapVariableData = $this->validatorService
             ->setUserLevel(User::USER_LEVEL_ADMIN)
             ->handle(Arr::get($data, 'map_id'), Arr::get($data, 'environment', []));
 
@@ -107,7 +107,7 @@ class ServerCreationService
         // If that connection fails out we will attempt to perform a cleanup by just
         // deleting the server itself from the system.
         /** @var Server $server */
-        $server = $this->connection->transaction(function () use ($data, $eggVariableData) {
+        $server = $this->connection->transaction(function () use ($data, $mapVariableData) {
             // Create the server and assign any additional allocations to it.
             $server = $this->createModel($data);
 
@@ -115,7 +115,7 @@ class ServerCreationService
                 $this->storeAssignedAllocations($server, $data);
             }
 
-            $this->storeMapVariables($server, $eggVariableData);
+            $this->storeMapVariables($server, $mapVariableData);
 
             return $server;
         }, 5);

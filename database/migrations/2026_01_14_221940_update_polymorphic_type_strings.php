@@ -10,7 +10,7 @@ return new class extends Migration
     {
         if (Schema::hasTable('mountables')) {
             DB::table('mountables')
-                ->whereIn('mountable_type', ['map', 'App\\Models\\Map'])
+                ->whereIn('mountable_type', ['egg', 'App\\Models\\Egg', 'map', 'App\\Models\\Map'])
                 ->update(['mountable_type' => 'map']);
         }
 
@@ -25,7 +25,7 @@ return new class extends Migration
     {
         if (Schema::hasTable('mountables')) {
             DB::table('mountables')
-                ->whereIn('mountable_type', ['map', 'App\\Models\\Map'])
+                ->whereIn('mountable_type', ['egg', 'App\\Models\\Egg', 'map', 'App\\Models\\Map'])
                 ->update(['mountable_type' => 'map']);
         }
 

@@ -22,10 +22,10 @@ class InstallMap implements ShouldQueue
     /**
      * @throws Throwable
      */
-    public function handle(MapImporterService $eggImporterService): void
+    public function handle(MapImporterService $mapImporterService): void
     {
         try {
-            $eggImporterService->fromUrl($this->downloadUrl);
+            $mapImporterService->fromUrl($this->downloadUrl);
         } catch (Throwable $e) {
             Log::error('Failed to install map from URL: ' . $this->downloadUrl, ['exception' => $e]);
         }
