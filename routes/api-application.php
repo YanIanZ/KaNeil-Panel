@@ -99,12 +99,12 @@ Route::prefix('/servers')->group(function () {
 |
 */
 Route::prefix('/maps')->group(function () {
-    Route::get('/', [Application\Maps\EggController::class, 'index'])->name('api.application.maps.maps');
-    Route::get('/{map:id}', [Application\Maps\EggController::class, 'view'])->name('api.application.maps.maps.view');
-    Route::get('/{map:id}/export', [Application\Maps\EggController::class, 'export'])->name('api.application.maps.maps.export');
-    Route::post('/import', [Application\Maps\EggController::class, 'import'])->name('api.application.maps.maps.import');
-    Route::delete('/{map:id}', [Application\Maps\EggController::class, 'delete'])->name('api.application.maps.maps.delete');
-    Route::delete('/uuid/{map:uuid}', [Application\Maps\EggController::class, 'delete'])->name('api.application.maps.maps.delete.uuid');
+    Route::get('/', [Application\Maps\MapController::class, 'index'])->name('api.application.maps.maps');
+    Route::get('/{map:id}', [Application\Maps\MapController::class, 'view'])->name('api.application.maps.maps.view');
+    Route::get('/{map:id}/export', [Application\Maps\MapController::class, 'export'])->name('api.application.maps.maps.export');
+    Route::post('/import', [Application\Maps\MapController::class, 'import'])->name('api.application.maps.maps.import');
+    Route::delete('/{map:id}', [Application\Maps\MapController::class, 'delete'])->name('api.application.maps.maps.delete');
+    Route::delete('/uuid/{map:uuid}', [Application\Maps\MapController::class, 'delete'])->name('api.application.maps.maps.delete.uuid');
 });
 
 /*
@@ -137,19 +137,19 @@ Route::prefix('/database-hosts')->group(function () {
 Route::prefix('mounts')->group(function () {
     Route::get('/', [Application\Mounts\MountController::class, 'index'])->name('api.application.mounts');
     Route::get('/{mount:id}', [Application\Mounts\MountController::class, 'view'])->name('api.application.mounts.view');
-    Route::get('/{mount:id}/maps', [Application\Mounts\MountController::class, 'getEggs']);
+    Route::get('/{mount:id}/maps', [Application\Mounts\MountController::class, 'getMaps']);
     Route::get('/{mount:id}/nodes', [Application\Mounts\MountController::class, 'getNodes']);
     Route::get('/{mount:id}/servers', [Application\Mounts\MountController::class, 'getServers']);
 
     Route::post('/', [Application\Mounts\MountController::class, 'store']);
-    Route::post('/{mount:id}/maps', [Application\Mounts\MountController::class, 'addEggs'])->name('api.application.mounts.maps');
+    Route::post('/{mount:id}/maps', [Application\Mounts\MountController::class, 'addMaps'])->name('api.application.mounts.maps');
     Route::post('/{mount:id}/nodes', [Application\Mounts\MountController::class, 'addNodes'])->name('api.application.mounts.nodes');
     Route::post('/{mount:id}/servers', [Application\Mounts\MountController::class, 'addServers'])->name('api.application.mounts.servers');
 
     Route::patch('/{mount:id}', [Application\Mounts\MountController::class, 'update']);
 
     Route::delete('/{mount:id}', [Application\Mounts\MountController::class, 'delete']);
-    Route::delete('/{mount:id}/maps/{map_id}', [Application\Mounts\MountController::class, 'deleteEgg']);
+    Route::delete('/{mount:id}/maps/{map_id}', [Application\Mounts\MountController::class, 'deleteMap']);
     Route::delete('/{mount:id}/nodes/{node_id}', [Application\Mounts\MountController::class, 'deleteNode']);
     Route::delete('/{mount:id}/servers/{server_id}', [Application\Mounts\MountController::class, 'deleteServer']);
 });

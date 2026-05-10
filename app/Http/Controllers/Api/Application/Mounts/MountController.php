@@ -225,7 +225,7 @@ class MountController extends ApplicationApiController
      *
      * Deletes an map from the mount's many-to-many relation.
      */
-    public function deleteEgg(Mount $mount, int $map_id): JsonResponse
+    public function deleteMap(Mount $mount, int $map_id): JsonResponse
     {
         $mount->maps()->detach($map_id);
 
