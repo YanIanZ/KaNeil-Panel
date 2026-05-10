@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         // Fix the columns having a different type than their relations.
-        Schema::table('egg_mount', function (Blueprint $table) {
+        Schema::table('map_mount', function (Blueprint $table) {
             $table->unsignedInteger('map_id')->change();
             $table->unsignedInteger('mount_id')->change();
         });
@@ -22,13 +22,13 @@ return new class extends Migration
         $mounts = DB::table('mounts')->select('id')->pluck('id')->toArray();
 
         // Drop any relations that are missing an map or mount.
-        DB::table('egg_mount')
+        DB::table('map_mount')
             ->select('map_id', 'mount_id')
             ->whereNotIn('map_id', $maps)
             ->orWhereNotIn('mount_id', $mounts)
             ->delete();
 
-        Schema::table('egg_mount', function (Blueprint $table) {
+        Schema::table('map_mount', function (Blueprint $table) {
             $table->foreign('map_id')
                 ->references('id')
                 ->on('maps')
@@ -46,7 +46,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('egg_mount', function (Blueprint $table) {
+        Schema::table('map_mount', function (Blueprint $table) {
             $table->dropForeign(['map_id']);
             $table->dropForeign(['mount_id']);
         });

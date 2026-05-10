@@ -59,14 +59,14 @@ return new class extends Migration
             ];
         });
 
-        Schema::table('egg_mount', function (Blueprint $table) {
+        Schema::table('map_mount', function (Blueprint $table) {
             $table->dropForeign(['map_id']);
             $table->dropForeign(['mount_id']);
             $table->dropUnique(['map_id', 'mount_id']);
         });
 
-        $eggMounts = DB::table('egg_mount')->get();
-        $eggMounts->each(function ($mount) use (&$inserts) {
+        $mapMounts = DB::table('map_mount')->get();
+        $mapMounts->each(function ($mount) use (&$inserts) {
             $inserts[] = [
                 'mount_id' => $mount->mount_id,
                 'mountable_type' => 'map',
@@ -80,7 +80,7 @@ return new class extends Migration
 
         Schema::drop('mount_node');
         Schema::drop('mount_server');
-        Schema::drop('egg_mount');
+        Schema::drop('map_mount');
     }
 
     /**

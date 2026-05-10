@@ -22,7 +22,7 @@ return new class extends Migration
             $table->tinyInteger('user_mountable')->unsigned();
         });
 
-        Schema::create('egg_mount', function (Blueprint $table) {
+        Schema::create('map_mount', function (Blueprint $table) {
             $table->integer('map_id');
             $table->integer('mount_id');
 
@@ -43,7 +43,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('mount_node');
-        Schema::dropIfExists('egg_mount');
+        Schema::dropIfExists('map_mount');
         Schema::dropIfExists('mounts');
     }
 };
