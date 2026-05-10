@@ -23,7 +23,7 @@ class ServerPanelProvider extends PanelProvider
             ->path('server')
             ->homeUrl(fn () => Filament::getPanel('app')->getUrl())
             ->brandName('KaNeil')
-            ->brandLogo(asset('kaneil.svg'))
+            ->brandLogo(asset('kaneil.png'))
             ->favicon(asset('kaneil.ico'))
             ->colors([
                 'primary' => Color::Indigo,

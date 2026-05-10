@@ -18,7 +18,7 @@ class AppPanelProvider extends PanelProvider
             ->id('app')
             ->default()
             ->brandName('KaNeil')
-            ->brandLogo(asset('kaneil.svg'))
+            ->brandLogo(asset('kaneil.png'))
             ->favicon(asset('kaneil.ico'))
             ->colors([
                 'primary' => Color::Indigo,

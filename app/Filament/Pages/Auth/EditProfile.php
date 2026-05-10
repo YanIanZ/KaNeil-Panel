@@ -552,7 +552,7 @@ class EditProfile extends BaseEditProfile
                                                             <style>
                                                             {$style}
                                                             </style>
-                                                            <span class="preview-text">The quick blue kaneil jumps over the lazy pterodactyl. :)</span>
+                                                            <span class="preview-text">KaNeil Game Panel — 1234567890 @[]{}$%^&*()_+</span>
                                                         HTML);
                                 }),
                             TextInput::make('console_graph_period')
