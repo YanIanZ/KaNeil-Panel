@@ -11,6 +11,10 @@ class Dashboard extends BaseDashboard
 {
     protected static string|BackedEnum|null $navigationIcon = TablerIcon::LayoutDashboard;
 
+    protected static ?string $title = 'Captain\'s Quarters';
+
+    protected static ?string $navigationLabel = 'Quarters';
+
     private SoftwareVersionService $softwareVersionService;
 
     public function mount(SoftwareVersionService $softwareVersionService): void
@@ -25,7 +29,7 @@ class Dashboard extends BaseDashboard
 
     public function getHeading(): string
     {
-        return trans('admin/dashboard.heading');
+        return 'Captain\'s Quarters';
     }
 
     public function getSubheading(): string

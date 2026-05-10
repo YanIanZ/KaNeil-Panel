@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'nav_title' => 'Nodes',
-    'model_label' => 'Node',
-    'model_label_plural' => 'Nodes',
-    'create' => 'Create Node',
+    'nav_title' => 'Ports',
+    'model_label' => 'Port',
+    'model_label_plural' => 'Ports',
+    'create' => 'Create Port',
     'tabs' => [
         'overview' => 'Overview',
         'basic_settings' => 'Basic Settings',
@@ -26,15 +26,15 @@ return [
         'allocation_notes' => 'Notes',
         'no_notes' => 'No notes',
     ],
-    'node_info' => 'Node Information',
+    'node_info' => 'Port Information',
     'wings_version' => 'Wings Version',
     'cpu_threads' => 'CPU Threads',
     'architecture' => 'Architecture',
     'kernel' => 'Kernel',
     'unknown' => 'Unknown',
     'latest' => '(Latest: :version)',
-    'node_uuid' => 'Node UUID',
-    'node_id' => 'Node ID',
+    'node_uuid' => 'Port UUID',
+    'node_id' => 'Port ID',
 
     'ip_address' => 'IP Address',
     'ip_help' => 'Usually your machine\'s public IP unless you are port forwarding.',
@@ -64,12 +64,12 @@ return [
     'upload_limit_help' => 'Enter the maximum size of files that can be uploaded through the web-based file manager.',
     'sftp_port' => 'SFTP Port',
     'sftp_alias' => 'SFTP Alias',
-    'sftp_alias_help' => 'Display alias for the SFTP address. Leave empty to use the Node FQDN.',
+    'sftp_alias_help' => 'Display alias for the SFTP address. Leave empty to use the Port FQDN.',
     'daemon_base' => 'Daemon Base Directory',
     'daemon_base_help' => 'The directory where server data will be stored.',
     'use_for_deploy' => 'Use for Deployments?',
     'maintenance_mode' => 'Maintenance Mode',
-    'maintenance_mode_help' => 'If the node is marked \'Under Maintenance\' users won\'t be able to access servers that are on that node',
+    'maintenance_mode_help' => 'If the port is marked \'Under Maintenance\' users won\'t be able to access vessels that are on that port',
 
     'cpu' => 'CPU',
     'cpu_limit' => 'CPU Limit',
@@ -93,12 +93,12 @@ return [
     'auto_label' => 'Type',
     'standalone' => 'Standalone',
     'docker' => 'Docker',
-    'auto_command' => 'To auto-configure your node run the following command:',
+    'auto_command' => 'To auto-configure your port run the following command:',
     'reset_token' => 'Reset Authorization Token',
     'token_reset' => 'The daemon token has been reset.',
     'reset_help' => 'Resetting the daemon token will void any request coming from the old token. This token is used for all sensitive operations on the daemon including server creation and deletion. We suggest changing this token regularly for security.',
 
-    'no_nodes' => 'No Nodes',
+    'no_nodes' => 'No Ports',
     'none' => 'None',
     'cpu_chart' => 'CPU - :cpu% of :max%',
     'memory_chart' => 'Memory - :used of :total',
@@ -106,7 +106,7 @@ return [
     'used' => 'Used',
     'unused' => 'Unused',
 
-    'node_has_servers' => 'Node Has Servers',
+    'node_has_servers' => 'Port Has Vessels',
     'create_allocation' => 'Create Allocation',
     'primary_allocation' => 'Primary Allocation',
     'databases' => 'Databases',
@@ -117,7 +117,7 @@ return [
     'allocation' => 'Allocation',
 
     'diagnostics' => [
-        'header' => 'Node Diagnostics',
+        'header' => 'Port Diagnostics',
         'include_endpoints' => 'Include Endpoints',
         'include_endpoints_hint' => 'Including endpoints will show panel urls within the logs and NOT obscure them.',
         'include_logs' => 'Include Logs',
@@ -136,11 +136,11 @@ return [
 
     'cloudflare_issue' => [
         'title' => 'Cloudflare Issue',
-        'body' => 'Your Node is not accessible by Cloudflare',
+        'body' => 'Your Port is not accessible by Cloudflare',
     ],
 
     'bulk_update_ip' => 'Update IPs',
-    'bulk_update_ip_description' => 'Replace an old IP address with a new one for allocations. This is useful when a node\'s IP address changes',
+    'bulk_update_ip_description' => 'Replace an old IP address with a new one for allocations. This is useful when a port\'s IP address changes',
     'update_ip' => 'Update IP',
     'old_ip' => 'Old IP Address',
     'new_ip' => 'New IP Address',

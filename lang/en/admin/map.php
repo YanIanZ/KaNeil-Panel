@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'nav_title' => 'Maps',
-    'model_label' => 'Map',
-    'model_label_plural' => 'Maps',
+    'nav_title' => 'Ship Blueprints',
+    'model_label' => 'Ship Blueprint',
+    'model_label_plural' => 'Ship Blueprints',
     'tabs' => [
         'configuration' => 'Configuration',
         'process_management' => 'Process Management',
@@ -99,7 +99,7 @@ return [
     'script_container' => 'Script Container',
     'script_entry' => 'Script Entry',
     'script_install' => 'Install Script',
-    'no_maps' => 'No Maps',
+    'no_maps' => 'No Ship Blueprints',
     'no_servers' => 'No Servers',
     'no_servers_help' => 'No Servers are assigned to this Map',
 
