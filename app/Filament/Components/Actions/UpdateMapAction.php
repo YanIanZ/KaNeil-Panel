@@ -9,7 +9,7 @@ use Exception;
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;
 
-class UpdateEggAction extends Action
+class UpdateMapAction extends Action
 {
     public static function getDefaultName(): ?string
     {

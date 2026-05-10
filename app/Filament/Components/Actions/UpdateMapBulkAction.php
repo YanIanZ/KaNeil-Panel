@@ -11,7 +11,7 @@ use Filament\Actions\BulkAction;
 use Filament\Notifications\Notification;
 use Illuminate\Database\Eloquent\Collection;
 
-class UpdateEggBulkAction extends BulkAction
+class UpdateMapBulkAction extends BulkAction
 {
     public static function getDefaultName(): ?string
     {

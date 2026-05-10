@@ -4,10 +4,10 @@ namespace App\Filament\Admin\Resources\Maps\Pages;
 
 use App\Enums\TablerIcon;
 use App\Filament\Admin\Resources\Maps\MapResource;
-use App\Filament\Components\Actions\ExportEggAction;
-use App\Filament\Components\Actions\ImportEggAction;
-use App\Filament\Components\Actions\UpdateEggAction;
-use App\Filament\Components\Actions\UpdateEggBulkAction;
+use App\Filament\Components\Actions\ExportMapAction;
+use App\Filament\Components\Actions\ImportMapAction;
+use App\Filament\Components\Actions\UpdateMapAction;
+use App\Filament\Components\Actions\UpdateMapBulkAction;
 use App\Filament\Components\Tables\Filters\TagsFilter;
 use App\Models\Map;
 use App\Traits\Filament\CanCustomizeHeaderActions;
@@ -38,7 +38,7 @@ class ListMaps extends ListRecords
      */
     public function table(Table $table): Table
     {
-        $defaultEggIcon = 'data:image/svg+xml;base64,' . base64_encode(file_get_contents(public_path('kaneil.svg')));
+        $defaultMapIcon = 'data:image/svg+xml;base64,' . base64_encode(file_get_contents(public_path('kaneil.svg')));
 
         return $table
             ->searchable(true)
@@ -51,7 +51,7 @@ class ListMaps extends ListRecords
                     ->label('')
                     ->alignCenter()
                     ->circular()
-                    ->getStateUsing(fn (Map $record) => $record->icon ?: $defaultEggIcon),
+                    ->getStateUsing(fn (Map $record) => $record->icon ?: $defaultMapIcon),
                 TextColumn::make('name')
                     ->label(trans('admin/map.name'))
                     ->description(fn ($record): ?string => (strlen($record->description) > 120) ? substr($record->description, 0, 120).'...' : $record->description)
@@ -65,9 +65,9 @@ class ListMaps extends ListRecords
             ->recordActions([
                 EditAction::make()
                     ->tooltip(trans('filament-actions::edit.single.label')),
-                ExportEggAction::make()
+                ExportMapAction::make()
                     ->tooltip(trans('filament-actions::export.modal.actions.export.label')),
-                UpdateEggAction::make()
+                UpdateMapAction::make()
                     ->tooltip(trans_choice('admin/map.update', 1)),
                 ReplicateAction::make()
                     ->tooltip(trans('filament-actions::replicate.single.label'))
@@ -82,21 +82,21 @@ class ListMaps extends ListRecords
                     ->successRedirectUrl(fn (Map $replica) => EditMap::getUrl(['record' => $replica])),
             ])
             ->toolbarActions([
-                ImportEggAction::make()
+                ImportMapAction::make()
                     ->multiple(),
                 CreateAction::make(),
                 BulkActionGroup::make([
                     DeleteBulkAction::make('exclude_bulk_delete')
                         ->before(function (Collection &$records) {
-                            $eggsWithServers = $records->filter(fn (Map $map) => $map->servers_count > 0);
+                            $mapsWithServers = $records->filter(fn (Map $map) => $map->servers_count > 0);
 
-                            if ($eggsWithServers->isNotEmpty()) {
-                                $eggNames = $eggsWithServers->map(fn (Map $map) => sprintf('%s (%d server%s)', $map->name, $map->servers_count, $map->servers_count > 1 ? 's' : ''))
+                            if ($mapsWithServers->isNotEmpty()) {
+                                $mapNames = $mapsWithServers->map(fn (Map $map) => sprintf('%s (%d server%s)', $map->name, $map->servers_count, $map->servers_count > 1 ? 's' : ''))
                                     ->join(', ');
                                 Notification::make()
                                     ->danger()
-                                    ->title(trans('admin/map.cannot_delete', ['count' => $eggsWithServers->count()]))
-                                    ->body(trans('admin/map.eggs_have_servers', ['maps' => $eggNames]))
+                                    ->title(trans('admin/map.cannot_delete', ['count' => $mapsWithServers->count()]))
+                                    ->body(trans('admin/map.eggs_have_servers', ['maps' => $mapNames]))
                                     ->send();
                             }
 
@@ -106,17 +106,17 @@ class ListMaps extends ListRecords
                                 $this->halt();
                             }
                         }),
-                    UpdateEggBulkAction::make('exclude_bulk_update')
+                    UpdateMapBulkAction::make('exclude_bulk_update')
                         ->before(function (Collection &$records) {
-                            $eggsWithoutUpdateUrl = $records->filter(fn (Map $map) => $map->update_url === null);
+                            $mapsWithoutUpdateUrl = $records->filter(fn (Map $map) => $map->update_url === null);
 
-                            if ($eggsWithoutUpdateUrl->isNotEmpty()) {
-                                $eggNames = $eggsWithoutUpdateUrl->pluck('name')->join(', ');
+                            if ($mapsWithoutUpdateUrl->isNotEmpty()) {
+                                $mapNames = $mapsWithoutUpdateUrl->pluck('name')->join(', ');
 
                                 Notification::make()
                                     ->warning()
-                                    ->title(trans('admin/map.cannot_update', ['count' => $eggsWithoutUpdateUrl->count()]))
-                                    ->body(trans('admin/map.no_update_url', ['maps' => $eggNames]))
+                                    ->title(trans('admin/map.cannot_update', ['count' => $mapsWithoutUpdateUrl->count()]))
+                                    ->body(trans('admin/map.no_update_url', ['maps' => $mapNames]))
                                     ->send();
                             }
 
@@ -130,7 +130,7 @@ class ListMaps extends ListRecords
             ])
             ->emptyStateIcon(TablerIcon::Maps)
             ->emptyStateDescription('')
-            ->emptyStateHeading(trans('admin/map.no_eggs'))
+            ->emptyStateHeading(trans('admin/map.no_maps'))
             ->filters([
                 TagsFilter::make()
                     ->model(Map::class),

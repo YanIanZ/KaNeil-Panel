@@ -6,8 +6,8 @@ use App\Enums\EditorLanguages;
 use App\Enums\TablerIcon;
 use App\Filament\Admin\Resources\Maps\MapResource;
 use App\Filament\Components\Actions\DeleteIcon;
-use App\Filament\Components\Actions\ExportEggAction;
-use App\Filament\Components\Actions\ImportEggAction;
+use App\Filament\Components\Actions\ExportMapAction;
+use App\Filament\Components\Actions\ImportMapAction;
 use App\Filament\Components\Actions\UploadIcon;
 use App\Filament\Components\Forms\Fields\CopyFrom;
 use App\Filament\Components\Forms\Fields\MonacoEditor;
@@ -301,8 +301,8 @@ class EditMap extends EditRecord
             DeleteAction::make()
                 ->disabled(fn (Map $map): bool => $map->servers()->count() > 0)
                 ->tooltip(fn (Map $map): string => $map->servers()->count() <= 0 ? trans('filament-actions::delete.single.label') : trans('admin/map.in_use')),
-            ExportEggAction::make(),
-            ImportEggAction::make()
+            ExportMapAction::make(),
+            ImportMapAction::make()
                 ->multiple(false),
             Action::make('save')
                 ->hiddenLabel()

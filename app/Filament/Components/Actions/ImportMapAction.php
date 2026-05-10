@@ -23,7 +23,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Artisan;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
-class ImportEggAction extends Action
+class ImportMapAction extends Action
 {
     public static function getDefaultName(): ?string
     {
@@ -204,12 +204,12 @@ class ImportEggAction extends Action
         }, $categories);
 
         if (empty($tabs)) {
-            $tabs[] = Tab::make('no_eggs')
-                ->label(trans('installer.map.no_eggs'))
+            $tabs[] = Tab::make('no_maps')
+                ->label(trans('installer.map.no_maps'))
                 ->schema([
-                    TextEntry::make('no_eggs')
+                    TextEntry::make('no_maps')
                         ->hiddenLabel()
-                        ->state(trans('installer.map.exceptions.no_eggs')),
+                        ->state(trans('installer.map.exceptions.no_maps')),
                 ]);
         }
 

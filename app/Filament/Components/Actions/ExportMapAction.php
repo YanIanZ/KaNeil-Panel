@@ -9,7 +9,7 @@ use Filament\Actions\Action;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Support\Enums\Alignment;
 
-class ExportEggAction extends Action
+class ExportMapAction extends Action
 {
     public static function getDefaultName(): ?string
     {
