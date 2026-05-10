@@ -22,9 +22,9 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->homeUrl('/')
             ->brandName('KaNeil')
-            ->brandLogo(asset('logo.svg'))
+            ->brandLogo(asset('kaneil.svg'))
             ->brandLogoHeight('2.5rem')
-            ->favicon(asset('logo.svg'))
+            ->favicon(asset('kaneil.ico'))
             ->colors([
                 'primary' => Color::Indigo,
                 'danger' => Color::Red,
