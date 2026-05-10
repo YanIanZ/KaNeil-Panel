@@ -26,12 +26,12 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogoHeight('2.5rem')
             ->favicon(asset('kaneil.ico'))
             ->colors([
-                'primary' => Color::Indigo,
-                'danger' => Color::Red,
-                'success' => Color::Emerald,
+                'primary' => Color::hex('#D4AF37'),
+                'danger' => Color::hex('#8B0000'),
+                'success' => Color::hex('#2F5233'),
                 'warning' => Color::Amber,
-                'gray' => Color::Slate,
                 'info' => Color::Cyan,
+                'gray' => Color::Slate,
             ])
             ->viteTheme('resources/css/filament/kaneil/theme.css')
             ->breadcrumbs(false)
