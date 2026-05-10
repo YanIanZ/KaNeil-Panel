@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\Application\Mounts;
 use App\Exceptions\Model\DataValidationException;
 use App\Exceptions\Service\HasActiveServersException;
 use App\Http\Controllers\Api\Application\ApplicationApiController;
-use App\Http\Requests\Api\Application\Maps\GetEggsRequest;
+use App\Http\Requests\Api\Application\Maps\GetMapsRequest;
 use App\Http\Requests\Api\Application\Mounts\DeleteMountRequest;
 use App\Http\Requests\Api\Application\Mounts\GetMountRequest;
 use App\Http\Requests\Api\Application\Mounts\StoreMountRequest;
@@ -126,7 +126,7 @@ class MountController extends ApplicationApiController
      *
      * @return array<array-key, mixed>
      */
-    public function getEggs(GetEggsRequest $request, Mount $mount): array
+    public function getEggs(GetMapsRequest $request, Mount $mount): array
     {
         return $this->fractal->collection($mount->maps)
             ->transformWith($this->getTransformer(MapTransformer::class))

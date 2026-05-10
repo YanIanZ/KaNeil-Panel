@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum EggFormat: string
+enum MapFormat: string
 {
     case YAML = 'yaml';
     case JSON = 'json';

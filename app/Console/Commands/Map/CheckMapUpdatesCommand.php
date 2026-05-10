@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands\Map;
 
-use App\Enums\EggFormat;
+use App\Enums\MapFormat;
 use App\Models\Map;
 use App\Services\Maps\Sharing\EggExporterService;
 use Exception;
@@ -39,8 +39,8 @@ class CheckMapUpdatesCommand extends Command
         $isYaml = in_array($ext, ['yaml', 'yml']);
 
         $local = $isYaml
-            ? Yaml::parse($exporterService->handle($map->id, EggFormat::YAML))
-            : json_decode($exporterService->handle($map->id, EggFormat::JSON), true);
+            ? Yaml::parse($exporterService->handle($map->id, MapFormat::YAML))
+            : json_decode($exporterService->handle($map->id, MapFormat::JSON), true);
 
         $remote = Http::timeout(5)->connectTimeout(1)->get($map->update_url);
 

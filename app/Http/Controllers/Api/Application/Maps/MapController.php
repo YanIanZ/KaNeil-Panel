@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api\Application\Maps;
 
-use App\Enums\EggFormat;
+use App\Enums\MapFormat;
 use App\Http\Controllers\Api\Application\ApplicationApiController;
-use App\Http\Requests\Api\Application\Maps\ExportEggRequest;
-use App\Http\Requests\Api\Application\Maps\GetEggRequest;
-use App\Http\Requests\Api\Application\Maps\GetEggsRequest;
-use App\Http\Requests\Api\Application\Maps\ImportEggRequest;
+use App\Http\Requests\Api\Application\Maps\ExportMapRequest;
+use App\Http\Requests\Api\Application\Maps\GetMapRequest;
+use App\Http\Requests\Api\Application\Maps\GetMapsRequest;
+use App\Http\Requests\Api\Application\Maps\ImportMapRequest;
 use App\Models\Map;
 use App\Services\Maps\Sharing\EggExporterService;
 use App\Services\Maps\Sharing\EggImporterService;
@@ -34,7 +34,7 @@ class MapController extends ApplicationApiController
      *
      * @return array<mixed>
      */
-    public function index(GetEggsRequest $request): array
+    public function index(GetMapsRequest $request): array
     {
         return $this->fractal->collection(Map::all())
             ->transformWith($this->getTransformer(MapTransformer::class))
@@ -48,7 +48,7 @@ class MapController extends ApplicationApiController
      *
      * @return array<mixed>
      */
-    public function view(GetEggRequest $request, Map $map): array
+    public function view(GetMapRequest $request, Map $map): array
     {
         return $this->fractal->item($map)
             ->transformWith($this->getTransformer(MapTransformer::class))
@@ -62,7 +62,7 @@ class MapController extends ApplicationApiController
      *
      * @throws Exception
      */
-    public function delete(GetEggRequest $request, Map $map): Response
+    public function delete(GetMapRequest $request, Map $map): Response
     {
         $map->delete();
 
@@ -74,9 +74,9 @@ class MapController extends ApplicationApiController
      *
      * Return a single map as yaml or json file (defaults to YAML)
      */
-    public function export(ExportEggRequest $request, Map $map): StreamedResponse
+    public function export(ExportMapRequest $request, Map $map): StreamedResponse
     {
-        $format = EggFormat::tryFrom($request->input('format')) ?? EggFormat::YAML;
+        $format = MapFormat::tryFrom($request->input('format')) ?? MapFormat::YAML;
 
         return response()->streamDownload(function () use ($map, $format) {
             echo $this->exporterService->handle($map->id, $format);
@@ -94,7 +94,7 @@ class MapController extends ApplicationApiController
      *
      * @throws Exception|Throwable
      */
-    public function import(ImportEggRequest $request): JsonResponse
+    public function import(ImportMapRequest $request): JsonResponse
     {
         $map = $this->importService->fromContent($request->getContent());
 

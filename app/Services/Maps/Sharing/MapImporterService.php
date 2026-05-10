@@ -2,7 +2,7 @@
 
 namespace App\Services\Maps\Sharing;
 
-use App\Enums\EggFormat;
+use App\Enums\MapFormat;
 use App\Exceptions\Service\InvalidFileUploadException;
 use App\Models\Map;
 use App\Models\MapVariable;
@@ -38,7 +38,7 @@ class MapImporterService
      *
      * @throws InvalidFileUploadException|Throwable
      */
-    public function fromContent(string $content, EggFormat $format = EggFormat::YAML, ?Map $map = null): Map
+    public function fromContent(string $content, EggFormat $format = MapFormat::YAML, ?Map $map = null): Map
     {
         $parsed = $this->parse($content, $format);
 
@@ -63,10 +63,10 @@ class MapImporterService
             $content = $file->getContent();
 
             if (in_array($extension, ['yaml', 'yml']) || str_contains($mime, 'yaml')) {
-                return $this->fromContent($content, EggFormat::YAML, $map);
+                return $this->fromContent($content, MapFormat::YAML, $map);
             }
 
-            return $this->fromContent($content, EggFormat::JSON, $map);
+            return $this->fromContent($content, MapFormat::JSON, $map);
         } catch (Throwable $e) {
             throw new InvalidFileUploadException('File parse failed: ' . $e->getMessage());
         }
@@ -83,8 +83,8 @@ class MapImporterService
         $extension = strtolower($info['extension']);
 
         $format = match ($extension) {
-            'yaml', 'yml' => EggFormat::YAML,
-            'json' => EggFormat::JSON,
+            'yaml', 'yml' => MapFormat::YAML,
+            'json' => MapFormat::JSON,
             default => throw new InvalidFileUploadException('Unsupported file format.'),
         };
 
@@ -147,7 +147,7 @@ class MapImporterService
     {
         try {
             $parsed = match ($format) {
-                EggFormat::YAML => Yaml::parse($content),
+                MapFormat::YAML => Yaml::parse($content),
                 default => json_decode($content, true, 512, JSON_THROW_ON_ERROR),
             };
         } catch (Throwable $e) {

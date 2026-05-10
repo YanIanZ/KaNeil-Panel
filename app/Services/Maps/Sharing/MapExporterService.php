@@ -2,7 +2,7 @@
 
 namespace App\Services\Maps\Sharing;
 
-use App\Enums\EggFormat;
+use App\Enums\MapFormat;
 use App\Models\Map;
 use App\Models\MapVariable;
 use Carbon\Carbon;
@@ -57,8 +57,8 @@ class MapExporterService
         ];
 
         return match ($format) {
-            EggFormat::JSON => json_encode($struct, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES),
-            EggFormat::YAML => Yaml::dump($this->yamlExport($struct), 10, 2, Yaml::DUMP_MULTI_LINE_LITERAL_BLOCK | Yaml::DUMP_OBJECT_AS_MAP),
+            MapFormat::JSON => json_encode($struct, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES),
+            MapFormat::YAML => Yaml::dump($this->yamlExport($struct), 10, 2, Yaml::DUMP_MULTI_LINE_LITERAL_BLOCK | Yaml::DUMP_OBJECT_AS_MAP),
         };
     }
 

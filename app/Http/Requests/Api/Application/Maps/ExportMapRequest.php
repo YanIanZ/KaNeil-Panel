@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Api\Application\Maps;
 
-class ExportMapRequest extends GetEggRequest
+class ExportMapRequest extends GetMapRequest
 {
     public function rules(): array
     {

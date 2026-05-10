@@ -2,7 +2,7 @@
 
 namespace App\Filament\Components\Actions;
 
-use App\Enums\EggFormat;
+use App\Enums\MapFormat;
 use App\Enums\TablerIcon;
 use App\Models\Map;
 use Filament\Actions\Action;
@@ -43,11 +43,11 @@ class ExportMapAction extends Action
         $this->modalFooterActions([
             Action::make('exclude_json')
                 ->label(trans('admin/map.export.as', ['format' => 'json']))
-                ->url(fn (Map $map) => route('api.application.maps.maps.export', ['map' => $map, 'format' => EggFormat::JSON->value]), true)
+                ->url(fn (Map $map) => route('api.application.maps.maps.export', ['map' => $map, 'format' => MapFormat::JSON->value]), true)
                 ->close(),
             Action::make('exclude_yaml')
                 ->label(trans('admin/map.export.as', ['format' => 'yaml']))
-                ->url(fn (Map $map) => route('api.application.maps.maps.export', ['map' => $map, 'format' => EggFormat::YAML->value]), true)
+                ->url(fn (Map $map) => route('api.application.maps.maps.export', ['map' => $map, 'format' => MapFormat::YAML->value]), true)
                 ->close(),
         ]);
     }

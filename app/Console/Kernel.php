@@ -2,7 +2,7 @@
 
 namespace App\Console;
 
-use App\Console\Commands\Map\CheckEggUpdatesCommand;
+use App\Console\Commands\Map\CheckMapUpdatesCommand;
 use App\Console\Commands\Map\UpdateMapIndexCommand;
 use App\Console\Commands\Maintenance\CleanServiceBackupFilesCommand;
 use App\Console\Commands\Maintenance\PruneImagesCommand;
@@ -43,7 +43,7 @@ class Kernel extends ConsoleKernel
         $schedule->command(CleanServiceBackupFilesCommand::class)->daily();
         $schedule->command(PruneImagesCommand::class)->daily();
 
-        $schedule->command(CheckEggUpdatesCommand::class)->daily();
+        $schedule->command(CheckMapUpdatesCommand::class)->daily();
         $schedule->command(UpdateMapIndexCommand::class)->daily();
 
         if (config('backups.prune_age')) {
