@@ -64,7 +64,7 @@ class MapSelectionStep
             ->label(trans('installer.map.title'))
             ->columnSpanFull()
             ->schema([
-                Tabs::make('egg_tabs')
+                Tabs::make('map_tabs')
                     ->tabs($tabs),
             ]);
     }

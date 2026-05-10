@@ -96,7 +96,7 @@ class EditMap extends EditRecord
                         ->columnSpan(1)
                         ->disabled(),
                     TextInput::make('uuid')
-                        ->label(trans('admin/map.egg_uuid'))
+                        ->label(trans('admin/map.map_uuid'))
                         ->disabled()
                         ->columnSpan(['default' => 1, 'sm' => 1, 'md' => 1, 'lg' => 2])
                         ->helperText(trans('admin/map.uuid_help')),

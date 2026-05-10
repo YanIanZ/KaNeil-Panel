@@ -44,7 +44,7 @@ class ServerConfigurationStructureService
      *     suspended: bool,
      *     environment: array<string, mixed>,
      *     invocation: string,
-     *     skip_egg_scripts: bool,
+     *     skip_map_scripts: bool,
      *     build: array{
      *         memory_limit: int,
      *         swap: int,
@@ -79,7 +79,7 @@ class ServerConfigurationStructureService
             'suspended' => $server->isSuspended(),
             'environment' => $this->environment->handle($server),
             'invocation' => $server->startup,
-            'skip_egg_scripts' => $server->skip_scripts,
+            'skip_map_scripts' => $server->skip_scripts,
             'build' => [
                 'memory_limit' => (int) round(config('panel.use_binary_prefix') ? $server->memory : $server->memory / 1.048576),
                 'swap' => (int) round(config('panel.use_binary_prefix') ? $server->swap : $server->swap / 1.048576),

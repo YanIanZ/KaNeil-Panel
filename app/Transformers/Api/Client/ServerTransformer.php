@@ -62,7 +62,7 @@ class ServerTransformer extends BaseClientTransformer
             ],
             'invocation' => $service->handle($server, hideAllValues: !$user->can(SubuserPermission::StartupRead, $server)),
             'docker_image' => $server->image,
-            'egg_features' => $server->map->inherit_features,
+            'map_features' => $server->map->inherit_features,
             'feature_limits' => [
                 'databases' => $server->database_limit,
                 'allocations' => $server->allocation_limit,

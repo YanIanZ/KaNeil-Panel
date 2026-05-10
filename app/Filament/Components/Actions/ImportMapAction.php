@@ -218,7 +218,7 @@ class ImportMapAction extends Action
             ->icon(TablerIcon::BrandGithub)
             ->columnSpanFull()
             ->schema([
-                Tabs::make('egg_tabs')
+                Tabs::make('map_tabs')
                     ->tabs($tabs),
             ]);
     }
