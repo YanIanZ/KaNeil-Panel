@@ -49,7 +49,7 @@ return new class extends Migration
             $table->string('remote')->default('%')->change();
         });
 
-        Schema::table('egg_variables', function (Blueprint $table) {
+        Schema::table('map_variables', function (Blueprint $table) {
             $table->string('name')->change();
             $table->string('env_variable')->change();
         });
@@ -189,7 +189,7 @@ return new class extends Migration
             $table->string('remote', 191)->default('%', 191)->change();
         });
 
-        Schema::table('egg_variables', function (Blueprint $table) {
+        Schema::table('map_variables', function (Blueprint $table) {
             $table->string('name', 191)->change();
             $table->string('env_variable', 191)->change();
         });

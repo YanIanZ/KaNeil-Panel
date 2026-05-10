@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         if (Schema::getConnection()->getDriverName() === 'pgsql') {
-            DB::table('eggs')->update([
+            DB::table('maps')->update([
                 'config_startup' => DB::raw("config_startup::jsonb - 'userInteraction'"),
             ]);
 
@@ -20,7 +20,7 @@ return new class extends Migration
         }
 
         // Remove User Interaction from startup config
-        DB::table('eggs')->update([
+        DB::table('maps')->update([
             'config_startup' => DB::raw('JSON_REMOVE(config_startup, \'$.userInteraction\')'),
         ]);
     }
@@ -28,7 +28,7 @@ return new class extends Migration
     public function down(): void
     {
         // Add blank User Interaction array back to startup config
-        DB::table('eggs')->update([
+        DB::table('maps')->update([
             'config_startup' => DB::raw('JSON_SET(config_startup, \'$.userInteraction\', JSON_ARRAY())'),
         ]);
     }

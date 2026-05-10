@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('eggs', function (Blueprint $table) {
+        Schema::table("maps", function (Blueprint $table) {
             $table->json('features')->after('description')->nullable();
         });
     }
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('eggs', function (Blueprint $table) {
+        Schema::table("maps", function (Blueprint $table) {
             $table->dropColumn('features');
         });
     }

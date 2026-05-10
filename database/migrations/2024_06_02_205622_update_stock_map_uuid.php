@@ -27,7 +27,7 @@ return new class extends Migration
         ];
 
         foreach ($nameToUuidMapping as $name => $uuid) {
-            DB::table('eggs')
+            DB::table('maps')
                 ->where('name', $name)
                 ->update(['uuid' => $uuid]);
         }

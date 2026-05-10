@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('r_users')->default(0);
             $table->unsignedTinyInteger('r_locations')->default(0);
             $table->unsignedTinyInteger('r_nests')->default(0);
-            $table->unsignedTinyInteger('r_eggs')->default(0);
+            $table->unsignedTinyInteger('r_maps')->default(0);
             $table->unsignedTinyInteger('r_database_hosts')->default(0);
             $table->unsignedTinyInteger('r_server_databases')->default(0);
             $table->unsignedTinyInteger('r_packs')->default(0);
@@ -48,7 +48,7 @@ return new class extends Migration
                 'r_users',
                 'r_locations',
                 'r_nests',
-                'r_eggs',
+                'r_maps',
                 'r_database_hosts',
                 'r_server_databases',
                 'r_packs',

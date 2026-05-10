@@ -12,20 +12,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('eggs', function (Blueprint $table) {
+        Schema::table("maps", function (Blueprint $table) {
             $table->json('docker_images')->after('docker_image')->nullable();
             $table->text('update_url')->after('docker_images')->nullable();
         });
 
-        Schema::table('eggs', function (Blueprint $table) {
+        Schema::table("maps", function (Blueprint $table) {
             if (Schema::getConnection()->getDriverName() === 'pgsql') {
-                DB::statement('UPDATE eggs SET docker_images = json_build_array(docker_image)');
+                DB::statement('UPDATE maps SET docker_images = json_build_array(docker_image)');
             } else {
-                DB::statement('UPDATE eggs SET docker_images = JSON_ARRAY(docker_image)');
+                DB::statement('UPDATE maps SET docker_images = JSON_ARRAY(docker_image)');
             }
         });
 
-        Schema::table('eggs', function (Blueprint $table) {
+        Schema::table("maps", function (Blueprint $table) {
             $table->dropColumn('docker_image');
         });
     }
@@ -35,15 +35,15 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('eggs', function (Blueprint $table) {
+        Schema::table("maps", function (Blueprint $table) {
             $table->text('docker_image')->after('docker_images');
         });
 
-        Schema::table('eggs', function (Blueprint $table) {
-            DB::statement('UPDATE eggs SET docker_image = JSON_UNQUOTE(JSON_EXTRACT(docker_images, "$[0]"))');
+        Schema::table("maps", function (Blueprint $table) {
+            DB::statement('UPDATE maps SET docker_image = JSON_UNQUOTE(JSON_EXTRACT(docker_images, "$[0]"))');
         });
 
-        Schema::table('eggs', function (Blueprint $table) {
+        Schema::table("maps", function (Blueprint $table) {
             $table->dropColumn('docker_images');
             $table->dropColumn('update_url');
         });

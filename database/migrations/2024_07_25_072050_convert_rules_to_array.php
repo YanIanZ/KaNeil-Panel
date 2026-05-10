@@ -12,17 +12,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::table('egg_variables')->select(['id', 'rules'])->cursor()->each(function ($eggVariable) {
-            DB::table('egg_variables')->where('id', $eggVariable->id)->update(['rules' => explode('|', $eggVariable->rules)]);
+        DB::table('map_variables')->select(['id', 'rules'])->cursor()->each(function ($eggVariable) {
+            DB::table('map_variables')->where('id', $eggVariable->id)->update(['rules' => explode('|', $eggVariable->rules)]);
         });
 
         if (Schema::getConnection()->getDriverName() === 'pgsql') {
-            DB::statement('ALTER TABLE egg_variables ALTER COLUMN rules TYPE JSON USING rules::json');
+            DB::statement('ALTER TABLE map_variables ALTER COLUMN rules TYPE JSON USING rules::json');
 
             return;
         }
 
-        Schema::table('egg_variables', function (Blueprint $table) {
+        Schema::table('map_variables', function (Blueprint $table) {
             $table->json('rules')->change();
         });
     }
@@ -32,12 +32,12 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('egg_variables', function (Blueprint $table) {
+        Schema::table('map_variables', function (Blueprint $table) {
             $table->text('rules')->change();
         });
 
-        DB::table('egg_variables')->select(['id', 'rules'])->cursor()->each(function ($eggVariable) {
-            DB::table('egg_variables')->where('id', $eggVariable->id)->update(['rules' => implode('|', json_decode($eggVariable->rules))]);
+        DB::table('map_variables')->select(['id', 'rules'])->cursor()->each(function ($eggVariable) {
+            DB::table('map_variables')->where('id', $eggVariable->id)->update(['rules' => implode('|', json_decode($eggVariable->rules))]);
         });
     }
 };

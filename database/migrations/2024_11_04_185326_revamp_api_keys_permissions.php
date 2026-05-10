@@ -31,7 +31,7 @@ return new class extends Migration
                 Node::RESOURCE_NAME => intval($apiKey->r_nodes ?? 0),
                 Allocation::RESOURCE_NAME => intval($apiKey->r_allocations ?? 0),
                 User::RESOURCE_NAME => intval($apiKey->r_users ?? 0),
-                Map::RESOURCE_NAME => intval($apiKey->r_eggs ?? 0),
+                Map::RESOURCE_NAME => intval($apiKey->r_maps ?? 0),
                 DatabaseHost::RESOURCE_NAME => intval($apiKey->r_database_hosts ?? 0),
                 Database::RESOURCE_NAME => intval($apiKey->r_server_databases ?? 0),
                 Mount::RESOURCE_NAME => intval($apiKey->r_mounts ?? 0),
@@ -48,7 +48,7 @@ return new class extends Migration
                 'r_nodes',
                 'r_allocations',
                 'r_users',
-                'r_eggs',
+                'r_maps',
                 'r_database_hosts',
                 'r_server_databases',
                 'r_mounts',
@@ -66,7 +66,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('r_nodes')->default(0);
             $table->unsignedTinyInteger('r_allocations')->default(0);
             $table->unsignedTinyInteger('r_users')->default(0);
-            $table->unsignedTinyInteger('r_eggs')->default(0);
+            $table->unsignedTinyInteger('r_maps')->default(0);
             $table->unsignedTinyInteger('r_database_hosts')->default(0);
             $table->unsignedTinyInteger('r_server_databases')->default(0);
             $table->unsignedTinyInteger('r_mounts')->default(0);
@@ -80,7 +80,7 @@ return new class extends Migration
                     'r_nodes' => $apiKey->permissions[Node::RESOURCE_NAME],
                     'r_allocations' => $apiKey->permissions[Allocation::RESOURCE_NAME],
                     'r_users' => $apiKey->permissions[User::RESOURCE_NAME],
-                    'r_eggs' => $apiKey->permissions[Map::RESOURCE_NAME],
+                    'r_maps' => $apiKey->permissions[Map::RESOURCE_NAME],
                     'r_database_hosts' => $apiKey->permissions[DatabaseHost::RESOURCE_NAME],
                     'r_server_databases' => $apiKey->permissions[Database::RESOURCE_NAME],
                     'r_mounts' => $apiKey->permissions[Mount::RESOURCE_NAME],

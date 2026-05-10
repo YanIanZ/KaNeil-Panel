@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('egg_variables', function (Blueprint $table) {
+        Schema::table('map_variables', function (Blueprint $table) {
             $table->unsignedTinyInteger('sort')->nullable()->after('map_id');
         });
     }
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('egg_variables', function (Blueprint $table) {
+        Schema::table('map_variables', function (Blueprint $table) {
             $table->dropColumn('sort');
         });
     }

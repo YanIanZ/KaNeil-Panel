@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::rename('service_variables', 'egg_variables');
+        Schema::rename('service_variables', 'map_variables');
 
         Schema::table('server_variables', function (Blueprint $table) {
             $table->dropForeign(['variable_id']);
 
-            $table->foreign('variable_id')->references('id')->on('egg_variables')->onDelete('CASCADE');
+            $table->foreign('variable_id')->references('id')->on('map_variables')->onDelete('CASCADE');
         });
 
         Schema::enableForeignKeyConstraints();
@@ -31,7 +31,7 @@ return new class extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::rename('egg_variables', 'service_variables');
+        Schema::rename('map_variables', 'service_variables');
 
         Schema::table('server_variables', function (Blueprint $table) {
             $table->dropForeign(['variable_id']);

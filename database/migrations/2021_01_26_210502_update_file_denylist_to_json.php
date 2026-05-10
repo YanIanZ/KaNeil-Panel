@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('eggs', function (Blueprint $table) {
+        Schema::table("maps", function (Blueprint $table) {
             $table->dropColumn('file_denylist');
         });
 
-        Schema::table('eggs', function (Blueprint $table) {
+        Schema::table("maps", function (Blueprint $table) {
             $table->json('file_denylist')->nullable()->after('docker_images');
         });
     }
@@ -25,11 +25,11 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('eggs', function (Blueprint $table) {
+        Schema::table("maps", function (Blueprint $table) {
             $table->dropColumn('file_denylist');
         });
 
-        Schema::table('eggs', function (Blueprint $table) {
+        Schema::table("maps", function (Blueprint $table) {
             $table->text('file_denylist')->after('docker_images');
         });
     }
