@@ -10,6 +10,9 @@ return new class extends Migration
 {
     private function renameIdColumn(string $table, string $from, string $to): void
     {
+        if ($from === $to) {
+            return;
+        }
         if (!Schema::hasColumn($table, $from)) {
             return;
         }
