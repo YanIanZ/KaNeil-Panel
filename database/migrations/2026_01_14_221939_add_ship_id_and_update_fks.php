@@ -63,7 +63,7 @@ return new class extends Migration
 
         if (!$this->foreignExists('maps', 'ship_id')) {
             Schema::table('maps', function (Blueprint $table) {
-                $table->foreign('ship_id')->references('id')->on('ships')->nullOnDelete();
+                $table->foreign('ship_id')->references('id')->on('ships')->cascadeOnDelete();
             });
         }
     }
