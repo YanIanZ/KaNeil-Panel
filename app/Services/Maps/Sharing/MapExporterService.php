@@ -10,7 +10,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Yaml\Yaml;
 
-class EggExporterService
+class MapExporterService
 {
     /**
      * Return a JSON or YAML representation of an map and its variables.

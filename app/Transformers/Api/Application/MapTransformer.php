@@ -9,7 +9,7 @@ use Illuminate\Support\Arr;
 use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\NullResource;
 
-class EggTransformer extends BaseTransformer
+class MapTransformer extends BaseTransformer
 {
     /**
      * Relationships that can be loaded onto this transformation.

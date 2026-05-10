@@ -147,7 +147,7 @@ class ServerTransformer extends BaseTransformer
 
         $server->loadMissing('map');
 
-        return $this->item($server->getRelation('map'), $this->makeTransformer(EggTransformer::class), 'map');
+        return $this->item($server->getRelation('map'), $this->makeTransformer(MapTransformer::class), 'map');
     }
 
     /**

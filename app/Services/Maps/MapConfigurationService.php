@@ -7,7 +7,7 @@ use App\Services\Servers\ServerConfigurationStructureService;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
-class EggConfigurationService
+class MapConfigurationService
 {
     /**
      * EggConfigurationService constructor.

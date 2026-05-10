@@ -7,7 +7,7 @@ use App\Models\Server;
 use App\Models\ServerVariable;
 use Illuminate\Support\Arr;
 
-class EggChangerService
+class MapChangerService
 {
     public function handle(Server $server, Map|int $newEgg, bool $keepOldVariables = true): void
     {

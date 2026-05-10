@@ -18,7 +18,7 @@ use stdClass;
 use Symfony\Component\Yaml\Yaml;
 use Throwable;
 
-class EggImporterService
+class MapImporterService
 {
     public const UPGRADE_VARIABLES = [
         'server.build.env.SERVER_IP' => 'server.allocations.default.ip',

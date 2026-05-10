@@ -13,7 +13,7 @@ use App\Http\Requests\Api\Application\Mounts\UpdateMountRequest;
 use App\Http\Requests\Api\Application\Nodes\GetNodesRequest;
 use App\Http\Requests\Api\Application\Servers\GetServerRequest;
 use App\Models\Mount;
-use App\Transformers\Api\Application\EggTransformer;
+use App\Transformers\Api\Application\MapTransformer;
 use App\Transformers\Api\Application\MountTransformer;
 use App\Transformers\Api\Application\NodeTransformer;
 use App\Transformers\Api\Application\ServerTransformer;
@@ -129,7 +129,7 @@ class MountController extends ApplicationApiController
     public function getEggs(GetEggsRequest $request, Mount $mount): array
     {
         return $this->fractal->collection($mount->maps)
-            ->transformWith($this->getTransformer(EggTransformer::class))
+            ->transformWith($this->getTransformer(MapTransformer::class))
             ->toArray();
     }
 

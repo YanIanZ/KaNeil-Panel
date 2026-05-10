@@ -4,7 +4,7 @@ namespace App\Transformers\Api\Client;
 
 use App\Models\Map;
 
-class EggTransformer extends BaseClientTransformer
+class MapTransformer extends BaseClientTransformer
 {
     /**
      * Return the resource name for the JSONAPI output.

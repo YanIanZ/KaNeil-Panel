@@ -128,7 +128,7 @@ class ServerTransformer extends BaseClientTransformer
      */
     public function includeEgg(Server $server): Item
     {
-        return $this->item($server->map, $this->makeTransformer(EggTransformer::class), Map::RESOURCE_NAME);
+        return $this->item($server->map, $this->makeTransformer(MapTransformer::class), Map::RESOURCE_NAME);
     }
 
     /**

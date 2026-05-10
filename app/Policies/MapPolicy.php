@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-class EggPolicy
+class MapPolicy
 {
     use DefaultAdminPolicies;
 

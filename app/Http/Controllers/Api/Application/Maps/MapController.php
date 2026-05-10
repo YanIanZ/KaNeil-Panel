@@ -11,14 +11,14 @@ use App\Http\Requests\Api\Application\Maps\ImportEggRequest;
 use App\Models\Map;
 use App\Services\Maps\Sharing\EggExporterService;
 use App\Services\Maps\Sharing\EggImporterService;
-use App\Transformers\Api\Application\EggTransformer;
+use App\Transformers\Api\Application\MapTransformer;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Throwable;
 
-class EggController extends ApplicationApiController
+class MapController extends ApplicationApiController
 {
     public function __construct(
         private EggExporterService $exporterService,
@@ -37,7 +37,7 @@ class EggController extends ApplicationApiController
     public function index(GetEggsRequest $request): array
     {
         return $this->fractal->collection(Map::all())
-            ->transformWith($this->getTransformer(EggTransformer::class))
+            ->transformWith($this->getTransformer(MapTransformer::class))
             ->toArray();
     }
 
@@ -51,7 +51,7 @@ class EggController extends ApplicationApiController
     public function view(GetEggRequest $request, Map $map): array
     {
         return $this->fractal->item($map)
-            ->transformWith($this->getTransformer(EggTransformer::class))
+            ->transformWith($this->getTransformer(MapTransformer::class))
             ->toArray();
     }
 
@@ -99,7 +99,7 @@ class EggController extends ApplicationApiController
         $map = $this->importService->fromContent($request->getContent());
 
         return $this->fractal->item($map)
-            ->transformWith($this->getTransformer(EggTransformer::class))
+            ->transformWith($this->getTransformer(MapTransformer::class))
             ->respond(201);
     }
 }

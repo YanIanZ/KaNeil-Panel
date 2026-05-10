@@ -3,7 +3,7 @@
 namespace App\Livewire\Installer;
 
 use App\Enums\TablerIcon;
-use App\Jobs\InstallEgg;
+use App\Jobs\InstallMap;
 use App\Livewire\Installer\Steps\CacheStep;
 use App\Livewire\Installer\Steps\DatabaseStep;
 use App\Livewire\Installer\Steps\MapSelectionStep;
@@ -243,7 +243,7 @@ class PanelInstaller extends SimplePage implements HasForms
 
             foreach ($selectedEggs as $category => $maps) {
                 foreach ($maps as $downloadUrl) {
-                    InstallEgg::dispatch($downloadUrl);
+                    InstallMap::dispatch($downloadUrl);
                 }
             }
 

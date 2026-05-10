@@ -45,7 +45,7 @@ class MountTransformer extends BaseTransformer
 
         return $this->collection(
             $mount->getRelation('maps'),
-            $this->makeTransformer(EggTransformer::class),
+            $this->makeTransformer(MapTransformer::class),
             'map'
         );
     }

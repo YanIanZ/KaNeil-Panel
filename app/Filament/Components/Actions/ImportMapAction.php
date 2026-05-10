@@ -4,7 +4,7 @@ namespace App\Filament\Components\Actions;
 
 use App\Console\Commands\Map\UpdateMapIndexCommand;
 use App\Enums\TablerIcon;
-use App\Jobs\InstallEgg;
+use App\Jobs\InstallMap;
 use App\Models\Map;
 use App\Services\Maps\Sharing\EggImporterService;
 use Closure;
@@ -52,7 +52,7 @@ class ImportMapAction extends Action
             if ($gitHubEggs) {
                 foreach ($gitHubEggs as $category => $sortedEggs) {
                     foreach ($sortedEggs as $downloadUrl) {
-                        InstallEgg::dispatch($downloadUrl);
+                        InstallMap::dispatch($downloadUrl);
                     }
                 }
 
