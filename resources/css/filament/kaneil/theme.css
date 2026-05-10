@@ -45,11 +45,11 @@
 
 @layer base {
     .fi-body {
-        @apply bg-gray-950 text-yellow-50;
+        @apply bg-gray-950 text-primary-50;
     }
 
     .fi-topbar {
-        @apply bg-gray-900 border-b-2 border-yellow-700;
+        @apply bg-gray-900 border-b-2 border-primary-700;
     }
 
     .fi-sidebar {
@@ -57,6 +57,6 @@
     }
 
     .fi-btn-color-primary {
-        @apply bg-yellow-600 text-black hover:bg-yellow-700;
+        @apply bg-primary-600 text-black hover:bg-primary-700;
     }
 }
