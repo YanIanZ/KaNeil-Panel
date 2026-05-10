@@ -10,7 +10,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\Yaml\Yaml;
 
-class CheckEggUpdatesCommand extends Command
+class CheckMapUpdatesCommand extends Command
 {
     protected $signature = 'p:map:check-updates';
 

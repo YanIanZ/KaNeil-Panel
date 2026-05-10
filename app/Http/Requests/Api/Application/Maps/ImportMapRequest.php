@@ -6,7 +6,7 @@ use App\Http\Requests\Api\Application\ApplicationApiRequest;
 use App\Models\Map;
 use App\Services\Acl\Api\AdminAcl;
 
-class ImportEggRequest extends ApplicationApiRequest
+class ImportMapRequest extends ApplicationApiRequest
 {
     protected ?string $resource = Map::RESOURCE_NAME;
 
