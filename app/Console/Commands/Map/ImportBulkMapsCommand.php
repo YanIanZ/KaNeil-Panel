@@ -148,14 +148,18 @@ class ImportBulkMapsCommand extends Command
                     'tags' => json_encode([$slug]),
                 ]);
 
-                // Create variables
-                foreach ($variables as $var) {
-                    $map->variables()->create(array_merge($var, [
-                        'map_id' => $map->id,
-                        'user_viewable' => $var['user_viewable'] ?? true,
-                        'user_editable' => $var['user_editable'] ?? true,
-                        'rules' => is_array($var['rules']) ? implode('|', $var['rules']) : ($var['rules'] ?? 'required|string'),
-                    ]));
+                // Create variables — skip if table/structure issues
+                try {
+                    foreach ($variables as $var) {
+                        $map->variables()->create(array_merge($var, [
+                            'map_id' => $map->id,
+                            'user_viewable' => $var['user_viewable'] ?? true,
+                            'user_editable' => $var['user_editable'] ?? true,
+                            'rules' => is_array($var['rules']) ? implode('|', $var['rules']) : ($var['rules'] ?? 'required|string'),
+                        ]));
+                    }
+                } catch (\Exception $e) {
+                    $this->warn("  Variables skipped for $name: " . $e->getMessage());
                 }
 
                 $this->info("Imported: $name");
