@@ -884,6 +884,12 @@ class Settings extends Page implements HasSchemas
 
             $this->writeToEnvironment($data);
 
+            // Clear config + view caches so env() picks up the new .env values
+            // immediately. Without this, OAuth toggles, captcha, mail, etc. won't
+            // take effect until the next manual `php artisan optimize:clear`.
+            Artisan::call('config:clear');
+            Artisan::call('view:clear');
+            Artisan::call('cache:clear');
             Artisan::call('queue:restart');
 
             $this->redirect($this->getUrl());
