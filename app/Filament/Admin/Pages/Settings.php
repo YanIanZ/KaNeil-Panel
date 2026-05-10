@@ -169,7 +169,7 @@ class Settings extends Page implements HasSchemas
                         ->label(trans('admin/setting.general.app_logo'))
                         ->hintIcon(TablerIcon::QuestionMark, trans('admin/setting.general.app_logo_help'))
                         ->default(env('APP_LOGO'))
-                        ->placeholder('/kaneil.png'),
+                        ->placeholder('/logo.svg'),
                     TextInput::make('APP_FAVICON')
                         ->label(trans('admin/setting.general.app_favicon'))
                         ->hintIcon(TablerIcon::QuestionMark, trans('admin/setting.general.app_favicon_help'))

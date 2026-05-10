@@ -41,7 +41,7 @@ class DiscordPreview extends Widget
                 'content' => null,
                 'sender' => [
                     'name' => 'KaNeil',
-                    'avatar' => 'https://raw.githubusercontent.com/YanIanZ/KaNeil-Panel/refs/heads/kaneil-v1/panel/public/kaneil.png',
+                    'avatar' => 'https://raw.githubusercontent.com/YanIanZ/KaNeil-Panel/refs/heads/kaneil-v1/panel/public/logo.svg',
                 ],
                 'embeds' => [],
                 'getTime' => 'Today at ' . Carbon::now()->format('h:i A'),
@@ -69,7 +69,7 @@ class DiscordPreview extends Widget
             'content' => data_get($payload, 'content'),
             'sender' => [
                 'name' => data_get($payload, 'username', 'KaNeil'),
-                'avatar' => data_get($payload, 'avatar_url', 'https://raw.githubusercontent.com/YanIanZ/KaNeil-Panel/refs/heads/kaneil-v1/panel/public/kaneil.png'),
+                'avatar' => data_get($payload, 'avatar_url', 'https://raw.githubusercontent.com/YanIanZ/KaNeil-Panel/refs/heads/kaneil-v1/panel/public/logo.svg'),
             ],
             'embeds' => $embeds,
             'getTime' => 'Today at ' . Carbon::now()->format('h:i A'),

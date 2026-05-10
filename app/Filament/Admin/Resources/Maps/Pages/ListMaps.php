@@ -38,7 +38,7 @@ class ListMaps extends ListRecords
      */
     public function table(Table $table): Table
     {
-        $defaultMapIcon = 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('kaneil.png')));
+        $defaultMapIcon = 'data:image/svg+xml;base64,' . base64_encode(file_get_contents(public_path('logo.svg')));
 
         return $table
             ->searchable(true)

@@ -4,7 +4,7 @@ return [
 
     'name' => env('APP_NAME', 'KaNeil'),
     'logo' => env('APP_LOGO'),
-    'favicon' => env('APP_FAVICON', '/kaneil.ico'),
+    'favicon' => env('APP_FAVICON', '/logo.svg'),
 
     'version' => '1.0.0',
 

@@ -37,7 +37,7 @@ abstract class PanelProvider extends BasePanelProvider
             ->brandName(config('app.name', 'KaNeil'))
             ->brandLogo(config('app.logo'))
             ->brandLogoHeight('2rem')
-            ->favicon(config('app.favicon', '/kaneil.ico'))
+            ->favicon(config('app.favicon', '/logo.svg'))
             ->topNavigation(function () {
                 $navigationType = user()?->getCustomization(CustomizationKey::TopNavigation);
 
