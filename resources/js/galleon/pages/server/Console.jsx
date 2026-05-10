@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { Link, usePage, router } from '@inertiajs/react';
-import { Layout, Card, StatusTag } from '../components/index.js';
+import { Layout, Card, StatusTag } from '../../components/index.js';
 
 export default function Console({ server }) {
   const [lines, setLines] = useState([]);

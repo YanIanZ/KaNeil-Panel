@@ -1,6 +1,6 @@
 import React from 'react';
 import { usePage, Link } from '@inertiajs/react';
-import { Layout, Card } from '../components/index.js';
+import { Layout, Card } from '../../components/index.js';
 
 export default function Maps() {
   const { auth, maps } = usePage().props;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { usePage, Link } from '@inertiajs/react';
-import { Layout, Card, StatusTag } from '../components/index.js';
+import { Layout, Card, StatusTag } from '../../components/index.js';
 
 export default function Nodes() {
   const { auth, nodes } = usePage().props;
