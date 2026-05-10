@@ -49,12 +49,13 @@ class NodeAutoDeployService
         }
 
         return sprintf(
-            '%s ship configure --panel-url %s --token %s --node %d%s',
+            '%s ship configure --panel-url %s --token %s --node %d%s%s',
             $docker ? 'docker compose exec -it $(docker ps --filter "name=ship" --format "{{.Names}}")' : 'sudo',
             config('app.url'),
             $token,
             $node->id,
-            $request->isSecure() ? '' : ' --allow-insecure'
+            $request->isSecure() ? '' : ' --allow-insecure',
+            $docker ? '' : ' && sudo systemctl enable --now ship && sudo ufw allow 8080/tcp 2>/dev/null || true'
         );
     }
 }
