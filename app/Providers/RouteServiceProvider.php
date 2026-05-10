@@ -29,6 +29,9 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->routes(function () {
             Route::middleware('web')->group(function () {
+                // Galleon UI — must take priority for `/`
+                Route::middleware([])->group(base_path('routes/galleon.php'));
+
                 Route::middleware(['auth.session'])
                     ->prefix('docs')
                     ->group(base_path('routes/docs.php'));
