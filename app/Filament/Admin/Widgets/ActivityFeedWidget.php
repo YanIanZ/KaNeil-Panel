@@ -22,12 +22,12 @@ class ActivityFeedWidget extends BaseWidget
                 TextColumn::make('description')
                     ->label('Description')
                     ->limit(80),
-                TextColumn::make('created_at')
+                TextColumn::make('timestamp')
                     ->label('Time')
                     ->dateTime('M j, Y H:i')
                     ->sortable(),
             ])
-            ->defaultSort('created_at', 'desc')
+            ->defaultSort('timestamp', 'desc')
             ->paginated([10, 25, 50]);
     }
 }
