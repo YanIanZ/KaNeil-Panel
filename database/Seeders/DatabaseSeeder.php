@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
         Role::firstOrCreate(['name' => Role::ROOT_ADMIN]);
 
         $this->call(StockMapSeeder::class);
+        $this->call(ApplicationShipsSeeder::class);
+        $this->call(GameShipsSeeder::class);
 
         $plugins = Plugin::query()->orderBy('load_order')->get();
         foreach ($plugins as $plugin) {
