@@ -52,8 +52,14 @@ class ImportBulkMapsCommand extends Command
 
             // Prepare docker images
             $dockerImages = [];
-            foreach ($data['docker_images'] ?? [] as $image => $label) {
-                $dockerImages[$image] = is_string($label) ? $label : $image;
+            $rawImages = $data['docker_images'] ?? [];
+            if (is_string($rawImages)) {
+                $rawImages = json_decode($rawImages, true) ?? [];
+            }
+            if (is_array($rawImages)) {
+                foreach ($rawImages as $image => $label) {
+                    $dockerImages[$image] = is_string($label) ? $label : (is_array($label) ? ($label[0] ?? $image) : $image);
+                }
             }
             if (empty($dockerImages)) {
                 $dockerImages['ghcr.io/kaneil-dev/yolks:java_21'] = 'Java 21';
@@ -61,7 +67,10 @@ class ImportBulkMapsCommand extends Command
 
             // Prepare startup command
             $startup = $data['startup'] ?? 'echo "Server started"';
-            $startupCommands = [$startup];
+            if (is_array($startup)) {
+                $startup = implode('; ', $startup);
+            }
+            $startupCommands = [is_string($startup) ? $startup : 'echo "Server started"'];
 
             // Prepare scripts
             $scriptInstall = $data['scripts']['installation']['script'] ?? '#!/bin/bash\necho "No install script"';
@@ -71,11 +80,21 @@ class ImportBulkMapsCommand extends Command
 
             // Prepare config files
             $configFiles = [];
-            foreach ($data['config']['files'] ?? [] as $path => $config) {
-                $configFiles[$path] = [
-                    'parser' => $config['parser'] ?? 'file',
-                    'find' => $config['find'] ?? [],
-                ];
+            $rawFiles = $data['config']['files'] ?? [];
+            if (is_string($rawFiles)) {
+                $rawFiles = json_decode($rawFiles, true) ?? [];
+            }
+            if (is_array($rawFiles)) {
+                foreach ($rawFiles as $path => $config) {
+                    if (is_string($config)) {
+                        $configFiles[$path] = ['parser' => 'file', 'find' => []];
+                    } else {
+                        $configFiles[$path] = [
+                            'parser' => $config['parser'] ?? 'file',
+                            'find' => $config['find'] ?? [],
+                        ];
+                    }
+                }
             }
 
             // Prepare config startup
