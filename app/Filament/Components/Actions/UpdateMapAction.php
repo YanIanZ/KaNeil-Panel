@@ -4,7 +4,7 @@ namespace App\Filament\Components\Actions;
 
 use App\Enums\TablerIcon;
 use App\Models\Map;
-use App\Services\Maps\Sharing\EggImporterService;
+use App\Services\Maps\Sharing\MapImporterService;
 use Exception;
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;
@@ -36,7 +36,7 @@ class UpdateMapAction extends Action
 
         $this->modalSubmitAction(fn (Action $action) => $action->color('danger'));
 
-        $this->action(function (Map $map, EggImporterService $eggImporterService) {
+        $this->action(function (Map $map, MapImporterService $eggImporterService) {
             try {
                 $eggImporterService->fromUrl($map->update_url, $map);
 

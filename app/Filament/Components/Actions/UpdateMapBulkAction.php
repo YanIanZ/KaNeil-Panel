@@ -4,7 +4,7 @@ namespace App\Filament\Components\Actions;
 
 use App\Enums\TablerIcon;
 use App\Models\Map;
-use App\Services\Maps\Sharing\EggImporterService;
+use App\Services\Maps\Sharing\MapImporterService;
 use Exception;
 use Filament\Actions\Action;
 use Filament\Actions\BulkAction;
@@ -38,7 +38,7 @@ class UpdateMapBulkAction extends BulkAction
 
         $this->modalSubmitAction(fn (Action $action) => $action->color('danger'));
 
-        $this->action(function (Collection $records, EggImporterService $eggImporterService) {
+        $this->action(function (Collection $records, MapImporterService $eggImporterService) {
             if ($records->count() === 0) {
                 Notification::make()
                     ->title(trans('admin/map.no_updates'))

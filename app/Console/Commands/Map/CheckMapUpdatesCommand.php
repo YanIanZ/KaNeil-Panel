@@ -4,7 +4,7 @@ namespace App\Console\Commands\Map;
 
 use App\Enums\MapFormat;
 use App\Models\Map;
-use App\Services\Maps\Sharing\EggExporterService;
+use App\Services\Maps\Sharing\MapExporterService;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
@@ -14,7 +14,7 @@ class CheckMapUpdatesCommand extends Command
 {
     protected $signature = 'p:map:check-updates';
 
-    public function handle(EggExporterService $exporterService): void
+    public function handle(MapExporterService $exporterService): void
     {
         $maps = Map::all();
         foreach ($maps as $map) {
@@ -27,7 +27,7 @@ class CheckMapUpdatesCommand extends Command
     }
 
     /** @throws Exception */
-    private function check(Map $map, EggExporterService $exporterService): void
+    private function check(Map $map, MapExporterService $exporterService): void
     {
         if (is_null($map->update_url)) {
             $this->comment("$map->name: Skipping (no update url set)");

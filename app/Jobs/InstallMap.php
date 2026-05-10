@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Services\Maps\Sharing\EggImporterService;
+use App\Services\Maps\Sharing\MapImporterService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -22,7 +22,7 @@ class InstallMap implements ShouldQueue
     /**
      * @throws Throwable
      */
-    public function handle(EggImporterService $eggImporterService): void
+    public function handle(MapImporterService $eggImporterService): void
     {
         try {
             $eggImporterService->fromUrl($this->downloadUrl);

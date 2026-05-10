@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 class MapConfigurationService
 {
     /**
-     * EggConfigurationService constructor.
+     * MapConfigurationService constructor.
      */
     public function __construct(private ServerConfigurationStructureService $configurationStructureService) {}
 

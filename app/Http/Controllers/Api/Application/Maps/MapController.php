@@ -9,8 +9,8 @@ use App\Http\Requests\Api\Application\Maps\GetMapRequest;
 use App\Http\Requests\Api\Application\Maps\GetMapsRequest;
 use App\Http\Requests\Api\Application\Maps\ImportMapRequest;
 use App\Models\Map;
-use App\Services\Maps\Sharing\EggExporterService;
-use App\Services\Maps\Sharing\EggImporterService;
+use App\Services\Maps\Sharing\MapExporterService;
+use App\Services\Maps\Sharing\MapImporterService;
 use App\Transformers\Api\Application\MapTransformer;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -21,8 +21,8 @@ use Throwable;
 class MapController extends ApplicationApiController
 {
     public function __construct(
-        private EggExporterService $exporterService,
-        private EggImporterService $importService
+        private MapExporterService $exporterService,
+        private MapImporterService $importService
     ) {
         parent::__construct();
     }

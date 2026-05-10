@@ -6,7 +6,7 @@ use App\Console\Commands\Map\UpdateMapIndexCommand;
 use App\Enums\TablerIcon;
 use App\Jobs\InstallMap;
 use App\Models\Map;
-use App\Services\Maps\Sharing\EggImporterService;
+use App\Services\Maps\Sharing\MapImporterService;
 use Closure;
 use Exception;
 use Filament\Actions\Action;
@@ -44,7 +44,7 @@ class ImportMapAction extends Action
 
         $this->authorize(fn () => user()?->can('import map'));
 
-        $this->action(function (array $data, EggImporterService $eggImportService): void {
+        $this->action(function (array $data, MapImporterService $eggImportService): void {
 
             $gitHubEggs = array_get($this->data, 'maps', []);
             $maps = array_merge(collect($data['urls'])->flatten()->whereNotNull()->unique()->all(), Arr::wrap($data['files']));

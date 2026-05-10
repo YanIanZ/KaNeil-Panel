@@ -18,7 +18,7 @@ use App\Models\Map;
 use App\Models\Server;
 use App\Models\User;
 use App\Repositories\Daemon\DaemonServerRepository;
-use App\Services\Maps\EggChangerService;
+use App\Services\Maps\MapChangerService;
 use App\Services\Servers\RandomWordService;
 use App\Services\Servers\ReinstallServerService;
 use App\Services\Servers\ServerDeletionService;
@@ -606,7 +606,7 @@ class EditServer extends EditRecord
                         ->hintAction(
                             Action::make('hint_change_egg')
                                 ->label(trans('admin/server.change_egg'))
-                                ->action(function (array $data, Server $server, EggChangerService $service) {
+                                ->action(function (array $data, Server $server, MapChangerService $service) {
                                     $service->handle($server, $data['map_id'], $data['keep_old_variables']);
 
                                     // Use redirect instead of fillForm to prevent server variables from duplicating

@@ -11,7 +11,7 @@ use App\Models\ActivityLog;
 use App\Models\Backup;
 use App\Models\Node;
 use App\Models\Server;
-use App\Services\Maps\EggConfigurationService;
+use App\Services\Maps\MapConfigurationService;
 use App\Services\Servers\ServerConfigurationStructureService;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Http\JsonResponse;
@@ -27,7 +27,7 @@ class ServerDetailsController extends Controller
     public function __construct(
         protected ConnectionInterface $connection,
         private ServerConfigurationStructureService $configurationStructureService,
-        private EggConfigurationService $eggConfigurationService
+        private MapConfigurationService $eggConfigurationService
     ) {}
 
     /**
