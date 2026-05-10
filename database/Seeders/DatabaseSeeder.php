@@ -15,6 +15,8 @@ class DatabaseSeeder extends Seeder
     {
         Role::firstOrCreate(['name' => Role::ROOT_ADMIN]);
 
+        $this->call(StockMapSeeder::class);
+
         $plugins = Plugin::query()->orderBy('load_order')->get();
         foreach ($plugins as $plugin) {
             if (!$plugin->shouldLoad()) {
