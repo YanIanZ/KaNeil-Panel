@@ -49,8 +49,8 @@ class NodeAutoDeployService
         }
 
         return sprintf(
-            '%s wings configure --panel-url %s --token %s --node %d%s',
-            $docker ? 'docker compose exec -it $(docker ps --filter "name=wings" --format "{{.Names}}")' : 'sudo',
+            '%s ship configure --panel-url %s --token %s --node %d%s',
+            $docker ? 'docker compose exec -it $(docker ps --filter "name=ship" --format "{{.Names}}")' : 'sudo',
             config('app.url'),
             $token,
             $node->id,

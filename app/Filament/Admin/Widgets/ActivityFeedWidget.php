@@ -14,7 +14,7 @@ class ActivityFeedWidget extends BaseWidget
     public function table(Table $table): Table
     {
         return $table
-            ->query(ActivityLog::latest()->limit(50))
+            ->query(ActivityLog::query()->orderByDesc('timestamp')->limit(50))
             ->columns([
                 TextColumn::make('event')
                     ->label('Event')

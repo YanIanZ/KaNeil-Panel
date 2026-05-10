@@ -27,7 +27,7 @@ return [
         'no_notes' => 'No notes',
     ],
     'node_info' => 'Port Information',
-    'wings_version' => 'Wings Version',
+    'wings_version' => 'Ship Version',
     'cpu_threads' => 'CPU Threads',
     'architecture' => 'Architecture',
     'kernel' => 'Kernel',
