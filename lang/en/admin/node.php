@@ -21,7 +21,7 @@ return [
         'servers' => 'Servers',
         'alias' => 'Alias',
         'ip' => 'IP',
-        'map' => 'Map',
+        'map' => 'Ship Blueprint',
         'owner' => 'Owner',
         'allocation_notes' => 'Notes',
         'no_notes' => 'No notes',
