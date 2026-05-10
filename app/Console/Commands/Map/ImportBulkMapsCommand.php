@@ -9,8 +9,8 @@ use Illuminate\Support\Str;
 
 class ImportBulkMapsCommand extends Command
 {
-    protected $signature = 'p:map:import-bulk {directory : Path to directory containing egg JSON files}';
-    protected $description = 'Import all game/application eggs from JSON files as Maps';
+    protected $signature = 'p:map:import-bulk {directory : Path to directory containing wing JSON files}';
+    protected $description = 'Import all game/application wings from JSON files as Maps';
 
     public function handle(): int
     {
@@ -27,7 +27,7 @@ class ImportBulkMapsCommand extends Command
         );
 
         $files = $this->findJsonFiles($directory);
-        $this->info('Found ' . count($files) . ' egg JSON files');
+        $this->info('Found ' . count($files) . ' wing JSON files');
 
         $imported = 0;
         $skipped = 0;
