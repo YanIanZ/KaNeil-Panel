@@ -139,7 +139,16 @@ class Handler extends ExceptionHandler
             $connections->rollBack(0);
         }
 
-        return parent::render($request, $e);
+        $response = parent::render($request, $e);
+
+        if ($request->header('X-Inertia') && in_array($response->getStatusCode(), [403, 404, 500, 503], true)) {
+            $code = (string) $response->getStatusCode();
+            return \Inertia\Inertia::render('Error', ['status' => $code])
+                ->toResponse($request)
+                ->setStatusCode((int) $code);
+        }
+
+        return $response;
     }
 
     /**
@@ -268,7 +277,7 @@ class Handler extends ExceptionHandler
             return new JsonResponse($this->convertExceptionToArray($exception), JsonResponse::HTTP_UNAUTHORIZED);
         }
 
-        return redirect()->guest(route('filament.app.auth.login'));
+        return redirect()->guest(route('galleon.login'));
     }
 
     /**

@@ -12,6 +12,8 @@ use App\Http\Middleware\EnsureStatefulRequests;
 use App\Http\Middleware\LanguageMiddleware;
 use App\Http\Middleware\MaintenanceMiddleware;
 use App\Http\Middleware\PreventRequestForgery;
+use App\Http\Middleware\GalleonAuthenticate;
+use App\Http\Middleware\HandleInertiaRequests;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\SetSecurityHeaders;
 use Illuminate\Contracts\Debug\ExceptionHandler;
@@ -27,7 +29,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->redirectGuestsTo(fn () => route('filament.app.auth.login'));
+        $middleware->redirectGuestsTo(fn () => route('galleon.login'));
 
         $middleware->web([
             LanguageMiddleware::class,
@@ -55,6 +57,12 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->group('daemon', [
             SubstituteBindings::class,
             DaemonAuthenticate::class,
+        ]);
+
+        $middleware->group('galleon', [
+            \Illuminate\Session\Middleware\AuthenticateSession::class,
+            GalleonAuthenticate::class,
+            HandleInertiaRequests::class,
         ]);
 
         $middleware->replaceInGroup('web', IlluminatePreventRequestForgery::class, PreventRequestForgery::class);
