@@ -15,12 +15,12 @@ return [
         'port_out_of_range' => 'Porty v alokacích musí být vyšší než 1024 a nížší nebo se rovnat 65535.',
     ],
     'map' => [
-        'delete_has_servers' => 'Vejce s aktivními servery, které jsou k němu připojeny, nemůže být odstraněna z panelu.',
-        'invalid_copy_id' => 'Vejce vybraná pro kopírování skriptu buď neexistuje, nebo kopíruje samotný skript.',
-        'has_children' => 'Toto vejce je nadřazeno jednomu či více vajec. Prosím vymažte tyto vejce předtím než smažete toto.',
+        'delete_has_servers' => 'Maps s aktivními servery, které jsou k němu připojeny, nemůže být odstraněna z panelu.',
+        'invalid_copy_id' => 'Maps vybraná pro kopírování skriptu buď neexistuje, nebo kopíruje samotný skript.',
+        'has_children' => 'Toto maps je nadřazeno jednomu či více vajec. Prosím vymažte tyto maps předtím než smažete toto.',
     ],
     'variables' => [
-        'env_not_unique' => 'Proměnná prostředí :name musí být pro toto vejce jedinečná.',
+        'env_not_unique' => 'Proměnná prostředí :name musí být pro toto maps jedinečná.',
         'reserved_name' => 'Proměnná prostředí :name je chráněná a nemůže být přiřazena k proměnné.',
         'bad_validation_rule' => 'Pravidlo ověření „:rule“ není platným pravidlem pro tuto aplikaci.',
     ],

@@ -94,7 +94,7 @@ return [
     'script_container' => 'Scenarijaus talpykla',
     'script_entry' => 'Scenarijaus įvestis',
     'script_install' => 'Įdiegimo scenarijus',
-    'no_eggs' => 'Nėra „kiaušinių“',
+    'no_maps' => 'Nėra „kiaušinių“',
     'no_servers' => 'Nėra serverių',
     'no_servers_help' => 'Šiam „kiaušiniui“ nepriskirti jokie serveriai.',
 

@@ -63,12 +63,12 @@ return [
     ],
     'map' => [
         'title' => 'Maps',
-        'no_eggs' => 'No Maps Available',
+        'no_maps' => 'No Maps Available',
         'background_install_started' => 'Map Install Started',
         'background_install_description' => 'Install of :count maps has been queued and will continue in the background.',
         'exceptions' => [
             'failed_to_update' => 'Failed to update map index',
-            'no_eggs' => 'No maps are available to install at this time.',
+            'no_maps' => 'No maps are available to install at this time.',
             'installation_failed' => 'Failed to install selected maps. Please import them after the installation via the map list.',
         ],
     ],

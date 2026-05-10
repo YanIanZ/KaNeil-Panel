@@ -99,7 +99,7 @@ return [
     'script_container' => 'Script Container',
     'script_entry' => 'Script Entry',
     'script_install' => 'Install Script',
-    'no_eggs' => 'No Maps',
+    'no_maps' => 'No Maps',
     'no_servers' => 'No Servers',
     'no_servers_help' => 'No Servers are assigned to this Map',
 

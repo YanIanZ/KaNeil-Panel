@@ -40,7 +40,7 @@ return [
         'daemonSFTP' => 'Inserisci la porta di ascolto SFTP del demone',
         'daemonSFTPAlias' => 'Inserisci l\'alias SFTP del daemon (può essere vuoto)',
         'daemonBase' => 'Inserisci la cartella di base',
-        'success' => 'Creato con successo un nuovo nodo con il nome :name che ha id :id',
+        'success' => 'Creato con successo un nmap nodo con il nome :name che ha id :id',
     ],
     'node_config' => [
         'error_not_exist' => 'Il nodo selezionato non esiste.',

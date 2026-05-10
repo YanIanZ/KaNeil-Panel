@@ -16,7 +16,7 @@ return [
         'node_name' => 'Název uzlu',
         'icon' => [
             'upload' => 'Nahrát Ikonu',
-            'tooltip' => 'Používá ikonu vejce',
+            'tooltip' => 'Používá ikonu maps',
             'updated' => 'Ikona serveru byla aktualizována',
             'deleted' => 'Ikona serveru byla smazána',
         ],

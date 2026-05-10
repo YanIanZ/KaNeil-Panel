@@ -17,7 +17,7 @@ return [
         'intro-update-available' => [
             'heading' => 'Aggiornamento disponibile',
             'content' => ':latestVersion è ora disponibile! Leggi la nostra documentazione per aggiornare il pannello.',
-            'button_changelog' => 'Cosa c\'è di nuovo?',
+            'button_changelog' => 'Cosa c\'è di nmap?',
         ],
         'intro-no-update' => [
             'heading' => 'Il pannello è aggiornato',

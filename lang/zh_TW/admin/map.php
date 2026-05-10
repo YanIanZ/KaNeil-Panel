@@ -94,7 +94,7 @@ return [
     'script_container' => '腳本容器',
     'script_entry' => '腳本進入點',
     'script_install' => '安裝腳本',
-    'no_eggs' => '無 Map',
+    'no_maps' => '無 Map',
     'no_servers' => '無伺服器',
     'no_servers_help' => '沒有伺服器分配給此 Map。',
 

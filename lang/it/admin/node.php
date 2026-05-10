@@ -139,10 +139,10 @@ return [
     ],
 
     'bulk_update_ip' => 'Aggiorna IP',
-    'bulk_update_ip_description' => 'Sostituisci un vecchio indirizzo IP con uno nuovo per le allocazioni. Ciò è utile quando l\'indirizzo IP di un nodo cambia',
+    'bulk_update_ip_description' => 'Sostituisci un vecchio indirizzo IP con uno nmap per le allocazioni. Ciò è utile quando l\'indirizzo IP di un nodo cambia',
     'update_ip' => 'Aggiorna IP',
     'old_ip' => 'Vecchio Indirizzo IP',
-    'new_ip' => 'Nuovo Indirizzo IP',
+    'new_ip' => 'Nmap Indirizzo IP',
     'no_allocations_to_update' => 'Nessuna allocazione con il vecchio indirizzo IP selezionato è stata trovata',
     'ip_updated' => 'Aggiornate con successo :count di :total allocazioni',
     'ip_update_failed' => ':count allocazioni non riuscite ad aggiornare',

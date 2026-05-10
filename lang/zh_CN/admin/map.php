@@ -96,7 +96,7 @@ return [
     'script_container' => '脚本容器',
     'script_entry' => '脚本条目',
     'script_install' => '安装脚本',
-    'no_eggs' => '没有 Maps',
+    'no_maps' => '没有 Maps',
     'no_servers' => '没有任何服务器',
     'no_servers_help' => '没有指定服务器到这个Map',
 

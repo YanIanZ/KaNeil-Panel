@@ -62,14 +62,14 @@ return [
         ],
     ],
     'map' => [
-        'title' => 'Vejce',
-        'no_eggs' => 'Žádná vejce nejsou k dispozici',
-        'background_install_started' => 'Instalace vejce byla spuštěna',
+        'title' => 'Maps',
+        'no_maps' => 'Žádná maps nejsou k dispozici',
+        'background_install_started' => 'Instalace maps byla spuštěna',
         'background_install_description' => 'Instalace :count vajec byla zařazena do fronty a bude pokračovat na pozadí.',
         'exceptions' => [
-            'failed_to_update' => 'Nepodařilo se aktualizovat index vejce',
-            'no_eggs' => 'V tuto chvíli nejsou k dispozici žádná vejce.',
-            'installation_failed' => 'Nepodařilo se nainstalovat vybraná vejce. Importujte je prosím po instalaci přes seznam vajec.',
+            'failed_to_update' => 'Nepodařilo se aktualizovat index maps',
+            'no_maps' => 'V tuto chvíli nejsou k dispozici žádná maps.',
+            'installation_failed' => 'Nepodařilo se nainstalovat vybraná maps. Importujte je prosím po instalaci přes seznam vajec.',
         ],
     ],
     'session' => [

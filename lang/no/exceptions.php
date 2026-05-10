@@ -31,7 +31,7 @@ return [
     ],
     'subusers' => [
         'editing_self' => 'Det er ikke tillatt å redigere din egen underbrukerkonto.',
-        'user_is_owner' => 'Du kan ikke legge til servereieren som en underbruker for denne serveren.',
+        'user_is_owner' => 'Du kan ikke legge til servermaps som en underbruker for denne serveren.',
         'subuser_exists' => 'En bruker med den e-postadressen er allerede tilknyttet som en underbruker for denne serveren.',
     ],
     'databases' => [

@@ -96,7 +96,7 @@ Het inschakelen van deze optie zal interne netwerken voor alle servers met deze 
     'script_container' => 'Script container',
     'script_entry' => 'Script Invoer',
     'script_install' => 'Installatiescript',
-    'no_eggs' => 'Geen Maps',
+    'no_maps' => 'Geen Maps',
     'no_servers' => 'Geen Servers',
     'no_servers_help' => 'Er zijn geen servers toegewezen aan deze Map',
 

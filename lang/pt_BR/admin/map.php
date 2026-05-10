@@ -95,7 +95,7 @@ Ativar esta opção desativa a comunicação interna entre servidores usando est
     'script_container' => 'Contêiner de Script',
     'script_entry' => 'Entrada do Script',
     'script_install' => 'Script de Instalação',
-    'no_eggs' => 'Sem Maps',
+    'no_maps' => 'Sem Maps',
     'no_servers' => 'Sem Servidores',
     'no_servers_help' => 'Nenhum servidor foi atribuído a este Map',
 

@@ -96,15 +96,15 @@ Włączenie tej opcji spowoduje wyłączenie wewnętrznej sieci dla wszystkich s
     'script_container' => 'Kontener skryptu',
     'script_entry' => 'Wpis skryptu',
     'script_install' => 'Skrypt instalacji',
-    'no_eggs' => 'Brak Jajek',
+    'no_maps' => 'Brak Maps',
     'no_servers' => 'Brak serwerów!',
     'no_servers_help' => 'Do tego Jajka nie przypisano żadnych serwerów.',
 
     'update' => 'Aktualizuj | Zaktualizuj wybrane',
-    'updated' => 'Jajko zostało zaktualizowane | Zaktualizowano :count z :total jajek',
+    'updated' => 'Jajko zostało zaktualizowane | Zaktualizowano :count z :total maps',
     'updated_failed' => ':count nie powiodło się',
     'updated_skipped' => ':count pominięto',
     'update_question' => 'Czy na pewno chcesz zaktualizować to jajko?|Czy na pewno chcesz zaktualizować wybrane jajka?',
     'update_description' => 'Jeśli wprowadziłeś jakiekolwiek zmiany w jajku, zostaną one nadpisane!|Jeśli wprowadziłeś jakiekolwiek zmiany w jajku, zostaną one nadpisane!',
-    'no_updates' => 'Brak dostępnych aktualizacji dla wybranych jajek',
+    'no_updates' => 'Brak dostępnych aktualizacji dla wybranych maps',
 ];

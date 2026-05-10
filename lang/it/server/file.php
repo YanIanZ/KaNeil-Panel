@@ -31,8 +31,8 @@ return [
         'move' => [
             'title' => 'Sposta',
             'directory' => 'Cartella',
-            'directory_hint' => 'Inserisci la nuova cartella, relativa alla cartella corrente.',
-            'new_location' => 'Nuova posizione',
+            'directory_hint' => 'Inserisci la nmaps cartella, relativa alla cartella corrente.',
+            'new_location' => 'Nmaps posizione',
             'new_location_hint' => 'Inserisci la posizione di questo file o cartella, relativa alla cartella corrente.',
             'notification' => 'File Spostato',
             'bulk_notification' => ':count file sono stati spostati in :directory',
@@ -58,14 +58,14 @@ return [
             'notification' => 'Disarchivio Completato',
         ],
         'new_file' => [
-            'title' => 'Nuovo file',
-            'file_name' => 'Nome del nuovo file',
+            'title' => 'Nmap file',
+            'file_name' => 'Nome del nmap file',
             'syntax' => 'Evidenziazione della sintassi',
             'create' => 'Crea',
         ],
         'new_folder' => [
-            'title' => 'Nuova cartella',
-            'folder_name' => 'Nome della nuova cartella',
+            'title' => 'Nmaps cartella',
+            'folder_name' => 'Nome della nmaps cartella',
         ],
         'nested_search' => [
             'title' => 'Ricerca in tutte le cartelle',

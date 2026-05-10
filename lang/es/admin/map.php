@@ -94,7 +94,7 @@ return [
     'script_container' => 'Contenedor de Script',
     'script_entry' => 'Entrada de Script',
     'script_install' => 'Script de instalación',
-    'no_eggs' => 'No hay huevos',
+    'no_maps' => 'No hay huevos',
     'no_servers' => 'No hay servidores',
     'no_servers_help' => 'No hay servidores asignados a este Huevo.',
 

@@ -63,13 +63,13 @@ return [
     ],
     'map' => [
         'title' => 'Jajka',
-        'no_eggs' => 'Brak jajek',
+        'no_maps' => 'Brak maps',
         'background_install_started' => 'Rozpoczęto instalację jajka',
         'background_install_description' => 'Instalacja :count maps została umieszczona w kolejce i będzie kontynuowana w tle.',
         'exceptions' => [
             'failed_to_update' => 'Nie udało się zaktualizować indeksu map',
-            'no_eggs' => 'W tej chwili nie ma dostępnych jajek do zainstalowania.',
-            'installation_failed' => 'Nie udało się zainstalować wybranych jajek. Proszę je zaimportować po instalacji z listy jajek.',
+            'no_maps' => 'W tej chwili nie ma dostępnych maps do zainstalowania.',
+            'installation_failed' => 'Nie udało się zainstalować wybranych maps. Proszę je zaimportować po instalacji z listy maps.',
         ],
     ],
     'session' => [

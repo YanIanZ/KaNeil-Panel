@@ -24,7 +24,7 @@ return [
     'port' => 'Porta',
     'port_help' => 'La porta su cui è attivo MySQL per questo host.',
     'max_database' => 'Numero massimo di database',
-    'max_databases_help' => 'Il numero massimo di database che possono essere creati su questo host. Se il limite è raggiunto, nessun nuovo database può essere creato su questo host. Lasciare vuoto per illimitato.',
+    'max_databases_help' => 'Il numero massimo di database che possono essere creati su questo host. Se il limite è raggiunto, nessun nmap database può essere creato su questo host. Lasciare vuoto per illimitato.',
     'display_name' => 'Nome visualizzato',
     'display_name_help' => 'L\'indirizzo IP o il nome di dominio che deve essere mostrato all\'utente finale.',
     'username' => 'Nome Utente',

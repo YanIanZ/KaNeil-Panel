@@ -26,7 +26,7 @@ return [
             'password-changed' => 'Password modificata',
         ],
         'api-key' => [
-            'create' => 'Creata una nuova chiave API <b>:identifier</b>',
+            'create' => 'Creata una nmaps chiave API <b>:identifier</b>',
             'delete' => 'Chiave API <b>:identifier</b> eliminata',
         ],
         'ssh-key' => [
@@ -54,7 +54,7 @@ return [
             'restore' => 'Ripristinato il backup <b>:name</b> (file rimossi: <b>:truncate</b>)',
             'restore-complete' => 'Ripristino completato del backup <b>:name</b>',
             'restore-failed' => 'Impossibile completare il ripristino del backup <b>:name</b>',
-            'start' => 'Avviato un nuovo backup <b>:name</b>',
+            'start' => 'Avviato un nmap backup <b>:name</b>',
             'complete' => 'Contrassegnato il backup <b>:name</b> come completo',
             'fail' => 'Contrassegnato il backup <b>:name</b> come non riuscito',
             'lock' => 'Bloccato il backup <b>:name</b>',
@@ -76,7 +76,7 @@ return [
             'download' => 'Scaricato <b>:file</b>',
             'pull' => 'Scaricato un file remoto da <b>:url</b> in <b>:directory</b>',
             'rename' => 'Mosso/ Rinominato <b>:from</b> a <b>:to</b>|Mosso/ Rinominato <b>:count</b> file in <b>:directory</b>',
-            'write' => 'Scritto il nuovo contenuto in <b>:file</b>',
+            'write' => 'Scritto il nmap contenuto in <b>:file</b>',
             'upload' => 'Iniziato il caricamento di un file',
             'uploaded' => 'Caricato <b>:directory:file</b>',
         ],
@@ -101,7 +101,7 @@ return [
             'delete' => 'Aggiornato il programma <b>:name</b>',
         ],
         'task' => [
-            'create' => 'Creato una nuova task "<b>:action</b>" per il programma <b>:name</b>',
+            'create' => 'Creato una nmaps task "<b>:action</b>" per il programma <b>:name</b>',
             'update' => 'Aggiornata la task "<b>:action</b>" per il programma <b>:name</b>',
             'delete' => 'Eliminata la task "<b>:action</b>" per la pianificazione <b>:name</b>',
         ],

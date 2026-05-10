@@ -63,13 +63,13 @@ return [
     ],
     'map' => [
         'title' => 'Œufs',
-        'no_eggs' => 'Aucun œuf disponible',
-        'background_install_started' => 'Installation de l’œuf démarrée',
-        'background_install_description' => 'L’installation de :count œufs a été mise en file d\'attente et se poursuivra en arrière-plan.',
+        'no_maps' => 'Aucun map disponible',
+        'background_install_started' => 'Installation de l’map démarrée',
+        'background_install_description' => 'L’installation de :count maps a été mise en file d\'attente et se poursuivra en arrière-plan.',
         'exceptions' => [
-            'failed_to_update' => 'Échec de la mise à jour de l’index des œufs',
-            'no_eggs' => 'Aucun œuf n’est disponible pour l’installation pour le moment.',
-            'installation_failed' => 'Échec de l’installation des œufs sélectionnés. Veuillez les importer après l’installation via la liste des œufs.',
+            'failed_to_update' => 'Échec de la mise à jour de l’index des maps',
+            'no_maps' => 'Aucun map n’est disponible pour l’installation pour le moment.',
+            'installation_failed' => 'Échec de l’installation des maps sélectionnés. Veuillez les importer après l’installation via la liste des maps.',
         ],
     ],
     'session' => [

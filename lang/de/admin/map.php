@@ -96,7 +96,7 @@ Das Aktivieren dieser Option deaktiviert das interne Netzwerk für alle Server, 
     'script_container' => 'Skript-Container',
     'script_entry' => 'Skript-Eintrag',
     'script_install' => 'Installationsscript',
-    'no_eggs' => 'Keine Maps',
+    'no_maps' => 'Keine Maps',
     'no_servers' => 'Keine Server',
     'no_servers_help' => 'Diesem Map sind keine Server zugeordnet.',
 

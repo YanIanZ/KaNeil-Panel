@@ -15,7 +15,7 @@ return [
     'description' => 'Popis:',
     'description_help' => 'Delší popis pro toto připojení',
     'no_mounts' => 'Žádná připojení',
-    'maps' => 'Vejce',
+    'maps' => 'Maps',
     'nodes' => 'Uzly',
     'toggles' => [
         'writable' => 'Lze zapisovat',
@@ -23,7 +23,7 @@ return [
     ],
     'table' => [
         'name' => 'Název',
-        'all_eggs' => 'Všechna vejce.',
+        'all_eggs' => 'Všechna maps.',
         'all_nodes' => 'Všechny uzly',
         'read_only' => 'Pouze pro čtení',
     ],
