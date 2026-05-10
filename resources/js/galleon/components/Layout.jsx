@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { useTheme } from '../context/ThemeContext.jsx';
 import Sidebar from './Sidebar.jsx';
 import Topbar from './Topbar.jsx';
 import TweaksPanel from './TweaksPanel.jsx';
 
 export default function Layout({ server, crumbs, actions, children }) {
-  const { t, setTweak } = useTheme();
   const [navOpen, setNavOpen] = useState(false);
 
   return (
@@ -16,7 +14,7 @@ export default function Layout({ server, crumbs, actions, children }) {
         <Topbar crumbs={crumbs} onMenu={() => setNavOpen(true)} actions={actions} />
         <div className="main-body">{children}</div>
       </main>
-      <TweaksPanel t={t} setTweak={setTweak} />
+      <TweaksPanel />
     </div>
   );
 }
