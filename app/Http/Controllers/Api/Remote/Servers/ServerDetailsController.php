@@ -51,7 +51,7 @@ class ServerDetailsController extends Controller
 
         return new JsonResponse([
             'settings' => $this->configurationStructureService->handle($server),
-            'process_configuration' => $this->eggConfigurationService->handle($server),
+            'process_configuration' => $this->mapConfigurationService->handle($server),
         ]);
     }
 
