@@ -48,19 +48,26 @@ class ImportBulkMapsCommand extends Command
                     continue;
                 }
 
-                // Simplify docker images
+                // Normalize docker images to [label => image_uri].
+                // Source egg JSON uses the same shape. Drop entries that aren't
+                // valid docker references (lowercase repo, no spaces) so the
+                // UI never offers a label-as-image footgun.
                 $dockerImages = [];
                 $raw = $data['docker_images'] ?? [];
                 if (is_string($raw)) $raw = json_decode($raw, true) ?? [];
                 if (is_array($raw)) {
-                    $first = array_key_first($raw);
-                    if ($first) {
-                        $label = $raw[$first];
-                        $dockerImages[$first] = is_string($label) ? $label : $first;
+                    foreach ($raw as $key => $value) {
+                        $label = (string) $key;
+                        $image = is_string($value) ? $value : (string) $value;
+                        // valid docker reference: no spaces, lowercase repo path before optional :tag
+                        if ($image === '' || preg_match('/\s/', $image) || preg_match('/[A-Z]/', explode(':', $image, 2)[0])) {
+                            continue;
+                        }
+                        $dockerImages[$label] = $image;
                     }
                 }
                 if (empty($dockerImages)) {
-                    $dockerImages['ghcr.io/kaneil-dev/yolks:java_21'] = 'Java 21';
+                    $dockerImages['Java 21'] = 'ghcr.io/kaneil-dev/yolks:java_21';
                 }
 
                 // Simplify startup
