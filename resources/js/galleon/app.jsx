@@ -1,4 +1,5 @@
 import './styles.css';
+import '@xterm/xterm/css/xterm.css';
 import axios from 'axios';
 import React, { Suspense } from 'react';
 import { createInertiaApp } from '@inertiajs/react';

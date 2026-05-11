@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\GalleonLoginController;
+use App\Http\Middleware\HandleInertiaRequests;
 use App\Models\Map;
 use App\Models\Node;
 use App\Models\Server;
@@ -11,14 +12,15 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 
 // ── Login (guest) — OUTSIDE galleon group to avoid redirect loop ───────────
+// HandleInertiaRequests must be present so Inertia uses the 'galleon' root view.
 
 Route::get('/login', function () {
     if (auth()->check()) return redirect('/');
     return Inertia::render('Login');
-})->name('galleon.login');
+})->middleware(HandleInertiaRequests::class)->name('galleon.login');
 
-Route::post('/auth/login',  [GalleonLoginController::class, 'login'])->name('galleon.auth.login');
-Route::post('/auth/logout', [GalleonLoginController::class, 'logout'])->middleware('auth')->name('galleon.auth.logout');
+Route::post('/auth/login', [GalleonLoginController::class, 'login'])->middleware(HandleInertiaRequests::class)->name('galleon.auth.login');
+Route::post('/auth/logout', [GalleonLoginController::class, 'logout'])->middleware(['auth', HandleInertiaRequests::class])->name('galleon.auth.logout');
 
 // ── Authenticated ──────────────────────────────────────────────────────────
 

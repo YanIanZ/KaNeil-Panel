@@ -24,7 +24,7 @@ export class XtermBoundary extends React.Component {
   render() {
     if (this.state.hasError) return (
       <div className="terminal-wrap" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#8a1e1e' }}>
-        Terminal failed to load. <button className="btn ghost sm" style={{ marginLeft: 12 }} onClick={() => this.setState({ hasError: false })}>Retry</button>
+        Terminal failed to load. <button className="btn ghost sm" style={{ marginLeft: 12 }} onClick={() => { this.setState({ hasError: false }); this.props.onRetry?.(); }}>Retry</button>
       </div>
     );
     return this.props.children;

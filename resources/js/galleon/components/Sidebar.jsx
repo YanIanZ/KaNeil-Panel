@@ -65,7 +65,7 @@ export default function Sidebar({ server, onClose }) {
       </nav>
 
       <div style={{ padding: 'var(--space-3) var(--space-4)', borderTop: '1px solid var(--border)', marginTop: 'auto' }}>
-        <Link href={route('galleon.auth.logout')} method="post" as="button" className="btn ghost" style={{ width: '100%', justifyContent: 'center' }}>
+        <Link href="/auth/logout" method="post" as="button" className="btn ghost" style={{ width: '100%', justifyContent: 'center' }}>
           Abandon Ship
         </Link>
       </div>

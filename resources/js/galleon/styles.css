@@ -329,12 +329,15 @@ h1, h2, h3, h4, h5, h6 {
 .terminal-wrap {
   background: #0a0e14;
   border-radius: 6px;
-  padding: var(--space-3);
   min-height: 360px;
-  font-family: var(--font-mono);
-  font-size: 13px;
   color: #c9d1d9;
-  overflow-y: auto;
+  overflow: hidden;
+}
+.terminal-wrap .xterm {
+  height: 100%;
+}
+.terminal-wrap .xterm-viewport {
+  overflow-y: auto !important;
 }
 
 /* Hamburger button — hidden on desktop, shown on mobile */
