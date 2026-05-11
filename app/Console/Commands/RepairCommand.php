@@ -20,10 +20,11 @@ class RepairCommand extends Command
         $dirsPre = $this->option('eggs-dir');
         if (empty($dirsPre)) {
             $dirsPre = [
-                storage_path('eggs/game-wings'),
-                storage_path('eggs/application-wings'),
+                storage_path('eggs/parkervcp-eggs'),
                 storage_path('eggs/game-eggs'),
                 storage_path('eggs/application-eggs'),
+                storage_path('eggs/game-wings'),
+                storage_path('eggs/application-wings'),
             ];
         }
         foreach ($dirsPre as $d) {
@@ -45,10 +46,11 @@ class RepairCommand extends Command
         $dirs = $this->option('eggs-dir');
         if (empty($dirs)) {
             $dirs = [
-                storage_path('eggs/game-wings'),
-                storage_path('eggs/application-wings'),
+                storage_path('eggs/parkervcp-eggs'),
                 storage_path('eggs/game-eggs'),
                 storage_path('eggs/application-eggs'),
+                storage_path('eggs/game-wings'),
+                storage_path('eggs/application-wings'),
             ];
         }
         foreach ($dirs as $d) {
