@@ -44,7 +44,7 @@ export default function Sidebar({ server, onClose }) {
             {SERVER_TABS.map(t => {
               const href = '/server/' + server.uuid + '/' + t.sub;
               return (
-                <Link key={t.sub} href={href} className={'nav-item' + (pathname.startsWith(href) ? ' active' : '')} onClick={onClose}>
+                <Link key={t.sub} href={href} className={'nav-item' + (pathname === href || pathname.startsWith(href + '/') ? ' active' : '')} onClick={onClose}>
                   {t.label}
                 </Link>
               );
@@ -56,7 +56,7 @@ export default function Sidebar({ server, onClose }) {
           <>
             <div className="nav-section">Admiralty</div>
             {NAV_ADMIN.map(it => (
-              <Link key={it.route} href={it.route} className={'nav-item' + (pathname.startsWith(it.route) ? ' active' : '')} onClick={onClose}>
+              <Link key={it.route} href={it.route} className={'nav-item' + (pathname === it.route || pathname.startsWith(it.route + '/') ? ' active' : '')} onClick={onClose}>
                 {it.label}
               </Link>
             ))}

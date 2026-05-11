@@ -4,6 +4,7 @@ namespace App\Console\Commands\Map;
 
 use App\Models\Map;
 use App\Models\Ship;
+use App\Services\Maps\Sharing\MapImporterService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 
@@ -70,17 +71,26 @@ class ImportBulkMapsCommand extends Command
                     $dockerImages['Java 21'] = 'ghcr.io/parkervcp/yolks:java_21';
                 }
 
-                // Startup command
+                // Upgrade legacy {{server.build.*}} placeholders to their
+                // {{server.environment.*}} / {{server.allocations.*}} equivalents,
+                // matching what MapImporterService does on single imports.
+                $upgrade = MapImporterService::UPGRADE_VARIABLES;
+
+                // Startup command — also upgrade legacy placeholders
                 $startup = $data['startup'] ?? 'echo "started"';
                 if (is_array($startup)) {
                     $startup = implode('; ', $startup);
                 }
+                $startup = str_replace(array_keys($upgrade), array_values($upgrade), $startup);
 
                 // Config blocks: egg stores these as JSON strings. Persist them
                 // back as JSON strings (the validation rule requires `json`).
                 $configFiles = $this->ensureJsonString($data['config']['files'] ?? '{}');
+                $configFiles = str_replace(array_keys($upgrade), array_values($upgrade), $configFiles);
                 $configStartup = $this->ensureJsonString($data['config']['startup'] ?? '{"done":"Done"}');
+                $configStartup = str_replace(array_keys($upgrade), array_values($upgrade), $configStartup);
                 $configLogs = $this->ensureJsonString($data['config']['logs'] ?? '{}');
+                $configLogs = str_replace(array_keys($upgrade), array_values($upgrade), $configLogs);
                 $configStop = $data['config']['stop'] ?? 'stop';
 
                 // Features / denylist: arrays land in JSON-cast columns directly.

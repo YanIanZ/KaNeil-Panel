@@ -80,7 +80,10 @@ export default function Console({ server }) {
       tokenRef.current = json.data?.token || null;
       socketRef.current = json.data?.socket || null;
       return { token: tokenRef.current, socket: socketRef.current };
-    } catch {
+    } catch (err) {
+      if (err.name !== 'AbortError' && termRef.current) {
+        termRef.current.write('\x1b[31m[connection error: ' + (err.message || 'failed') + ']\x1b[0m\n');
+      }
       return null;
     }
   }, [server.uuid]);

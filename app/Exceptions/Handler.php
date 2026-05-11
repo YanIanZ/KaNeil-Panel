@@ -136,12 +136,12 @@ class Handler extends ExceptionHandler
         // much as possible at the code level, but there are a lot of spots that do a
         // ton of actions and were written before this bug discovery was made.
         if ($connections->transactionLevel()) {
-            $connections->rollBack(0);
+            $connections->rollBack($connections->transactionLevel());
         }
 
         $response = parent::render($request, $e);
 
-        if ($request->header('X-Inertia') && in_array($response->getStatusCode(), [403, 404, 500, 503], true)) {
+        if ($request->header('X-Inertia') && $response->getStatusCode() >= 400 && $response->getStatusCode() < 600) {
             $code = (string) $response->getStatusCode();
             return \Inertia\Inertia::render('Error', ['status' => $code])
                 ->toResponse($request)
@@ -275,6 +275,11 @@ class Handler extends ExceptionHandler
     {
         if ($request->expectsJson()) {
             return new JsonResponse($this->convertExceptionToArray($exception), JsonResponse::HTTP_UNAUTHORIZED);
+        }
+
+        // API routes return 401, not a redirect to login page.
+        if ($request->is('api/*')) {
+            return new JsonResponse(['error' => 'Unauthenticated.'], JsonResponse::HTTP_UNAUTHORIZED);
         }
 
         return redirect()->guest(route('galleon.login'));
