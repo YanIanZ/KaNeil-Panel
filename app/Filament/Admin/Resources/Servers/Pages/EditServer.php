@@ -604,7 +604,7 @@ class EditServer extends EditRecord
                         ->preload()
                         ->required()
                         ->hintAction(
-                            Action::make('hint_change_egg')
+                            Action::make('hint_change_map')
                                 ->label(trans('admin/server.change_egg'))
                                 ->action(function (array $data, Server $server, MapChangerService $service) {
                                     $service->handle($server, $data['map_id'], $data['keep_old_variables']);

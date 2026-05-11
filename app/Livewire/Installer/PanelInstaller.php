@@ -153,7 +153,7 @@ class PanelInstaller extends SimplePage implements HasForms
             $this->writeToEnv('env_session');
 
             // Install selected maps
-            $this->installEggs();
+            $this->installMaps();
 
             // Redirect to admin panel
             $this->redirect(Filament::getPanel('admin')->getUrl());
@@ -233,15 +233,15 @@ class PanelInstaller extends SimplePage implements HasForms
         }
     }
 
-    public function installEggs(): void
+    public function installMaps(): void
     {
         try {
-            $selectedEggs = array_get($this->data, 'maps', []);
-            if (!$selectedEggs) {
+            $selectedMaps = array_get($this->data, 'maps', []);
+            if (!$selectedMaps) {
                 return;
             }
 
-            foreach ($selectedEggs as $category => $maps) {
+            foreach ($selectedMaps as $category => $maps) {
                 foreach ($maps as $downloadUrl) {
                     InstallMap::dispatch($downloadUrl);
                 }
@@ -249,7 +249,7 @@ class PanelInstaller extends SimplePage implements HasForms
 
             Notification::make()
                 ->title(trans('installer.map.background_install_started'))
-                ->body(trans('installer.map.background_install_description', ['count' => array_sum(array_map('count', $selectedEggs))]))
+                ->body(trans('installer.map.background_install_description', ['count' => array_sum(array_map('count', $selectedMaps))]))
                 ->success()
                 ->persistent()
                 ->send();

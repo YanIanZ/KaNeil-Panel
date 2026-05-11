@@ -395,8 +395,8 @@ class CreateServer extends CreateRecord
 
                             $set('environment', $variables);
 
-                            $previousEgg = Map::query()->find($old);
-                            if (!$get('name') || $previousEgg?->getKebabName() === $get('name')) {
+                            $previousMap = Map::query()->find($old);
+                            if (!$get('name') || $previousMap?->getKebabName() === $get('name')) {
                                 $set('name', $map->getKebabName());
                             }
                         })

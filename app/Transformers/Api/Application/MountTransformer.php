@@ -35,7 +35,7 @@ class MountTransformer extends BaseTransformer
     /**
      * Return the maps associated with this mount.
      */
-    public function includeEggs(Mount $mount): Collection|NullResource
+    public function includeMaps(Mount $mount): Collection|NullResource
     {
         if (!$this->authorize(Map::RESOURCE_NAME)) {
             return $this->null();
@@ -48,6 +48,14 @@ class MountTransformer extends BaseTransformer
             $this->makeTransformer(MapTransformer::class),
             'map'
         );
+    }
+
+    /**
+     * @deprecated Use ?include=maps. Kept so existing API consumers continue to work.
+     */
+    public function includeEggs(Mount $mount): Collection|NullResource
+    {
+        return $this->includeMaps($mount);
     }
 
     /**

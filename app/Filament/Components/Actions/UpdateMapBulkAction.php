@@ -48,40 +48,40 @@ class UpdateMapBulkAction extends BulkAction
                 return;
             }
 
-            $successEggs = collect();
-            $failedEggs = collect();
-            $skippedEggs = collect();
+            $successMaps = collect();
+            $failedMaps = collect();
+            $skippedMaps = collect();
 
             /** @var Map $map */
             foreach ($records as $map) {
                 if ($map->update_url === null) {
-                    $skippedEggs->push($map->name);
+                    $skippedMaps->push($map->name);
 
                     continue;
                 }
                 try {
                     $mapImporterService->fromUrl($map->update_url, $map);
 
-                    $successEggs->push($map->name);
+                    $successMaps->push($map->name);
 
                     cache()->forget("maps.$map->uuid.update");
                 } catch (Exception $exception) {
-                    $failedEggs->push($map->name);
+                    $failedMaps->push($map->name);
 
                     report($exception);
                 }
             }
 
             $bodyParts = collect([
-                $successEggs->isNotEmpty() ? trans('admin/map.updated_maps', ['maps' => $successEggs->join(', ')]) : null,
-                $failedEggs->isNotEmpty() ? trans('admin/map.failed_maps', ['maps' => $failedEggs->join(', ')]) : null,
-                $skippedEggs->isNotEmpty() ? trans('admin/map.skipped_maps', ['maps' => $skippedEggs->join(', ')]) : null,
+                $successMaps->isNotEmpty() ? trans('admin/map.updated_maps', ['maps' => $successMaps->join(', ')]) : null,
+                $failedMaps->isNotEmpty() ? trans('admin/map.failed_maps', ['maps' => $failedMaps->join(', ')]) : null,
+                $skippedMaps->isNotEmpty() ? trans('admin/map.skipped_maps', ['maps' => $skippedMaps->join(', ')]) : null,
             ])->filter();
 
             Notification::make()
-                ->title(trans_choice('admin/map.updated', 2, ['count' => $successEggs->count(), 'total' => $records->count()]))
+                ->title(trans_choice('admin/map.updated', 2, ['count' => $successMaps->count(), 'total' => $records->count()]))
                 ->body($bodyParts->join(' | '))
-                ->status($failedEggs->isNotEmpty() ? 'warning' : 'success')
+                ->status($failedMaps->isNotEmpty() ? 'warning' : 'success')
                 ->persistent()
                 ->send();
         });

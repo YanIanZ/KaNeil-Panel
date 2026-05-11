@@ -18,7 +18,7 @@ class MapExporterService
     public function handle(int $map, EggFormat $format): string
     {
         $map = Map::with(['scriptFrom', 'configFrom', 'variables'])->findOrFail($map);
-        $iconBase64 = $this->getEggIconAsBase64($map);
+        $iconBase64 = $this->getMapIconAsBase64($map);
 
         $struct = [
             '_comment' => 'DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL',
@@ -65,7 +65,7 @@ class MapExporterService
     /**
      * Get the map icon as base64 for export.
      */
-    private function getEggIconAsBase64(Map $map): ?string
+    private function getMapIconAsBase64(Map $map): ?string
     {
         foreach (Map::$iconFormats as $ext => $mimeType) {
             $path = Map::getIconStoragePath() . "/$map->uuid.$ext";

@@ -46,19 +46,19 @@ class ImportMapAction extends Action
 
         $this->action(function (array $data, MapImporterService $mapImportService): void {
 
-            $gitHubEggs = array_get($this->data, 'maps', []);
+            $gitHubMaps = array_get($this->data, 'maps', []);
             $maps = array_merge(collect($data['urls'])->flatten()->whereNotNull()->unique()->all(), Arr::wrap($data['files']));
 
-            if ($gitHubEggs) {
-                foreach ($gitHubEggs as $category => $sortedEggs) {
-                    foreach ($sortedEggs as $downloadUrl) {
+            if ($gitHubMaps) {
+                foreach ($gitHubMaps as $category => $sortedMaps) {
+                    foreach ($sortedMaps as $downloadUrl) {
                         InstallMap::dispatch($downloadUrl);
                     }
                 }
 
                 Notification::make()
                     ->title(trans('installer.map.background_install_started'))
-                    ->body(trans('installer.map.background_install_description', ['count' => array_sum(array_map('count', $gitHubEggs))]))
+                    ->body(trans('installer.map.background_install_description', ['count' => array_sum(array_map('count', $gitHubMaps))]))
                     ->success()
                     ->persistent()
                     ->send();
@@ -134,7 +134,7 @@ class ImportMapAction extends Action
             Tabs::make('Tabs')
                 ->contained(false)
                 ->tabs([
-                    $this->importEggsFromGitHub(),
+                    $this->importMapsFromGitHub(),
                     Tab::make('file')
                         ->label(trans('admin/map.import.file'))
                         ->icon(TablerIcon::FileUpload)
@@ -178,7 +178,7 @@ class ImportMapAction extends Action
         return $this;
     }
 
-    public function importEggsFromGitHub(): Tab
+    public function importMapsFromGitHub(): Tab
     {
         if (!cache()->get('maps.index')) {
             Artisan::call(UpdateMapIndexCommand::class);

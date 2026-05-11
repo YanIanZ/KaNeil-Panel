@@ -126,9 +126,17 @@ class ServerTransformer extends BaseClientTransformer
     /**
      * Returns the map associated with this server.
      */
-    public function includeEgg(Server $server): Item
+    public function includeMap(Server $server): Item
     {
         return $this->item($server->map, $this->makeTransformer(MapTransformer::class), Map::RESOURCE_NAME);
+    }
+
+    /**
+     * @deprecated Use ?include=map. Kept so existing API consumers continue to work.
+     */
+    public function includeEgg(Server $server): Item
+    {
+        return $this->includeMap($server);
     }
 
     /**

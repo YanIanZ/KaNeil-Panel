@@ -126,7 +126,7 @@ class MountController extends ApplicationApiController
      *
      * @return array<array-key, mixed>
      */
-    public function getEggs(GetMapsRequest $request, Mount $mount): array
+    public function getMaps(GetMapsRequest $request, Mount $mount): array
     {
         return $this->fractal->collection($mount->maps)
             ->transformWith($this->getTransformer(MapTransformer::class))
@@ -164,7 +164,7 @@ class MountController extends ApplicationApiController
      *
      * @return array<array-key, mixed>
      */
-    public function addEggs(Request $request, Mount $mount): array
+    public function addMaps(Request $request, Mount $mount): array
     {
         $validatedData = $request->validate([
             'maps' => 'required|array|exists:maps,id',

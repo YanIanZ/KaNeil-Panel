@@ -139,7 +139,7 @@ class ServerTransformer extends BaseTransformer
     /**
      * Return a generic array with map information for this server.
      */
-    public function includeEgg(Server $server): Item|NullResource
+    public function includeMap(Server $server): Item|NullResource
     {
         if (!$this->authorize(Map::RESOURCE_NAME)) {
             return $this->null();
@@ -148,6 +148,14 @@ class ServerTransformer extends BaseTransformer
         $server->loadMissing('map');
 
         return $this->item($server->getRelation('map'), $this->makeTransformer(MapTransformer::class), 'map');
+    }
+
+    /**
+     * @deprecated Use ?include=map. Kept so existing API consumers continue to work.
+     */
+    public function includeEgg(Server $server): Item|NullResource
+    {
+        return $this->includeMap($server);
     }
 
     /**
