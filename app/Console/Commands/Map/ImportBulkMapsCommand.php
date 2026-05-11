@@ -67,7 +67,7 @@ class ImportBulkMapsCommand extends Command
                     }
                 }
                 if (empty($dockerImages)) {
-                    $dockerImages['Java 21'] = 'ghcr.io/pterodactyl/yolks:java_21';
+                    $dockerImages['Java 21'] = 'ghcr.io/parkervcp/yolks:java_21';
                 }
 
                 // Simplify startup
@@ -88,7 +88,7 @@ class ImportBulkMapsCommand extends Command
                 // Scripts
                 $scriptInstall = $data['scripts']['installation']['script'] ?? '#!/bin/bash\necho "done"';
                 $scriptEntry = $data['scripts']['installation']['entrypoint'] ?? 'bash';
-                $scriptContainer = $data['scripts']['installation']['container'] ?? 'ghcr.io/pterodactyl/installers:alpine';
+                $scriptContainer = $data['scripts']['installation']['container'] ?? 'ghcr.io/parkervcp/installers:alpine';
                 $isPrivileged = ($data['scripts']['installation']['privileged'] ?? false) === true;
 
                 Map::create([
