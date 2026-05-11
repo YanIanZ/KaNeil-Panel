@@ -91,7 +91,7 @@ class ImportBulkMapsCommand extends Command
                 $scriptContainer = $data['scripts']['installation']['container'] ?? 'ghcr.io/parkervcp/installers:alpine';
                 $isPrivileged = ($data['scripts']['installation']['privileged'] ?? false) === true;
 
-                Map::create([
+                $map = Map::create([
                     'ship_id' => $ship->id,
                     'uuid' => Str::uuid()->toString(),
                     'name' => $name,
@@ -113,7 +113,35 @@ class ImportBulkMapsCommand extends Command
                     'tags' => json_encode([]),
                 ]);
 
-                $this->info("  OK: $name");
+                // Import variables from egg JSON
+                $variables = $data['variables'] ?? [];
+                $varCount = 0;
+                if (is_array($variables)) {
+                    foreach ($variables as $sort => $var) {
+                        if (!is_array($var)) continue;
+                        $envName = $var['env_variable'] ?? null;
+                        if (!$envName || in_array($envName, \App\Models\MapVariable::RESERVED_ENV_NAMES)) continue;
+                        $rules = $var['rules'] ?? '';
+                        if (is_string($rules)) {
+                            $rules = array_values(array_filter(array_map('trim', explode('|', $rules))));
+                        }
+                        if (!is_array($rules) || empty($rules)) $rules = ['nullable', 'string'];
+                        \App\Models\MapVariable::create([
+                            'map_id' => $map->id,
+                            'sort' => $sort,
+                            'name' => (string) ($var['name'] ?? $envName),
+                            'description' => (string) ($var['description'] ?? ''),
+                            'env_variable' => $envName,
+                            'default_value' => (string) ($var['default_value'] ?? ''),
+                            'user_viewable' => (bool) ($var['user_viewable'] ?? true),
+                            'user_editable' => (bool) ($var['user_editable'] ?? true),
+                            'rules' => $rules,
+                        ]);
+                        $varCount++;
+                    }
+                }
+
+                $this->info("  OK: $name (vars=$varCount)");
                 $imported++;
             } catch (\Exception $e) {
                 $this->error("  FAIL: " . ($data['name'] ?? basename($file)) . " - " . $e->getMessage());
