@@ -93,11 +93,16 @@ class ImportBulkMapsCommand extends Command
                 $scriptContainer = $data['scripts']['installation']['container'] ?? 'ghcr.io/parkervcp/installers:alpine';
                 $isPrivileged = ($data['scripts']['installation']['privileged'] ?? false) === true;
 
+                $author = $data['author'] ?? 'unknown@kaneil.dev';
+                if (!filter_var($author, FILTER_VALIDATE_EMAIL)) {
+                    $author = 'unknown@kaneil.dev';
+                }
+
                 $map = Map::create([
                     'ship_id' => $ship->id,
                     'uuid' => Str::uuid()->toString(),
                     'name' => $name,
-                    'author' => $data['author'] ?? 'unknown@kaneil.dev',
+                    'author' => $author,
                     'description' => $data['description'] ?? '',
                     'features' => $features,
                     'docker_images' => $dockerImages,

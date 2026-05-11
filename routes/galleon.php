@@ -66,18 +66,37 @@ Route::middleware('galleon')->group(function () {
 
     Route::post('/server', function (Request $request) {
         $data = $request->validate([
-            'name'          => ['required','string','max:255'],
-            'map_id'        => ['required','exists:maps,id'],
-            'node_id'       => ['required','exists:nodes,id'],
-            'allocation_id' => ['required','exists:allocations,id'],
-            'memory'        => ['required','integer','min:0'],
-            'swap'          => ['required','integer','min:-1'],
-            'disk'          => ['required','integer','min:0'],
-            'io'            => ['required','integer','between:10,1000'],
-            'cpu'           => ['required','integer','min:0'],
-            'startup'       => ['required','string'],
-            'image'         => ['required','string'],
+            'name'             => ['required','string','max:255'],
+            'description'      => ['nullable','string'],
+            'map_id'           => ['required','exists:maps,id'],
+            'node_id'          => ['required','exists:nodes,id'],
+            'allocation_id'    => ['required','exists:allocations,id'],
+            'memory'           => ['required','integer','min:0'],
+            'swap'             => ['required','integer','min:-1'],
+            'disk'             => ['required','integer','min:0'],
+            'io'               => ['required','integer','between:10,1000'],
+            'cpu'              => ['required','integer','min:0'],
+            'threads'          => ['nullable','string'],
+            'startup'          => ['required','string'],
+            'image'            => ['required','string'],
+            'oom_killer'       => ['nullable','boolean'],
+            'database_limit'   => ['nullable','integer','min:0'],
+            'allocation_limit' => ['nullable','integer','min:0'],
+            'backup_limit'     => ['nullable','integer','min:0'],
+            'environment'      => ['nullable','array'],
+            'environment.*'    => ['nullable','string'],
         ]);
+
+        // Default env to MapVariable defaults so install scripts don't fail on empty vars.
+        $map = \App\Models\Map::with('variables')->findOrFail($data['map_id']);
+        $env = $data['environment'] ?? [];
+        foreach ($map->variables as $mv) {
+            if (!array_key_exists($mv->env_variable, $env) || $env[$mv->env_variable] === null || $env[$mv->env_variable] === '') {
+                $env[$mv->env_variable] = (string) $mv->default_value;
+            }
+        }
+        $data['environment'] = $env;
+
         $server = app(\App\Services\Servers\ServerCreationService::class)->handle(array_merge($data, [
             'owner_id' => auth()->id(),
         ]));
@@ -166,10 +185,93 @@ Route::middleware('galleon')->group(function () {
             abort_unless(auth()->user()->isRootAdmin(), 403);
             $request->validate(['json_content' => ['required','string']]);
             $payload = json_decode($request->input('json_content'), true, 512, JSON_THROW_ON_ERROR);
-            $map = Map::create(Arr::only($payload, [
-                'name','description','author','docker_images',
-                'startup','config_files','config_startup','config_logs','config_stop',
-            ]));
+
+            // Build a payload that satisfies Map::$validationRules.
+            $ship = \App\Models\Ship::firstOrCreate(
+                ['name' => 'Default'],
+                ['author' => 'KaNeil', 'description' => 'Default ship for imported maps']
+            );
+
+            $author = $payload['author'] ?? 'unknown@kaneil.dev';
+            if (!filter_var($author, FILTER_VALIDATE_EMAIL)) {
+                $author = 'unknown@kaneil.dev';
+            }
+
+            // docker_images: must be ['label' => 'uri', ...] with valid refs.
+            $dockerImages = [];
+            $raw = $payload['docker_images'] ?? [];
+            if (is_string($raw)) { $raw = json_decode($raw, true) ?? []; }
+            if (is_array($raw)) {
+                foreach ($raw as $k => $v) {
+                    $uri = is_string($v) ? $v : '';
+                    if ($uri === '' || preg_match('/\s/', $uri) || preg_match('/[A-Z]/', explode(':', $uri, 2)[0] ?? '')) {
+                        continue;
+                    }
+                    $dockerImages[(string) $k] = $uri;
+                }
+            }
+            if (empty($dockerImages)) {
+                $dockerImages = ['Java 21' => 'ghcr.io/parkervcp/yolks:java_21'];
+            }
+
+            // startup_commands
+            $startup = $payload['startup'] ?? 'echo "started"';
+            if (is_array($startup)) { $startup = implode('; ', $startup); }
+
+            $ensureJsonString = function (mixed $v): string {
+                if (is_string($v)) {
+                    $d = json_decode($v, true);
+                    return json_last_error() === JSON_ERROR_NONE ? json_encode($d) : '{}';
+                }
+                if (is_array($v) || is_object($v)) { return json_encode($v); }
+                return '{}';
+            };
+
+            $map = Map::create([
+                'ship_id'         => $ship->id,
+                'uuid'            => \Illuminate\Support\Str::uuid()->toString(),
+                'name'            => $payload['name'] ?? 'Imported Map',
+                'author'          => $author,
+                'description'    => $payload['description'] ?? '',
+                'features'        => is_array($payload['features'] ?? null) ? $payload['features'] : null,
+                'docker_images'   => $dockerImages,
+                'startup_commands' => ['Default' => $startup],
+                'file_denylist'   => is_array($payload['file_denylist'] ?? null) ? $payload['file_denylist'] : [],
+                'config_files'    => $ensureJsonString($payload['config']['files']   ?? '{}'),
+                'config_startup'  => $ensureJsonString($payload['config']['startup'] ?? '{"done":"Done"}'),
+                'config_logs'     => $ensureJsonString($payload['config']['logs']    ?? '{}'),
+                'config_stop'     => $payload['config']['stop'] ?? 'stop',
+                'script_install'  => $payload['scripts']['installation']['script']     ?? "#!/bin/bash\necho \"done\"",
+                'script_entry'    => $payload['scripts']['installation']['entrypoint'] ?? 'bash',
+                'script_container'=> $payload['scripts']['installation']['container']  ?? 'ghcr.io/parkervcp/installers:alpine',
+                'script_is_privileged' => ($payload['scripts']['installation']['privileged'] ?? false) === true,
+                'update_url'      => null,
+                'tags'            => [],
+            ]);
+
+            // Variables
+            foreach (($payload['variables'] ?? []) as $sort => $var) {
+                if (!is_array($var)) { continue; }
+                $env = $var['env_variable'] ?? null;
+                if (!$env || in_array($env, \App\Models\MapVariable::RESERVED_ENV_NAMES)) { continue; }
+                $rules = $var['rules'] ?? '';
+                if (is_string($rules)) {
+                    $rules = array_values(array_filter(array_map('trim', explode('|', $rules))));
+                }
+                if (!is_array($rules) || empty($rules)) { $rules = ['nullable', 'string']; }
+                \App\Models\MapVariable::create([
+                    'map_id'         => $map->id,
+                    'sort'           => $sort,
+                    'name'           => (string) ($var['name'] ?? $env),
+                    'description'    => (string) ($var['description'] ?? ''),
+                    'env_variable'   => $env,
+                    'default_value'  => (string) ($var['default_value'] ?? ''),
+                    'user_viewable'  => (bool) ($var['user_viewable'] ?? true),
+                    'user_editable'  => (bool) ($var['user_editable'] ?? true),
+                    'rules'          => $rules,
+                ]);
+            }
+
             return redirect()->route('galleon.maps')->with('success', 'Map imported.');
         })->name('galleon.import.post');
     });
