@@ -16,6 +16,22 @@ class RepairCommand extends Command
 
     public function handle(): int
     {
+        $this->info('=== Repair: refresh map config blocks from local egg JSON ===');
+        $dirsPre = $this->option('eggs-dir');
+        if (empty($dirsPre)) {
+            $dirsPre = [
+                storage_path('eggs/game-wings'),
+                storage_path('eggs/application-wings'),
+                storage_path('eggs/game-eggs'),
+                storage_path('eggs/application-eggs'),
+            ];
+        }
+        foreach ($dirsPre as $d) {
+            if (is_dir($d)) {
+                $this->refreshMapConfigsFromEggs($d);
+            }
+        }
+
         $this->info('=== Repair: docker_images normalization ===');
         $this->repairDockerImages();
 
@@ -51,6 +67,78 @@ class RepairCommand extends Command
         $this->info('Done.');
 
         return self::SUCCESS;
+    }
+
+    private function refreshMapConfigsFromEggs(string $dir): void
+    {
+        $rii = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::SKIP_DOTS));
+        $touched = 0;
+        foreach ($rii as $f) {
+            if (!$f->isFile() || $f->getExtension() !== 'json' || !str_starts_with($f->getFilename(), 'egg-')) {
+                continue;
+            }
+            $data = json_decode(file_get_contents($f->getPathname()), true);
+            if (!$data || empty($data['name'])) {
+                continue;
+            }
+            $map = Map::where('name', $data['name'])->first();
+            if (!$map) {
+                continue;
+            }
+            $changed = false;
+
+            // config_files: was previously stored as PHP array ("Array" literal) - replace with JSON string.
+            $current = $map->getRawOriginal('config_files');
+            if ($current === 'Array' || $current === null || (is_string($current) && json_decode($current, true) === null && $current !== '')) {
+                $map->config_files = $this->ensureJsonString($data['config']['files'] ?? '{}');
+                $changed = true;
+            }
+
+            // config_startup: replace placeholder ({"done":"Done"}) with real egg startup matcher.
+            $startupCur = $map->getRawOriginal('config_startup');
+            if ($startupCur === null || $startupCur === '' || $startupCur === '{"done":"Done"}') {
+                $map->config_startup = $this->ensureJsonString($data['config']['startup'] ?? '{"done":"Done"}');
+                $changed = true;
+            }
+
+            // config_logs
+            $logsCur = $map->getRawOriginal('config_logs');
+            $isPlaceholderLogs = $logsCur === null || $logsCur === '' || $logsCur === '{"custom":false,"location":"latest.log"}';
+            if ($isPlaceholderLogs) {
+                $map->config_logs = $this->ensureJsonString($data['config']['logs'] ?? '{}');
+                $changed = true;
+            }
+
+            // Ensure script_install reflects real egg install script
+            $eggInstall = $data['scripts']['installation']['script'] ?? null;
+            if (is_string($eggInstall) && !empty($eggInstall) && $map->script_install !== $eggInstall) {
+                $map->script_install = $eggInstall;
+                $changed = true;
+            }
+
+            if ($changed) {
+                $map->save();
+                $touched++;
+            }
+        }
+        $this->line("  Maps refreshed from $dir: $touched");
+    }
+
+    private function ensureJsonString(mixed $value): string
+    {
+        if (is_string($value)) {
+            $decoded = json_decode($value, true);
+            if (json_last_error() === JSON_ERROR_NONE) {
+                return json_encode($decoded);
+            }
+
+            return '{}';
+        }
+        if (is_array($value) || is_object($value)) {
+            return json_encode($value);
+        }
+
+        return '{}';
     }
 
     private function repairDockerImages(): void

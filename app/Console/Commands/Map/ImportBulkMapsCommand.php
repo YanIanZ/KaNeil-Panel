@@ -70,23 +70,25 @@ class ImportBulkMapsCommand extends Command
                     $dockerImages['Java 21'] = 'ghcr.io/parkervcp/yolks:java_21';
                 }
 
-                // Simplify startup
+                // Startup command
                 $startup = $data['startup'] ?? 'echo "started"';
-                if (is_array($startup)) $startup = implode('; ', $startup);
+                if (is_array($startup)) {
+                    $startup = implode('; ', $startup);
+                }
 
-                // Simplify config
-                $configStartup = json_encode(['done' => 'Done']);
-
-                $configFiles = [];
-                $rawFiles = $data['config']['files'] ?? [];
-                if (is_string($rawFiles)) $rawFiles = json_decode($rawFiles, true) ?? [];
-                $configFiles = is_array($rawFiles) ? $rawFiles : [];
-
-                $configLogs = json_encode(['custom' => false, 'location' => 'latest.log']);
+                // Config blocks: egg stores these as JSON strings. Persist them
+                // back as JSON strings (the validation rule requires `json`).
+                $configFiles = $this->ensureJsonString($data['config']['files'] ?? '{}');
+                $configStartup = $this->ensureJsonString($data['config']['startup'] ?? '{"done":"Done"}');
+                $configLogs = $this->ensureJsonString($data['config']['logs'] ?? '{}');
                 $configStop = $data['config']['stop'] ?? 'stop';
 
+                // Features / denylist: arrays land in JSON-cast columns directly.
+                $features = is_array($data['features'] ?? null) ? $data['features'] : null;
+                $fileDenylist = is_array($data['file_denylist'] ?? null) ? array_values(array_filter($data['file_denylist'], 'is_string')) : [];
+
                 // Scripts
-                $scriptInstall = $data['scripts']['installation']['script'] ?? '#!/bin/bash\necho "done"';
+                $scriptInstall = $data['scripts']['installation']['script'] ?? "#!/bin/bash\necho \"done\"";
                 $scriptEntry = $data['scripts']['installation']['entrypoint'] ?? 'bash';
                 $scriptContainer = $data['scripts']['installation']['container'] ?? 'ghcr.io/parkervcp/installers:alpine';
                 $isPrivileged = ($data['scripts']['installation']['privileged'] ?? false) === true;
@@ -97,10 +99,10 @@ class ImportBulkMapsCommand extends Command
                     'name' => $name,
                     'author' => $data['author'] ?? 'unknown@kaneil.dev',
                     'description' => $data['description'] ?? '',
-                    'features' => null,
+                    'features' => $features,
                     'docker_images' => $dockerImages,
                     'startup_commands' => ['Default' => $startup],
-                    'file_denylist' => [],
+                    'file_denylist' => $fileDenylist,
                     'config_files' => $configFiles,
                     'config_startup' => $configStartup,
                     'config_logs' => $configLogs,
@@ -110,7 +112,7 @@ class ImportBulkMapsCommand extends Command
                     'script_container' => $scriptContainer,
                     'script_is_privileged' => $isPrivileged,
                     'update_url' => null,
-                    'tags' => json_encode([]),
+                    'tags' => [],
                 ]);
 
                 // Import variables from egg JSON
@@ -151,6 +153,28 @@ class ImportBulkMapsCommand extends Command
 
         $this->info("Done. Imported: $imported, Skipped: $skipped");
         return 0;
+    }
+
+    /**
+     * Accept either a JSON string or a PHP array/object and return a JSON string.
+     * Eggs sometimes ship config blocks already JSON-encoded; either way the DB
+     * column expects a valid JSON string per the Map model's validation rules.
+     */
+    private function ensureJsonString(mixed $value): string
+    {
+        if (is_string($value)) {
+            $decoded = json_decode($value, true);
+            if (json_last_error() === JSON_ERROR_NONE) {
+                return json_encode($decoded);
+            }
+
+            return '{}';
+        }
+        if (is_array($value) || is_object($value)) {
+            return json_encode($value);
+        }
+
+        return '{}';
     }
 
     private function findJsonFiles(string $directory): array
