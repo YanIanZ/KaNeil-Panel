@@ -1,0 +1,70 @@
+name: Rolling Release (experimental)
+
+on:
+  push:
+    branches:
+      - experimental/v2.0-EX
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build & publish rolling tarball
+    runs-on: ubuntu-22.04
+    env:
+      COMMIT_SHA: ${{ github.sha }}
+
+    steps:
+      - name: Code checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.5"
+          extensions: bcmath, curl, gd, mbstring, mysql, openssl, pdo, tokenizer, xml, zip
+          tools: composer:v2
+          coverage: none
+
+      - name: Install PHP dependencies
+        run: composer install --no-interaction --no-suggest --no-progress --no-autoloader --no-scripts --no-dev
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "yarn"
+
+      - name: Install JS dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build frontend
+        run: yarn build
+
+      - name: Create release archive
+        run: |
+          rm -rf node_modules vendor tests CODE_OF_CONDUCT.md CONTRIBUTING.md phpunit.xml shell.nix
+          tar -czf panel.tar.gz * .env.example
+
+      - name: Create checksum
+        run: |
+          sha256sum panel.tar.gz > checksum.txt
+
+      - name: Publish rolling release
+        uses: softprops/action-gh-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          name: "Experimental rolling build"
+          tag_name: experimental-latest
+          prerelease: true
+          make_latest: "false"
+          body: |
+            Auto-built from branch experimental/v2.0-EX.
+            Commit: ${{ env.COMMIT_SHA }}
+            Used by KaNeil-Installer update-panel.sh experimental track.
+          files: |
+            panel.tar.gz
+            checksum.txt
