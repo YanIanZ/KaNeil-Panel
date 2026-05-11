@@ -99,7 +99,7 @@ class ImportBulkMapsCommand extends Command
                     'description' => $data['description'] ?? '',
                     'features' => null,
                     'docker_images' => $dockerImages,
-                    'startup_commands' => [$startup],
+                    'startup_commands' => ['Default' => $startup],
                     'file_denylist' => [],
                     'config_files' => $configFiles,
                     'config_startup' => $configStartup,
