@@ -67,6 +67,10 @@ class ActivityLog extends Model implements HasIcon, HasLabel
      */
     public const DISABLED_EVENTS = ['server:file.upload'];
 
+    public const CREATED_AT = 'timestamp';
+
+    public const UPDATED_AT = null;
+
     public $timestamps = false;
 
     protected $guarded = [
